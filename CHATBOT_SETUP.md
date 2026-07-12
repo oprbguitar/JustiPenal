@@ -30,6 +30,7 @@ RATE_LIMIT_SALT=<secreto aleatorio de alta entropía>
 - `ALLOWED_ORIGIN` admite una URL con ruta o barra final y el backend la normaliza al origen. También puede contener varios orígenes separados por comas. Para GitHub Pages se recomienda `https://oprbguitar.github.io`.
 - `CHAT_MAX_INPUT_CHARS` es opcional; el valor predeterminado es 4000.
 - `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN` y `RATE_LIMIT_SALT` son obligatorias en producción para aplicar el límite persistente. La dirección de red se identifica únicamente mediante HMAC-SHA256 y no se guarda en texto claro.
+- Alternativa recomendada: instalar **Upstash for Redis desde el Marketplace de Vercel** (Storage → Upstash → Redis, o `npx vercel integration add upstash/upstash-kv`). El recurso inyecta automáticamente `KV_REST_API_URL` y `KV_REST_API_TOKEN`, que el backend acepta como equivalentes; solo queda `RATE_LIMIT_SALT` por definir manualmente.
 
 No use prefijos públicos como `NEXT_PUBLIC_` ni coloque valores reales en `.env.example`.
 

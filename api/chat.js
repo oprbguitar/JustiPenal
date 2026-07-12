@@ -84,7 +84,7 @@ export function guardModelOutput(value) {
   const suspicious = [
     /<\/?(?:contexto_verificado_justipenal|contexto_portal_no_confiable|historial_reciente_no_confiable|consulta_actual_no_confiable)>?/,
     /\bsystem_instruction\b|\bsystem prompt\b|\bprompt del sistema\b/,
-    /\b(?:gemini_api_key|upstash_redis_rest_(?:url|token)|rate_limit_salt|allowed_origin)\b/,
+    /\b(?:gemini_api_key|upstash_redis_rest_(?:url|token)|kv_rest_api_(?:url|token)|rate_limit_salt|allowed_origin)\b/,
     /\bAIza[0-9A-Za-z_-]{20,}\b|\bsk-[0-9A-Za-z_-]{20,}\b/
   ].some((pattern) => pattern.test(text));
   if (!original || suspicious) return OUTPUT_REFUSAL;
@@ -320,8 +320,10 @@ function checkAbuseGuard(identifier) {
 }
 
 function getPersistentLimiter() {
-  const url = process.env.UPSTASH_REDIS_REST_URL || "";
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN || "";
+  /* Acepta credenciales directas de Upstash o las inyectadas por el
+     marketplace de Vercel (Upstash for Redis usa el prefijo KV_). */
+  const url = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL || "";
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN || "";
   if (!url || !token) return null;
   const key = `${url}\u0000${token}`;
   if (!persistentLimiter || persistentLimiterKey !== key) {
