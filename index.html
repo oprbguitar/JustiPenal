@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JustiPenal — Portal Informativo del Sistema Penal Peruano</title>
+  <meta name="description" content="Información, normativa y cálculo referencial de penas según el Código Penal y el Nuevo Código Procesal Penal del Perú.">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-logo">G</div>
+    <div class="brand-name">Justi<span>Penal</span></div>
+  </div>
+  <div class="topbar-divider"></div>
+  <div class="topbar-title">
+    <h1>Portal Informativo del Sistema Penal Peruano</h1>
+    <p>Información, normativa y cálculo de penas según el Código Penal y el Nuevo Código Procesal Penal</p>
+  </div>
+  <div class="topbar-spacer"></div>
+  <nav class="topbar-links">
+    <a href="#normativa">📄 Normativa Vigente</a>
+    <a href="#procedimientos">⚖️ Procedimientos</a>
+    <a href="#fuentes">📚 Fuentes</a>
+  </nav>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <button class="nav-item active" data-page="inicio"><span class="ic">🏠</span> Inicio</button>
+    <button class="nav-item" data-page="delitos"><span class="ic">⚖️</span> Delitos y Penas</button>
+    <button class="nav-item" data-page="calculo"><span class="ic">🧮</span> Cálculo de Penas</button>
+    <button class="nav-item" data-page="procedimientos"><span class="ic">📂</span> Procedimientos</button>
+    <button class="nav-item" data-page="plazos"><span class="ic">🕐</span> Plazos Procesales</button>
+    <button class="nav-item" data-page="medidas"><span class="ic">🛡️</span> Medidas Coercitivas</button>
+    <button class="nav-item" data-page="fiscalias"><span class="ic">👥</span> Fiscalías</button>
+    <button class="nav-item" data-page="normativa"><span class="ic">📄</span> Normativa</button>
+    <button class="nav-item" data-page="fuentes"><span class="ic">📚</span> Fuentes Oficiales</button>
+
+    <div class="side-box">
+      <h4>Base Legal Principal</h4>
+      <ul>
+        <li>Constitución Política del Perú</li>
+        <li>D. Leg. 635 – Código Penal</li>
+        <li>D. Leg. 957 – NCPP</li>
+        <li>Ley Orgánica del Ministerio Público</li>
+        <li>Leyes Especiales y Modificatorias</li>
+      </ul>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="updated-tag">Actualizado al <b>12 de julio de 2026</b> ●</div>
+
+    <!-- ================= INICIO ================= -->
+    <section class="page active" id="page-inicio">
+      <div class="hero">
+        <h2>Sistema Penal Peruano</h2>
+        <p>Información clara, actualizada y herramientas de cálculo referencial para profesionales del derecho y ciudadanos.</p>
+      </div>
+
+      <div class="stats" id="stats-row"></div>
+
+      <div class="card">
+        <div class="card-title"><span class="ic">🧮</span><h3>Cálculo de Pena Concreta</h3></div>
+        <p class="card-sub">Herramienta de cálculo referencial según el Código Penal (art. 45-A y siguientes) — sistema de tercios.</p>
+        <p style="font-size:13.5px">Seleccione el delito, marque las circunstancias del caso y obtenga un <b>rango referencial de pena</b>, el tercio aplicable, los escenarios con bonificaciones procesales, el órgano judicial competente y la fiscalía posiblemente a cargo.</p>
+        <button class="btn" onclick="goPage('calculo')">Iniciar cálculo →</button>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title"><span class="ic">📂</span><h3>Procedimiento Penal</h3></div>
+          <p class="card-sub">Flujo del proceso penal común (D. Leg. 957)</p>
+          <div class="flow" id="mini-flow"></div>
+          <button class="btn secondary" onclick="goPage('procedimientos')">Ver procedimiento completo →</button>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="ic">👥</span><h3>Fiscalías por Especialidad</h3></div>
+          <p class="card-sub">Principales especialidades del Ministerio Público</p>
+          <ul class="list-check" id="mini-fiscalias"></ul>
+          <button class="btn secondary" onclick="goPage('fiscalias')">Ver todas las fiscalías →</button>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title"><span class="ic">🛡️</span><h3>Medidas Coercitivas</h3></div>
+          <p class="card-sub">No equivalen a una condena</p>
+          <ul class="list-check" id="mini-medidas"></ul>
+          <button class="btn secondary" onclick="goPage('medidas')">Ver más medidas →</button>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="ic">📄</span><h3>Normativa Reciente</h3></div>
+          <p class="card-sub">Últimas modificaciones relevantes</p>
+          <ul class="list-check" id="mini-normas"></ul>
+          <button class="btn secondary" onclick="goPage('normativa')">Ver todas las normas →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= DELITOS ================= -->
+    <section class="page" id="page-delitos">
+      <div class="card">
+        <div class="card-title"><span class="ic">⚖️</span><h3>Delitos y Penas — Matriz Referencial</h3></div>
+        <p class="card-sub">Delitos más frecuentes del Código Penal y leyes penales especiales. La matriz es representativa, no exhaustiva; siempre verifique el texto vigente a la fecha del hecho.</p>
+        <input type="text" id="buscar-delito" class="search-input" placeholder="🔎 Buscar delito, artículo o familia…">
+        <div class="tbl-wrap">
+          <table class="tbl" id="tabla-delitos">
+            <thead><tr><th>Familia</th><th>Delito</th><th>Artículo / Norma</th><th>Modalidad</th><th>Pena referencial</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="disclaimer">⚠️ Los rangos son referenciales y pueden haber sido modificados por leyes posteriores. La pena concreta la determina exclusivamente el órgano jurisdiccional.</div>
+      </div>
+    </section>
+
+    <!-- ================= CÁLCULO ================= -->
+    <section class="page" id="page-calculo">
+      <div class="card">
+        <div class="card-title"><span class="ic">🧮</span><h3>Cálculo de Pena Concreta</h3></div>
+        <p class="card-sub">Herramienta de cálculo referencial según el Código Penal (art. 45-A y siguientes)</p>
+
+        <div class="steps">
+          <div class="step on" id="st-1"><div class="dot">1</div> Delito</div><div class="step-line"></div>
+          <div class="step" id="st-2"><div class="dot">2</div> Circunstancias</div><div class="step-line"></div>
+          <div class="step" id="st-3"><div class="dot">3</div> Cálculo</div><div class="step-line"></div>
+          <div class="step" id="st-4"><div class="dot">4</div> Resultado</div>
+        </div>
+
+        <div class="grid-2">
+          <div>
+            <h4 style="color:var(--blue-600);font-size:13px">1. SELECCIONE EL DELITO</h4>
+            <label class="fld">Familia delictiva</label>
+            <select id="sel-familia"></select>
+            <label class="fld">Delito</label>
+            <select id="sel-delito"></select>
+            <label class="fld">Modalidad / Agravante</label>
+            <select id="sel-modalidad"></select>
+            <label class="fld">Grado de ejecución</label>
+            <select id="sel-consumacion">
+              <option value="consumado">Delito consumado</option>
+              <option value="tentativa">Tentativa (art. 16 — reducción prudencial; verificar Ley 32258)</option>
+            </select>
+            <div class="abstract-box" id="box-abstracta"></div>
+          </div>
+
+          <div>
+            <h4 style="color:var(--blue-600);font-size:13px">2. CIRCUNSTANCIAS DEL CASO (art. 46)</h4>
+            <div class="grid-2" style="gap:10px">
+              <div>
+                <label class="fld">Atenuantes genéricas</label>
+                <div id="chk-atenuantes"></div>
+              </div>
+              <div>
+                <label class="fld">Agravantes genéricas</label>
+                <div id="chk-agravantes"></div>
+              </div>
+            </div>
+            <label class="fld">Reincidencia / habitualidad (agravantes cualificadas)</label>
+            <select id="sel-reincidencia">
+              <option value="no">No — agente primario</option>
+              <option value="reincidencia">Reincidencia (art. 46-B — puede elevar el marco por encima del máximo)</option>
+              <option value="habitualidad">Habitualidad (art. 46-C — puede elevar el marco por encima del máximo)</option>
+            </select>
+            <label class="fld">Bonificaciones procesales (escenarios separados)</label>
+            <div id="chk-reducciones"></div>
+            <button class="btn" id="btn-calcular">Calcular pena →</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="resultado-wrap" style="display:none">
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title"><span class="ic">✅</span><h3>Resultado del Cálculo</h3></div>
+            <p class="card-sub">Pena concreta sugerida (referencial)</p>
+            <div class="panel green" id="res-rango"></div>
+            <div class="panel blue" id="res-detalle"></div>
+            <div class="panel amber" id="res-escenarios" style="display:none"></div>
+          </div>
+          <div class="card">
+            <div class="card-title"><span class="ic">🏛️</span><h3>Competencia y Plazos</h3></div>
+            <p class="card-sub">Órgano judicial, fiscalía y plazos aplicables</p>
+            <div class="panel" id="res-competencia"></div>
+            <div class="panel blue" id="res-plazos"></div>
+          </div>
+        </div>
+        <div class="disclaimer">⚠️ El cálculo es referencial y de carácter orientador. No constituye asesoría legal: la pena concreta será determinada por el órgano jurisdiccional según los hechos probados. Verifique la versión vigente de la norma a la fecha del hecho (principio de legalidad y retroactividad favorable).</div>
+      </div>
+    </section>
+
+    <!-- ================= PROCEDIMIENTOS ================= -->
+    <section class="page" id="page-procedimientos">
+      <div class="card">
+        <div class="card-title"><span class="ic">📂</span><h3>Procedimiento Penal — Proceso Común</h3></div>
+        <p class="card-sub">Nuevo Código Procesal Penal (D. Leg. 957): modelo acusatorio, oral y contradictorio</p>
+        <div class="flow" id="flow-completo"></div>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title"><span class="ic">🔀</span><h3>Rutas procesales especiales</h3></div>
+          <ul class="list-check">
+            <li>Proceso inmediato (flagrancia, confesión o evidencia suficiente)</li>
+            <li>Terminación anticipada (acuerdo sobre pena y reparación civil)</li>
+            <li>Colaboración eficaz (información útil y corroborada)</li>
+            <li>Proceso por razón de función pública (altos funcionarios)</li>
+            <li>Proceso de seguridad (inimputables)</li>
+            <li>Querella (ejercicio privado de la acción penal)</li>
+            <li>Procedimiento de criminalidad organizada (Ley 30077)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="ic">🗂️</span><h3>Decisiones fiscales posibles</h3></div>
+          <ul class="list-check">
+            <li>Archivo (el hecho no constituye delito o no hay base mínima)</li>
+            <li>Reserva provisional</li>
+            <li>Principio de oportunidad o acuerdo reparatorio</li>
+            <li>Incoación de proceso inmediato</li>
+            <li>Formalización de la investigación preparatoria</li>
+            <li>Acusación directa</li>
+          </ul>
+          <p style="font-size:12.5px;color:var(--text-muted);margin-top:10px">La víctima disconforme con el archivo puede solicitar la elevación de actuados al fiscal superior (art. 334 CPP).</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="ic">🤝</span><h3>Distribución Fiscalía – Policía (Ley 32130 y STC 00005-2025-PI/TC)</h3></div>
+        <ul class="list-check">
+          <li>La Policía Nacional desarrolla material y operativamente la investigación preliminar</li>
+          <li>El fiscal dispone la apertura, delimita el objeto, fija plazos y formalidades</li>
+          <li>El fiscal conserva la conducción jurídica, supervisión y control desde el inicio</li>
+          <li>Los informes y precalificaciones policiales no vinculan al fiscal</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= PLAZOS ================= -->
+    <section class="page" id="page-plazos">
+      <div class="card">
+        <div class="card-title"><span class="ic">🕐</span><h3>Calculadora de Plazos Procesales</h3></div>
+        <p class="card-sub">Cálculo referencial de vencimientos (arts. 334 y 342 CPP; Ley 30077)</p>
+        <div class="grid-2">
+          <div>
+            <label class="fld">Tipo de investigación</label>
+            <select id="sel-plazo-tipo">
+              <option value="0">Diligencias preliminares (60 días)</option>
+              <option value="1">Investigación preparatoria — ordinaria (120 días + 60 de prórroga)</option>
+              <option value="2">Investigación preparatoria — compleja (8 meses + 8 de prórroga)</option>
+              <option value="3">Investigación preparatoria — criminalidad organizada (36 meses + 36)</option>
+            </select>
+            <label class="fld">Fecha de inicio (disposición fiscal / formalización)</label>
+            <input type="date" id="inp-fecha-inicio">
+            <div class="check-row" style="margin-top:10px"><input type="checkbox" id="chk-prorroga"><span>Incluir prórroga concedida</span></div>
+            <button class="btn" id="btn-plazo">Calcular plazo →</button>
+          </div>
+          <div id="res-plazo-panel"></div>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title"><span class="ic">📅</span><h3>Plazos legales de referencia</h3></div>
+          <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Etapa</th><th>Plazo</th><th>Prórroga / observación</th></tr></thead><tbody id="tabla-plazos"></tbody></table></div>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="ic">🔒</span><h3>Prisión preventiva — plazos máximos</h3></div>
+          <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Tipo de proceso</th><th>Plazo máximo</th></tr></thead><tbody id="tabla-pp"></tbody></table></div>
+          <p style="font-size:12.5px;color:var(--text-muted);margin-top:10px">La prisión preventiva no es una pena. Puede existir prolongación judicial cuando concurren los presupuestos legales. No debe confundirse con el plazo de la investigación preparatoria.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= MEDIDAS ================= -->
+    <section class="page" id="page-medidas">
+      <div class="card">
+        <div class="card-title"><span class="ic">🛡️</span><h3>Medidas Coercitivas</h3></div>
+        <p class="card-sub">Medidas procesales durante la investigación y el juicio — no equivalen a una condena</p>
+        <div class="grid-3" id="grid-medidas"></div>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="ic">📊</span><h3>Clases de penas (art. 28 CP)</h3></div>
+        <div class="grid-3">
+          <div class="panel blue"><h4>Privativa de libertad</h4><p style="font-size:13px">Temporal (hasta 35 años como regla general) o cadena perpetua en los delitos que la contemplan.</p></div>
+          <div class="panel blue"><h4>Restrictivas de libertad</h4><p style="font-size:13px">Expulsión de extranjeros y otras modalidades expresamente previstas.</p></div>
+          <div class="panel blue"><h4>Limitativas de derechos</h4><p style="font-size:13px">Prestación de servicios a la comunidad, limitación de días libres e inhabilitación.</p></div>
+          <div class="panel blue"><h4>Multa</h4><p style="font-size:13px">Días-multa calculados según los ingresos y la situación económica del condenado.</p></div>
+          <div class="panel green"><h4>Consecuencias adicionales</h4><p style="font-size:13px">Reparación civil, decomiso, consecuencias accesorias contra personas jurídicas y medidas de seguridad.</p></div>
+          <div class="panel amber"><h4>Suspensión de la pena</h4><p style="font-size:13px">El art. 57 permite suspender la ejecución bajo requisitos; existen numerosas exclusiones legales (una condena de 4 años o menos no se suspende automáticamente).</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FISCALÍAS ================= -->
+    <section class="page" id="page-fiscalias">
+      <div class="card">
+        <div class="card-title"><span class="ic">👥</span><h3>Organización de las Fiscalías Penales</h3></div>
+        <p class="card-sub">Jerarquía fiscal (D. Leg. 052 — Ley Orgánica del Ministerio Público)</p>
+        <div class="grid-3">
+          <div class="panel blue"><h4>Fiscalías Provinciales</h4><p style="font-size:13px">Nivel operativo principal: reciben denuncias, conducen la investigación, formalizan, acusan y litigan en juicio.</p></div>
+          <div class="panel blue"><h4>Fiscalías Superiores</h4><p style="font-size:13px">Apelaciones, elevación de actuados por archivo, revisión jerárquica y discrepancias sobre sobreseimiento.</p></div>
+          <div class="panel blue"><h4>Fiscalías Supremas</h4><p style="font-size:13px">Casaciones, revisiones de sentencia, procesos contra altos funcionarios y cooperación judicial internacional.</p></div>
+        </div>
+        <p style="font-size:12.5px;color:var(--text-muted);margin-top:10px">No es correcto asociar «delito grave = fiscalía superior»: la especialidad depende de la materia y de las reglas de competencia, no solo de la pena prevista.</p>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="ic">🗂️</span><h3>Fiscalías por Especialidad</h3></div>
+        <div class="grid-3" id="grid-fiscalias"></div>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="ic">📍</span><h3>Cómo se determina la competencia</h3></div>
+        <div class="grid-2">
+          <ul class="list-check">
+            <li><b>Por materia:</b> especialidad del delito (corrupción, drogas, lavado, etc.)</li>
+            <li><b>Por territorio:</b> distrito fiscal del lugar de comisión o del resultado</li>
+          </ul>
+          <ul class="list-check">
+            <li><b>Por condición de la persona:</b> funcionarios, aforados, adolescentes</li>
+            <li><b>Por etapa:</b> provincial (investigación), superior (apelación), suprema (casación)</li>
+          </ul>
+        </div>
+        <p style="font-size:12.5px;color:var(--text-muted);margin-top:8px">Los directorios oficiales por distrito fiscal se publican en <a href="https://www.gob.pe/mpfn" target="_blank" rel="noopener">gob.pe/mpfn</a> y pueden cambiar mediante resoluciones de la Fiscalía de la Nación.</p>
+      </div>
+    </section>
+
+    <!-- ================= NORMATIVA ================= -->
+    <section class="page" id="page-normativa">
+      <div class="card">
+        <div class="card-title"><span class="ic">📄</span><h3>Marco Normativo Penal Vigente</h3></div>
+        <p class="card-sub">Estructura normativa principal del sistema penal peruano</p>
+        <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Norma</th><th>Contenido principal</th></tr></thead><tbody id="tabla-normas"></tbody></table></div>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="ic">🆕</span><h3>Modificaciones Recientes</h3></div>
+        <p class="card-sub">Reformas que obligan a verificar el texto vigente — no use ediciones antiguas de los códigos</p>
+        <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Norma</th><th>Contenido</th></tr></thead><tbody id="tabla-normas-recientes"></tbody></table></div>
+        <div class="disclaimer">📌 <b>Vigencia temporal y favorabilidad:</b> la norma aplicable es la vigente a la fecha del hecho, salvo que una norma posterior resulte más favorable al procesado (retroactividad benigna, art. 103 de la Constitución). Verifique cada artículo en SPIJ y El Peruano.</div>
+      </div>
+    </section>
+
+    <!-- ================= FUENTES ================= -->
+    <section class="page" id="page-fuentes">
+      <div class="card">
+        <div class="card-title"><span class="ic">📚</span><h3>Fuentes Oficiales del Estado Peruano</h3></div>
+        <p class="card-sub">Repositorios oficiales que alimentan este portal, ordenados por nivel de prioridad</p>
+        <div class="grid-3" id="grid-fuentes"></div>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="ic">🏢</span><h3>Fuentes complementarias sectoriales</h3></div>
+        <div class="grid-2">
+          <ul class="list-check">
+            <li><b>SUNAT:</b> delitos tributarios y aduaneros</li>
+            <li><b>OEFA / MINAM:</b> materia ambiental</li>
+            <li><b>MIMP:</b> violencia y protección de víctimas</li>
+            <li><b>SBS / SMV:</b> delitos financieros</li>
+          </ul>
+          <ul class="list-check">
+            <li><b>UIF-Perú:</b> información pública sobre lavado de activos</li>
+            <li><b>OSIPTEL:</b> telecomunicaciones</li>
+            <li><b>Indecopi:</b> propiedad intelectual</li>
+            <li><b>Gob.pe:</b> normas sectoriales</li>
+          </ul>
+        </div>
+        <p style="font-size:12.5px;color:var(--text-muted);margin-top:10px">Estas fuentes aportan normativa técnica o sectorial, pero la tipificación y la pena siempre deben quedar vinculadas a una norma penal con rango legal.</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <span>ℹ️ La información proporcionada es de carácter informativo y no constituye asesoría legal. Siempre consulte con un profesional del derecho.</span>
+  <span>© 2026 JustiPenal — Portal Informativo del Sistema Penal Peruano</span>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
