@@ -12,13 +12,20 @@ En pocas palabras: si quieres saber **qué pena corresponde a un delito**, **qu�
 
 ## ¿Qué puedes hacer en el portal?
 
-### 🧮 Calcular una pena referencial
-Selecciona un delito (por ejemplo, robo agravado), marca las circunstancias del caso (atenuantes y agravantes) y el portal te muestra:
+### 🔎 Analizar un caso con tus propias palabras
+Escribe lo que pasó — sin conocer artículos ni términos jurídicos — y el portal identifica los elementos relevantes (violencia, armas, número de personas, lesiones), propone **hipótesis delictivas** (principal, alternativas y conexas), construye una **matriz de tipicidad** que explica por qué aparece cada delito, y te dice qué información falta por acreditar. Todo se procesa en tu propio navegador: **nada se envía ni se guarda en ningún servidor**.
+
+### 🧮 Calcular una pena referencial — con uno o varios delitos
+Arma un caso con **uno o más delitos** (por ejemplo, robo agravado más lesiones). Para cada uno marcas sus circunstancias y el portal muestra el **rango referencial de individualización** por el sistema de tercios; con dos o más delitos, presenta los **escenarios de concurso** (real, ideal, delito continuado y concurso aparente) sin sumar penas mecánicamente. Aplica además la regla contra la **doble valoración**: una circunstancia que ya integra la modalidad agravada no vuelve a computarse. Al final puedes **descargar el informe** en Word, Markdown, TXT o imprimirlo en PDF.
+
+### 🧮 ¿Qué incluye el cálculo?
 - El **rango de pena referencial** aplicando el **sistema de tercios** del Código Penal (tercio inferior, intermedio o superior).
-- Qué pasa si hay **tentativa**, **reincidencia** o **habitualidad**.
-- Escenarios con **beneficios procesales**: confesión sincera, terminación anticipada y conclusión anticipada del juicio.
+- Qué pasa si hay **tentativa**, **reincidencia** o **habitualidad** (el portal distingue lo calculable automáticamente de lo que exige decisión judicial motivada).
+- Escenarios con **beneficios procesales** (confesión sincera, terminación anticipada y conclusión anticipada), mostrados como hipótesis A/B/C, nunca como una cifra única.
+- Las **otras consecuencias**: días-multa, inhabilitación y penas alternativas, cuando el delito las contempla.
 - El **órgano judicial** que juzgaría el caso (juzgado unipersonal o colegiado).
-- La **fiscalía posiblemente competente** según la especialidad del delito.
+- La **fiscalía posiblemente competente** según la especialidad, el territorio y la condición del investigado, con enlace al directorio oficial.
+- La **trazabilidad**: cada delito enlaza a su fuente oficial con fecha de última verificación y sello de estado.
 
 ### ⚖️ Consultar delitos y penas
 Una tabla con los delitos más frecuentes del Código Penal peruano (homicidio, feminicidio, lesiones, robo, hurto, extorsión, corrupción, drogas, lavado de activos, delitos informáticos y más), con sus artículos, modalidades y rangos de pena, y un buscador para encontrarlos rápido.
@@ -48,9 +55,13 @@ Toda la información proviene de **fuentes oficiales del Estado peruano**, verif
 | **Poder Judicial** | Jurisprudencia, acuerdos plenarios y casaciones |
 | **Tribunal Constitucional** | Criterios sobre derechos fundamentales |
 
-## ⚠️ Importante
+## 🛠️ Metodología y transparencia
 
-> Este portal es **informativo y referencial**. No constituye asesoría legal ni reemplaza la evaluación de un abogado, la investigación fiscal o la decisión de un juez. La pena concreta de un caso real solo la determina el **Poder Judicial** tras un proceso con todas las garantías. Ante cualquier situación legal real, consulta siempre con un profesional del derecho.
+El portal incluye una página de **Metodología** que explica quién actualiza los datos, qué fuente tiene prioridad ante contradicciones, cómo se gestionan las derogaciones y un **registro público de cambios**. Los errores se reportan mediante la sección *Issues* de este repositorio, citando la norma y la fuente oficial que respalda la corrección.
+
+## ⚠️ Importante — Aviso legal
+
+> Este portal es **informativo y referencial**. No constituye asesoría legal ni reemplaza la evaluación de un abogado, la investigación fiscal o la decisión de un juez. La pena concreta de un caso real solo la determina el **Poder Judicial** tras un proceso con todas las garantías. Todos los contenidos provienen de **fuentes públicas y oficiales del Estado peruano** y de enlaces públicos identificados en cada sección. El portal **no recopila, no almacena y no transmite datos personales**: sus herramientas se ejecutan íntegramente en el navegador del usuario. El aviso legal completo, con la limitación de responsabilidad y la política de privacidad, está disponible dentro del portal.
 
 ---
 
