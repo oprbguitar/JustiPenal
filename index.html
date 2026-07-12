@@ -36,6 +36,7 @@
 
   <aside class="sidebar" id="sidebar">
     <button class="nav-item active" data-page="inicio"><span class="ic">🏠</span> Inicio</button>
+    <button class="nav-item nav-simulator" data-page="simulador"><span class="ic">▶</span> Simular caso <span class="nav-new">NUEVO</span></button>
     <button class="nav-item" data-page="analizar"><span class="ic">🔎</span> Analizar Caso</button>
     <button class="nav-item" data-page="delitos"><span class="ic">⚖️</span> Delitos y Penas</button>
     <button class="nav-item" data-page="calculo"><span class="ic">🧮</span> Cálculo de Penas</button>
@@ -63,7 +64,7 @@
   <div class="overlay" id="overlay"></div>
 
   <main class="main">
-    <div class="updated-tag">Última revisión editorial: <b>12 de julio de 2026</b> ● <span>No constituye certificación legal profesional.</span></div>
+    <div class="updated-tag">Última revisión editorial: <b>12 de julio de 2026</b> ● <span>No constituye asesoría legal, validación oficial ni pronunciamiento de autoridad.</span></div>
 
     <!-- ================= INICIO ================= -->
     <section class="page active" id="page-inicio">
@@ -72,6 +73,10 @@
         <div class="hero-sweep" aria-hidden="true"></div>
         <div class="hero-title-mask"><h2>Sistema Penal Peruano</h2></div>
         <p>Información clara, actualizada y herramientas de análisis referencial para profesionales del derecho y ciudadanos.</p>
+        <button class="hero-simulator-cta" type="button" onclick="goPage('simulador')">
+          <b>▶ Simular un caso educativo</b>
+          <span>Explora paso a paso cómo podría avanzar un caso ficticio.</span>
+        </button>
         <svg class="hero-scales" viewBox="0 0 180 120" aria-hidden="true">
           <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M90 15v82M63 97h54M73 106h34M55 38h70M90 26l-35 12M90 26l35 12M55 38 38 66M55 38 72 66M38 66c4 15 30 15 34 0M125 38l-17 28M125 38l17 28M108 66c4 15 30 15 34 0"/>
@@ -124,6 +129,41 @@
           <ul class="list-check" id="mini-normas"></ul>
           <button class="btn secondary" onclick="goPage('normativa')">Ver todas las normas →</button>
         </div>
+      </div>
+    </section>
+
+    <!-- ================= SIMULADOR EDUCATIVO ================= -->
+    <section class="page" id="page-simulador" aria-labelledby="sim-title">
+      <div class="sim-header">
+        <div><span class="sim-kicker">RECORRIDO INTERACTIVO</span><h2 id="sim-title">Simular un caso educativo</h2><p>Explora paso a paso cómo podría avanzar un caso ficticio dentro del sistema penal peruano.</p></div>
+        <div class="sim-notice" role="note"><span aria-hidden="true">ⓘ</span><p>Casos ficticios y simplificados. Las rutas representan posibles escenarios procesales y no constituyen asesoría legal, predicción de sentencia ni evaluación de un caso real.</p></div>
+      </div>
+      <div id="case-simulator" class="case-simulator">
+        <section class="sim-selector" aria-labelledby="sim-selector-title">
+          <h3 id="sim-selector-title">Elige un caso para comenzar</h3>
+          <div class="sim-case-grid" id="sim-case-grid"></div>
+        </section>
+        <section class="sim-workspace" id="sim-workspace" hidden aria-label="Recorrido del caso">
+          <header class="sim-casebar">
+            <div><span>Caso seleccionado</span><strong id="sim-current-title"></strong></div>
+            <div><button class="sim-btn ghost" type="button" id="sim-change">Cambiar caso</button><button class="sim-btn light" type="button" id="sim-restart">↻ Reiniciar caso</button></div>
+          </header>
+          <div class="sim-timeline-wrap"><div class="sim-timeline" id="sim-timeline"></div></div>
+          <div class="sim-stage-layout">
+            <article class="sim-stage-card" id="sim-stage-card"></article>
+            <aside class="sim-sources" id="sim-sources"></aside>
+          </div>
+          <div class="sim-complete" id="sim-complete" hidden aria-live="polite">Ruta educativa completada</div>
+          <footer class="sim-controls">
+            <button class="sim-btn light" type="button" id="sim-prev">← Anterior</button>
+            <div><strong id="sim-step-count"></strong><div class="sim-progress" aria-hidden="true"><i id="sim-progress-bar"></i></div></div>
+            <button class="sim-btn" type="button" id="sim-next">Siguiente →</button>
+            <button class="sim-btn light" type="button" id="sim-route">Ver ruta completa</button>
+            <button class="sim-btn light" type="button" id="sim-all-sources">Ver fuentes</button>
+          </footer>
+          <div class="sim-route-panel" id="sim-route-panel" hidden></div>
+        </section>
+        <p class="sr-only" id="sim-live" aria-live="polite"></p>
       </div>
     </section>
 
@@ -654,6 +694,7 @@
 <script src="js/data.js?v=5"></script>
 <script src="js/config.js?v=5"></script>
 <script src="js/app.js?v=5"></script>
+<script src="js/case-simulator.js?v=1"></script>
 <script src="js/chat.js?v=5"></script>
 <!-- Estadísticas anónimas de visitas (GoatCounter): sin cookies, sin almacenar IPs,
      sin rastrear personas. Solo agregados: páginas vistas, país y tipo de dispositivo. -->
