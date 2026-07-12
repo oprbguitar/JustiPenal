@@ -20,13 +20,71 @@
   const config = window.JUSTIPENAL_CONFIG || {};
   const apiBaseUrl = String(config.apiBaseUrl || "").replace(/\/$/, "");
   const configured = /^https:\/\//.test(apiBaseUrl) && !/YOUR-JUSTIPENAL-API/i.test(apiBaseUrl);
-  const quickQuestions = [
+  /* Sugerencias contextuales: cambian según la página activa del portal. */
+  const QUICK_DEFAULT = [
     "¿Cuál es la diferencia entre hurto y robo?",
     "¿Qué significa el sistema de tercios?",
     "¿Cuánto dura la investigación preparatoria ordinaria?",
     "¿Qué función cumple una fiscalía superior?",
     "¿Por qué la tentativa no se calcula automáticamente?"
   ];
+  const QUICK_BY_PAGE = {
+    analizar: [
+      "¿Qué es la matriz de tipicidad?",
+      "¿Qué diferencia hay entre hipótesis principal y alternativa?",
+      "¿Qué significa que un elemento esté «inferido»?",
+      "¿Qué es un delito conexo?"
+    ],
+    delitos: [
+      "¿Cuál es la diferencia entre hurto y robo?",
+      "¿Qué delitos se persiguen por querella?",
+      "¿Qué es la microcomercialización de drogas?",
+      "¿Qué significa el sello «pendiente de revisión»?"
+    ],
+    calculo: [
+      "¿Qué es el tercio inferior?",
+      "¿Qué es la prohibición de doble valoración?",
+      "¿Cómo funciona la terminación anticipada?",
+      "¿Por qué no se suman las penas en el concurso de delitos?"
+    ],
+    teoria: [
+      "¿Cuáles son los tres elementos de la teoría del caso?",
+      "¿Qué es la legítima defensa?",
+      "¿Cuándo prescribe un delito?",
+      "¿Puedo evitar el juicio con el principio de oportunidad?"
+    ],
+    procedimientos: [
+      "¿Qué pasa después de la denuncia?",
+      "¿Qué es la etapa intermedia?",
+      "¿Qué es el proceso inmediato por flagrancia?",
+      "¿Quién investiga: la Policía o el fiscal?"
+    ],
+    plazos: [
+      "¿Cuánto dura la investigación preparatoria ordinaria?",
+      "¿Qué es una investigación compleja?",
+      "¿Desde cuándo se cuenta el plazo de las diligencias preliminares?",
+      "¿Qué pasa si el fiscal se excede del plazo?"
+    ],
+    medidas: [
+      "¿Qué requisitos tiene la prisión preventiva?",
+      "¿Qué es la comparecencia con restricciones?",
+      "¿Qué dice la Casación 626-2013-Moquegua?",
+      "¿La prisión preventiva es una condena?"
+    ],
+    fiscalias: [
+      "¿Qué fiscalía investiga la corrupción de funcionarios?",
+      "¿Cómo se determina la competencia fiscal?",
+      "¿Qué pasa si el investigado es un adolescente?",
+      "¿Qué hace una fiscalía superior?"
+    ],
+    normativa: [
+      "¿Qué cambió la Ley 32258?",
+      "¿Qué es un acuerdo plenario?",
+      "¿Qué norma se aplica si la ley cambió después del hecho?",
+      "¿Qué es el Decreto Legislativo 1735?"
+    ]
+  };
+  let currentPage = (location.hash || "").replace("#", "") || "inicio";
   let history = [];
   let pendingPortalContext = { type: "none", data: {} };
   let lastFocused = null;
@@ -259,14 +317,23 @@
   el("btn-preguntar-analisis").addEventListener("click", () => attachPortalContext("analysis"));
   el("btn-preguntar-calculo").addEventListener("click", () => attachPortalContext("calculation"));
 
-  for (const question of quickQuestions) {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.textContent = question;
-    button.disabled = !configured || isRateLimited();
-    button.addEventListener("click", () => submitMessage(question));
-    quickEl.appendChild(button);
+  function renderQuickQuestions() {
+    const questions = QUICK_BY_PAGE[currentPage] || QUICK_DEFAULT;
+    quickEl.replaceChildren();
+    for (const question of questions) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.textContent = question;
+      button.disabled = busy || !configured || isRateLimited();
+      button.addEventListener("click", () => submitMessage(question));
+      quickEl.appendChild(button);
+    }
   }
+  document.addEventListener("justipenal:pagechange", (event) => {
+    currentPage = String(event.detail || "inicio");
+    renderQuickQuestions();
+  });
+  renderQuickQuestions();
 
   try {
     const storedReset = Number(localStorage.getItem(RATE_LIMIT_RESET_KEY));

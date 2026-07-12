@@ -3968,6 +3968,133 @@
       ]
     }
   ],
+  "jurisprudence": [
+    {
+      "id": "ap-5-2008",
+      "type": "jurisprudence",
+      "name": "Acuerdo Plenario 5-2008/CJ-116",
+      "article": "Salas Penales de la Corte Suprema (2008)",
+      "aliases": [
+        "Acuerdo Plenario 5-2008/CJ-116",
+        "Conclusión anticipada del juicio oral",
+        "acuerdo plenario",
+        "casación",
+        "jurisprudencia",
+        "conclusión anticipada",
+        "conformidad",
+        "bonificaciones procesales"
+      ],
+      "verificationStatus": "pendiente",
+      "verifiedAt": "12/07/2026",
+      "text": "Conclusión anticipada del juicio oral. Fija los alcances de la conformidad procesal: el acusado que acepta los cargos al inicio del juicio obtiene una reducción de un séptimo de la pena concreta. Es la base de la bonificación por conclusión anticipada que muestra la calculadora. Verifique el texto completo y la vigencia del criterio en la jurisprudencia sistematizada del Poder Judicial.",
+      "sources": [
+        {
+          "name": "Poder Judicial del Perú",
+          "url": "https://www.pj.gob.pe/wps/wcm/connect/cij-juris/s_jurisprudencia_sistematizada"
+        }
+      ]
+    },
+    {
+      "id": "ap-1-2011",
+      "type": "jurisprudence",
+      "name": "Acuerdo Plenario 1-2011/CJ-116",
+      "article": "Salas Penales de la Corte Suprema (2011)",
+      "aliases": [
+        "Acuerdo Plenario 1-2011/CJ-116",
+        "Apreciación de la prueba en delitos contra la libertad sexual",
+        "acuerdo plenario",
+        "casación",
+        "jurisprudencia",
+        "violación sexual",
+        "declaración de la víctima",
+        "prueba"
+      ],
+      "verificationStatus": "pendiente",
+      "verifiedAt": "12/07/2026",
+      "text": "Apreciación de la prueba en delitos contra la libertad sexual. La declaración de la víctima puede constituir prueba de cargo suficiente si cumple garantías de certeza: ausencia de incredibilidad subjetiva, verosimilitud corroborada periféricamente y persistencia en la incriminación. Orienta la actividad probatoria en violación sexual y delitos conexos. Verifique el texto completo y la vigencia del criterio en la jurisprudencia sistematizada del Poder Judicial.",
+      "sources": [
+        {
+          "name": "Poder Judicial del Perú",
+          "url": "https://www.pj.gob.pe/wps/wcm/connect/cij-juris/s_jurisprudencia_sistematizada"
+        }
+      ]
+    },
+    {
+      "id": "ap-3-2010",
+      "type": "jurisprudence",
+      "name": "Acuerdo Plenario 3-2010/CJ-116",
+      "article": "Salas Penales de la Corte Suprema (2010)",
+      "aliases": [
+        "Acuerdo Plenario 3-2010/CJ-116",
+        "Lavado de activos: autonomía y prueba indiciaria",
+        "acuerdo plenario",
+        "casación",
+        "jurisprudencia",
+        "lavado de activos",
+        "delito fuente",
+        "prueba indiciaria"
+      ],
+      "verificationStatus": "pendiente",
+      "verifiedAt": "12/07/2026",
+      "text": "Lavado de activos: autonomía y prueba indiciaria. El lavado de activos es un delito autónomo: no requiere condena previa por el delito fuente, cuya existencia puede acreditarse mediante prueba indiciaria (desbalance patrimonial, operaciones inusuales, vínculos con la actividad ilícita). Verifique el texto completo y la vigencia del criterio en la jurisprudencia sistematizada del Poder Judicial.",
+      "sources": [
+        {
+          "name": "Poder Judicial del Perú",
+          "url": "https://www.pj.gob.pe/wps/wcm/connect/cij-juris/s_jurisprudencia_sistematizada"
+        }
+      ]
+    },
+    {
+      "id": "cas-626-2013",
+      "type": "jurisprudence",
+      "name": "Casación 626-2013-Moquegua",
+      "article": "Sala Penal Permanente de la Corte Suprema (2015)",
+      "aliases": [
+        "Casación 626-2013-Moquegua",
+        "Prisión preventiva: audiencia y presupuestos",
+        "acuerdo plenario",
+        "casación",
+        "jurisprudencia",
+        "prisión preventiva",
+        "peligro procesal",
+        "medidas coercitivas"
+      ],
+      "verificationStatus": "pendiente",
+      "verifiedAt": "12/07/2026",
+      "text": "Prisión preventiva: audiencia y presupuestos. Doctrina jurisprudencial sobre la audiencia de prisión preventiva: debate ordenado por cada presupuesto (fundados y graves elementos, prognosis de pena, peligro procesal), motivación reforzada y discusión expresa de la proporcionalidad y la duración de la medida. Verifique el texto completo y la vigencia del criterio en la jurisprudencia sistematizada del Poder Judicial.",
+      "sources": [
+        {
+          "name": "Poder Judicial del Perú",
+          "url": "https://www.pj.gob.pe/wps/wcm/connect/cij-juris/s_jurisprudencia_sistematizada"
+        }
+      ]
+    },
+    {
+      "id": "ap-1-2019",
+      "type": "jurisprudence",
+      "name": "Acuerdo Plenario 01-2019/CIJ-116",
+      "article": "XI Pleno Jurisdiccional — Salas Penales de la Corte Suprema (2019)",
+      "aliases": [
+        "Acuerdo Plenario 01-2019/CIJ-116",
+        "Prisión preventiva: presupuestos y requisitos",
+        "acuerdo plenario",
+        "casación",
+        "jurisprudencia",
+        "prisión preventiva",
+        "excepcionalidad",
+        "peligro de fuga"
+      ],
+      "verificationStatus": "pendiente",
+      "verifiedAt": "12/07/2026",
+      "text": "Prisión preventiva: presupuestos y requisitos. Actualiza y sistematiza la doctrina sobre la prisión preventiva: reafirma su carácter excepcional y subsidiario, desarrolla el peligro de fuga y de obstaculización, y exige que la duración fijada sea proporcional y esté motivada. Verifique el texto completo y la vigencia del criterio en la jurisprudencia sistematizada del Poder Judicial.",
+      "sources": [
+        {
+          "name": "Poder Judicial del Perú",
+          "url": "https://www.pj.gob.pe/wps/wcm/connect/cij-juris/s_jurisprudencia_sistematizada"
+        }
+      ]
+    }
+  ],
   "glossary": [
     {
       "id": "glossary-1",

@@ -718,6 +718,30 @@ const INSTITUCIONES = [
     texto: "Los Acuerdos Plenarios de las Salas Penales de la Corte Suprema y las casaciones con doctrina jurisprudencial fijan cómo se aplican las normas: por ejemplo, el AP 5-2008/CJ-116 sobre conclusión anticipada, o la Casación 626-2013-Moquegua y el AP 01-2019/CIJ-116 sobre los presupuestos de la prisión preventiva. Dan el salto del 'texto de la ley' a 'cómo se aplica'; se consultan en el portal del Poder Judicial." }
 ];
 
+/* Jurisprudencia vinculante y de referencia (Corte Suprema) */
+const JURISPRUDENCIA = [
+  { id: "ap-5-2008", nombre: "Acuerdo Plenario 5-2008/CJ-116", organo: "Salas Penales de la Corte Suprema", anio: "2008", sello: "pendiente",
+    materia: "Conclusión anticipada del juicio oral",
+    texto: "Fija los alcances de la conformidad procesal: el acusado que acepta los cargos al inicio del juicio obtiene una reducción de un séptimo de la pena concreta. Es la base de la bonificación por conclusión anticipada que muestra la calculadora.",
+    relacionadoCon: ["conclusión anticipada", "conformidad", "bonificaciones procesales"] },
+  { id: "ap-1-2011", nombre: "Acuerdo Plenario 1-2011/CJ-116", organo: "Salas Penales de la Corte Suprema", anio: "2011", sello: "pendiente",
+    materia: "Apreciación de la prueba en delitos contra la libertad sexual",
+    texto: "La declaración de la víctima puede constituir prueba de cargo suficiente si cumple garantías de certeza: ausencia de incredibilidad subjetiva, verosimilitud corroborada periféricamente y persistencia en la incriminación. Orienta la actividad probatoria en violación sexual y delitos conexos.",
+    relacionadoCon: ["violación sexual", "declaración de la víctima", "prueba"] },
+  { id: "ap-3-2010", nombre: "Acuerdo Plenario 3-2010/CJ-116", organo: "Salas Penales de la Corte Suprema", anio: "2010", sello: "pendiente",
+    materia: "Lavado de activos: autonomía y prueba indiciaria",
+    texto: "El lavado de activos es un delito autónomo: no requiere condena previa por el delito fuente, cuya existencia puede acreditarse mediante prueba indiciaria (desbalance patrimonial, operaciones inusuales, vínculos con la actividad ilícita).",
+    relacionadoCon: ["lavado de activos", "delito fuente", "prueba indiciaria"] },
+  { id: "cas-626-2013", nombre: "Casación 626-2013-Moquegua", organo: "Sala Penal Permanente de la Corte Suprema", anio: "2015", sello: "pendiente",
+    materia: "Prisión preventiva: audiencia y presupuestos",
+    texto: "Doctrina jurisprudencial sobre la audiencia de prisión preventiva: debate ordenado por cada presupuesto (fundados y graves elementos, prognosis de pena, peligro procesal), motivación reforzada y discusión expresa de la proporcionalidad y la duración de la medida.",
+    relacionadoCon: ["prisión preventiva", "peligro procesal", "medidas coercitivas"] },
+  { id: "ap-1-2019", nombre: "Acuerdo Plenario 01-2019/CIJ-116", organo: "XI Pleno Jurisdiccional — Salas Penales de la Corte Suprema", anio: "2019", sello: "pendiente",
+    materia: "Prisión preventiva: presupuestos y requisitos",
+    texto: "Actualiza y sistematiza la doctrina sobre la prisión preventiva: reafirma su carácter excepcional y subsidiario, desarrolla el peligro de fuga y de obstaculización, y exige que la duración fijada sea proporcional y esté motivada.",
+    relacionadoCon: ["prisión preventiva", "excepcionalidad", "peligro de fuga"] }
+];
+
 /* Glosario penal (pseudo-wiki) */
 const GLOSARIO = [
   { termino: "Tipicidad", def: "Correspondencia exacta entre el hecho real y la descripción del delito en la ley. Si falta un elemento, el hecho es atípico y no hay delito." },
@@ -750,6 +774,9 @@ const GLOSARIO = [
 
 /* ---- Registro de cambios (política de actualización) ---- */
 const CHANGELOG = [
+  { fecha: "12/07/2026", cambio: "Jurisprudencia vinculante en Normativa y en la base del asistente (AP 5-2008, AP 3-2010, AP 1-2011, Casación 626-2013-Moquegua, AP 01-2019). El asistente cita los plenarios por su denominación cuando son pertinentes." },
+  { fecha: "12/07/2026", cambio: "Sugerencias de preguntas del asistente ahora contextuales según la página activa (calculadora, plazos, medidas, teoría del caso, etc.)." },
+  { fecha: "12/07/2026", cambio: "Estadísticas anónimas de visitas con GoatCounter: sin cookies, sin IPs, solo agregados por página, país y dispositivo. Declarado en el Aviso Legal §5." },
   { fecha: "12/07/2026", cambio: "Nuevo módulo «Teoría del Caso»: tres elementos, checklist probatorio por familia de delito, perspectiva de la defensa (art. 20 y 14 CP), instituciones del proceso y de la pena, y glosario penal. Contenido nuevo con sello «pendiente de revisión» hasta su verificación editorial en SPIJ." },
   { fecha: "12/07/2026", cambio: "Ampliación del catálogo: delitos contra el honor (arts. 130-132, acción privada), ambientales (arts. 304, 307-A, 310 — FEMA), administración pública ampliada (arts. 389, 399, 400, 401) y fe pública (arts. 428, 438). Sello «pendiente de revisión»." },
   { fecha: "12/07/2026", cambio: "Corrección de la fecha de la Ley 32258: publicada el 14 de marzo de 2025 (antes figuraba 2026)." },

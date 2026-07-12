@@ -7,7 +7,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const source = fs.readFileSync(path.join(root, "js", "data.js"), "utf8");
 const context = {};
 vm.createContext(context);
-vm.runInContext(`${source}\nthis.__JP_EXPORT__ = { VERIFICADO_AT, DELITOS, ATENUANTES, AGRAVANTES, REDUCCIONES, CONCURSO_INFO, FISCALIAS, CONDICIONES_PERSONA, PLAZOS, PRISION_PREVENTIVA, MEDIDAS_COERCITIVAS, NORMAS_BASE, NORMAS_RECIENTES, FUENTES_OFICIALES, PROCEDIMIENTO, TEORIA_ELEMENTOS, CHECKLIST_PROBATORIO, DEFENSAS, INSTITUCIONES, GLOSARIO };`, context);
+vm.runInContext(`${source}\nthis.__JP_EXPORT__ = { VERIFICADO_AT, DELITOS, ATENUANTES, AGRAVANTES, REDUCCIONES, CONCURSO_INFO, FISCALIAS, CONDICIONES_PERSONA, PLAZOS, PRISION_PREVENTIVA, MEDIDAS_COERCITIVAS, NORMAS_BASE, NORMAS_RECIENTES, FUENTES_OFICIALES, PROCEDIMIENTO, TEORIA_ELEMENTOS, CHECKLIST_PROBATORIO, DEFENSAS, INSTITUCIONES, GLOSARIO, JURISPRUDENCIA };`, context);
 
 const data = context.__JP_EXPORT__;
 const sourceByName = Object.fromEntries(data.FUENTES_OFICIALES.map((item) => [item.nombre, item]));
@@ -205,6 +205,17 @@ const kb = {
     verifiedAt: data.VERIFICADO_AT,
     text: item.texto,
     sources: [sourceEntry(spij), sourceEntry(elPeruano)]
+  })),
+  jurisprudence: data.JURISPRUDENCIA.map((item) => ({
+    id: item.id,
+    type: "jurisprudence",
+    name: item.nombre,
+    article: `${item.organo} (${item.anio})`,
+    aliases: [item.nombre, item.materia, "acuerdo plenario", "casación", "jurisprudencia", ...item.relacionadoCon],
+    verificationStatus: item.sello,
+    verifiedAt: data.VERIFICADO_AT,
+    text: `${item.materia}. ${item.texto} Verifique el texto completo y la vigencia del criterio en la jurisprudencia sistematizada del Poder Judicial.`,
+    sources: [sourceEntry(sourceByName["Poder Judicial del Perú"])]
   })),
   glossary: data.GLOSARIO.map((item, index) => ({
     id: `glossary-${index + 1}`,

@@ -106,6 +106,11 @@ function goPage(id) {
   window.scrollTo({ top: 0, behavior: "smooth" });
   if (location.hash !== "#" + id) history.replaceState(null, "", "#" + id);
   if (window.AOS && id === "inicio") setTimeout(() => AOS.refresh(), 60);
+  document.dispatchEvent(new CustomEvent("justipenal:pagechange", { detail: id }));
+  /* Estadística anónima por módulo (GoatCounter, sin cookies ni IPs) */
+  if (window.goatcounter && typeof window.goatcounter.count === "function") {
+    window.goatcounter.count({ path: "/" + id, title: "JustiPenal — " + id, event: false });
+  }
 }
 $$(".nav-item").forEach((btn) => btn.addEventListener("click", () => goPage(btn.dataset.page)));
 $$(".topbar-links a, .footer-links a[data-goto]").forEach((a) =>
@@ -812,6 +817,9 @@ $("#tabla-condiciones").innerHTML = CONDICIONES_PERSONA.filter((c) => c.nota).ma
 $("#tabla-normas").innerHTML = NORMAS_BASE.map(
   (n) => `<tr><td style="white-space:nowrap"><b>${n.norma}</b></td><td>${n.contenido}</td></tr>`
 ).join("");
+$("#tabla-jurisprudencia").innerHTML = JURISPRUDENCIA.map(
+  (j) => `<tr><td style="white-space:nowrap"><b>${esc(j.nombre)}</b><br><small style="color:var(--text-muted)">${esc(j.organo)} · ${esc(j.anio)}</small></td><td><b>${esc(j.materia)}</b></td><td style="font-size:12.5px">${esc(j.texto)}</td><td>${selloBadge(j.sello)}<br><small style="color:var(--text-muted)">al ${VERIFICADO_AT}</small></td></tr>`
+).join("");
 $("#tabla-normas-recientes").innerHTML = NORMAS_RECIENTES.map(
   (n) => `<tr><td style="white-space:nowrap"><span class="badge green">${n.norma}</span></td><td>${n.publicacion}</td><td>${n.materia}<br><small style="color:var(--text-muted)">Vigencia: ${n.vigencia}</small></td><td>${n.fuenteOficial}</td><td>${n.estado}</td><td>${n.verificacion}</td></tr>`
 ).join("");
@@ -859,6 +867,7 @@ const AYUDA = [
   ["Verificador de Competencia", "La fiscalía competente se determina por cuatro factores: materia, territorio, condición de la persona investigada y etapa del proceso."],
   ["Marco Normativo", "Las normas que forman el sistema penal peruano: Constitución, Código Penal, Código Procesal Penal y leyes especiales."],
   ["Modificaciones Recientes", "Reformas recientes con su fecha de publicación, materia y estado. La ley aplicable es la vigente en la fecha del hecho, salvo que una posterior sea más favorable."],
+  ["Jurisprudencia Vinculante", "Criterios de la Corte Suprema (acuerdos plenarios y casaciones) que explican cómo se aplican las normas en la práctica: prisión preventiva, prueba en delitos sexuales, lavado de activos, conclusión anticipada."],
   ["Fuentes Oficiales", "Repositorios del Estado peruano de donde proviene la información, ordenados por prioridad: El Peruano, SPIJ, Congreso, Ministerio Público, Poder Judicial y Tribunal Constitucional."],
   ["Fuentes complementarias", "Entidades sectoriales (SUNAT, OEFA, Indecopi…) que aportan normativa técnica; la pena siempre proviene de una norma penal con rango de ley."],
   ["Metodología", "Cómo se construye y actualiza la información del portal: fuentes prioritarias, gestión de derogaciones, reporte de errores y registro público de cambios."],

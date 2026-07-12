@@ -80,6 +80,7 @@ La página de **Metodología** del portal explica quién actualiza los datos, qu
 - El analizador y las calculadoras continúan ejecutándose localmente, sin enviar relatos ni campos del caso.
 - El asistente usa la API de Interactions de Gemini mediante `@google/genai`, con `store: false`, recuperación determinista desde `data/legal-kb.json` y sin herramientas de navegación.
 - Supabase no almacena conversaciones ni datos de casos.
+- Estadísticas de visitas con **GoatCounter**: anónimas y agregadas (página, país, dispositivo), sin cookies y sin almacenar direcciones IP; cada módulo interno se cuenta como página propia para conocer qué herramientas se usan más. Declarado en el Aviso Legal.
 - Animaciones con **AOS** (revelado al hacer scroll) y **anime.js** (contadores y transiciones), con degradación elegante si las librerías no cargan y respeto por `prefers-reduced-motion`.
 - **Diseño responsive**: menú lateral deslizable con botón hamburguesa accesible en celulares (soporte de teclado, `aria-expanded`, bloqueo de scroll de fondo) y panel de fuentes oficiales en pantallas anchas.
 - Publicado automáticamente en **GitHub Pages** mediante GitHub Actions en cada actualización.
