@@ -3,6 +3,31 @@
 // ---------- utilidades ----------
 const $ = (s) => document.querySelector(s);
 const $$ = (s) => document.querySelectorAll(s);
+
+/* Anima la entrada de elementos dinámicos (no interfiere con AOS:
+   solo se aplica a nodos recién renderizados, sin data-aos).
+   Si anime.js no cargó o el usuario prefiere menos movimiento,
+   no hace nada y el contenido se muestra normal. */
+const REDUCE_MOTION = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function animarEntrada(selector, opts = {}) {
+  if (!window.anime || REDUCE_MOTION) return;
+  const els = typeof selector === "string" ? $$(selector) : selector;
+  if (!els.length) return;
+  anime.remove(els);
+  anime({
+    targets: els,
+    translateY: [14, 0],
+    opacity: [0, 1],
+    delay: anime.stagger(opts.stagger || 70),
+    duration: opts.duration || 450,
+    easing: "easeOutCubic"
+  });
+}
+function pulso(el) {
+  if (!window.anime || REDUCE_MOTION || !el) return;
+  anime.remove(el);
+  anime({ targets: el, scale: [0.97, 1], duration: 300, easing: "easeOutBack" });
+}
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
 function fmtAnios(v) {
@@ -249,6 +274,9 @@ $("#btn-agregar").addEventListener("click", () => {
   $("#sel-reincidencia").value = "no";
   setStep(3);
   renderBloques();
+  const ultimo = $("#lista-bloques").lastElementChild;
+  pulso(ultimo);
+  if (ultimo) ultimo.scrollIntoView({ behavior: "smooth", block: "nearest" });
 });
 
 // ---------- cálculo del caso ----------
@@ -383,6 +411,7 @@ $("#btn-calcular").addEventListener("click", () => {
 
   ultimoInforme = generarInforme(resultados, reds, cond, territorio, fis);
   $("#resultado-wrap").scrollIntoView({ behavior: "smooth" });
+  animarEntrada("#res-delitos .panel, #res-concurso, #res-escenarios, #res-competencia, #res-plazos, #res-fuentes .panel", { stagger: 90 });
 });
 
 // ---------- informe descargable ----------
@@ -549,6 +578,9 @@ $("#btn-analizar").addEventListener("click", () => {
 
   $("#analisis-wrap").style.display = "block";
   $("#analisis-wrap").scrollIntoView({ behavior: "smooth" });
+  animarEntrada(".tag-pill", { stagger: 40, duration: 350 });
+  animarEntrada("#analisis-hipotesis .panel, #analisis-faltante", { stagger: 90 });
+  animarEntrada("#tabla-matriz tr", { stagger: 50, duration: 380 });
 });
 
 // ---------- procedimiento ----------
@@ -616,6 +648,7 @@ $("#btn-plazo").addEventListener("click", () => {
     ${faltante.length ? `<div class="panel amber" style="font-size:12px"><h4>Información faltante</h4><ul class="list-check">${faltante.map((f) => `<li>${f}</li>`).join("")}</ul></div>` : ""}
     <div class="panel" style="font-size:12px"><h4 style="color:var(--navy-800)">Advertencia</h4>
       El cómputo real puede variar por suspensión, ampliación, declaración de complejidad, conversión a criminalidad organizada, nulidades, acumulación o disposiciones que fijen un plazo distinto. El control de plazo puede solicitarse judicialmente.</div>`;
+  animarEntrada("#res-plazo-panel .panel", { stagger: 100 });
 });
 
 // ---------- medidas ----------
