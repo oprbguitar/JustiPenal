@@ -228,10 +228,23 @@ export async function createChatReply(payload, options = {}) {
 }
 
 function applyCors(req, res) {
-  const allowedOrigin = process.env.ALLOWED_ORIGIN || "";
   const origin = req.headers.origin || "";
+  const allowedOrigins = String(process.env.ALLOWED_ORIGIN || "")
+    .split(",")
+    .map((value) => value.trim())
+    .filter(Boolean)
+    .map((value) => {
+      try { return new URL(value).origin; } catch { return value.replace(/\/$/, ""); }
+    });
+  const requestHost = String(req.headers["x-forwarded-host"] || req.headers.host || "").split(",")[0].trim();
+  const requestProtocol = String(req.headers["x-forwarded-proto"] || "https").split(",")[0].trim();
+  let sameOrigin = false;
+  try {
+    const originUrl = new URL(origin);
+    sameOrigin = originUrl.host === requestHost && originUrl.protocol === `${requestProtocol}:`;
+  } catch { /* Un encabezado Origin inválido nunca se considera del mismo origen. */ }
   const localAllowed = process.env.NODE_ENV !== "production" && /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin);
-  if (origin && origin !== allowedOrigin && !localAllowed) return false;
+  if (origin && !allowedOrigins.includes(origin) && !sameOrigin && !localAllowed) return false;
   if (origin) res.setHeader("Access-Control-Allow-Origin", origin);
   res.setHeader("Vary", "Origin");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");

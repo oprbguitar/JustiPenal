@@ -3,17 +3,17 @@
    Fuentes: Código Penal (D. Leg. 635) y modificatorias,
    Código Procesal Penal (D. Leg. 957), Ley 30077, DL 1106,
    Ley 30096, DL 813, Ley 32258 (14/03/2025), DL 1735 (12/02/2026).
-   Última verificación editorial: 12 de julio de 2026.
+   Última revisión editorial: 12 de julio de 2026.
    Los rangos son REFERENCIALES: siempre debe verificarse el
    texto vigente en SPIJ / El Peruano a la fecha del hecho.
    ============================================================ */
 
 const VERIFICADO_AT = "12/07/2026";
 
-/* Sellos de verificación:
+/* Sellos de revisión editorial:
    verificado | pendiente | posiblemente-modificado */
 const SELLOS = {
-  "verificado": { label: "Verificado", clase: "green" },
+  "verificado": { label: "Revisión editorial", clase: "green" },
   "pendiente": { label: "Pendiente de revisión", clase: "amber" },
   "posiblemente-modificado": { label: "Posiblemente modificado", clase: "red" }
 };
@@ -390,7 +390,7 @@ const CONDICIONES_PERSONA = [
 
 /* ---- Plazos procesales (CPP, arts. 334 y 342; Ley 30077) ---- */
 const PLAZOS = [
-  { etapa: "Diligencias preliminares", plazo: "60 días naturales", base: "Art. 334.2 CPP", prorroga: "El fiscal puede fijar un plazo distinto según la complejidad; sujeto a control judicial. Se reduce si hay persona detenida.", dias: 60 },
+  { etapa: "Diligencias preliminares", plazo: "60 días naturales (referencia general)", base: "Art. 334.2 CPP", prorroga: "Puede variar conforme al CPP, el control judicial, la complejidad y los regímenes especiales. Se reduce si hay persona detenida.", dias: 60 },
   { etapa: "Investigación preparatoria — ordinaria", plazo: "120 días naturales", base: "Art. 342.1 CPP", prorroga: "Prórroga fiscal por única vez hasta 60 días.", dias: 120, prorrogaDias: 60 },
   { etapa: "Investigación preparatoria — compleja", plazo: "8 meses", base: "Art. 342.2 CPP", prorroga: "El juez puede conceder prórroga por igual plazo.", meses: 8, prorrogaMeses: 8 },
   { etapa: "Investigación preparatoria — criminalidad organizada", plazo: "36 meses", base: "Art. 342.2 CPP (Ley 30077)", prorroga: "El juez puede conceder prórroga por igual plazo.", meses: 36, prorrogaMeses: 36 },
@@ -438,7 +438,7 @@ const NORMAS_BASE = [
   { norma: "Decreto Legislativo 1348", contenido: "Código de Responsabilidad Penal de Adolescentes." }
 ];
 
-/* Estructura: número, publicación, vigencia, materia, fuente, estado, verificación */
+/* Estructura: número, publicación, vigencia, materia, fuente, estado, revisión editorial */
 const NORMAS_RECIENTES = [
   { norma: "Ley 32258", publicacion: "14/03/2025", vigencia: "Verificar disposición correspondiente", materia: "Modifica el tratamiento de la tentativa y amplía las restricciones para suspender la ejecución de determinadas penas.", fuenteOficial: "El Peruano", estado: "Vigente", verificacion: VERIFICADO_AT },
   { norma: "Decreto Legislativo 1735", publicacion: "12/02/2026", vigencia: "Conforme a su texto", materia: "Norma organizativa: crea el Subsistema Especializado contra la Extorsión y sus Delitos Conexos. No establece penas sustantivas.", fuenteOficial: "El Peruano", estado: "Vigente", verificacion: VERIFICADO_AT },
@@ -457,7 +457,7 @@ const FUENTES_OFICIALES = [
 
 const PROCEDIMIENTO = [
   { icono: "📥", nombre: "Denuncia", desc: "Denuncia, noticia policial, flagrancia o actuación de oficio." },
-  { icono: "🔍", nombre: "Investigación preliminar", desc: "60 días. PNP investiga operativamente; el fiscal conduce jurídicamente (Ley 32130)." },
+  { icono: "🔍", nombre: "Investigación preliminar", desc: "60 días como referencia general; puede variar conforme al CPP, el control judicial o regímenes especiales." },
   { icono: "📋", nombre: "Investigación preparatoria", desc: "120 días / 8 meses / 36 meses según el tipo de investigación." },
   { icono: "⚖️", nombre: "Etapa intermedia", desc: "Control judicial de la acusación, de la prueba y de los medios de defensa." },
   { icono: "🏛️", nombre: "Juicio oral", desc: "Unipersonal o colegiado según la pena mínima del delito (mayor de 6 años → colegiado)." },

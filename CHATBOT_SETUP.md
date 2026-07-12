@@ -24,7 +24,7 @@ CHAT_MAX_INPUT_CHARS=4000
 
 - `GEMINI_API_KEY` es obligatoria y secreta.
 - `GEMINI_MODEL` es opcional; el backend usa `gemini-3.5-flash` cuando falta.
-- `ALLOWED_ORIGIN` debe ser el origen exacto, sin ruta ni barra final. Para GitHub Pages es `https://oprbguitar.github.io`.
+- `ALLOWED_ORIGIN` admite una URL con ruta o barra final y el backend la normaliza al origen. También puede contener varios orígenes separados por comas. Para GitHub Pages se recomienda `https://oprbguitar.github.io`.
 - `CHAT_MAX_INPUT_CHARS` es opcional; el valor predeterminado es 4000.
 
 No use prefijos públicos como `NEXT_PUBLIC_` ni coloque valores reales en `.env.example`.

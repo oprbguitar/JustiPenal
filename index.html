@@ -14,7 +14,9 @@
 <header class="topbar">
   <button class="btn-menu" id="btn-menu" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="sidebar">☰</button>
   <div class="brand">
-    <div class="brand-logo">G</div>
+    <div class="brand-logo" aria-hidden="true">
+      <svg viewBox="0 0 36 36" role="img" aria-label="JP"><rect x="1" y="1" width="34" height="34" rx="9"/><text x="18" y="23" text-anchor="middle">JP</text></svg>
+    </div>
     <div class="brand-name">Justi<span>Penal</span></div>
   </div>
   <div class="topbar-divider"></div>
@@ -60,18 +62,24 @@
   <div class="overlay" id="overlay"></div>
 
   <main class="main">
-    <div class="updated-tag">Última verificación editorial: <b>12 de julio de 2026</b> ●</div>
+    <div class="updated-tag">Última revisión editorial: <b>12 de julio de 2026</b> ● <span>No constituye certificación legal profesional.</span></div>
 
     <!-- ================= INICIO ================= -->
     <section class="page active" id="page-inicio">
       <div class="hero">
-        <h2>Sistema Penal Peruano</h2>
+        <div class="hero-glow" aria-hidden="true"></div>
+        <div class="hero-title-mask"><h2>Sistema Penal Peruano</h2></div>
         <p>Información clara, actualizada y herramientas de análisis referencial para profesionales del derecho y ciudadanos.</p>
+        <svg class="hero-scales" viewBox="0 0 180 120" aria-hidden="true">
+          <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M90 15v82M63 97h54M73 106h34M55 38h70M90 26l-35 12M90 26l35 12M55 38 38 66M55 38 72 66M38 66c4 15 30 15 34 0M125 38l-17 28M125 38l17 28M108 66c4 15 30 15 34 0"/>
+          </g>
+        </svg>
       </div>
 
       <div class="stats" id="stats-row"></div>
 
-      <div class="grid-2">
+      <div class="grid-2 action-grid">
         <div class="card">
           <div class="card-title"><span class="ic">🔎</span><h3>Analizar un Caso</h3></div>
           <p class="card-sub">Describa lo sucedido con sus propias palabras — sin necesidad de conocer artículos</p>
@@ -119,7 +127,7 @@
 
     <!-- ================= ANALIZAR CASO ================= -->
     <section class="page" id="page-analizar">
-      <div class="card">
+      <div class="card analysis-input-card">
         <div class="card-title"><span class="ic">🔎</span><h3>Analizar un Caso</h3></div>
         <p class="card-sub">Describa brevemente lo ocurrido. No es necesario indicar artículos ni términos jurídicos. El texto se procesa únicamente en su navegador: no se envía ni se guarda en ningún servidor.</p>
         <label class="fld">Relato de los hechos</label>
@@ -140,6 +148,7 @@
           <div><label class="fld">¿Algún investigado es funcionario público?</label><select id="caso-funcionario"><option value="no">No</option><option value="si">Sí</option></select></div>
         </div>
         <button class="btn" id="btn-analizar">Analizar caso →</button>
+        <div class="analysis-scan" aria-hidden="true"></div>
       </div>
 
       <div id="analisis-wrap" style="display:none">
@@ -152,6 +161,7 @@
           </div>
           <div class="card">
             <div class="card-title"><span class="ic">⚖️</span><h3>Hipótesis Delictivas</h3></div>
+            <span class="result-stamp hypothesis-stamp">Hipótesis preliminar</span>
             <p class="card-sub">Provisionales — deben contrastarse con la prueba</p>
             <div id="analisis-hipotesis"></div>
           </div>
@@ -171,7 +181,7 @@
     <section class="page" id="page-delitos">
       <div class="card">
         <div class="card-title"><span class="ic">⚖️</span><h3>Delitos y Penas — Matriz Referencial</h3></div>
-        <p class="card-sub">Delitos frecuentes del Código Penal y leyes penales especiales, con consecuencias adicionales y sello de verificación. La matriz es representativa, no exhaustiva.</p>
+        <p class="card-sub">Delitos frecuentes del Código Penal y leyes penales especiales, con consecuencias adicionales y sello de revisión editorial. La matriz es representativa, no exhaustiva.</p>
         <input type="text" id="buscar-delito" class="search-input" placeholder="🔎 Buscar delito, artículo o familia…">
         <div class="tbl-wrap">
           <table class="tbl" id="tabla-delitos">
@@ -259,7 +269,9 @@
       <div id="resultado-wrap" style="display:none">
         <div class="card">
           <div class="card-title"><span class="ic">✅</span><h3>Rango Referencial de Individualización de la Pena</h3></div>
+          <span class="result-stamp penalty-stamp">Resultado referencial</span>
           <p class="card-sub">No es una pena concreta: la individualización exacta dentro del tercio exige motivación judicial (gravedad del hecho, intensidad del dolo, extensión del daño, condiciones personales).</p>
+          <div class="calculation-notice">Este es un escenario matemático de referencia, no una pena predicha ni determinada judicialmente.</div>
           <div id="res-delitos"></div>
           <div class="panel blue" id="res-concurso" style="display:none"></div>
           <div class="panel amber" id="res-escenarios" style="display:none"></div>
@@ -280,11 +292,11 @@
           </div>
           <div class="card">
             <div class="card-title"><span class="ic">🔗</span><h3>Trazabilidad Normativa</h3></div>
-            <p class="card-sub">Fuente exacta de cada delito utilizado en este cálculo</p>
+            <p class="card-sub">Repositorio o fuente oficial de consulta de cada delito utilizado en este cálculo</p>
             <div id="res-fuentes"></div>
           </div>
         </div>
-        <div class="disclaimer">⚠️ Resultado referencial y orientador: <b>Informe preliminar de análisis penal referencial</b>. No constituye sentencia, dictamen fiscal ni determinación definitiva de pena. Verifique la versión vigente de cada norma a la fecha del hecho (legalidad y retroactividad favorable, art. 103 Const.).</div>
+        <div class="disclaimer prominent-disclaimer">⚠️ Resultado referencial y orientador: <b>Informe preliminar de análisis penal referencial</b>. No constituye sentencia, dictamen fiscal ni determinación definitiva de pena. Verifique la versión vigente de cada norma a la fecha del hecho (legalidad y retroactividad favorable, art. 103 Const.).</div>
       </div>
     </section>
 
@@ -341,7 +353,7 @@
           <div>
             <label class="fld">Régimen / tipo de investigación</label>
             <select id="sel-plazo-tipo">
-              <option value="0">Diligencias preliminares (60 días)</option>
+              <option value="0">Diligencias preliminares (60 días, referencia general)</option>
               <option value="1">Investigación preparatoria — ordinaria (120 días + 60 de prórroga)</option>
               <option value="2">Investigación preparatoria — compleja (8 meses + 8 de prórroga)</option>
               <option value="3">Investigación preparatoria — criminalidad organizada (36 meses + 36)</option>
@@ -435,8 +447,8 @@
       </div>
       <div class="card">
         <div class="card-title"><span class="ic">🆕</span><h3>Modificaciones Recientes</h3></div>
-        <p class="card-sub">Con fecha de publicación, materia, estado y fecha de última verificación — no use ediciones antiguas de los códigos</p>
-        <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Norma</th><th>Publicación</th><th>Materia</th><th>Fuente</th><th>Estado</th><th>Verificado</th></tr></thead><tbody id="tabla-normas-recientes"></tbody></table></div>
+        <p class="card-sub">Con fecha de publicación, materia, estado y fecha de última revisión editorial — no use ediciones antiguas de los códigos</p>
+        <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Norma</th><th>Publicación</th><th>Materia</th><th>Fuente</th><th>Estado</th><th>Revisión editorial</th></tr></thead><tbody id="tabla-normas-recientes"></tbody></table></div>
         <div class="disclaimer">📌 <b>Vigencia temporal y favorabilidad:</b> la norma aplicable es la vigente a la fecha del hecho, salvo que una norma posterior resulte más favorable al procesado (retroactividad benigna, art. 103 de la Constitución). Verifique cada artículo en SPIJ y El Peruano.</div>
       </div>
     </section>
@@ -476,7 +488,7 @@
         <h4>¿Quién actualiza los datos?</h4>
         <p>El mantenimiento editorial del portal es responsabilidad de su administrador, contrastando cada dato contra las fuentes oficiales listadas en la sección «Fuentes Oficiales».</p>
         <h4>¿Cada cuánto se revisan?</h4>
-        <p>Cada entrada registra una fecha de última verificación. Las áreas sometidas a reformas frecuentes (extorsión, criminalidad organizada, tentativa) se marcan con el sello «posiblemente modificado» y deben revisarse con prioridad.</p>
+        <p>Cada entrada registra una fecha de última revisión editorial, que no constituye certificación legal profesional. Las áreas sometidas a reformas frecuentes (extorsión, criminalidad organizada, tentativa) se marcan con el sello «posiblemente modificado» y deben revisarse con prioridad.</p>
         <h4>¿Qué fuente tiene prioridad?</h4>
         <p>1) Diario Oficial El Peruano (texto oficialmente publicado); 2) SPIJ (texto sistematizado); 3) Archivo Digital del Congreso; 4) portales institucionales (MPFN, PJ, TC). Ante contradicción, prevalece el texto publicado en El Peruano y su fe de erratas.</p>
         <h4>¿Cómo se gestionan las derogaciones?</h4>
@@ -503,13 +515,13 @@
         <p>Todos los contenidos jurídicos provienen de <b>fuentes públicas y oficiales del Estado peruano</b> — Diario Oficial El Peruano, SPIJ (MINJUSDH), Congreso de la República, Ministerio Público, Poder Judicial y Tribunal Constitucional — y de enlaces públicos identificados en cada sección. El portal no reproduce documentos reservados ni información obtenida de fuentes no públicas. Las normas citadas son de dominio público conforme al art. 9 del D. Leg. 822 (Ley sobre el Derecho de Autor), que excluye de protección a los textos oficiales.</p>
 
         <h4>3. Exactitud y desactualización</h4>
-        <p>La legislación penal peruana cambia con frecuencia. Aunque cada dato registra su fecha de verificación, <b>no se garantiza que la información esté libre de errores ni permanentemente actualizada</b>. El usuario debe verificar siempre el texto vigente en las fuentes oficiales enlazadas antes de tomar cualquier decisión.</p>
+        <p>La legislación penal peruana cambia con frecuencia. Aunque cada dato registra su fecha de revisión editorial, <b>no se garantiza que la información esté libre de errores ni permanentemente actualizada</b>. El usuario debe verificar siempre el texto vigente en las fuentes oficiales enlazadas antes de tomar cualquier decisión.</p>
 
         <h4>4. Limitación de responsabilidad</h4>
         <p>El uso del portal es bajo exclusiva responsabilidad del usuario. El portal y sus autores <b>no asumen responsabilidad</b> por decisiones adoptadas con base en la información o los cálculos aquí mostrados, ni por daños directos o indirectos derivados de su uso, interpretación o imposibilidad de acceso. Ninguna herramienta de este portal crea una relación abogado-cliente.</p>
 
         <h4>5. Privacidad y datos personales</h4>
-        <p>JustiPenal no utiliza cuentas de usuario ni bases de datos de casos. El módulo «Analizar Caso» y las calculadoras se ejecutan íntegramente en el navegador: sus relatos y campos <b>no se envían a ningún servidor</b> y desaparecen al cerrar o recargar la página. El asistente opcional es distinto: únicamente los mensajes que el usuario escriba en el chat, o un resumen estructurado que confirme expresamente, se procesan mediante Vercel y Gemini. No se almacenan conversaciones en Supabase ni en el portal. No incluya nombres, documentos de identidad, domicilios, expedientes ni otros datos personales o reservados, conforme a los principios de la Ley 29733 y su Reglamento (D. S. 016-2024-JUS).</p>
+        <p>JustiPenal no utiliza cuentas de usuario ni bases de datos de casos. El módulo «Analizar Caso» y las calculadoras se ejecutan en el navegador. El chat envía el mensaje actual, el historial reciente y, solo con confirmación del usuario, un contexto estructurado y sanitizado; el procesamiento se realiza mediante Vercel y Gemini. No incluya datos personales, confidenciales ni identificadores del caso, conforme a los principios de la Ley 29733 y su Reglamento (D. S. 016-2024-JUS).</p>
 
         <h4>6. Enlaces a terceros</h4>
         <p>Los enlaces a portales del Estado u otros sitios se ofrecen solo como referencia. El portal no controla ni responde por el contenido, disponibilidad o políticas de esos sitios.</p>
@@ -519,7 +531,7 @@
 
         <h4>8. Uso aceptable</h4>
         <p>Queda prohibido usar el portal para fines ilícitos, para presentar sus resultados como documentos oficiales, o para atribuir responsabilidad penal a personas concretas. Los resultados no son aptos como prueba ni como sustento único de decisiones legales.</p>
-        <div class="disclaimer">Si usted enfrenta una situación legal real, busque de inmediato la asistencia de un abogado colegiado o de la defensa pública gratuita del Ministerio de Justicia (<a href="https://www.gob.pe/minjus" target="_blank" rel="noopener">gob.pe/minjus</a>).</div>
+        <div class="disclaimer prominent-disclaimer">Si usted enfrenta una situación legal real, busque de inmediato la asistencia de un abogado colegiado o de la defensa pública gratuita del Ministerio de Justicia (<a href="https://www.gob.pe/minjus" target="_blank" rel="noopener">gob.pe/minjus</a>).</div>
       </div>
     </section>
 
@@ -530,13 +542,13 @@
     <div class="rail-card">
       <h4>📚 Fuentes oficiales</h4>
       <div id="rail-fuentes"></div>
-      <p class="rail-note">Cada dato del portal enlaza a su fuente. Última verificación editorial: 12/07/2026.</p>
+      <p class="rail-note">Cada dato del portal enlaza a su fuente. Última revisión editorial: 12/07/2026; no es certificación legal profesional.</p>
     </div>
   </aside>
 </div>
 
 <button class="chat-launcher" id="chat-launcher" type="button" aria-label="Abrir Asistente JustiPenal" aria-controls="chat-panel" aria-expanded="false" title="Abrir Asistente JustiPenal">
-  <span aria-hidden="true">⚖️</span>
+  <img class="chat-avatar" src="assets/justipenal-chatbot.svg" alt="" aria-hidden="true">
 </button>
 
 <section class="chat-panel" id="chat-panel" aria-label="Asistente JustiPenal" aria-hidden="true">
@@ -569,11 +581,11 @@
       <textarea id="chat-input" rows="3" maxlength="4000" placeholder="Escriba una consulta sobre derecho penal peruano"></textarea>
       <div class="chat-form-actions">
         <button class="btn small secondary" type="button" id="chat-clear">Borrar conversación</button>
-        <span class="chat-loading" id="chat-loading" role="status" hidden>Consultando…</span>
+        <span class="chat-loading" id="chat-loading" role="status" hidden>Consultando<span class="chat-dots" aria-hidden="true"><i></i><i></i><i></i></span></span>
         <button class="btn small" type="submit" id="chat-send">Enviar</button>
       </div>
     </form>
-    <p class="chat-privacy">Los mensajes enviados al asistente serán procesados mediante Gemini. No incluya nombres, DNI, domicilios, números de expediente ni otros datos personales o reservados.</p>
+    <p class="chat-privacy">El analizador permanece en su navegador. El chat envía a Vercel y Gemini el mensaje actual, el historial reciente y cualquier contexto sanitizado que usted confirme. No incluya datos personales, confidenciales ni identificadores del caso.</p>
   </div>
 </section>
 
@@ -585,7 +597,7 @@
     <a href="https://github.com/oprbguitar/JustiPenal" target="_blank" rel="noopener">Repositorio y reporte de errores</a>
   </div>
   <div class="footer-row">
-    <span>ℹ️ La información es referencial y no constituye asesoría legal. El analizador y las calculadoras son locales; solo los mensajes enviados voluntariamente al asistente se procesan mediante Vercel y Gemini. No incluya datos personales. Siempre consulte con un profesional del derecho.</span>
+    <span>ℹ️ La información es referencial y no constituye asesoría legal. El analizador y las calculadoras son locales; el chat procesa mediante Vercel y Gemini el mensaje actual, el historial reciente y el contexto sanitizado confirmado. No incluya datos personales o confidenciales. Consulte con un profesional.</span>
     <span>© 2026 JustiPenal — Portal Informativo del Sistema Penal Peruano</span>
   </div>
 </footer>
