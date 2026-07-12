@@ -1,0 +1,2854 @@
+{
+  "schemaVersion": 1,
+  "editorialVerificationDate": "12/07/2026",
+  "scope": "Catálogo legal verificado y ya publicado por JustiPenal; no es exhaustivo.",
+  "offenses": [
+    {
+      "id": "hom-simple",
+      "type": "offense",
+      "family": "Vida, el cuerpo y la salud",
+      "name": "Homicidio simple",
+      "article": "Art. 106",
+      "aliases": [],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": 6,
+          "max": 20,
+          "elementos": []
+        }
+      ],
+      "prosecutorialSpecialtyId": "penal-comun",
+      "prosecutorialNote": null,
+      "effectiveNote": "Texto con modificatorias; verificar versión a la fecha del hecho",
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "hom-calificado",
+      "type": "offense",
+      "family": "Vida, el cuerpo y la salud",
+      "name": "Homicidio calificado (asesinato)",
+      "article": "Art. 108",
+      "aliases": [],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": 15,
+          "max": 35,
+          "elementos": [
+            "alevosia"
+          ],
+          "nota": "Determinadas modalidades pueden alcanzar cadena perpetua."
+        }
+      ],
+      "prosecutorialSpecialtyId": "penal-comun",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "sicariato",
+      "type": "offense",
+      "family": "Vida, el cuerpo y la salud",
+      "name": "Sicariato",
+      "article": "Art. 108-C",
+      "aliases": [],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": 25,
+          "max": 35,
+          "elementos": [
+            "precio"
+          ],
+          "nota": "Matar por orden, encargo o acuerdo, con propósito de lucro."
+        },
+        {
+          "id": "a",
+          "nombre": "Formas agravadas",
+          "min": null,
+          "max": null,
+          "perpetua": true,
+          "elementos": [
+            "precio",
+            "pluralidad"
+          ],
+          "nota": "Cadena perpetua: víctima menor o vulnerable, dos o más personas, entre otros supuestos."
+        }
+      ],
+      "prosecutorialSpecialtyId": "crimen-organizado",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635 (incorporado por D. Leg. 1181)",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "feminicidio",
+      "type": "offense",
+      "family": "Vida, el cuerpo y la salud",
+      "name": "Feminicidio",
+      "article": "Art. 108-B",
+      "aliases": [],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": 20,
+          "max": 35,
+          "elementos": []
+        },
+        {
+          "id": "a",
+          "nombre": "Con agravantes",
+          "min": 30,
+          "max": 35,
+          "elementos": [],
+          "nota": "Determinadas concurrencias permiten cadena perpetua."
+        }
+      ],
+      "prosecutorialSpecialtyId": "violencia-mujer",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "lesiones-graves",
+      "type": "offense",
+      "family": "Vida, el cuerpo y la salud",
+      "name": "Lesiones graves",
+      "article": "Art. 121",
+      "aliases": [],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": 4,
+          "max": 8,
+          "elementos": []
+        },
+        {
+          "id": "a",
+          "nombre": "Formas agravadas",
+          "min": 6,
+          "max": 12,
+          "elementos": [],
+          "nota": "Marco variable según el daño, la condición de la víctima, el medio y el resultado."
+        }
+      ],
+      "prosecutorialSpecialtyId": "penal-comun",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "lesiones-leves",
+      "type": "offense",
+      "family": "Vida, el cuerpo y la salud",
+      "name": "Lesiones leves",
+      "article": "Art. 122",
+      "aliases": [],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": 2,
+          "max": 5,
+          "elementos": []
+        },
+        {
+          "id": "a",
+          "nombre": "Con agravantes",
+          "min": 3,
+          "max": 6,
+          "elementos": [],
+          "nota": "Rango referencial; varía según la condición de la víctima."
+        }
+      ],
+      "prosecutorialSpecialtyId": "penal-comun",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "agresiones-mujer",
+      "type": "offense",
+      "family": "Vida, el cuerpo y la salud",
+      "name": "Agresiones contra mujeres o integrantes del grupo familiar",
+      "article": "Art. 122-B",
+      "aliases": [],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": 1,
+          "max": 3,
+          "elementos": [],
+          "inhab": "Inhabilitación conforme al art. 36 (incisos aplicables)."
+        }
+      ],
+      "prosecutorialSpecialtyId": "violencia-mujer",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635 (Ley 30364 y modificatorias)",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "oaf",
+      "type": "offense",
+      "family": "La familia",
+      "name": "Omisión de asistencia familiar",
+      "article": "Art. 149",
+      "aliases": [],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": null,
+          "max": 3,
+          "minNoExpreso": true,
+          "alternativa": "Prestación de servicios comunitarios de 20 a 52 jornadas",
+          "nota": "Pena privativa de libertad no mayor de 3 años, o prestación de servicios comunitarios de 20 a 52 jornadas, sin perjuicio del pago de la pensión alimenticia. La norma no fija un mínimo expreso en este párrafo.",
+          "elementos": []
+        }
+      ],
+      "prosecutorialSpecialtyId": "penal-comun",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "coaccion",
+      "type": "offense",
+      "family": "La libertad",
+      "name": "Coacción",
+      "article": "Art. 151",
+      "aliases": [],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": null,
+          "max": 2,
+          "minNoExpreso": true,
+          "elementos": [
+            "amenaza"
+          ],
+          "nota": "Obligar a otro, mediante amenaza o violencia, a hacer lo que la ley no manda o impedirle lo que ella no prohíbe."
+        }
+      ],
+      "prosecutorialSpecialtyId": "penal-comun",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "secuestro",
+      "type": "offense",
+      "family": "La libertad",
+      "name": "Secuestro",
+      "article": "Art. 152",
+      "aliases": [],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": 20,
+          "max": 30,
+          "elementos": []
+        },
+        {
+          "id": "a",
+          "nombre": "Formas agravadas",
+          "min": 30,
+          "max": 35,
+          "perpetua": true,
+          "elementos": [
+            "pluralidad"
+          ],
+          "nota": "Cadena perpetua en determinados supuestos agravados."
+        }
+      ],
+      "prosecutorialSpecialtyId": "crimen-organizado",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "trata",
+      "type": "offense",
+      "family": "La libertad",
+      "name": "Trata de personas",
+      "article": "Art. 153",
+      "aliases": [],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": 8,
+          "max": 15,
+          "elementos": []
+        },
+        {
+          "id": "a",
+          "nombre": "Formas agravadas (art. 153-A)",
+          "min": 12,
+          "max": 20,
+          "elementos": [
+            "pluralidad"
+          ],
+          "nota": "Supuestos de mayor gravedad pueden superar este marco."
+        }
+      ],
+      "prosecutorialSpecialtyId": "trata",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "violacion",
+      "type": "offense",
+      "family": "Libertad sexual",
+      "name": "Violación sexual",
+      "article": "Art. 170",
+      "aliases": [],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": 14,
+          "max": 20,
+          "elementos": [
+            "amenaza"
+          ]
+        },
+        {
+          "id": "a",
+          "nombre": "Con agravantes",
+          "min": 20,
+          "max": 26,
+          "elementos": [
+            "amenaza",
+            "pluralidad",
+            "arma"
+          ]
+        }
+      ],
+      "prosecutorialSpecialtyId": "penal-comun",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635 (Ley 30838)",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "violacion-menor",
+      "type": "offense",
+      "family": "Libertad sexual",
+      "name": "Violación sexual de menor de 14 años",
+      "article": "Art. 173",
+      "aliases": [],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Regulación Ley 30838",
+          "min": null,
+          "max": null,
+          "perpetua": true,
+          "elementos": [],
+          "nota": "Cadena perpetua bajo la regulación introducida por la Ley 30838."
+        }
+      ],
+      "prosecutorialSpecialtyId": "penal-comun",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635 (Ley 30838)",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "hurto-simple",
+      "type": "offense",
+      "family": "Patrimonio",
+      "name": "Hurto simple",
+      "article": "Art. 185",
+      "aliases": [
+        "hurto",
+        "sustracción sin violencia"
+      ],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": 1,
+          "max": 3,
+          "elementos": []
+        }
+      ],
+      "prosecutorialSpecialtyId": "penal-comun",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "hurto-agravado",
+      "type": "offense",
+      "family": "Patrimonio",
+      "name": "Hurto agravado",
+      "article": "Art. 186",
+      "aliases": [
+        "hurto",
+        "sustracción agravada"
+      ],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "n1",
+          "nombre": "Primer nivel de agravación",
+          "min": 3,
+          "max": 6,
+          "elementos": [
+            "pluralidad",
+            "nocturnidad"
+          ]
+        },
+        {
+          "id": "n2",
+          "nombre": "Segundo nivel de agravación",
+          "min": 4,
+          "max": 8,
+          "elementos": [
+            "pluralidad"
+          ]
+        },
+        {
+          "id": "n3",
+          "nombre": "Tercer nivel de agravación",
+          "min": 8,
+          "max": 15,
+          "elementos": [
+            "organizacion"
+          ]
+        }
+      ],
+      "prosecutorialSpecialtyId": "penal-comun",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "robo-simple",
+      "type": "offense",
+      "family": "Patrimonio",
+      "name": "Robo simple",
+      "article": "Art. 188",
+      "aliases": [
+        "robo",
+        "apoderamiento con violencia",
+        "apoderamiento con amenaza"
+      ],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": 3,
+          "max": 8,
+          "elementos": [
+            "violencia",
+            "amenaza"
+          ]
+        }
+      ],
+      "prosecutorialSpecialtyId": "penal-comun",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "robo-agravado",
+      "type": "offense",
+      "family": "Patrimonio",
+      "name": "Robo agravado",
+      "article": "Art. 189",
+      "aliases": [
+        "robo",
+        "asalto",
+        "apoderamiento con arma"
+      ],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "n1",
+          "nombre": "Primer nivel de agravación",
+          "min": 12,
+          "max": 20,
+          "elementos": [
+            "violencia",
+            "amenaza",
+            "arma",
+            "pluralidad",
+            "nocturnidad"
+          ],
+          "nota": "Incluye supuestos como mano armada, concurso de dos o más personas, en vivienda o durante la noche."
+        },
+        {
+          "id": "n2",
+          "nombre": "Segundo nivel de agravación",
+          "min": 20,
+          "max": 30,
+          "elementos": [
+            "violencia",
+            "amenaza",
+            "arma",
+            "pluralidad"
+          ],
+          "nota": "Incluye lesiones a la integridad, abuso de incapacidad de la víctima, entre otros."
+        },
+        {
+          "id": "n3",
+          "nombre": "Modalidad máxima",
+          "min": null,
+          "max": null,
+          "perpetua": true,
+          "elementos": [
+            "violencia",
+            "organizacion"
+          ],
+          "nota": "Cadena perpetua cuando se causa muerte o lesiones graves, o como integrante de organización criminal."
+        }
+      ],
+      "prosecutorialSpecialtyId": "penal-comun",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "apropiacion",
+      "type": "offense",
+      "family": "Patrimonio",
+      "name": "Apropiación ilícita",
+      "article": "Art. 190",
+      "aliases": [],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": 2,
+          "max": 4,
+          "elementos": [],
+          "multa": "Días-multa conforme al tipo."
+        }
+      ],
+      "prosecutorialSpecialtyId": "penal-comun",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "receptacion",
+      "type": "offense",
+      "family": "Patrimonio",
+      "name": "Receptación",
+      "article": "Art. 194",
+      "aliases": [],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": 1,
+          "max": 4,
+          "elementos": [],
+          "multa": "30 a 90 días-multa (referencial).",
+          "nota": "Aumenta según el bien y el delito de procedencia."
+        }
+      ],
+      "prosecutorialSpecialtyId": "penal-comun",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "estafa",
+      "type": "offense",
+      "family": "Patrimonio",
+      "name": "Estafa",
+      "article": "Art. 196",
+      "aliases": [],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": 1,
+          "max": 6,
+          "elementos": [
+            "engano"
+          ]
+        },
+        {
+          "id": "a",
+          "nombre": "Formas agravadas (art. 196-A)",
+          "min": 4,
+          "max": 8,
+          "elementos": [
+            "engano",
+            "pluralidad"
+          ],
+          "nota": "Pluralidad de víctimas, bienes de primera necesidad, entre otros."
+        }
+      ],
+      "prosecutorialSpecialtyId": "penal-comun",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "extorsion",
+      "type": "offense",
+      "family": "Patrimonio",
+      "name": "Extorsión",
+      "article": "Art. 200",
+      "aliases": [
+        "extorsión",
+        "cobro de cupos"
+      ],
+      "verificationStatus": "posiblemente-modificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica (referencial)",
+          "min": 10,
+          "max": 15,
+          "elementos": [
+            "violencia",
+            "amenaza"
+          ],
+          "nota": "Área sometida a sucesivas reformas: verificar el texto vigente del art. 200 y sus leyes modificatorias a la fecha del hecho."
+        },
+        {
+          "id": "a",
+          "nombre": "Niveles agravados",
+          "min": 15,
+          "max": 30,
+          "perpetua": true,
+          "elementos": [
+            "violencia",
+            "amenaza",
+            "pluralidad",
+            "arma"
+          ],
+          "nota": "Algunos supuestos con cadena perpetua."
+        }
+      ],
+      "prosecutorialSpecialtyId": "extorsion",
+      "prosecutorialNote": "La competencia corresponde al Subsistema Especializado contra la Extorsión y sus Delitos Conexos, creado por el D. Leg. 1735 (publicado el 12/02/2026). El DL 1735 es una norma organizativa: no establece la pena del delito.",
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635 — verificar texto consolidado con reformas de 2025-2026",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "usurpacion",
+      "type": "offense",
+      "family": "Patrimonio",
+      "name": "Usurpación",
+      "article": "Arts. 202 y 204",
+      "aliases": [],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": 2,
+          "max": 5,
+          "elementos": [
+            "violencia"
+          ]
+        },
+        {
+          "id": "a",
+          "nombre": "Formas agravadas",
+          "min": 5,
+          "max": 12,
+          "elementos": [
+            "violencia",
+            "pluralidad",
+            "arma"
+          ],
+          "nota": "Según violencia, pluralidad y condición del inmueble."
+        }
+      ],
+      "prosecutorialSpecialtyId": "penal-comun",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "danos",
+      "type": "offense",
+      "family": "Patrimonio",
+      "name": "Daños",
+      "article": "Art. 205",
+      "aliases": [],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": null,
+          "max": 3,
+          "minNoExpreso": true,
+          "elementos": [],
+          "multa": "30 a 60 días-multa (referencial)."
+        }
+      ],
+      "prosecutorialSpecialtyId": "penal-comun",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "tenencia-armas",
+      "type": "offense",
+      "family": "Seguridad pública",
+      "name": "Fabricación y tenencia ilegal de armas",
+      "article": "Art. 279-G",
+      "aliases": [],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Tenencia ilegal de armas de fuego",
+          "min": 6,
+          "max": 10,
+          "elementos": [
+            "arma"
+          ],
+          "nota": "Fabricación, comercialización o tenencia ilegal de armas, municiones y explosivos tiene rangos propios."
+        }
+      ],
+      "prosecutorialSpecialtyId": "penal-comun",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635 (D. Leg. 1244)",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "conduccion-ebriedad",
+      "type": "offense",
+      "family": "Seguridad pública",
+      "name": "Conducción en estado de ebriedad o drogadicción",
+      "article": "Art. 274",
+      "aliases": [],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": 0.5,
+          "max": 2,
+          "elementos": [],
+          "inhab": "Inhabilitación para conducir conforme al art. 36.7.",
+          "alternativa": "Prestación de servicios comunitarios (supuestos legales)."
+        }
+      ],
+      "prosecutorialSpecialtyId": "penal-comun",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "tid",
+      "type": "offense",
+      "family": "Drogas",
+      "name": "Promoción o favorecimiento al tráfico ilícito de drogas",
+      "article": "Art. 296",
+      "aliases": [
+        "tráfico ilícito de drogas",
+        "drogas"
+      ],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad principal",
+          "min": 8,
+          "max": 15,
+          "elementos": [],
+          "multa": "180 a 365 días-multa.",
+          "inhab": "Inhabilitación conforme al art. 36 (incisos aplicables)."
+        }
+      ],
+      "prosecutorialSpecialtyId": "drogas",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "tid-insumos",
+      "type": "offense",
+      "family": "Drogas",
+      "name": "Tráfico de insumos químicos y productos fiscalizados",
+      "article": "Art. 296-B",
+      "aliases": [],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Comercialización o desvío de insumos para elaboración ilegal de drogas",
+          "min": 5,
+          "max": 10,
+          "elementos": [],
+          "multa": "60 a 120 días-multa (referencial).",
+          "inhab": "Inhabilitación conforme al art. 36."
+        }
+      ],
+      "prosecutorialSpecialtyId": "drogas",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "tid-agravado",
+      "type": "offense",
+      "family": "Drogas",
+      "name": "TID — formas agravadas",
+      "article": "Art. 297",
+      "aliases": [],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Formas agravadas",
+          "min": 15,
+          "max": 25,
+          "elementos": [
+            "pluralidad",
+            "organizacion"
+          ],
+          "multa": "180 a 365 días-multa.",
+          "inhab": "Inhabilitación conforme al art. 36.",
+          "nota": "Agravantes: funcionario, docente, tres o más personas, entre otros."
+        },
+        {
+          "id": "c",
+          "nombre": "Cabecilla o dirigente de organización dedicada al TID",
+          "min": 25,
+          "max": 35,
+          "elementos": [
+            "organizacion"
+          ],
+          "multa": "Días-multa conforme al tipo."
+        }
+      ],
+      "prosecutorialSpecialtyId": "drogas",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "microcomercializacion",
+      "type": "offense",
+      "family": "Drogas",
+      "name": "Microcomercialización o microproducción",
+      "article": "Art. 298",
+      "aliases": [],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Pequeñas cantidades (límites del art. 298)",
+          "min": 3,
+          "max": 7,
+          "elementos": [],
+          "multa": "180 a 360 días-multa (referencial).",
+          "nota": "La posesión no punible para consumo propio se rige por el art. 299."
+        }
+      ],
+      "prosecutorialSpecialtyId": "drogas",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "colusion",
+      "type": "offense",
+      "family": "Administración pública",
+      "name": "Colusión",
+      "article": "Art. 384",
+      "aliases": [],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "s",
+          "nombre": "Colusión simple",
+          "min": 3,
+          "max": 6,
+          "elementos": [
+            "cargo"
+          ],
+          "multa": "180 a 365 días-multa.",
+          "inhab": "Inhabilitación conforme al art. 36."
+        },
+        {
+          "id": "a",
+          "nombre": "Colusión agravada",
+          "min": 6,
+          "max": 15,
+          "elementos": [
+            "cargo"
+          ],
+          "multa": "365 a 730 días-multa.",
+          "inhab": "Inhabilitación conforme al art. 36."
+        }
+      ],
+      "prosecutorialSpecialtyId": "corrupcion",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "peculado",
+      "type": "offense",
+      "family": "Administración pública",
+      "name": "Peculado",
+      "article": "Art. 387",
+      "aliases": [],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad principal",
+          "min": 4,
+          "max": 8,
+          "elementos": [
+            "cargo"
+          ],
+          "multa": "180 a 365 días-multa.",
+          "inhab": "Inhabilitación conforme al art. 36."
+        },
+        {
+          "id": "a",
+          "nombre": "Formas agravadas",
+          "min": 8,
+          "max": 12,
+          "elementos": [
+            "cargo"
+          ],
+          "multa": "365 a 730 días-multa.",
+          "inhab": "Inhabilitación conforme al art. 36."
+        }
+      ],
+      "prosecutorialSpecialtyId": "corrupcion",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "cohecho",
+      "type": "offense",
+      "family": "Administración pública",
+      "name": "Cohecho pasivo propio",
+      "article": "Art. 393",
+      "aliases": [],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Aceptar o recibir",
+          "min": 5,
+          "max": 8,
+          "elementos": [
+            "cargo"
+          ],
+          "multa": "180 a 365 días-multa.",
+          "inhab": "Inhabilitación conforme al art. 36."
+        },
+        {
+          "id": "c",
+          "nombre": "Condicionar el acto funcional",
+          "min": 8,
+          "max": 10,
+          "elementos": [
+            "cargo"
+          ],
+          "multa": "365 a 730 días-multa.",
+          "inhab": "Inhabilitación conforme al art. 36."
+        }
+      ],
+      "prosecutorialSpecialtyId": "corrupcion",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "falsedad-doc",
+      "type": "offense",
+      "family": "Fe pública",
+      "name": "Falsificación de documentos",
+      "article": "Art. 427",
+      "aliases": [],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "pub",
+          "nombre": "Documento público",
+          "min": 2,
+          "max": 10,
+          "elementos": [],
+          "multa": "Días-multa conforme al tipo."
+        },
+        {
+          "id": "priv",
+          "nombre": "Documento privado",
+          "min": 2,
+          "max": 4,
+          "elementos": []
+        }
+      ],
+      "prosecutorialSpecialtyId": "penal-comun",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "encubrimiento-p",
+      "type": "offense",
+      "family": "Administración de justicia",
+      "name": "Encubrimiento personal",
+      "article": "Art. 404",
+      "aliases": [],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": 3,
+          "max": 6,
+          "elementos": [],
+          "nota": "Agravado si el delito encubierto es grave (marco superior)."
+        }
+      ],
+      "prosecutorialSpecialtyId": "penal-comun",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "encubrimiento-r",
+      "type": "offense",
+      "family": "Administración de justicia",
+      "name": "Encubrimiento real",
+      "article": "Art. 405",
+      "aliases": [],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": 2,
+          "max": 4,
+          "elementos": []
+        }
+      ],
+      "prosecutorialSpecialtyId": "penal-comun",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "lavado",
+      "type": "offense",
+      "family": "Lavado de activos",
+      "name": "Actos de conversión y transferencia",
+      "article": "D. Leg. 1106, art. 1",
+      "aliases": [
+        "lavado de activos",
+        "lavado de dinero"
+      ],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": 8,
+          "max": 15,
+          "elementos": [],
+          "multa": "120 a 350 días-multa."
+        },
+        {
+          "id": "a",
+          "nombre": "Formas agravadas (art. 4)",
+          "min": 10,
+          "max": 20,
+          "elementos": [
+            "organizacion",
+            "cargo"
+          ],
+          "multa": "365 a 730 días-multa.",
+          "nota": "Integrante de organización criminal o funcionario: marco superior. Ciertos supuestos alcanzan penas mayores."
+        }
+      ],
+      "prosecutorialSpecialtyId": "lavado",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Decreto Legislativo 1106",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "defraudacion",
+      "type": "offense",
+      "family": "Delitos tributarios",
+      "name": "Defraudación tributaria",
+      "article": "D. Leg. 813",
+      "aliases": [],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": 5,
+          "max": 8,
+          "elementos": [
+            "engano"
+          ],
+          "multa": "365 a 730 días-multa."
+        },
+        {
+          "id": "a",
+          "nombre": "Modalidades agravadas",
+          "min": 8,
+          "max": 12,
+          "elementos": [
+            "engano"
+          ],
+          "multa": "730 a 1460 días-multa."
+        }
+      ],
+      "prosecutorialSpecialtyId": "tributarios",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Decreto Legislativo 813 — Ley Penal Tributaria",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "acceso-ilicito",
+      "type": "offense",
+      "family": "Delitos informáticos",
+      "name": "Acceso ilícito",
+      "article": "Ley 30096, art. 2",
+      "aliases": [],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": 1,
+          "max": 4,
+          "elementos": [],
+          "multa": "30 a 90 días-multa."
+        }
+      ],
+      "prosecutorialSpecialtyId": "ciber",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Ley 30096, modificada entre otras por la Ley 32314 (empleo de IA)",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "fraude-informatico",
+      "type": "offense",
+      "family": "Delitos informáticos",
+      "name": "Fraude informático",
+      "article": "Ley 30096, art. 8",
+      "aliases": [],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": 3,
+          "max": 8,
+          "elementos": [
+            "engano"
+          ],
+          "multa": "60 a 120 días-multa."
+        },
+        {
+          "id": "a",
+          "nombre": "Con agravantes",
+          "min": 5,
+          "max": 10,
+          "elementos": [
+            "engano"
+          ],
+          "multa": "80 a 140 días-multa."
+        }
+      ],
+      "prosecutorialSpecialtyId": "ciber",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Ley 30096, modificada entre otras por la Ley 32314",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "suplantacion",
+      "type": "offense",
+      "family": "Delitos informáticos",
+      "name": "Suplantación de identidad",
+      "article": "Ley 30096, art. 9",
+      "aliases": [],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": 3,
+          "max": 5,
+          "elementos": []
+        }
+      ],
+      "prosecutorialSpecialtyId": "ciber",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Ley 30096",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "org-criminal",
+      "type": "offense",
+      "family": "Criminalidad organizada",
+      "name": "Organización criminal",
+      "article": "Art. 317",
+      "aliases": [],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Integrante",
+          "min": 8,
+          "max": 15,
+          "elementos": [
+            "organizacion"
+          ],
+          "nota": "Depende del rol, estructura, finalidad criminal y delito-fin."
+        },
+        {
+          "id": "l",
+          "nombre": "Líder / dirigente / cabecilla",
+          "min": 15,
+          "max": 20,
+          "elementos": [
+            "organizacion"
+          ]
+        }
+      ],
+      "prosecutorialSpecialtyId": "crimen-organizado",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635; Ley 30077 (norma procesal y de técnicas especiales)",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    }
+  ],
+  "sentencingRules": [
+    {
+      "id": "penalty-thirds",
+      "type": "sentencing-rule",
+      "name": "Sistema de tercios",
+      "article": "Art. 45-A del Código Penal",
+      "aliases": [
+        "tercios",
+        "tercio inferior",
+        "tercio intermedio",
+        "tercio superior",
+        "individualización de la pena"
+      ],
+      "text": "JustiPenal divide el marco penal en tres partes. Solo atenuantes o ninguna circunstancia computable ubican el rango en el tercio inferior; atenuantes y agravantes, en el intermedio; solo agravantes computables, en el superior. El resultado es un rango referencial, no una pena judicial concreta.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "attempt",
+      "type": "sentencing-rule",
+      "name": "Tentativa",
+      "article": "Art. 16 del Código Penal; Ley 32258",
+      "aliases": [
+        "tentativa",
+        "delito intentado",
+        "no consumado"
+      ],
+      "text": "La reducción es prudencial y exige decisión judicial motivada. JustiPenal no calcula automáticamente su magnitud ni reemplaza la valoración judicial.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        },
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "recidivism-habituality",
+      "type": "sentencing-rule",
+      "name": "Reincidencia y habitualidad",
+      "article": "Arts. 46-B y 46-C del Código Penal",
+      "aliases": [
+        "reincidencia",
+        "habitualidad",
+        "antecedentes"
+      ],
+      "text": "Son agravantes cualificadas legalmente condicionadas. No se calculan sin antecedentes verificables y valoración judicial.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "participation",
+      "type": "sentencing-rule",
+      "name": "Participación",
+      "article": "Código Penal",
+      "aliases": [
+        "autor",
+        "coautor",
+        "cómplice",
+        "participación"
+      ],
+      "text": "La participación específica de cada interviniente requiere información y prueba; el analizador local la trata como información faltante cuando detecta pluralidad de agentes.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    }
+  ],
+  "concurrenceRules": [
+    {
+      "id": "real",
+      "type": "concurrence-rule",
+      "name": "Concurso real (art. 50)",
+      "aliases": [
+        "concurso",
+        "concurrencia de delitos",
+        "real"
+      ],
+      "text": "Se suman las penas que fije el juez para cada delito, hasta un máximo del doble de la pena del delito más grave, sin exceder de 35 años. Si un delito tiene cadena perpetua, se aplica únicamente esta.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "ideal",
+      "type": "concurrence-rule",
+      "name": "Concurso ideal (art. 48)",
+      "aliases": [
+        "concurso",
+        "concurrencia de delitos",
+        "ideal"
+      ],
+      "text": "Una sola conducta configura dos o más delitos: se aplica la pena del delito más grave, pudiendo incrementarse hasta en una cuarta parte por encima de su máximo, sin exceder de 35 años.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "continuado",
+      "type": "concurrence-rule",
+      "name": "Delito continuado (art. 49)",
+      "aliases": [
+        "concurso",
+        "concurrencia de delitos",
+        "continuado"
+      ],
+      "text": "Violaciones de la misma ley penal en momentos diversos con actos ejecutivos de la misma resolución criminal: se sanciona con la pena del delito más grave; si hay pluralidad de personas perjudicadas, puede aumentarse en un tercio del máximo.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "aparente",
+      "type": "concurrence-rule",
+      "name": "Concurso aparente de leyes",
+      "aliases": [
+        "concurso",
+        "concurrencia de delitos",
+        "aparente"
+      ],
+      "text": "Solo se aplica el tipo penal que absorbe el desvalor total del hecho (especialidad, subsidiariedad, consunción). Las demás conductas no se sancionan por separado.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    }
+  ],
+  "genericCircumstances": {
+    "mitigating": [
+      {
+        "texto": "Carencia de antecedentes penales",
+        "tag": null
+      },
+      {
+        "texto": "Obrar por móviles nobles o altruistas",
+        "tag": null
+      },
+      {
+        "texto": "Obrar en estado de emoción, temor o perturbación excusable",
+        "tag": null
+      },
+      {
+        "texto": "Influencia de apremiantes circunstancias personales o familiares",
+        "tag": null
+      },
+      {
+        "texto": "Procurar voluntariamente reparar el daño o disminuir sus consecuencias",
+        "tag": null
+      },
+      {
+        "texto": "Presentarse voluntariamente a las autoridades",
+        "tag": null
+      },
+      {
+        "texto": "Edad del imputado, cuando influyó en la conducta",
+        "tag": null
+      }
+    ],
+    "aggravating": [
+      {
+        "texto": "Ejecutar el hecho sobre bienes o recursos destinados a necesidades básicas",
+        "tag": null
+      },
+      {
+        "texto": "Pluralidad de agentes en la ejecución",
+        "tag": "pluralidad"
+      },
+      {
+        "texto": "Abuso de condiciones de superioridad o aprovechamiento de víctima vulnerable",
+        "tag": null
+      },
+      {
+        "texto": "Emplear armas o medios cuyo uso pueda generar peligro común",
+        "tag": "arma"
+      },
+      {
+        "texto": "Móvil abyecto, fútil o mediante precio, recompensa o promesa",
+        "tag": "precio"
+      },
+      {
+        "texto": "Abusar del cargo, posición económica, formación, poder o profesión",
+        "tag": "cargo"
+      },
+      {
+        "texto": "Actuar por motivos de intolerancia o discriminación",
+        "tag": null
+      },
+      {
+        "texto": "Utilizar a menores de edad o inimputables",
+        "tag": null
+      }
+    ],
+    "proceduralReductions": [
+      {
+        "id": "confesion",
+        "nombre": "Confesión sincera",
+        "regla": "Reducción de hasta un tercio por debajo del mínimo legal (art. 161 CPP). No procede en flagrancia ni ante evidencia suficiente.",
+        "factor": 0.3333333333333333,
+        "sobre": "min"
+      },
+      {
+        "id": "terminacion",
+        "nombre": "Terminación anticipada",
+        "regla": "Reducción de un sexto de la pena concreta individualizada (art. 471 CPP), acumulable a la confesión sincera.",
+        "factor": 0.16666666666666666,
+        "sobre": "concreta"
+      },
+      {
+        "id": "conclusion",
+        "nombre": "Conclusión anticipada del juicio",
+        "regla": "Reducción de un séptimo de la pena concreta individualizada (Acuerdo Plenario 5-2008/CJ-116).",
+        "factor": 0.14285714285714285,
+        "sobre": "concreta"
+      }
+    ]
+  },
+  "proceduralDeadlines": [
+    {
+      "id": "deadline-1",
+      "type": "procedural-deadline",
+      "name": "Diligencias preliminares",
+      "aliases": [
+        "Diligencias preliminares",
+        "Art. 334.2 CPP",
+        "plazo",
+        "duración"
+      ],
+      "deadline": "60 días naturales",
+      "legalBasis": "Art. 334.2 CPP",
+      "extension": "El fiscal puede fijar un plazo distinto según la complejidad; sujeto a control judicial. Se reduce si hay persona detenida.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "deadline-2",
+      "type": "procedural-deadline",
+      "name": "Investigación preparatoria — ordinaria",
+      "aliases": [
+        "Investigación preparatoria — ordinaria",
+        "Art. 342.1 CPP",
+        "plazo",
+        "duración"
+      ],
+      "deadline": "120 días naturales",
+      "legalBasis": "Art. 342.1 CPP",
+      "extension": "Prórroga fiscal por única vez hasta 60 días.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "deadline-3",
+      "type": "procedural-deadline",
+      "name": "Investigación preparatoria — compleja",
+      "aliases": [
+        "Investigación preparatoria — compleja",
+        "Art. 342.2 CPP",
+        "plazo",
+        "duración"
+      ],
+      "deadline": "8 meses",
+      "legalBasis": "Art. 342.2 CPP",
+      "extension": "El juez puede conceder prórroga por igual plazo.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "deadline-4",
+      "type": "procedural-deadline",
+      "name": "Investigación preparatoria — criminalidad organizada",
+      "aliases": [
+        "Investigación preparatoria — criminalidad organizada",
+        "Art. 342.2 CPP (Ley 30077)",
+        "plazo",
+        "duración"
+      ],
+      "deadline": "36 meses",
+      "legalBasis": "Art. 342.2 CPP (Ley 30077)",
+      "extension": "El juez puede conceder prórroga por igual plazo.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "deadline-5",
+      "type": "procedural-deadline",
+      "name": "Decisión fiscal al concluir la investigación",
+      "aliases": [
+        "Decisión fiscal al concluir la investigación",
+        "Art. 344.1 CPP",
+        "plazo",
+        "duración"
+      ],
+      "deadline": "15 días",
+      "legalBasis": "Art. 344.1 CPP",
+      "extension": "Plazo mayor en procesos complejos y de criminalidad organizada.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "deadline-6",
+      "type": "procedural-deadline",
+      "name": "Etapa intermedia y juicio oral",
+      "aliases": [
+        "Etapa intermedia y juicio oral",
+        "Arts. 351 y ss. CPP",
+        "plazo",
+        "duración"
+      ],
+      "deadline": "Variable",
+      "legalBasis": "Arts. 351 y ss. CPP",
+      "extension": "Depende de la agenda judicial y de la complejidad del caso.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    }
+  ],
+  "preventiveDetentionDeadlines": [
+    {
+      "id": "preventive-detention-1",
+      "type": "preventive-detention-deadline",
+      "name": "Prisión preventiva — Proceso ordinario",
+      "aliases": [
+        "prisión preventiva",
+        "Proceso ordinario"
+      ],
+      "deadline": "9 meses",
+      "text": "La prisión preventiva es una medida excepcional, no una pena.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "preventive-detention-2",
+      "type": "preventive-detention-deadline",
+      "name": "Prisión preventiva — Proceso complejo",
+      "aliases": [
+        "prisión preventiva",
+        "Proceso complejo"
+      ],
+      "deadline": "18 meses",
+      "text": "La prisión preventiva es una medida excepcional, no una pena.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "preventive-detention-3",
+      "type": "preventive-detention-deadline",
+      "name": "Prisión preventiva — Criminalidad organizada",
+      "aliases": [
+        "prisión preventiva",
+        "Criminalidad organizada"
+      ],
+      "deadline": "36 meses",
+      "text": "La prisión preventiva es una medida excepcional, no una pena.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    }
+  ],
+  "prosecutorialSpecialties": [
+    {
+      "id": "penal-comun",
+      "type": "prosecutorial-specialty",
+      "name": "Fiscalía Provincial Penal Corporativa",
+      "aliases": [
+        "penal comun",
+        "fiscalía",
+        "competencia fiscal"
+      ],
+      "text": "Nivel operativo principal: recibe denuncias, conduce jurídicamente la investigación, formaliza, acusa y participa en juicio.",
+      "competenceRule": "La competencia depende de materia, territorio, condición personal y etapa procesal.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "corrupcion",
+      "type": "prosecutorial-specialty",
+      "name": "Fiscalía Especializada en Delitos de Corrupción de Funcionarios",
+      "aliases": [
+        "corrupcion",
+        "fiscalía",
+        "competencia fiscal"
+      ],
+      "text": "Delitos contra la administración pública cometidos por funcionarios: colusión, peculado, cohecho y conexos.",
+      "competenceRule": "La competencia depende de materia, territorio, condición personal y etapa procesal.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "crimen-organizado",
+      "type": "prosecutorial-specialty",
+      "name": "Fiscalía Especializada contra la Criminalidad Organizada (FECOR)",
+      "aliases": [
+        "crimen organizado",
+        "fiscalía",
+        "competencia fiscal"
+      ],
+      "text": "Organizaciones criminales y delitos cometidos en ese contexto (Ley 30077).",
+      "competenceRule": "La competencia depende de materia, territorio, condición personal y etapa procesal.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "lavado",
+      "type": "prosecutorial-specialty",
+      "name": "Fiscalía Especializada en Lavado de Activos",
+      "aliases": [
+        "lavado",
+        "fiscalía",
+        "competencia fiscal"
+      ],
+      "text": "Lavado de activos y pérdida de dominio (D. Leg. 1106).",
+      "competenceRule": "La competencia depende de materia, territorio, condición personal y etapa procesal.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "drogas",
+      "type": "prosecutorial-specialty",
+      "name": "Fiscalía Especializada en Tráfico Ilícito de Drogas",
+      "aliases": [
+        "drogas",
+        "fiscalía",
+        "competencia fiscal"
+      ],
+      "text": "Delitos de los arts. 296 y siguientes del Código Penal.",
+      "competenceRule": "La competencia depende de materia, territorio, condición personal y etapa procesal.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "violencia-mujer",
+      "type": "prosecutorial-specialty",
+      "name": "Fiscalía Especializada en Violencia contra la Mujer e Integrantes del Grupo Familiar",
+      "aliases": [
+        "violencia mujer",
+        "fiscalía",
+        "competencia fiscal"
+      ],
+      "text": "Ley 30364 y delitos conexos, incluido el feminicidio.",
+      "competenceRule": "La competencia depende de materia, territorio, condición personal y etapa procesal.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "trata",
+      "type": "prosecutorial-specialty",
+      "name": "Fiscalía Especializada en Trata de Personas",
+      "aliases": [
+        "trata",
+        "fiscalía",
+        "competencia fiscal"
+      ],
+      "text": "Trata de personas y explotación (arts. 153 y siguientes).",
+      "competenceRule": "La competencia depende de materia, territorio, condición personal y etapa procesal.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "extorsion",
+      "type": "prosecutorial-specialty",
+      "name": "Subsistema Especializado contra la Extorsión y Delitos Conexos",
+      "aliases": [
+        "extorsion",
+        "fiscalía",
+        "competencia fiscal"
+      ],
+      "text": "Norma organizativa: Decreto Legislativo 1735, publicado el 12 de febrero de 2026. No establece penas sustantivas.",
+      "competenceRule": "La competencia depende de materia, territorio, condición personal y etapa procesal.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "tributarios",
+      "type": "prosecutorial-specialty",
+      "name": "Fiscalía Especializada en Delitos Tributarios y Aduaneros",
+      "aliases": [
+        "tributarios",
+        "fiscalía",
+        "competencia fiscal"
+      ],
+      "text": "Defraudación tributaria (D. Leg. 813) y delitos aduaneros (Ley 28008).",
+      "competenceRule": "La competencia depende de materia, territorio, condición personal y etapa procesal.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "ciber",
+      "type": "prosecutorial-specialty",
+      "name": "Fiscalía Especializada en Ciberdelincuencia",
+      "aliases": [
+        "ciber",
+        "fiscalía",
+        "competencia fiscal"
+      ],
+      "text": "Delitos informáticos (Ley 30096), según la organización de cada distrito fiscal.",
+      "competenceRule": "La competencia depende de materia, territorio, condición personal y etapa procesal.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    }
+  ],
+  "personalJurisdictionConditions": [
+    {
+      "id": "funcionario",
+      "type": "jurisdiction-condition",
+      "name": "Funcionario o servidor público",
+      "aliases": [
+        "Funcionario o servidor público",
+        "competencia"
+      ],
+      "text": "Puede activar la competencia de la Fiscalía Especializada en Corrupción de Funcionarios o procedimientos por razón de la función.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "aforado",
+      "type": "jurisdiction-condition",
+      "name": "Alto funcionario con prerrogativa (congresista, ministro, juez supremo…)",
+      "aliases": [
+        "Alto funcionario con prerrogativa (congresista, ministro, juez supremo…)",
+        "competencia"
+      ],
+      "text": "Puede requerir antejuicio o proceso especial por razón de la función ante la Fiscalía de la Nación y la Corte Suprema.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "policia-militar",
+      "type": "jurisdiction-condition",
+      "name": "Efectivo policial o militar",
+      "aliases": [
+        "Efectivo policial o militar",
+        "competencia"
+      ],
+      "text": "Si el hecho es delito de función, puede corresponder al fuero militar-policial; los delitos comunes van al fuero ordinario.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "adolescente",
+      "type": "jurisdiction-condition",
+      "name": "Adolescente (menor de 18 años)",
+      "aliases": [
+        "Adolescente (menor de 18 años)",
+        "competencia"
+      ],
+      "text": "No se aplica el Código Penal de adultos: rige el Código de Responsabilidad Penal de Adolescentes (D. Leg. 1348), con fiscalías y juzgados de familia especializados.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    }
+  ],
+  "proceduralStages": [
+    {
+      "id": "stage-1",
+      "type": "procedural-stage",
+      "name": "Denuncia",
+      "aliases": [
+        "Denuncia",
+        "etapa procesal",
+        "proceso penal"
+      ],
+      "text": "Denuncia, noticia policial, flagrancia o actuación de oficio.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "stage-2",
+      "type": "procedural-stage",
+      "name": "Investigación preliminar",
+      "aliases": [
+        "Investigación preliminar",
+        "etapa procesal",
+        "proceso penal"
+      ],
+      "text": "60 días. PNP investiga operativamente; el fiscal conduce jurídicamente (Ley 32130).",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "stage-3",
+      "type": "procedural-stage",
+      "name": "Investigación preparatoria",
+      "aliases": [
+        "Investigación preparatoria",
+        "etapa procesal",
+        "proceso penal"
+      ],
+      "text": "120 días / 8 meses / 36 meses según el tipo de investigación.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "stage-4",
+      "type": "procedural-stage",
+      "name": "Etapa intermedia",
+      "aliases": [
+        "Etapa intermedia",
+        "etapa procesal",
+        "proceso penal"
+      ],
+      "text": "Control judicial de la acusación, de la prueba y de los medios de defensa.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "stage-5",
+      "type": "procedural-stage",
+      "name": "Juicio oral",
+      "aliases": [
+        "Juicio oral",
+        "etapa procesal",
+        "proceso penal"
+      ],
+      "text": "Unipersonal o colegiado según la pena mínima del delito (mayor de 6 años → colegiado).",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "stage-6",
+      "type": "procedural-stage",
+      "name": "Sentencia",
+      "aliases": [
+        "Sentencia",
+        "etapa procesal",
+        "proceso penal"
+      ],
+      "text": "Absolución o condena. Apelación ante la Sala Penal Superior y casación ante la Corte Suprema.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    }
+  ],
+  "coerciveMeasures": [
+    {
+      "id": "measure-1",
+      "type": "coercive-measure",
+      "name": "Comparecencia simple",
+      "aliases": [
+        "Comparecencia simple",
+        "medida coercitiva",
+        "coerción procesal"
+      ],
+      "text": "El imputado sigue el proceso en libertad, con la obligación de concurrir a las citaciones.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "measure-2",
+      "type": "coercive-measure",
+      "name": "Comparecencia con restricciones",
+      "aliases": [
+        "Comparecencia con restricciones",
+        "medida coercitiva",
+        "coerción procesal"
+      ],
+      "text": "Libertad sujeta a reglas: no ausentarse, firmar periódicamente, caución u otras restricciones.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "measure-3",
+      "type": "coercive-measure",
+      "name": "Impedimento de salida",
+      "aliases": [
+        "Impedimento de salida",
+        "medida coercitiva",
+        "coerción procesal"
+      ],
+      "text": "Prohibición de salir del país o de la localidad, dispuesta judicialmente.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "measure-4",
+      "type": "coercive-measure",
+      "name": "Detención preliminar judicial",
+      "aliases": [
+        "Detención preliminar judicial",
+        "medida coercitiva",
+        "coerción procesal"
+      ],
+      "text": "Privación breve de libertad al inicio de la investigación, ordenada por el juez.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "measure-5",
+      "type": "coercive-measure",
+      "name": "Prisión preventiva",
+      "aliases": [
+        "Prisión preventiva",
+        "medida coercitiva",
+        "coerción procesal"
+      ],
+      "text": "Requiere graves y fundados elementos, prognosis de pena superior a 4 años y peligro procesal. No es una pena.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "measure-6",
+      "type": "coercive-measure",
+      "name": "Arresto domiciliario",
+      "aliases": [
+        "Arresto domiciliario",
+        "medida coercitiva",
+        "coerción procesal"
+      ],
+      "text": "Alternativa a la prisión preventiva para supuestos legalmente previstos.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "measure-7",
+      "type": "coercive-measure",
+      "name": "Embargo / incautación / inhibición",
+      "aliases": [
+        "Embargo / incautación / inhibición",
+        "medida coercitiva",
+        "coerción procesal"
+      ],
+      "text": "Medidas reales sobre bienes para asegurar la reparación civil o el decomiso.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "measure-8",
+      "type": "coercive-measure",
+      "name": "Suspensión preventiva de derechos",
+      "aliases": [
+        "Suspensión preventiva de derechos",
+        "medida coercitiva",
+        "coerción procesal"
+      ],
+      "text": "Suspensión temporal de cargos o actividades vinculadas al delito.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    }
+  ],
+  "baseLegislation": [
+    {
+      "id": "base-law-1",
+      "type": "base-legislation",
+      "name": "Constitución Política del Perú",
+      "aliases": [
+        "Constitución Política del Perú",
+        "normativa",
+        "base legal"
+      ],
+      "text": "Libertad personal, debido proceso, función jurisdiccional y atribuciones del Ministerio Público (arts. 2.24, 139, 158 y 159).",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        },
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "base-law-2",
+      "type": "base-legislation",
+      "name": "Decreto Legislativo 635 — Código Penal",
+      "aliases": [
+        "Decreto Legislativo 635 — Código Penal",
+        "normativa",
+        "base legal"
+      ],
+      "text": "Delitos, penas, tentativa, autoría, agravantes, atenuantes y determinación judicial de la pena.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        },
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "base-law-3",
+      "type": "base-legislation",
+      "name": "Decreto Legislativo 957 — Código Procesal Penal",
+      "aliases": [
+        "Decreto Legislativo 957 — Código Procesal Penal",
+        "normativa",
+        "base legal"
+      ],
+      "text": "Investigación, acusación, juzgamiento, impugnaciones, medidas coercitivas y procesos especiales.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        },
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "base-law-4",
+      "type": "base-legislation",
+      "name": "Decreto Legislativo 052 — Ley Orgánica del Ministerio Público",
+      "aliases": [
+        "Decreto Legislativo 052 — Ley Orgánica del Ministerio Público",
+        "normativa",
+        "base legal"
+      ],
+      "text": "Organización y funciones de fiscales provinciales, superiores y supremos.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        },
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "base-law-5",
+      "type": "base-legislation",
+      "name": "Ley 30077 — Crimen organizado",
+      "aliases": [
+        "Ley 30077 — Crimen organizado",
+        "normativa",
+        "base legal"
+      ],
+      "text": "Criminalidad organizada, técnicas especiales de investigación y plazos especiales.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        },
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "base-law-6",
+      "type": "base-legislation",
+      "name": "Decreto Legislativo 1106",
+      "aliases": [
+        "Decreto Legislativo 1106",
+        "normativa",
+        "base legal"
+      ],
+      "text": "Lucha eficaz contra el lavado de activos.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        },
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "base-law-7",
+      "type": "base-legislation",
+      "name": "Ley 30096 — Delitos informáticos",
+      "aliases": [
+        "Ley 30096 — Delitos informáticos",
+        "normativa",
+        "base legal"
+      ],
+      "text": "Modificada, entre otras, por la Ley 32314 respecto del empleo de inteligencia artificial.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        },
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "base-law-8",
+      "type": "base-legislation",
+      "name": "Ley 30364",
+      "aliases": [
+        "Ley 30364",
+        "normativa",
+        "base legal"
+      ],
+      "text": "Violencia contra las mujeres e integrantes del grupo familiar.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        },
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "base-law-9",
+      "type": "base-legislation",
+      "name": "Decreto Legislativo 813",
+      "aliases": [
+        "Decreto Legislativo 813",
+        "normativa",
+        "base legal"
+      ],
+      "text": "Ley Penal Tributaria.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        },
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "base-law-10",
+      "type": "base-legislation",
+      "name": "Ley 28008",
+      "aliases": [
+        "Ley 28008",
+        "normativa",
+        "base legal"
+      ],
+      "text": "Delitos aduaneros.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        },
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "base-law-11",
+      "type": "base-legislation",
+      "name": "Decreto Ley 25475",
+      "aliases": [
+        "Decreto Ley 25475",
+        "normativa",
+        "base legal"
+      ],
+      "text": "Delitos de terrorismo.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        },
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "base-law-12",
+      "type": "base-legislation",
+      "name": "Decreto Legislativo 1348",
+      "aliases": [
+        "Decreto Legislativo 1348",
+        "normativa",
+        "base legal"
+      ],
+      "text": "Código de Responsabilidad Penal de Adolescentes.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        },
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    }
+  ],
+  "recentLegislation": [
+    {
+      "id": "recent-law-1",
+      "type": "recent-legislation",
+      "name": "Ley 32258",
+      "aliases": [
+        "Ley 32258",
+        "Modifica el tratamiento de la tentativa y amplía las restricciones para suspender la ejecución de determinadas penas."
+      ],
+      "publicationDate": "14/03/2025",
+      "effectiveDate": "Verificar disposición correspondiente",
+      "text": "Modifica el tratamiento de la tentativa y amplía las restricciones para suspender la ejecución de determinadas penas.",
+      "status": "Vigente",
+      "verifiedAt": "12/07/2026",
+      "sources": [
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "recent-law-2",
+      "type": "recent-legislation",
+      "name": "Decreto Legislativo 1735",
+      "aliases": [
+        "Decreto Legislativo 1735",
+        "Norma organizativa: crea el Subsistema Especializado contra la Extorsión y sus Delitos Conexos. No establece penas sustantivas."
+      ],
+      "publicationDate": "12/02/2026",
+      "effectiveDate": "Conforme a su texto",
+      "text": "Norma organizativa: crea el Subsistema Especializado contra la Extorsión y sus Delitos Conexos. No establece penas sustantivas.",
+      "status": "Vigente",
+      "verifiedAt": "12/07/2026",
+      "sources": [
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "recent-law-3",
+      "type": "recent-legislation",
+      "name": "Ley 32130 y STC Exp. 00005-2025-PI/TC",
+      "aliases": [
+        "Ley 32130 y STC Exp. 00005-2025-PI/TC",
+        "Distribución de funciones entre la Policía Nacional y el Ministerio Público en la investigación preliminar: la Policía investiga operativamente; el fiscal conserva la conducción jurídica."
+      ],
+      "publicationDate": "2024 / sentencia 2026",
+      "effectiveDate": "Conforme a su texto e interpretación del TC",
+      "text": "Distribución de funciones entre la Policía Nacional y el Ministerio Público en la investigación preliminar: la Policía investiga operativamente; el fiscal conserva la conducción jurídica.",
+      "status": "Vigente (interpretada)",
+      "verifiedAt": "12/07/2026",
+      "sources": [
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "recent-law-4",
+      "type": "recent-legislation",
+      "name": "Ley 32314",
+      "aliases": [
+        "Ley 32314",
+        "Incorpora el empleo de inteligencia artificial en los delitos informáticos (modifica la Ley 30096)."
+      ],
+      "publicationDate": "2025",
+      "effectiveDate": "Conforme a su texto",
+      "text": "Incorpora el empleo de inteligencia artificial en los delitos informáticos (modifica la Ley 30096).",
+      "status": "Vigente",
+      "verifiedAt": "12/07/2026",
+      "sources": [
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    }
+  ],
+  "officialSources": [
+    {
+      "id": "official-source-1",
+      "type": "official-source",
+      "name": "Diario Oficial El Peruano",
+      "aliases": [
+        "Diario Oficial El Peruano",
+        "Nivel 1",
+        "fuente oficial"
+      ],
+      "text": "Texto oficialmente publicado, fechas de publicación y vigencia, derogaciones, fe de erratas, precedentes publicados.",
+      "level": "Nivel 1",
+      "sources": [
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "official-source-2",
+      "type": "official-source",
+      "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+      "aliases": [
+        "SPIJ — Ministerio de Justicia y Derechos Humanos",
+        "Nivel 2",
+        "fuente oficial"
+      ],
+      "text": "Textos sistematizados, concordancias, modificaciones, normas vigentes y derogadas, legislación por materia.",
+      "level": "Nivel 2",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "official-source-3",
+      "type": "official-source",
+      "name": "Congreso de la República — Archivo Digital",
+      "aliases": [
+        "Congreso de la República — Archivo Digital",
+        "Nivel 3",
+        "fuente oficial"
+      ],
+      "text": "Textos originales de leyes y decretos legislativos, fichas técnicas, antecedentes y leyes modificatorias.",
+      "level": "Nivel 3",
+      "sources": [
+        {
+          "name": "Congreso de la República — Archivo Digital",
+          "url": "https://leyes.congreso.gob.pe/"
+        }
+      ]
+    },
+    {
+      "id": "official-source-4",
+      "type": "official-source",
+      "name": "Ministerio Público — Fiscalía de la Nación",
+      "aliases": [
+        "Ministerio Público — Fiscalía de la Nación",
+        "Nivel 4",
+        "fuente oficial"
+      ],
+      "text": "Directorios por distrito fiscal, fiscalías especializadas, resoluciones de creación y reorganización, protocolos.",
+      "level": "Nivel 4",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "official-source-5",
+      "type": "official-source",
+      "name": "Poder Judicial del Perú",
+      "aliases": [
+        "Poder Judicial del Perú",
+        "Nivel 5",
+        "fuente oficial"
+      ],
+      "text": "Acuerdos plenarios, casaciones, doctrina jurisprudencial, ejecutorias vinculantes y criterios de determinación de la pena.",
+      "level": "Nivel 5",
+      "sources": [
+        {
+          "name": "Poder Judicial del Perú",
+          "url": "https://www.pj.gob.pe/wps/wcm/connect/cij-juris/s_jurisprudencia_sistematizada"
+        }
+      ]
+    },
+    {
+      "id": "official-source-6",
+      "type": "official-source",
+      "name": "Tribunal Constitucional",
+      "aliases": [
+        "Tribunal Constitucional",
+        "Nivel 6",
+        "fuente oficial"
+      ],
+      "text": "Debido proceso, legalidad penal, libertad personal, plazo razonable, retroactividad favorable.",
+      "level": "Nivel 6",
+      "sources": [
+        {
+          "name": "Tribunal Constitucional",
+          "url": "https://www.tc.gob.pe/"
+        }
+      ]
+    }
+  ]
+}

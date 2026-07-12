@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>JustiPenal — Portal Informativo del Sistema Penal Peruano</title>
   <meta name="description" content="Información, normativa y cálculo referencial de penas según el Código Penal y el Nuevo Código Procesal Penal del Perú.">
-  <link rel="stylesheet" href="css/styles.css?v=3">
+  <link rel="stylesheet" href="css/styles.css?v=4">
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>">
 </head>
@@ -161,6 +161,7 @@
           <p class="card-sub" id="matriz-sub"></p>
           <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Elemento del posible delito</th><th>Información encontrada</th><th>Evaluación</th></tr></thead><tbody id="tabla-matriz"></tbody></table></div>
           <button class="btn" id="btn-cargar-calc">Cargar hipótesis en la calculadora →</button>
+          <button class="btn secondary" id="btn-preguntar-analisis" style="display:none">💬 Preguntar sobre este resultado</button>
         </div>
         <div class="disclaimer">⚠️ El análisis es una orientación preliminar generada por reglas heurísticas locales. Diferencia entre hechos escritos, inferencias y datos faltantes, pero <b>no convierte sospechas en hechos probados</b> ni reemplaza la investigación fiscal.</div>
       </div>
@@ -268,6 +269,7 @@
             <button class="btn small secondary" id="btn-md">⬇ Markdown</button>
             <button class="btn small secondary" id="btn-doc">⬇ Word</button>
             <button class="btn small secondary" id="btn-print">🖨 Imprimir / PDF</button>
+            <button class="btn small secondary" id="btn-preguntar-calculo">💬 Preguntar sobre este resultado</button>
           </div>
         </div>
         <div class="grid-2">
@@ -507,7 +509,7 @@
         <p>El uso del portal es bajo exclusiva responsabilidad del usuario. El portal y sus autores <b>no asumen responsabilidad</b> por decisiones adoptadas con base en la información o los cálculos aquí mostrados, ni por daños directos o indirectos derivados de su uso, interpretación o imposibilidad de acceso. Ninguna herramienta de este portal crea una relación abogado-cliente.</p>
 
         <h4>5. Privacidad y datos personales</h4>
-        <p>JustiPenal <b>no recopila, no almacena y no transmite datos personales</b>. No utiliza cuentas de usuario, formularios de registro ni bases de datos de casos. El módulo «Analizar Caso» y las calculadoras se ejecutan íntegramente en el navegador del usuario: los textos ingresados <b>no se envían a ningún servidor</b> y desaparecen al cerrar o recargar la página. Se recomienda, en todo caso, no ingresar nombres, documentos de identidad ni datos que identifiquen a personas reales, conforme a los principios de la Ley 29733 (Ley de Protección de Datos Personales) y su Reglamento (D. S. 016-2024-JUS).</p>
+        <p>JustiPenal no utiliza cuentas de usuario ni bases de datos de casos. El módulo «Analizar Caso» y las calculadoras se ejecutan íntegramente en el navegador: sus relatos y campos <b>no se envían a ningún servidor</b> y desaparecen al cerrar o recargar la página. El asistente opcional es distinto: únicamente los mensajes que el usuario escriba en el chat, o un resumen estructurado que confirme expresamente, se procesan mediante Vercel y Gemini. No se almacenan conversaciones en Supabase ni en el portal. No incluya nombres, documentos de identidad, domicilios, expedientes ni otros datos personales o reservados, conforme a los principios de la Ley 29733 y su Reglamento (D. S. 016-2024-JUS).</p>
 
         <h4>6. Enlaces a terceros</h4>
         <p>Los enlaces a portales del Estado u otros sitios se ofrecen solo como referencia. El portal no controla ni responde por el contenido, disponibilidad o políticas de esos sitios.</p>
@@ -533,6 +535,48 @@
   </aside>
 </div>
 
+<button class="chat-launcher" id="chat-launcher" type="button" aria-label="Abrir Asistente JustiPenal" aria-controls="chat-panel" aria-expanded="false" title="Abrir Asistente JustiPenal">
+  <span aria-hidden="true">⚖️</span>
+</button>
+
+<section class="chat-panel" id="chat-panel" aria-label="Asistente JustiPenal" aria-hidden="true">
+  <header class="chat-header">
+    <div>
+      <h2>Asistente JustiPenal</h2>
+      <p>Orientación informativa sobre el sistema penal peruano</p>
+      <span class="chat-status" id="chat-status"></span>
+    </div>
+    <div class="chat-window-actions">
+      <button type="button" id="chat-minimize" aria-label="Minimizar el asistente" title="Minimizar">—</button>
+      <button type="button" id="chat-close" aria-label="Cerrar el asistente" title="Cerrar">✕</button>
+    </div>
+  </header>
+  <div class="chat-body">
+    <div class="chat-messages" id="chat-messages" role="log" aria-live="polite" aria-relevant="additions"></div>
+    <div class="chat-context-banner" id="chat-context-banner" hidden></div>
+    <div class="chat-quick" id="chat-quick" aria-label="Preguntas sugeridas"></div>
+    <div class="chat-error" id="chat-error" role="alert" hidden></div>
+    <div class="chat-fallback" id="chat-fallback" hidden>
+      <span>Herramientas locales:</span>
+      <button type="button" data-chat-goto="analizar">Analizar Caso</button>
+      <button type="button" data-chat-goto="delitos">Delitos y Penas</button>
+      <button type="button" data-chat-goto="plazos">Plazos Procesales</button>
+      <button type="button" data-chat-goto="fiscalias">Fiscalías</button>
+      <button type="button" data-chat-goto="fuentes">Fuentes Oficiales</button>
+    </div>
+    <form class="chat-form" id="chat-form">
+      <label for="chat-input">Consulta</label>
+      <textarea id="chat-input" rows="3" maxlength="4000" placeholder="Escriba una consulta sobre derecho penal peruano"></textarea>
+      <div class="chat-form-actions">
+        <button class="btn small secondary" type="button" id="chat-clear">Borrar conversación</button>
+        <span class="chat-loading" id="chat-loading" role="status" hidden>Consultando…</span>
+        <button class="btn small" type="submit" id="chat-send">Enviar</button>
+      </div>
+    </form>
+    <p class="chat-privacy">Los mensajes enviados al asistente serán procesados mediante Gemini. No incluya nombres, DNI, domicilios, números de expediente ni otros datos personales o reservados.</p>
+  </div>
+</section>
+
 <footer class="footer">
   <div class="footer-links">
     <a href="#aviso" data-goto="aviso">Aviso legal</a>
@@ -541,14 +585,16 @@
     <a href="https://github.com/oprbguitar/JustiPenal" target="_blank" rel="noopener">Repositorio y reporte de errores</a>
   </div>
   <div class="footer-row">
-    <span>ℹ️ La información proporcionada es de carácter informativo y referencial, proviene de fuentes públicas y oficiales del Estado peruano, y no constituye asesoría legal. Este portal no recopila ni almacena datos personales. Siempre consulte con un profesional del derecho.</span>
+    <span>ℹ️ La información es referencial y no constituye asesoría legal. El analizador y las calculadoras son locales; solo los mensajes enviados voluntariamente al asistente se procesan mediante Vercel y Gemini. No incluya datos personales. Siempre consulte con un profesional del derecho.</span>
     <span>© 2026 JustiPenal — Portal Informativo del Sistema Penal Peruano</span>
   </div>
 </footer>
 
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
-<script src="js/data.js?v=3"></script>
-<script src="js/app.js?v=3"></script>
+<script src="js/data.js?v=4"></script>
+<script src="js/config.js?v=4"></script>
+<script src="js/app.js?v=4"></script>
+<script src="js/chat.js?v=4"></script>
 </body>
 </html>
