@@ -86,6 +86,25 @@
     sendButton.disabled = value || !configured;
     input.disabled = value || !configured;
     loading.hidden = !value;
+    launcher.classList.toggle("is-thinking", value);
+    panel.setAttribute("aria-busy", String(value));
+  }
+
+  function successReaction() {
+    if (!window.anime || reduceMotion) return;
+    anime.remove(launcher);
+    anime.remove(launcher.querySelector(".chat-avatar"));
+    anime({ targets: launcher, scale: [1, 1.11, 1], duration: 520, easing: "easeOutElastic(1, .55)" });
+    anime({ targets: launcher.querySelector(".chat-avatar"), rotate: [0, -3, 3, 0], duration: 480, easing: "easeOutQuad" });
+  }
+
+  function handleLauncherClick() {
+    if (!panel.classList.contains("open") && window.anime && !reduceMotion) {
+      const avatar = launcher.querySelector(".chat-avatar");
+      anime.remove(avatar);
+      anime({ targets: avatar, scale: [1, .9, 1.08, 1], translateY: [0, 2, -3, 0], duration: 520, easing: "easeOutElastic(1, .58)" });
+    }
+    openPanel();
   }
 
   function openPanel() {
@@ -94,6 +113,7 @@
     panel.classList.remove("minimized");
     panel.setAttribute("aria-hidden", "false");
     launcher.setAttribute("aria-expanded", "true");
+    launcher.classList.add("panel-open");
     if (window.anime && !reduceMotion) {
       anime.remove(panel);
       anime({ targets: panel, opacity: [0, 1], translateY: [12, 0], scale: [.985, 1], duration: 320, easing: "easeOutCubic" });
@@ -107,6 +127,7 @@
     (lastFocused && document.contains(lastFocused) ? lastFocused : launcher).focus();
     const finish = () => {
       panel.classList.remove("open", "minimized");
+      launcher.classList.remove("panel-open");
       panel.style.opacity = "";
       panel.style.transform = "";
     };
@@ -148,6 +169,7 @@
       const data = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(data.error || "No fue posible completar la consulta.");
       addMessage("assistant", data.reply, Array.isArray(data.sources) ? data.sources : []);
+      successReaction();
       history.push({ role: "user", content: message }, { role: "assistant", content: data.reply });
       history = history.slice(-10);
     } catch (error) {
@@ -158,7 +180,7 @@
     }
   }
 
-  launcher.addEventListener("click", openPanel);
+  launcher.addEventListener("click", handleLauncherClick);
   el("chat-close").addEventListener("click", closePanel);
   el("chat-minimize").addEventListener("click", () => {
     panel.classList.toggle("minimized");

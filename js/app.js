@@ -776,7 +776,7 @@ const AYUDA = [
   ["3. Delitos del Caso", "Los delitos que usted agregó al caso. Con dos o más, el portal evalúa las reglas de <b>concurso</b> (arts. 48-50): las penas no se suman mecánicamente."],
   ["Rango Referencial de Individualización", "Intervalo del tercio aplicable según sus circunstancias. La pena exacta dentro del tercio exige motivación judicial (gravedad, dolo, daño, condiciones personales)."],
   ["Competencia y Plazos", "Fiscalía que probablemente conocería el caso (según materia, territorio y condición del investigado), el órgano judicial de juzgamiento y los plazos de investigación aplicables."],
-  ["Trazabilidad Normativa", "Fuente oficial exacta de cada delito usado en el cálculo, con enlace, fecha de revisión editorial y su sello correspondiente."],
+  ["Trazabilidad Normativa", "Repositorio o fuente oficial de consulta de cada delito usado en el cálculo, con enlace, fecha de revisión editorial y su sello correspondiente."],
   ["Procedimiento Penal", "Etapas del proceso penal común peruano, desde la denuncia hasta la sentencia y sus recursos (D. Leg. 957)."],
   ["Rutas procesales especiales", "Caminos distintos al proceso común: proceso inmediato por flagrancia, acuerdos como la terminación anticipada, colaboración eficaz, etc."],
   ["Decisiones fiscales", "Opciones que tiene el fiscal al terminar las diligencias preliminares: archivar, aplicar salidas alternativas, formalizar investigación o acusar directamente."],
