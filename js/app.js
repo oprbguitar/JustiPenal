@@ -32,10 +32,24 @@ function animarPagina(page, nav) {
   if (!window.anime || REDUCE_MOTION || !page) return;
   anime.remove(page);
   anime({ targets: page, opacity: [0, 1], translateY: [10, 0], clipPath: ["inset(0 0 8% 0)", "inset(0 0 0% 0)"], duration: 420, easing: "easeOutCubic" });
+  const cards = [...page.querySelectorAll(".card")].filter((card) => card.getClientRects().length);
+  if (cards.length) {
+    anime.remove(cards);
+    anime({ targets: cards, opacity: [0, 1], translateY: [10, 0], delay: anime.stagger(45), duration: 380, easing: "easeOutCubic" });
+  }
   if (nav) {
     anime.remove(nav);
     anime({ targets: nav, translateX: [-5, 0], duration: 300, easing: "easeOutQuad" });
   }
+}
+let heroAnimated = false;
+function animarHeroUnaVez() {
+  if (heroAnimated) return;
+  heroAnimated = true;
+  const hero = $(".hero");
+  hero?.classList.add("animate-hero");
+  if (!window.anime || REDUCE_MOTION) return;
+  anime({ targets: ".hero-scales path", strokeDashoffset: [anime.setDashoffset, 0], duration: 650, easing: "easeInOutSine" });
 }
 let statsAnimated = false;
 function animarEstadisticasUnaVez() {
@@ -87,7 +101,7 @@ function goPage(id) {
   if (page) page.classList.add("active");
   if (nav) nav.classList.add("active");
   animarPagina(page, nav);
-  if (id === "inicio") requestAnimationFrame(animarEstadisticasUnaVez);
+  if (id === "inicio") requestAnimationFrame(() => { animarEstadisticasUnaVez(); animarHeroUnaVez(); });
   setMenu(false);
   window.scrollTo({ top: 0, behavior: "smooth" });
   if (location.hash !== "#" + id) history.replaceState(null, "", "#" + id);
@@ -841,7 +855,6 @@ if (window.AOS) {
 if (window.anime) {
   anime({ targets: ".hero h2, .hero p", translateY: [18, 0], opacity: [0, 1], delay: anime.stagger(100), duration: 600, easing: "easeOutCubic" });
   anime({ targets: ".hero-glow", scale: [.86, 1], opacity: [.35, 1], duration: 650, easing: "easeOutSine" });
-  anime({ targets: ".hero-scales path", strokeDashoffset: [anime.setDashoffset, 0], duration: 650, easing: "easeInOutSine" });
   anime({ targets: ".brand-logo", scale: [0.6, 1], rotate: ["-12deg", "0deg"], duration: 600, easing: "easeOutBack" });
-  if ($("#page-inicio").classList.contains("active")) animarEstadisticasUnaVez();
+  if ($("#page-inicio").classList.contains("active")) { animarEstadisticasUnaVez(); animarHeroUnaVez(); }
 }

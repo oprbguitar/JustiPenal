@@ -68,6 +68,7 @@
     <section class="page active" id="page-inicio">
       <div class="hero">
         <div class="hero-glow" aria-hidden="true"></div>
+        <div class="hero-sweep" aria-hidden="true"></div>
         <div class="hero-title-mask"><h2>Sistema Penal Peruano</h2></div>
         <p>Información clara, actualizada y herramientas de análisis referencial para profesionales del derecho y ciudadanos.</p>
         <svg class="hero-scales" viewBox="0 0 180 120" aria-hidden="true">
@@ -493,8 +494,6 @@
         <p>1) Diario Oficial El Peruano (texto oficialmente publicado); 2) SPIJ (texto sistematizado); 3) Archivo Digital del Congreso; 4) portales institucionales (MPFN, PJ, TC). Ante contradicción, prevalece el texto publicado en El Peruano y su fe de erratas.</p>
         <h4>¿Cómo se gestionan las derogaciones?</h4>
         <p>Una norma derogada no se elimina: se marca con su estado y fechas, porque puede seguir siendo aplicable a hechos anteriores (vigencia temporal y favorabilidad).</p>
-        <h4>¿Cómo se reportan errores?</h4>
-        <p>A través del repositorio público del proyecto (sección «Issues» de GitHub), indicando la norma, el dato observado y la fuente oficial que lo respalda.</p>
         <h4>¿Cómo se valida un cambio antes de publicarlo?</h4>
         <p>Todo cambio debe citar la norma modificatoria, su fecha de publicación y su enlace oficial, y queda registrado en el historial de cambios siguiente.</p>
         <h4>Registro de cambios</h4>
@@ -518,7 +517,7 @@
         <p>La legislación penal peruana cambia con frecuencia. Aunque cada dato registra su fecha de revisión editorial, <b>no se garantiza que la información esté libre de errores ni permanentemente actualizada</b>. El usuario debe verificar siempre el texto vigente en las fuentes oficiales enlazadas antes de tomar cualquier decisión.</p>
 
         <h4>4. Limitación de responsabilidad</h4>
-        <p>El uso del portal es bajo exclusiva responsabilidad del usuario. El portal y sus autores <b>no asumen responsabilidad</b> por decisiones adoptadas con base en la información o los cálculos aquí mostrados, ni por daños directos o indirectos derivados de su uso, interpretación o imposibilidad de acceso. Ninguna herramienta de este portal crea una relación abogado-cliente.</p>
+        <p>El uso del portal es bajo exclusiva responsabilidad del usuario. Dentro de los límites permitidos por la legislación aplicable, el portal y sus autores <b>no asumen responsabilidad</b> por decisiones adoptadas exclusivamente con base en la información o los cálculos mostrados. Ninguna herramienta de este portal crea una relación abogado-cliente.</p>
 
         <h4>5. Privacidad y datos personales</h4>
         <p>JustiPenal no utiliza cuentas de usuario ni bases de datos de casos. El módulo «Analizar Caso» y las calculadoras se ejecutan en el navegador. El chat envía el mensaje actual, el historial reciente y, solo con confirmación del usuario, un contexto estructurado y sanitizado; el procesamiento se realiza mediante Vercel y Gemini. No incluya datos personales, confidenciales ni identificadores del caso, conforme a los principios de la Ley 29733 y su Reglamento (D. S. 016-2024-JUS).</p>
@@ -527,7 +526,7 @@
         <p>Los enlaces a portales del Estado u otros sitios se ofrecen solo como referencia. El portal no controla ni responde por el contenido, disponibilidad o políticas de esos sitios.</p>
 
         <h4>7. Propiedad intelectual</h4>
-        <p>El diseño y el código del portal se publican en un repositorio público. Los textos normativos y jurisprudenciales citados son de dominio público; su titularidad institucional corresponde a las entidades emisoras.</p>
+        <p>El diseño y el código del portal son elementos propios del proyecto. Los textos normativos y jurisprudenciales citados son de dominio público; su titularidad institucional corresponde a las entidades emisoras.</p>
 
         <h4>8. Uso aceptable</h4>
         <p>Queda prohibido usar el portal para fines ilícitos, para presentar sus resultados como documentos oficiales, o para atribuir responsabilidad penal a personas concretas. Los resultados no son aptos como prueba ni como sustento único de decisiones legales.</p>
@@ -568,6 +567,7 @@
     <div class="chat-context-banner" id="chat-context-banner" hidden></div>
     <div class="chat-quick" id="chat-quick" aria-label="Preguntas sugeridas"></div>
     <div class="chat-error" id="chat-error" role="alert" hidden></div>
+    <p class="chat-service-cta chat-limit-cta" id="chat-limit-cta" hidden>¿Necesita un chatbot avanzado para su organización? Implementación y gestión tecnológica con <a href="https://www.andesnova.solutions/" target="_blank" rel="noopener noreferrer">AndesNova Solutions</a>.</p>
     <div class="chat-fallback" id="chat-fallback" hidden>
       <span>Herramientas locales:</span>
       <button type="button" data-chat-goto="analizar">Analizar Caso</button>
@@ -577,6 +577,8 @@
       <button type="button" data-chat-goto="fuentes">Fuentes Oficiales</button>
     </div>
     <form class="chat-form" id="chat-form">
+      <p class="chat-privacy-warning">No ingrese nombres, DNI, números de expediente, domicilios, documentos, datos de víctimas, menores de edad ni otra información personal o confidencial.</p>
+      <p class="chat-usage-limit">Límite de uso: 10 consultas por dirección de red cada 2 horas.</p>
       <label for="chat-input">Consulta</label>
       <textarea id="chat-input" rows="3" maxlength="4000" placeholder="Escriba una consulta sobre derecho penal peruano"></textarea>
       <div class="chat-form-actions">
@@ -586,6 +588,7 @@
       </div>
     </form>
     <p class="chat-privacy">El analizador permanece en su navegador. El chat envía a Vercel y Gemini el mensaje actual, el historial reciente y cualquier contexto sanitizado que usted confirme. No incluya datos personales, confidenciales ni identificadores del caso.</p>
+    <p class="chat-service-cta">¿Necesita un chatbot avanzado para su organización? Implementación y gestión tecnológica con <a href="https://www.andesnova.solutions/" target="_blank" rel="noopener noreferrer">AndesNova Solutions</a>.</p>
   </div>
 </section>
 
@@ -594,7 +597,6 @@
     <a href="#aviso" data-goto="aviso">Aviso legal</a>
     <a href="#metodologia" data-goto="metodologia">Metodología</a>
     <a href="#fuentes" data-goto="fuentes">Fuentes oficiales</a>
-    <a href="https://github.com/oprbguitar/JustiPenal" target="_blank" rel="noopener">Repositorio y reporte de errores</a>
   </div>
   <div class="footer-row">
     <span>ℹ️ La información es referencial y no constituye asesoría legal. El analizador y las calculadoras son locales; el chat procesa mediante Vercel y Gemini el mensaje actual, el historial reciente y el contexto sanitizado confirmado. No incluya datos personales o confidenciales. Consulte con un profesional.</span>

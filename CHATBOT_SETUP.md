@@ -20,12 +20,16 @@ GEMINI_API_KEY=<clave secreta>
 GEMINI_MODEL=gemini-3.5-flash
 ALLOWED_ORIGIN=https://oprbguitar.github.io
 CHAT_MAX_INPUT_CHARS=4000
+UPSTASH_REDIS_REST_URL=<URL REST de Upstash Redis>
+UPSTASH_REDIS_REST_TOKEN=<token REST de Upstash Redis>
+RATE_LIMIT_SALT=<secreto aleatorio de alta entropía>
 ```
 
 - `GEMINI_API_KEY` es obligatoria y secreta.
 - `GEMINI_MODEL` es opcional; el backend usa `gemini-3.5-flash` cuando falta.
 - `ALLOWED_ORIGIN` admite una URL con ruta o barra final y el backend la normaliza al origen. También puede contener varios orígenes separados por comas. Para GitHub Pages se recomienda `https://oprbguitar.github.io`.
 - `CHAT_MAX_INPUT_CHARS` es opcional; el valor predeterminado es 4000.
+- `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN` y `RATE_LIMIT_SALT` son obligatorias en producción para aplicar el límite persistente. La dirección de red se identifica únicamente mediante HMAC-SHA256 y no se guarda en texto claro.
 
 No use prefijos públicos como `NEXT_PUBLIC_` ni coloque valores reales en `.env.example`.
 
@@ -71,9 +75,9 @@ Abra la URL indicada por Vercel. En desarrollo, el backend acepta `localhost` y 
 - El analizador de casos sigue ejecutándose íntegramente en el navegador y nunca se envía al abrir el chat.
 - Cada mensaje escrito en el chat sí se envía a Vercel y Gemini.
 - “Preguntar sobre este resultado” requiere confirmación y transmite solo campos estructurados permitidos; excluye el relato, nombres, DNI, domicilios, fechas, lugar y documentos.
-- El historial permanece solo en memoria del navegador y se pierde al recargar. Vercel y Supabase no almacenan conversaciones.
+- El historial visible permanece en memoria del navegador y se pierde al recargar; el mensaje actual y hasta cuatro mensajes recientes del usuario se procesan mediante Vercel y Gemini.
 - Gemini se invoca con `store: false`, sin búsqueda web, URL context, ejecución de código ni funciones.
-- El limitador de 20 solicitudes por 10 minutos es por instancia y memoria. En serverless no es un límite distribuido fuerte; si el tráfico crece, puede reemplazarse por Supabase o Upstash sin guardar el contenido de las conversaciones.
+- El límite de 10 consultas por cada 2 horas se aplica mediante Upstash Redis usando un identificador HMAC de la dirección de red. En desarrollo local existe un fallback en memoria; en producción el chat se deshabilita si Redis o la sal criptográfica no están configurados.
 - Supabase no es necesario para el funcionamiento actual y no contiene tablas del chatbot.
 
 ## 7. Desactivar el asistente

@@ -15,6 +15,7 @@
   const statusEl = el("chat-status");
   const quickEl = el("chat-quick");
   const contextBanner = el("chat-context-banner");
+  const limitCta = el("chat-limit-cta");
   const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
   const config = window.JUSTIPENAL_CONFIG || {};
   const apiBaseUrl = String(config.apiBaseUrl || "").replace(/\/$/, "");
@@ -30,6 +31,9 @@
   let pendingPortalContext = { type: "none", data: {} };
   let lastFocused = null;
   let busy = false;
+  let rateLimitReset = 0;
+  let rateLimitTimer;
+  const RATE_LIMIT_RESET_KEY = "justipenal-chat-rate-limit-reset";
 
   function addMessage(role, text, sources = []) {
     const article = document.createElement("article");
@@ -70,24 +74,62 @@
   }
 
   function showError(message) {
+    delete errorEl.dataset.rateLimit;
     errorEl.textContent = message;
     errorEl.hidden = false;
     fallbackEl.hidden = false;
+    limitCta.hidden = true;
   }
 
   function clearError() {
     errorEl.hidden = true;
     errorEl.textContent = "";
     fallbackEl.hidden = true;
+    limitCta.hidden = true;
+  }
+
+  function isRateLimited() {
+    return rateLimitReset > Date.now();
+  }
+
+  function updateControls() {
+    const disabled = busy || !configured || isRateLimited();
+    sendButton.disabled = disabled;
+    input.disabled = disabled;
+    quickEl.querySelectorAll("button").forEach((button) => { button.disabled = disabled; });
+  }
+
+  function clearRateLimit() {
+    rateLimitReset = 0;
+    window.clearTimeout(rateLimitTimer);
+    try { localStorage.removeItem(RATE_LIMIT_RESET_KEY); } catch { /* Continuidad visual opcional. */ }
+    if (errorEl.dataset.rateLimit === "true") clearError();
+    updateControls();
+  }
+
+  function activateRateLimit(data = {}, message = "") {
+    let reset = Number(data.reset);
+    if (reset > 0 && reset < 1e12) reset *= 1000;
+    if (!Number.isFinite(reset) || reset <= Date.now()) reset = Date.now() + Math.max(1, Number(data.retryAfter) || 7200) * 1000;
+    rateLimitReset = reset;
+    try { localStorage.setItem(RATE_LIMIT_RESET_KEY, String(reset)); } catch { /* El servidor sigue siendo el control de seguridad. */ }
+    const localReset = new Date(reset).toLocaleString([], { dateStyle: "short", timeStyle: "short" });
+    errorEl.dataset.rateLimit = "true";
+    errorEl.textContent = `${message || "El límite de uso está activo."} Hora aproximada de restablecimiento: ${localReset}.`;
+    errorEl.hidden = false;
+    fallbackEl.hidden = false;
+    limitCta.hidden = false;
+    window.clearTimeout(rateLimitTimer);
+    rateLimitTimer = window.setTimeout(clearRateLimit, Math.max(1, reset - Date.now()));
+    updateControls();
   }
 
   function setBusy(value) {
     busy = value;
-    sendButton.disabled = value || !configured;
-    input.disabled = value || !configured;
     loading.hidden = !value;
     launcher.classList.toggle("is-thinking", value);
     panel.setAttribute("aria-busy", String(value));
+    updateControls();
   }
 
   function successReaction() {
@@ -167,16 +209,18 @@
         body: JSON.stringify({ message, history: requestHistory, portalContext })
       });
       const data = await response.json().catch(() => ({}));
+      if (response.status === 429) throw Object.assign(new Error(data.error || "Se alcanzó el límite de uso."), { rateLimit: data });
       if (!response.ok) throw new Error(data.error || "No fue posible completar la consulta.");
       addMessage("assistant", data.reply, Array.isArray(data.sources) ? data.sources : []);
       successReaction();
       history.push({ role: "user", content: message }, { role: "assistant", content: data.reply });
       history = history.slice(-10);
     } catch (error) {
-      showError(error.message || "El asistente no está disponible. Las demás herramientas continúan funcionando localmente.");
+      if (error.rateLimit) activateRateLimit(error.rateLimit, error.message);
+      else showError(error.message || "El asistente no está disponible. Las demás herramientas continúan funcionando localmente.");
     } finally {
       setBusy(false);
-      input.focus();
+      if (!input.disabled) input.focus();
     }
   }
 
@@ -219,10 +263,16 @@
     const button = document.createElement("button");
     button.type = "button";
     button.textContent = question;
-    button.disabled = !configured;
+    button.disabled = !configured || isRateLimited();
     button.addEventListener("click", () => submitMessage(question));
     quickEl.appendChild(button);
   }
+
+  try {
+    const storedReset = Number(localStorage.getItem(RATE_LIMIT_RESET_KEY));
+    if (storedReset > Date.now()) activateRateLimit({ reset: storedReset }, "El envío permanece pausado en este navegador hasta el restablecimiento indicado por el servidor.");
+    else localStorage.removeItem(RATE_LIMIT_RESET_KEY);
+  } catch { /* La continuidad visual es opcional; el límite real se aplica en el servidor. */ }
 
   try {
     if (!localStorage.getItem("justipenal-chat-pulse-seen")) {
