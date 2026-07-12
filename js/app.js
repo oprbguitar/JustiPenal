@@ -28,6 +28,28 @@ function pulso(el) {
   anime.remove(el);
   anime({ targets: el, scale: [0.97, 1], duration: 300, easing: "easeOutBack" });
 }
+function animarPagina(page, nav) {
+  if (!window.anime || REDUCE_MOTION || !page) return;
+  anime.remove(page);
+  anime({ targets: page, opacity: [0, 1], translateY: [10, 0], clipPath: ["inset(0 0 8% 0)", "inset(0 0 0% 0)"], duration: 420, easing: "easeOutCubic" });
+  if (nav) {
+    anime.remove(nav);
+    anime({ targets: nav, translateX: [-5, 0], duration: 300, easing: "easeOutQuad" });
+  }
+}
+let statsAnimated = false;
+function animarEstadisticasUnaVez() {
+  if (statsAnimated || REDUCE_MOTION || !window.anime) return;
+  const values = $$("#stats-row b");
+  if (!values.length) return;
+  statsAnimated = true;
+  values.forEach((el) => {
+    const match = el.textContent.match(/^(\d+)(.*)$/);
+    if (!match) return;
+    const end = Number(match[1]), suffix = match[2] || "", state = { value: 0 };
+    anime({ targets: state, value: end, round: 1, duration: 650, easing: "easeOutCubic", update: () => { el.textContent = state.value + suffix; } });
+  });
+}
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
 function fmtAnios(v) {
@@ -64,10 +86,12 @@ function goPage(id) {
   const nav = document.querySelector(`.nav-item[data-page="${id}"]`);
   if (page) page.classList.add("active");
   if (nav) nav.classList.add("active");
+  animarPagina(page, nav);
+  if (id === "inicio") requestAnimationFrame(animarEstadisticasUnaVez);
   setMenu(false);
   window.scrollTo({ top: 0, behavior: "smooth" });
   if (location.hash !== "#" + id) history.replaceState(null, "", "#" + id);
-  if (window.AOS) setTimeout(() => { AOS.refresh(); window.dispatchEvent(new Event("scroll")); }, 60);
+  if (window.AOS && id === "inicio") setTimeout(() => AOS.refresh(), 60);
 }
 $$(".nav-item").forEach((btn) => btn.addEventListener("click", () => goPage(btn.dataset.page)));
 $$(".topbar-links a, .footer-links a[data-goto]").forEach((a) =>
@@ -319,7 +343,7 @@ $("#btn-calcular").addEventListener("click", () => {
         <small style="color:var(--text-muted)">de pena privativa de libertad ${chip("calc", "Calculado (art. 45-A)")}</small>
         <div style="margin-top:8px">
           <div class="kv"><span>Pena abstracta</span><b>${b.m.min == null ? "No mayor de " + fmtAnios(b.m.max) : fmtAnios(b.m.min) + " a " + fmtAnios(b.m.max)}</b></div>
-          <div class="kv"><span>Tercio aplicado</span><b>${r.tercio}</b></div>
+          <div class="kv third-indicator"><span>Tercio aplicado</span><b>${r.tercio}</b></div>
           <div class="kv"><span>Justificación</span><b>${r.justif}</b></div>
           <div class="kv"><span>Atenuantes computadas</span><b>${b.atenuantes.length}</b></div>
           <div class="kv"><span>Agravantes computadas</span><b>${r.agValidas.length}</b></div>
@@ -398,13 +422,14 @@ $("#btn-calcular").addEventListener("click", () => {
     <p style="font-size:12px;margin-top:6px"><b>Condición:</b> siempre que no se confirme organización criminal, violencia familiar, condición especial del investigado u otro criterio de especialidad que desplace la competencia.</p>
     ${cond.nota ? `<div class="kv" style="margin-top:6px"><span>Condición del investigado</span><b style="max-width:55%">${cond.label}</b></div><p style="font-size:12px;color:var(--amber-600)">${cond.nota}</p>` : ""}
     <div class="kv" style="margin-top:6px"><span>Órgano de juzgamiento</span><b style="text-align:right">${organoJudicial(principal.b.m)}</b></div>
-    <p style="font-size:12px;margin-top:6px"><a href="${dirUrl}" target="_blank" rel="noopener">Buscar el directorio oficial del distrito fiscal ↗</a> · <small style="color:var(--text-muted)">verificado al ${VERIFICADO_AT}; los despachos cambian por resolución de la Fiscalía de la Nación</small></p>`;
+    <p style="font-size:12px;margin-top:6px"><a href="${dirUrl}" target="_blank" rel="noopener">Buscar el directorio oficial del distrito fiscal ↗</a> · <small style="color:var(--text-muted)">revisión editorial al ${VERIFICADO_AT}; los despachos cambian por resolución de la Fiscalía de la Nación</small></p>`;
 
   $("#res-plazos").innerHTML = `<h4>Plazos aplicables (regímenes alternativos, referenciales)</h4>
-    <div class="kv"><span>Investigación preliminar</span><b>60 días</b></div>
+    <div class="kv"><span>Investigación preliminar</span><b>60 días (referencia general)</b></div>
     <div class="kv"><span>Preparatoria ordinaria</span><b>120 días (+60)</b></div>
     <div class="kv"><span>Caso complejo</span><b>8 meses (+8)</b></div>
     <div class="kv"><span>Criminalidad organizada</span><b>36 meses (+36)</b></div>
+    <p style="font-size:11.5px;color:var(--text-muted);margin:6px 0">El plazo puede variar conforme al CPP, el control judicial o los regímenes especiales.</p>
     <a href="#plazos" onclick="goPage('plazos');return false" style="font-size:12.5px">Ver calculadora de plazos →</a>`;
 
   // ----- trazabilidad -----
@@ -413,7 +438,7 @@ $("#btn-calcular").addEventListener("click", () => {
     <div class="panel" style="padding:12px 14px">
       <p style="font-size:13px"><b>${b.d.nombre} — ${b.d.articulo}</b> ${selloBadge(b.d.sello)}</p>
       <p style="font-size:12px;color:var(--text-muted)">${esc(b.d.fuente.norma)}${b.d.vigenteDesde ? " · " + b.d.vigenteDesde : ""}</p>
-      <p style="font-size:12px"><a href="${b.d.fuente.url}" target="_blank" rel="noopener">Ver texto oficial ↗</a> · Última comprobación: ${VERIFICADO_AT}</p>
+      <p style="font-size:12px"><a href="${b.d.fuente.url}" target="_blank" rel="noopener">Ver texto oficial ↗</a> · Revisión editorial: ${VERIFICADO_AT}</p>
     </div>`).join("");
 
   ultimoInforme = generarInforme(resultados, reds, cond, territorio, fis);
@@ -438,6 +463,7 @@ $("#btn-calcular").addEventListener("click", () => {
   };
   $("#resultado-wrap").scrollIntoView({ behavior: "smooth" });
   animarEntrada("#res-delitos .panel, #res-concurso, #res-escenarios, #res-competencia, #res-plazos, #res-fuentes .panel", { stagger: 90 });
+  animarEntrada("#resultado-wrap .big-range, #resultado-wrap .third-indicator, #resultado-wrap .penalty-stamp", { stagger: 70, duration: 500 });
 });
 
 // ---------- informe descargable ----------
@@ -512,6 +538,11 @@ $("#btn-print").addEventListener("click", () => window.print());
 $("#btn-analizar").addEventListener("click", () => {
   const texto = $("#caso-texto").value.trim();
   if (texto.length < 20) { alert("Describa el caso con un poco más de detalle (mínimo unas dos líneas)."); return; }
+  const scanner = $(".analysis-scan");
+  if (window.anime && !REDUCE_MOTION && scanner) {
+    anime.remove(scanner);
+    anime({ targets: scanner, translateY: [0, Math.max(120, $(".analysis-input-card").offsetHeight - 2)], opacity: [0, 1, 0], duration: 500, easing: "easeInOutQuad" });
+  }
   const tags = new Map();
   for (const p of ANALIZADOR_PATRONES) if (!tags.has(p.tag) && p.re.test(texto)) tags.set(p.tag, p.etiqueta);
   if (tags.has("arma-fuego") || tags.has("arma-blanca")) tags.set("arma-tipo", tags.get("arma-fuego") || tags.get("arma-blanca"));
@@ -630,6 +661,7 @@ $("#btn-analizar").addEventListener("click", () => {
   animarEntrada(".tag-pill", { stagger: 40, duration: 350 });
   animarEntrada("#analisis-hipotesis .panel, #analisis-faltante", { stagger: 90 });
   animarEntrada("#tabla-matriz tr", { stagger: 50, duration: 380 });
+  animarEntrada(".hypothesis-stamp", { duration: 420 });
 });
 
 // ---------- procedimiento ----------
@@ -744,7 +776,7 @@ const AYUDA = [
   ["3. Delitos del Caso", "Los delitos que usted agregó al caso. Con dos o más, el portal evalúa las reglas de <b>concurso</b> (arts. 48-50): las penas no se suman mecánicamente."],
   ["Rango Referencial de Individualización", "Intervalo del tercio aplicable según sus circunstancias. La pena exacta dentro del tercio exige motivación judicial (gravedad, dolo, daño, condiciones personales)."],
   ["Competencia y Plazos", "Fiscalía que probablemente conocería el caso (según materia, territorio y condición del investigado), el órgano judicial de juzgamiento y los plazos de investigación aplicables."],
-  ["Trazabilidad Normativa", "Fuente oficial exacta de cada delito usado en el cálculo, con enlace, fecha de última comprobación y sello de verificación."],
+  ["Trazabilidad Normativa", "Fuente oficial exacta de cada delito usado en el cálculo, con enlace, fecha de revisión editorial y su sello correspondiente."],
   ["Procedimiento Penal", "Etapas del proceso penal común peruano, desde la denuncia hasta la sentencia y sus recursos (D. Leg. 957)."],
   ["Rutas procesales especiales", "Caminos distintos al proceso común: proceso inmediato por flagrancia, acuerdos como la terminación anticipada, colaboración eficaz, etc."],
   ["Decisiones fiscales", "Opciones que tiene el fiscal al terminar las diligencias preliminares: archivar, aplicar salidas alternativas, formalizar investigación o acusar directamente."],
@@ -791,7 +823,7 @@ $$(".card-title h3").forEach((h3) => {
     pop.style.left = Math.min(r.left, window.innerWidth - pop.offsetWidth - 12) + "px";
     pop.style.top = r.bottom + window.scrollY + 8 + "px";
     popActual = pop;
-    if (window.anime) anime({ targets: pop, translateY: [-4, 0], opacity: [0, 1], duration: 180, easing: "easeOutQuad" });
+    if (window.anime && !REDUCE_MOTION) anime({ targets: pop, translateY: [-4, 0], opacity: [0, 1], duration: 250, easing: "easeOutQuad" });
   });
   h3.parentElement.appendChild(btn);
 });
@@ -800,21 +832,16 @@ $$(".card-title h3").forEach((h3) => {
    Animaciones (AOS + anime.js) — con degradación elegante
    ============================================================ */
 if (window.AOS) {
-  $$(".card, .stat").forEach((el, i) => {
+  $$("#page-inicio .action-grid .card, #stats-row .stat").forEach((el, i) => {
     el.setAttribute("data-aos", "fade-up");
     el.setAttribute("data-aos-delay", String(Math.min((i % 6) * 60, 300)));
   });
   AOS.init({ duration: 550, once: true, offset: 50 });
 }
 if (window.anime) {
-  anime({ targets: ".hero h2, .hero p", translateY: [18, 0], opacity: [0, 1], delay: anime.stagger(120), duration: 700, easing: "easeOutCubic" });
+  anime({ targets: ".hero h2, .hero p", translateY: [18, 0], opacity: [0, 1], delay: anime.stagger(100), duration: 600, easing: "easeOutCubic" });
+  anime({ targets: ".hero-glow", scale: [.86, 1], opacity: [.35, 1], duration: 650, easing: "easeOutSine" });
+  anime({ targets: ".hero-scales path", strokeDashoffset: [anime.setDashoffset, 0], duration: 650, easing: "easeInOutSine" });
   anime({ targets: ".brand-logo", scale: [0.6, 1], rotate: ["-12deg", "0deg"], duration: 600, easing: "easeOutBack" });
-  // contador animado en las estadísticas
-  $$("#stats-row b").forEach((el) => {
-    const m = el.textContent.match(/^(\d+)(.*)$/);
-    if (!m) return;
-    const fin = +m[1], sufijo = m[2] || "";
-    const obj = { v: 0 };
-    anime({ targets: obj, v: fin, round: 1, duration: 1200, easing: "easeOutExpo", update: () => (el.textContent = obj.v + sufijo) });
-  });
+  if ($("#page-inicio").classList.contains("active")) animarEstadisticasUnaVez();
 }

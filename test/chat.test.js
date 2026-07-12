@@ -82,6 +82,36 @@ test("CORS rechaza orígenes no autorizados", async () => {
   process.env.ALLOWED_ORIGIN = oldOrigin;
 });
 
+test("CORS normaliza rutas y barras finales del origen configurado", async () => {
+  const oldOrigin = process.env.ALLOWED_ORIGIN;
+  process.env.ALLOWED_ORIGIN = "https://oprbguitar.github.io/JustiPenal/";
+  const req = { method: "OPTIONS", headers: { origin: "https://oprbguitar.github.io" } };
+  const res = mockResponse();
+  await handler(req, res);
+  assert.equal(res.statusCode, 204);
+  assert.equal(res.headers["Access-Control-Allow-Origin"], "https://oprbguitar.github.io");
+  process.env.ALLOWED_ORIGIN = oldOrigin;
+});
+
+test("CORS permite que el despliegue de Vercel llame a su propio backend", async () => {
+  const oldOrigin = process.env.ALLOWED_ORIGIN;
+  process.env.ALLOWED_ORIGIN = "https://oprbguitar.github.io";
+  const req = {
+    method: "OPTIONS",
+    headers: {
+      origin: "https://justipenal-api.vercel.app",
+      host: "justipenal-api.vercel.app",
+      "x-forwarded-host": "justipenal-api.vercel.app",
+      "x-forwarded-proto": "https"
+    }
+  };
+  const res = mockResponse();
+  await handler(req, res);
+  assert.equal(res.statusCode, 204);
+  assert.equal(res.headers["Access-Control-Allow-Origin"], "https://justipenal-api.vercel.app");
+  process.env.ALLOWED_ORIGIN = oldOrigin;
+});
+
 test("la interfaz renderiza texto, no HTML del modelo", () => {
   const source = fs.readFileSync(new URL("../js/chat.js", import.meta.url), "utf8");
   assert.match(source, /body\.textContent = text/);

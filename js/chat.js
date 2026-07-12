@@ -15,6 +15,7 @@
   const statusEl = el("chat-status");
   const quickEl = el("chat-quick");
   const contextBanner = el("chat-context-banner");
+  const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
   const config = window.JUSTIPENAL_CONFIG || {};
   const apiBaseUrl = String(config.apiBaseUrl || "").replace(/\/$/, "");
   const configured = /^https:\/\//.test(apiBaseUrl) && !/YOUR-JUSTIPENAL-API/i.test(apiBaseUrl);
@@ -61,6 +62,11 @@
     }
     messagesEl.appendChild(article);
     messagesEl.scrollTop = messagesEl.scrollHeight;
+    if (window.anime && !reduceMotion) {
+      anime({ targets: article, translateY: [8, 0], opacity: [0, 1], duration: 320, easing: "easeOutCubic" });
+      const links = article.querySelectorAll("a");
+      if (links.length) anime({ targets: links, translateX: [-5, 0], opacity: [0, 1], delay: anime.stagger(45), duration: 300, easing: "easeOutQuad" });
+    }
   }
 
   function showError(message) {
@@ -88,14 +94,26 @@
     panel.classList.remove("minimized");
     panel.setAttribute("aria-hidden", "false");
     launcher.setAttribute("aria-expanded", "true");
+    if (window.anime && !reduceMotion) {
+      anime.remove(panel);
+      anime({ targets: panel, opacity: [0, 1], translateY: [12, 0], scale: [.985, 1], duration: 320, easing: "easeOutCubic" });
+    }
     requestAnimationFrame(() => (configured ? input : el("chat-close")).focus());
   }
 
   function closePanel() {
-    panel.classList.remove("open", "minimized");
     panel.setAttribute("aria-hidden", "true");
     launcher.setAttribute("aria-expanded", "false");
     (lastFocused && document.contains(lastFocused) ? lastFocused : launcher).focus();
+    const finish = () => {
+      panel.classList.remove("open", "minimized");
+      panel.style.opacity = "";
+      panel.style.transform = "";
+    };
+    if (window.anime && !reduceMotion && panel.classList.contains("open")) {
+      anime.remove(panel);
+      anime({ targets: panel, opacity: [1, 0], translateY: [0, 10], scale: [1, .985], duration: 250, easing: "easeInQuad", complete: finish });
+    } else finish();
   }
 
   function attachPortalContext(type) {
@@ -183,6 +201,13 @@
     button.addEventListener("click", () => submitMessage(question));
     quickEl.appendChild(button);
   }
+
+  try {
+    if (!localStorage.getItem("justipenal-chat-pulse-seen")) {
+      localStorage.setItem("justipenal-chat-pulse-seen", "1");
+      if (!reduceMotion) launcher.classList.add("first-visit-pulse");
+    }
+  } catch { /* El almacenamiento puede estar bloqueado; el chat sigue funcionando. */ }
 
   if (configured) {
     statusEl.textContent = "● Configurado";
