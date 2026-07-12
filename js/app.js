@@ -42,6 +42,7 @@ function goPage(id) {
   setMenu(false);
   window.scrollTo({ top: 0, behavior: "smooth" });
   if (location.hash !== "#" + id) history.replaceState(null, "", "#" + id);
+  if (window.AOS) setTimeout(() => { AOS.refresh(); window.dispatchEvent(new Event("scroll")); }, 60);
 }
 $$(".nav-item").forEach((btn) => btn.addEventListener("click", () => goPage(btn.dataset.page)));
 $$(".topbar-links a, .footer-links a[data-goto]").forEach((a) =>
@@ -647,3 +648,91 @@ $("#grid-fuentes").innerHTML = FUENTES_OFICIALES.map(
 $("#tabla-changelog").innerHTML = CHANGELOG.map(
   (c) => `<tr><td style="white-space:nowrap">${c.fecha}</td><td>${c.cambio}</td></tr>`
 ).join("");
+
+/* ============================================================
+   Ayuda contextual: botón (?) en cada sección
+   ============================================================ */
+const AYUDA = [
+  ["Analizar un Caso", "Escriba lo ocurrido con sus propias palabras. El sistema detecta los elementos relevantes (armas, violencia, personas), propone hipótesis de delito y le dice qué información falta. <b>Todo se procesa en su navegador: nada se envía a internet.</b>"],
+  ["Cálculo de Penas", "Seleccione uno o más delitos y sus circunstancias. El portal aplica el <b>sistema de tercios</b> del Código Penal (art. 45-A) y muestra un rango referencial de pena — no una condena: esa la decide únicamente un juez."],
+  ["Extracción de Hechos", "Lista de los elementos jurídicamente relevantes que el analizador reconoció en su relato, separando lo confirmado de lo inferido y de lo que falta acreditar."],
+  ["Hipótesis Delictivas", "Delitos que <b>podrían</b> corresponder a los hechos: una hipótesis principal, alternativas si algo no se confirma, y delitos conexos que podrían sumarse o quedar absorbidos."],
+  ["Matriz de Tipicidad", "Tabla que compara cada requisito legal del delito con lo que usted relató, y explica por qué aparece esta hipótesis y qué elemento podría descartarla."],
+  ["Delitos y Penas", "Catálogo referencial de los delitos más frecuentes con su artículo, rango de pena, multa e inhabilitación. Use el buscador y haga clic en el artículo para ver el texto oficial."],
+  ["3. Delitos del Caso", "Los delitos que usted agregó al caso. Con dos o más, el portal evalúa las reglas de <b>concurso</b> (arts. 48-50): las penas no se suman mecánicamente."],
+  ["Rango Referencial de Individualización", "Intervalo del tercio aplicable según sus circunstancias. La pena exacta dentro del tercio exige motivación judicial (gravedad, dolo, daño, condiciones personales)."],
+  ["Competencia y Plazos", "Fiscalía que probablemente conocería el caso (según materia, territorio y condición del investigado), el órgano judicial de juzgamiento y los plazos de investigación aplicables."],
+  ["Trazabilidad Normativa", "Fuente oficial exacta de cada delito usado en el cálculo, con enlace, fecha de última comprobación y sello de verificación."],
+  ["Procedimiento Penal", "Etapas del proceso penal común peruano, desde la denuncia hasta la sentencia y sus recursos (D. Leg. 957)."],
+  ["Rutas procesales especiales", "Caminos distintos al proceso común: proceso inmediato por flagrancia, acuerdos como la terminación anticipada, colaboración eficaz, etc."],
+  ["Decisiones fiscales", "Opciones que tiene el fiscal al terminar las diligencias preliminares: archivar, aplicar salidas alternativas, formalizar investigación o acusar directamente."],
+  ["Distribución Fiscalía", "Cómo se reparten el trabajo la Policía (investigación operativa) y el fiscal (conducción jurídica) tras la Ley 32130 y la sentencia del Tribunal Constitucional de 2026."],
+  ["Calculadora de Plazos", "Estime la fecha de vencimiento de una investigación indicando el acto que inicia el cómputo. El resultado incluye base normativa y nivel de certeza; el cómputo real puede variar."],
+  ["Plazos legales de referencia", "Duración máxima legal de cada etapa. Son regímenes alternativos: una investigación es ordinaria, compleja o de criminalidad organizada — no las tres a la vez."],
+  ["Prisión preventiva", "Plazos máximos de la prisión preventiva. No es una pena: es una medida excepcional que requiere graves elementos, prognosis de pena y peligro procesal."],
+  ["Medidas Coercitivas", "Restricciones que un juez puede imponer durante el proceso (comparecencia, impedimento de salida, prisión preventiva). Ninguna equivale a una condena."],
+  ["Clases de penas", "Tipos de pena del art. 28 del Código Penal: privativa de libertad, restrictivas, limitativas de derechos y multa, más las consecuencias adicionales."],
+  ["Organización de las Fiscalías", "Jerarquía del Ministerio Público: fiscalías provinciales (investigan y acusan), superiores (apelaciones) y supremas (casación). La jerarquía no depende de la gravedad del delito."],
+  ["Fiscalías por Especialidad", "Fiscalías dedicadas a materias específicas: corrupción, crimen organizado, drogas, lavado, extorsión, etc. La especialidad depende de la materia, no de la pena."],
+  ["Verificador de Competencia", "La fiscalía competente se determina por cuatro factores: materia, territorio, condición de la persona investigada y etapa del proceso."],
+  ["Marco Normativo", "Las normas que forman el sistema penal peruano: Constitución, Código Penal, Código Procesal Penal y leyes especiales."],
+  ["Modificaciones Recientes", "Reformas recientes con su fecha de publicación, materia y estado. La ley aplicable es la vigente en la fecha del hecho, salvo que una posterior sea más favorable."],
+  ["Fuentes Oficiales", "Repositorios del Estado peruano de donde proviene la información, ordenados por prioridad: El Peruano, SPIJ, Congreso, Ministerio Público, Poder Judicial y Tribunal Constitucional."],
+  ["Fuentes complementarias", "Entidades sectoriales (SUNAT, OEFA, Indecopi…) que aportan normativa técnica; la pena siempre proviene de una norma penal con rango de ley."],
+  ["Metodología", "Cómo se construye y actualiza la información del portal: fuentes prioritarias, gestión de derogaciones, reporte de errores y registro público de cambios."],
+  ["Aviso Legal", "Términos de uso: el portal es informativo, usa solo fuentes públicas oficiales, no recopila datos personales y no constituye asesoría legal."]
+];
+let popActual = null;
+function cerrarPop() { if (popActual) { popActual.remove(); popActual = null; } }
+document.addEventListener("click", (e) => { if (popActual && !e.target.closest(".help-pop") && !e.target.closest(".help-btn")) cerrarPop(); });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") cerrarPop(); });
+
+$$(".card-title h3").forEach((h3) => {
+  const titulo = h3.textContent.trim();
+  const entrada = AYUDA.find(([k]) => titulo.toLowerCase().startsWith(k.toLowerCase()) || titulo.toLowerCase().includes(k.toLowerCase()));
+  if (!entrada) return;
+  const btn = document.createElement("button");
+  btn.className = "help-btn";
+  btn.textContent = "?";
+  btn.setAttribute("aria-label", "¿Qué es esta sección?");
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const abierto = popActual && popActual.dataset.para === titulo;
+    cerrarPop();
+    if (abierto) return;
+    const pop = document.createElement("div");
+    pop.className = "help-pop";
+    pop.dataset.para = titulo;
+    pop.innerHTML = entrada[1];
+    document.body.appendChild(pop);
+    const r = btn.getBoundingClientRect();
+    pop.style.left = Math.min(r.left, window.innerWidth - pop.offsetWidth - 12) + "px";
+    pop.style.top = r.bottom + window.scrollY + 8 + "px";
+    popActual = pop;
+    if (window.anime) anime({ targets: pop, translateY: [-4, 0], opacity: [0, 1], duration: 180, easing: "easeOutQuad" });
+  });
+  h3.parentElement.appendChild(btn);
+});
+
+/* ============================================================
+   Animaciones (AOS + anime.js) — con degradación elegante
+   ============================================================ */
+if (window.AOS) {
+  $$(".card, .stat").forEach((el, i) => {
+    el.setAttribute("data-aos", "fade-up");
+    el.setAttribute("data-aos-delay", String(Math.min((i % 6) * 60, 300)));
+  });
+  AOS.init({ duration: 550, once: true, offset: 50 });
+}
+if (window.anime) {
+  anime({ targets: ".hero h2, .hero p", translateY: [18, 0], opacity: [0, 1], delay: anime.stagger(120), duration: 700, easing: "easeOutCubic" });
+  anime({ targets: ".brand-logo", scale: [0.6, 1], rotate: ["-12deg", "0deg"], duration: 600, easing: "easeOutBack" });
+  // contador animado en las estadísticas
+  $$("#stats-row b").forEach((el) => {
+    const m = el.textContent.match(/^(\d+)(.*)$/);
+    if (!m) return;
+    const fin = +m[1], sufijo = m[2] || "";
+    const obj = { v: 0 };
+    anime({ targets: obj, v: fin, round: 1, duration: 1200, easing: "easeOutExpo", update: () => (el.textContent = obj.v + sufijo) });
+  });
+}

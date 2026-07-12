@@ -2,66 +2,89 @@
 
 ### 🌐 Visita el portal aquí: **[https://oprbguitar.github.io/JustiPenal/](https://oprbguitar.github.io/JustiPenal/)**
 
+Funciona en computadora, tablet y celular. No requiere registro, no tiene costo y no guarda ningún dato de quien lo usa.
+
 ---
 
 ## ¿Qué es JustiPenal?
 
-**JustiPenal** es un portal web informativo y gratuito sobre el sistema penal del Perú. Está pensado tanto para **ciudadanos sin conocimientos jurídicos** como para **abogados, estudiantes de derecho y analistas** que necesitan una orientación rápida y clara.
+**JustiPenal** es un portal web informativo y gratuito sobre el sistema penal del Perú. Está pensado para dos públicos a la vez:
 
-En pocas palabras: si quieres saber **qué pena corresponde a un delito**, **qué fiscalía podría ver un caso**, **cuánto puede durar una investigación** o **cómo avanza un proceso penal**, este portal te lo explica y te lo calcula de forma sencilla.
+- **Ciudadanos sin conocimientos jurídicos** que quieren entender qué delito podría configurar un hecho, qué pena contempla la ley o cuánto puede durar una investigación.
+- **Abogados, estudiantes de derecho y analistas** que necesitan una referencia rápida de rangos de pena, plazos, competencia fiscal y normativa reciente, con enlace a la fuente oficial de cada dato.
 
-## ¿Qué puedes hacer en el portal?
+En cada sección del portal encontrarás un **símbolo (?)** junto al título: haz clic en él y una ventana breve te explica qué hace esa herramienta y cómo interpretarla, en lenguaje simple.
+
+## ¿Qué puedes hacer en el portal? — Guía de módulos
 
 ### 🔎 Analizar un caso con tus propias palabras
-Escribe lo que pasó — sin conocer artículos ni términos jurídicos — y el portal identifica los elementos relevantes (violencia, armas, número de personas, lesiones), propone **hipótesis delictivas** (principal, alternativas y conexas), construye una **matriz de tipicidad** que explica por qué aparece cada delito, y te dice qué información falta por acreditar. Todo se procesa en tu propio navegador: **nada se envía ni se guarda en ningún servidor**.
+Escribe lo que pasó — por ejemplo: *"Dos personas entraron a una tienda, amenazaron al vendedor con un cuchillo y se llevaron tres teléfonos"* — y el portal:
+1. **Extrae los hechos relevantes**: violencia, amenaza, armas, número de personas, lesiones, lugar.
+2. **Propone hipótesis delictivas**: una principal (p. ej. robo agravado), alternativas (si algo no se confirma, la calificación baja a robo simple o hurto) y delitos conexos (p. ej. lesiones).
+3. **Construye una matriz de tipicidad**: una tabla que compara cada requisito legal del delito con lo que relataste, clasificando cada elemento como *confirmado, compatible, inferido, no determinado o ausente* — así entiendes **por qué** aparece esa hipótesis y qué podría descartarla.
+4. **Te dice qué información falta**: certificado médico-legal, tipo de arma, valor de los bienes, fecha del hecho.
+5. Con un clic, **carga la hipótesis en la calculadora de penas**.
+
+> 🔒 **Privacidad**: el análisis se ejecuta íntegramente en tu navegador. El texto que escribes **no se envía a ningún servidor** y desaparece al cerrar la página. Aun así, evita ingresar nombres o datos de personas reales.
 
 ### 🧮 Calcular una pena referencial — con uno o varios delitos
-Arma un caso con **uno o más delitos** (por ejemplo, robo agravado más lesiones). Para cada uno marcas sus circunstancias y el portal muestra el **rango referencial de individualización** por el sistema de tercios; con dos o más delitos, presenta los **escenarios de concurso** (real, ideal, delito continuado y concurso aparente) sin sumar penas mecánicamente. Aplica además la regla contra la **doble valoración**: una circunstancia que ya integra la modalidad agravada no vuelve a computarse. Al final puedes **descargar el informe** en Word, Markdown, TXT o imprimirlo en PDF.
+Arma un caso agregando **uno o más delitos** (por ejemplo, robo agravado + lesiones). Para cada uno marcas sus circunstancias y el portal muestra:
 
-### 🧮 ¿Qué incluye el cálculo?
-- El **rango de pena referencial** aplicando el **sistema de tercios** del Código Penal (tercio inferior, intermedio o superior).
-- Qué pasa si hay **tentativa**, **reincidencia** o **habitualidad** (el portal distingue lo calculable automáticamente de lo que exige decisión judicial motivada).
-- Escenarios con **beneficios procesales** (confesión sincera, terminación anticipada y conclusión anticipada), mostrados como hipótesis A/B/C, nunca como una cifra única.
-- Las **otras consecuencias**: días-multa, inhabilitación y penas alternativas, cuando el delito las contempla.
-- El **órgano judicial** que juzgaría el caso (juzgado unipersonal o colegiado).
-- La **fiscalía posiblemente competente** según la especialidad, el territorio y la condición del investigado, con enlace al directorio oficial.
-- La **trazabilidad**: cada delito enlaza a su fuente oficial con fecha de última verificación y sello de estado.
+- El **rango referencial de individualización** aplicando el **sistema de tercios** del art. 45-A del Código Penal (tercio inferior, intermedio o superior), explicando qué circunstancias determinaron la ubicación.
+- La **regla contra la doble valoración**: si una circunstancia ya integra la modalidad agravada elegida (p. ej. la pluralidad de agentes en el robo agravado), el portal la excluye del cómputo y te lo advierte.
+- Con dos o más delitos, los **escenarios de concurso** (real, ideal, delito continuado y concurso aparente, arts. 48-50), con sus topes legales — **sin sumar penas mecánicamente**, porque la regla aplicable exige análisis jurídico.
+- **Tentativa, reincidencia y habitualidad** con etiquetas honestas: el portal distingue lo *calculado automáticamente* de lo que *requiere decisión judicial motivada* o *no es calculable* sin antecedentes verificados.
+- **Bonificaciones procesales** (confesión sincera, terminación anticipada, conclusión anticipada) mostradas como **escenarios A/B/C** sobre los extremos del tercio — nunca como una cifra única inventada.
+- Las **otras consecuencias**: días-multa, inhabilitación y penas alternativas cuando el delito las contempla, además de la reparación civil.
+- El **órgano judicial** de juzgamiento (unipersonal o colegiado, según la pena mínima).
+- La **fiscalía posiblemente competente**, considerando materia, territorio y condición del investigado (funcionario, aforado, policía/militar, adolescente), con enlace al directorio oficial del distrito fiscal.
+- La **trazabilidad completa**: cada delito enlaza a su fuente oficial (SPIJ), con fecha de última comprobación y un sello de estado (*verificado / pendiente / posiblemente modificado*).
+- Un **informe descargable** — *Informe preliminar de análisis penal referencial* — en **Word, Markdown, TXT**, copiable al portapapeles o imprimible como **PDF**.
 
 ### ⚖️ Consultar delitos y penas
-Una tabla con los delitos más frecuentes del Código Penal peruano (homicidio, feminicidio, lesiones, robo, hurto, extorsión, corrupción, drogas, lavado de activos, delitos informáticos y más), con sus artículos, modalidades y rangos de pena, y un buscador para encontrarlos rápido.
+Catálogo con **más de 40 modalidades delictivas** de las familias más frecuentes: vida (homicidio, feminicidio, sicariato), integridad (lesiones), familia (omisión de asistencia familiar), libertad (secuestro, trata, coacción), libertad sexual, patrimonio (hurto, robo, estafa, extorsión, usurpación), drogas (con sus artículos diferenciados: tráfico 296, insumos químicos 296-B, formas agravadas 297, microcomercialización 298), corrupción (colusión, peculado, cohecho), lavado de activos, delitos tributarios, informáticos, fe pública y crimen organizado. Cada fila incluye artículo con enlace oficial, rango de pena, multa/inhabilitación y sello de verificación.
 
 ### 🕐 Calcular plazos procesales
-Indica la fecha de inicio de una investigación y el portal estima la **fecha de vencimiento del plazo**: diligencias preliminares (60 días), investigación preparatoria ordinaria (120 días), compleja (8 meses) o de criminalidad organizada (36 meses), con o sin prórroga. También muestra los plazos máximos de la **prisión preventiva**.
+Indica el **acto que inicia el cómputo** (disposición fiscal, formalización, detención), la fecha y — si la conoces — la fecha de notificación. El portal estima el vencimiento con su **base normativa** (artículo del CPP), un **nivel de certeza** (alta/media/baja) y la lista de información faltante. Incluye los plazos de: diligencias preliminares (60 días), investigación preparatoria ordinaria (120 días + 60), compleja (8 meses + 8) y de criminalidad organizada (36 meses + 36), además de los máximos de prisión preventiva.
 
 ### 📂 Entender el procedimiento penal
-Un diagrama simple del proceso penal peruano paso a paso: denuncia → investigación preliminar → investigación preparatoria → etapa intermedia → juicio oral → sentencia, con las rutas especiales (proceso inmediato, terminación anticipada, colaboración eficaz, etc.).
+Diagrama del proceso penal común paso a paso (denuncia → investigación preliminar → preparatoria → etapa intermedia → juicio oral → sentencia → apelación → casación), las rutas especiales (proceso inmediato, terminación anticipada, colaboración eficaz) y la distribución actual de funciones entre la **Policía Nacional y el Ministerio Público** tras la Ley 32130 y la sentencia del Tribunal Constitucional de 2026.
 
 ### 👥 Conocer las fiscalías
-Cómo se organiza el Ministerio Público (fiscalías provinciales, superiores y supremas) y qué **fiscalías especializadas** existen: corrupción de funcionarios, crimen organizado, lavado de activos, drogas, ciberdelincuencia, extorsión y más.
+La jerarquía del Ministerio Público (provinciales, superiores, supremas), las **14 especialidades fiscales** y el verificador de competencia por sus **cuatro dimensiones**: materia, territorio, condición de la persona y etapa del proceso.
 
 ### 📄 Revisar la normativa vigente
-Las normas que forman el sistema penal peruano (Código Penal, Código Procesal Penal, leyes especiales) y las **reformas más recientes**, como la Ley 32258 sobre tentativa o el Decreto Legislativo 1735 que creó el subsistema contra la extorsión.
+Las normas base del sistema penal y las **modificaciones recientes** con fecha de publicación, materia, fuente, estado y fecha de verificación — por ejemplo, la Ley 32258 (14/03/2025, tentativa y suspensión de penas) y el D. Leg. 1735 (12/02/2026, subsistema contra la extorsión).
 
 ## ¿De dónde sale la información?
 
-Toda la información proviene de **fuentes oficiales del Estado peruano**, verificables y enlazadas dentro del portal:
+Todo el contenido proviene de **fuentes públicas y oficiales del Estado peruano**, enlazadas dentro del portal:
 
-| Fuente | Qué aporta |
-|---|---|
-| Diario Oficial **El Peruano** | Textos oficiales, fechas de publicación y vigencia |
-| **SPIJ** (Ministerio de Justicia) | Normas sistematizadas y actualizadas |
-| **Congreso de la República** | Textos originales de leyes y decretos |
-| **Ministerio Público** | Directorios y fiscalías especializadas |
-| **Poder Judicial** | Jurisprudencia, acuerdos plenarios y casaciones |
-| **Tribunal Constitucional** | Criterios sobre derechos fundamentales |
+| Prioridad | Fuente | Qué aporta |
+|---|---|---|
+| 1 | Diario Oficial **El Peruano** | Textos oficiales, fechas de publicación y vigencia |
+| 2 | **SPIJ** (Ministerio de Justicia) | Normas sistematizadas y actualizadas |
+| 3 | **Congreso de la República** | Textos originales de leyes y decretos |
+| 4 | **Ministerio Público** | Directorios y fiscalías especializadas |
+| 5 | **Poder Judicial** | Jurisprudencia, acuerdos plenarios y casaciones |
+| 6 | **Tribunal Constitucional** | Criterios sobre derechos fundamentales |
 
-## 🛠️ Metodología y transparencia
+La página de **Metodología** del portal explica quién actualiza los datos, qué fuente prevalece ante contradicciones, cómo se manejan las derogaciones (una norma derogada no se borra: puede aplicarse a hechos anteriores) y mantiene un **registro público de cambios**.
 
-El portal incluye una página de **Metodología** que explica quién actualiza los datos, qué fuente tiene prioridad ante contradicciones, cómo se gestionan las derogaciones y un **registro público de cambios**. Los errores se reportan mediante la sección *Issues* de este repositorio, citando la norma y la fuente oficial que respalda la corrección.
+## Tecnología
+
+- Sitio **100 % estático** (HTML + CSS + JavaScript puro): sin servidores, sin base de datos, sin cuentas ni cookies de seguimiento.
+- Animaciones con **AOS** (revelado al hacer scroll) y **anime.js** (contadores y transiciones), con degradación elegante si las librerías no cargan y respeto por `prefers-reduced-motion`.
+- **Diseño responsive**: menú lateral deslizable con botón hamburguesa accesible en celulares (soporte de teclado, `aria-expanded`, bloqueo de scroll de fondo) y panel de fuentes oficiales en pantallas anchas.
+- Publicado automáticamente en **GitHub Pages** mediante GitHub Actions en cada actualización.
+
+## ¿Encontraste un error?
+
+Abre un *Issue* en este repositorio indicando: la norma o dato observado, lo que dice el portal, y la **fuente oficial** que respalda la corrección (enlace a El Peruano o SPIJ). Todo cambio aceptado queda registrado en el historial de cambios de la página de Metodología.
 
 ## ⚠️ Importante — Aviso legal
 
-> Este portal es **informativo y referencial**. No constituye asesoría legal ni reemplaza la evaluación de un abogado, la investigación fiscal o la decisión de un juez. La pena concreta de un caso real solo la determina el **Poder Judicial** tras un proceso con todas las garantías. Todos los contenidos provienen de **fuentes públicas y oficiales del Estado peruano** y de enlaces públicos identificados en cada sección. El portal **no recopila, no almacena y no transmite datos personales**: sus herramientas se ejecutan íntegramente en el navegador del usuario. El aviso legal completo, con la limitación de responsabilidad y la política de privacidad, está disponible dentro del portal.
+> Este portal es **informativo y referencial**. No constituye asesoría legal ni reemplaza la evaluación de un abogado, la investigación fiscal o la decisión de un juez. La pena concreta de un caso real solo la determina el **Poder Judicial** tras un proceso con todas las garantías. Todos los contenidos provienen de **fuentes públicas y oficiales del Estado peruano**. El portal **no recopila, no almacena y no transmite datos personales**: sus herramientas se ejecutan íntegramente en el navegador del usuario. El aviso legal completo — con la limitación de responsabilidad, la política de privacidad y las condiciones de uso aceptable — está disponible en la sección «Aviso Legal» del portal. Si enfrentas una situación legal real, acude a un abogado colegiado o a la defensa pública gratuita del Ministerio de Justicia.
 
 ---
 
