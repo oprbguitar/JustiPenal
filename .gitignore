@@ -5,6 +5,3 @@
 .playwright-cli
 node_modules
 npm-debug.log*
-
-.vercel
-.env*
