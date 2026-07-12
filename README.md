@@ -85,6 +85,15 @@ La página de **Metodología** del portal explica quién actualiza los datos, qu
 - **Diseño responsive**: menú lateral deslizable con botón hamburguesa accesible en celulares (soporte de teclado, `aria-expanded`, bloqueo de scroll de fondo) y panel de fuentes oficiales en pantallas anchas.
 - Publicado automáticamente en **GitHub Pages** mediante GitHub Actions en cada actualización.
 
+### Configurar el formulario de opinión con Supabase
+
+1. Cree un proyecto en [Supabase](https://supabase.com/dashboard) o seleccione uno existente.
+2. Abra **SQL Editor**, copie y ejecute [`supabase/site_feedback.sql`](supabase/site_feedback.sql). El script crea la tabla con RLS, sin acceso anónimo, y habilita únicamente la inserción server-side.
+3. En Vercel, abra **Project Settings → Environment Variables** y agregue `SUPABASE_URL` y `SUPABASE_SERVICE_ROLE_KEY` para producción. Marque `SUPABASE_SERVICE_ROLE_KEY` como variable sensible y manténgala exclusivamente del lado del servidor.
+4. Vuelva a desplegar el proyecto en Vercel después de agregar las variables.
+5. Revise los comentarios desde **Supabase → Table Editor → site_feedback**. Actualice la columna `status` a `reviewed`, `implemented` o `dismissed` según corresponda.
+6. Para exportarlos, abra la tabla y use la opción **Export data → CSV** del Table Editor.
+
 ## ¿Encontraste un error?
 
 Abre un *Issue* en este repositorio indicando: la norma o dato observado, lo que dice el portal, y la **fuente oficial** que respalda la corrección (enlace a El Peruano o SPIJ). Todo cambio aceptado queda registrado en el historial de cambios de la página de Metodología.

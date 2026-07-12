@@ -91,11 +91,11 @@ export function guardModelOutput(value) {
   return original.replace(/https?:\/\/[^\s)\]]+/gi, "[enlace omitido; consulte las fuentes verificadas]");
 }
 
-function cleanString(value, max = 1000) {
+export function cleanString(value, max = 1000) {
   return typeof value === "string" ? value.trim().slice(0, max) : "";
 }
 
-function isPlainObject(value) {
+export function isPlainObject(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
 }
 
@@ -295,7 +295,7 @@ function applyCors(req, res) {
   return true;
 }
 
-function clientIdentifier(req) {
+export function clientIdentifier(req) {
   const ip = String(req.headers["x-forwarded-for"] || req.headers["x-real-ip"] || "unknown").split(",")[0].trim();
   const production = process.env.NODE_ENV === "production" || process.env.VERCEL_ENV === "production";
   const salt = process.env.RATE_LIMIT_SALT || (production ? "" : "justipenal-local-development");
@@ -303,7 +303,7 @@ function clientIdentifier(req) {
   return createHmac("sha256", salt).update(ip).digest("hex");
 }
 
-function checkMemoryBucket(store, identifier, limit, windowMs) {
+export function checkMemoryBucket(store, identifier, limit, windowMs) {
   const now = Date.now();
   const bucket = store.get(identifier);
   if (!bucket || now >= bucket.resetAt) {

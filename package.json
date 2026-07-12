@@ -6,7 +6,7 @@
   "scripts": {
     "build:kb": "node scripts/build-legal-kb.mjs",
     "test": "node --test",
-    "test:syntax": "node --check api/chat.js && node --check js/chat.js && node --check js/app.js"
+    "test:syntax": "node --check api/chat.js && node --check api/feedback.js && node --check js/chat.js && node --check js/app.js && node --check js/feedback.js && node --check js/case-simulator.js"
   },
   "dependencies": {
     "@google/genai": "2.11.0",

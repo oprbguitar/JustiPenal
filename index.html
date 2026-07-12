@@ -29,6 +29,7 @@
     <a href="#analizar">🔎 Analizar Caso</a>
     <a href="#normativa">📄 Normativa</a>
     <a href="#fuentes">📚 Fuentes</a>
+    <button class="feedback-trigger feedback-trigger-header" type="button" data-feedback-open><span class="feedback-star" aria-hidden="true">☆</span> Tu opinión</button>
   </nav>
 </header>
 
@@ -49,6 +50,7 @@
     <button class="nav-item" data-page="fuentes"><span class="ic">📚</span> Fuentes Oficiales</button>
     <button class="nav-item" data-page="metodologia"><span class="ic">🛠️</span> Metodología</button>
     <button class="nav-item" data-page="aviso"><span class="ic">§</span> Aviso Legal</button>
+    <button class="feedback-trigger feedback-trigger-mobile" type="button" data-feedback-open><span class="ic feedback-star" aria-hidden="true">☆</span> Tu opinión</button>
 
     <div class="side-box">
       <h4>Base Legal Principal</h4>
@@ -606,6 +608,7 @@
 
         <h4>5. Privacidad y datos personales</h4>
         <p>JustiPenal no utiliza cuentas de usuario ni bases de datos de casos. El módulo «Analizar Caso» y las calculadoras se ejecutan en el navegador. El chat envía el mensaje actual, el historial reciente y, solo con confirmación del usuario, un contexto estructurado y sanitizado; el procesamiento se realiza mediante Vercel y Gemini. No incluya datos personales, confidenciales ni identificadores del caso, conforme a los principios de la Ley 29733 y su Reglamento (D. S. 016-2024-JUS). El portal emplea <b>GoatCounter</b> para estadísticas anónimas y agregadas de visitas (página vista, país y tipo de dispositivo): no usa cookies, no almacena direcciones IP ni perfila personas.</p>
+        <p>El formulario de opinión almacena únicamente la categoría seleccionada, el comentario voluntario, la sección consultada y la fecha de envío. No solicite ni incluya nombres, documentos de identidad, expedientes ni información de casos reales. Estos comentarios se utilizan exclusivamente para evaluar y mejorar el portal.</p>
 
         <h4>6. Enlaces a terceros</h4>
         <p>Los enlaces a portales del Estado u otros sitios se ofrecen solo como referencia. El portal no controla ni responde por el contenido, disponibilidad o políticas de esos sitios.</p>
@@ -677,6 +680,24 @@
   </div>
 </section>
 
+<div class="feedback-modal" id="feedback-modal" role="dialog" aria-modal="true" aria-labelledby="feedback-title" aria-describedby="feedback-question feedback-privacy" hidden>
+  <div class="feedback-dialog">
+    <header><div><h2 id="feedback-title">Ayúdanos a mejorar</h2><p id="feedback-question">¿Qué agregarías, mejorarías o retirarías?</p></div><button type="button" class="feedback-close" data-feedback-close aria-label="Cerrar">✕</button></header>
+    <form id="feedback-form" novalidate>
+      <label class="fld" for="feedback-category">Categoría</label>
+      <select id="feedback-category" name="category" required>
+        <option value="add">Agregar</option><option value="improve">Mejorar</option><option value="remove">Retirar</option><option value="error">Informar un error</option>
+      </select>
+      <label class="fld" for="feedback-message">Sugerencia</label>
+      <textarea id="feedback-message" name="message" minlength="3" maxlength="500" placeholder="Escribe una sugerencia breve…" required></textarea>
+      <div class="feedback-meta"><span id="feedback-privacy">No incluyas nombres, DNI, expedientes ni información de casos reales.</span><output id="feedback-counter" for="feedback-message">0/500</output></div>
+      <div class="feedback-honeypot" aria-hidden="true"><label for="feedback-website">Sitio web</label><input id="feedback-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+      <p class="feedback-status" id="feedback-status" role="status" aria-live="polite"></p>
+      <div class="feedback-actions"><button class="btn secondary" type="button" data-feedback-close>Cancelar</button><button class="btn" type="submit" id="feedback-submit">Enviar opinión</button></div>
+    </form>
+  </div>
+</div>
+
 <footer class="footer">
   <div class="footer-links">
     <a href="#aviso" data-goto="aviso">Aviso legal</a>
@@ -695,6 +716,7 @@
 <script src="js/config.js?v=5"></script>
 <script src="js/app.js?v=5"></script>
 <script src="js/case-simulator.js?v=1"></script>
+<script src="js/feedback.js?v=1"></script>
 <script src="js/chat.js?v=5"></script>
 <!-- Estadísticas anónimas de visitas (GoatCounter): sin cookies, sin almacenar IPs,
      sin rastrear personas. Solo agregados: páginas vistas, país y tipo de dispositivo. -->
