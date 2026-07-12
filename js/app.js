@@ -222,6 +222,13 @@ function setStep(n) { for (let i = 1; i <= 4; i++) $("#st-" + i).classList.toggl
 // ---------- caso multi-delito ----------
 let bloques = [];
 let ultimoInforme = "";
+let ultimoContextoAnalisis = null;
+let ultimoContextoCalculo = null;
+
+window.getJustiPenalPortalContext = (type) => {
+  const context = type === "analysis" ? ultimoContextoAnalisis : type === "calculation" ? ultimoContextoCalculo : null;
+  return context ? JSON.parse(JSON.stringify(context)) : null;
+};
 
 function calcularTercioBloque(b) {
   const m = b.m;
@@ -410,6 +417,25 @@ $("#btn-calcular").addEventListener("click", () => {
     </div>`).join("");
 
   ultimoInforme = generarInforme(resultados, reds, cond, territorio, fis);
+  ultimoContextoCalculo = {
+    type: "calculation",
+    data: {
+      candidateOffenseIds: resultados.map(({ b }) => b.d.id),
+      articles: resultados.map(({ b }) => b.d.articulo),
+      selectedModality: resultados.map(({ b }) => ({ offenseId: b.d.id, modalityId: b.m.id, name: b.m.nombre })),
+      applicableThird: resultados.map(({ b, r }) => ({ offenseId: b.d.id, third: r.perpetua ? "No aplicable: cadena perpetua" : r.tercio })),
+      generalCircumstances: resultados.flatMap(({ b, r }) => [
+        ...b.atenuantes.map((item) => item.texto),
+        ...(r.agValidas || []).map((item) => item.texto),
+        ...(b.reincidencia !== "no" ? [b.reincidencia] : [])
+      ]),
+      executionStatus: resultados.map(({ b }) => ({ offenseId: b.d.id, status: b.tentativa ? "tentativa" : "consumado" })),
+      proceduralStage: "No indicada en la calculadora",
+      preliminaryProsecutionSpecialty: fis.nombre,
+      missingInformation: ["La pena concreta requiere individualización judicial", "La regla concursal aplicable requiere análisis jurídico cuando existe más de un delito"],
+      sources: resultados.map(({ b }) => ({ name: b.d.fuente.norma, url: b.d.fuente.url }))
+    }
+  };
   $("#resultado-wrap").scrollIntoView({ behavior: "smooth" });
   animarEntrada("#res-delitos .panel, #res-concurso, #res-escenarios, #res-competencia, #res-plazos, #res-fuentes .panel", { stagger: 90 });
 });
@@ -566,6 +592,29 @@ $("#btn-analizar").addEventListener("click", () => {
 
   // cargar en calculadora
   $("#btn-cargar-calc").style.display = principal ? "inline-flex" : "none";
+  $("#btn-preguntar-analisis").style.display = principal ? "inline-flex" : "none";
+  if (principal) {
+    const candidates = encontradas.map((hypothesis) => DELITOS.find((item) => item.id === hypothesis.delitoId)).filter(Boolean);
+    const principalOffense = DELITOS.find((item) => item.id === principal.delitoId);
+    const specialty = FISCALIAS[principalOffense.fiscalia] || FISCALIAS["penal-comun"];
+    ultimoContextoAnalisis = {
+      type: "analysis",
+      data: {
+        candidateOffenseIds: candidates.map((item) => item.id),
+        articles: candidates.map((item) => item.articulo),
+        selectedModality: principal.modalidadId,
+        applicableThird: "No calculado en el análisis local",
+        generalCircumstances: [...tags.values()].filter((value, index, values) => values.indexOf(value) === index),
+        executionStatus: tags.has("tentativa") ? "tentativa por confirmar" : "consumación probable por confirmar",
+        proceduralStage: $("#caso-etapa").value || "Sin etapa indicada",
+        preliminaryProsecutionSpecialty: specialty.nombre,
+        missingInformation: faltantes,
+        sources: candidates.map((item) => ({ name: item.fuente.norma, url: item.fuente.url }))
+      }
+    };
+  } else {
+    ultimoContextoAnalisis = null;
+  }
   $("#btn-cargar-calc").onclick = () => {
     if (!principal) return;
     const d = DELITOS.find((x) => x.id === principal.delitoId);

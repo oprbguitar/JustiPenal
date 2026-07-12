@@ -2,7 +2,7 @@
 
 ### 🌐 Visita el portal aquí: **[https://oprbguitar.github.io/JustiPenal/](https://oprbguitar.github.io/JustiPenal/)**
 
-Funciona en computadora, tablet y celular. No requiere registro, no tiene costo y no guarda ningún dato de quien lo usa.
+Funciona en computadora, tablet y celular. No requiere registro. Las herramientas deterministas siguen siendo gratuitas y locales; el asistente opcional procesa únicamente los mensajes que el usuario decide enviar.
 
 ---
 
@@ -73,7 +73,10 @@ La página de **Metodología** del portal explica quién actualiza los datos, qu
 
 ## Tecnología
 
-- Sitio **100 % estático** (HTML + CSS + JavaScript puro): sin servidores, sin base de datos, sin cuentas ni cookies de seguimiento.
+- Frontend estático en GitHub Pages (HTML + CSS + JavaScript puro) y un endpoint serverless aislado en Vercel para el asistente opcional.
+- El analizador y las calculadoras continúan ejecutándose localmente, sin enviar relatos ni campos del caso.
+- El asistente usa la API de Interactions de Gemini mediante `@google/genai`, con `store: false`, recuperación determinista desde `data/legal-kb.json` y sin herramientas de navegación.
+- Supabase no almacena conversaciones ni datos de casos.
 - Animaciones con **AOS** (revelado al hacer scroll) y **anime.js** (contadores y transiciones), con degradación elegante si las librerías no cargan y respeto por `prefers-reduced-motion`.
 - **Diseño responsive**: menú lateral deslizable con botón hamburguesa accesible en celulares (soporte de teclado, `aria-expanded`, bloqueo de scroll de fondo) y panel de fuentes oficiales en pantallas anchas.
 - Publicado automáticamente en **GitHub Pages** mediante GitHub Actions en cada actualización.
@@ -84,7 +87,7 @@ Abre un *Issue* en este repositorio indicando: la norma o dato observado, lo que
 
 ## ⚠️ Importante — Aviso legal
 
-> Este portal es **informativo y referencial**. No constituye asesoría legal ni reemplaza la evaluación de un abogado, la investigación fiscal o la decisión de un juez. La pena concreta de un caso real solo la determina el **Poder Judicial** tras un proceso con todas las garantías. Todos los contenidos provienen de **fuentes públicas y oficiales del Estado peruano**. El portal **no recopila, no almacena y no transmite datos personales**: sus herramientas se ejecutan íntegramente en el navegador del usuario. El aviso legal completo — con la limitación de responsabilidad, la política de privacidad y las condiciones de uso aceptable — está disponible en la sección «Aviso Legal» del portal. Si enfrentas una situación legal real, acude a un abogado colegiado o a la defensa pública gratuita del Ministerio de Justicia.
+> Este portal es **informativo y referencial**. No constituye asesoría legal ni reemplaza la evaluación de un abogado, la investigación fiscal o la decisión de un juez. La pena concreta de un caso real solo la determina el **Poder Judicial** tras un proceso con todas las garantías. El analizador y las calculadoras se ejecutan íntegramente en el navegador. Solo los mensajes que el usuario escribe en el asistente —o el resumen estructurado que confirma expresamente— se procesan mediante Vercel y Gemini; no deben incluir datos personales o reservados. Consulte [CHATBOT_SETUP.md](CHATBOT_SETUP.md) para la arquitectura, configuración y límites de privacidad.
 
 ---
 
