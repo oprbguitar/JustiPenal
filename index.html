@@ -39,6 +39,7 @@
     <button class="nav-item" data-page="analizar"><span class="ic">🔎</span> Analizar Caso</button>
     <button class="nav-item" data-page="delitos"><span class="ic">⚖️</span> Delitos y Penas</button>
     <button class="nav-item" data-page="calculo"><span class="ic">🧮</span> Cálculo de Penas</button>
+    <button class="nav-item" data-page="teoria"><span class="ic">🧭</span> Teoría del Caso</button>
     <button class="nav-item" data-page="procedimientos"><span class="ic">📂</span> Procedimientos</button>
     <button class="nav-item" data-page="plazos"><span class="ic">🕐</span> Plazos Procesales</button>
     <button class="nav-item" data-page="medidas"><span class="ic">🛡️</span> Medidas Coercitivas</button>
@@ -342,6 +343,44 @@
           <li>El fiscal conserva la conducción jurídica, supervisión y control desde el inicio</li>
           <li>Los informes y precalificaciones policiales no vinculan al fiscal</li>
         </ul>
+      </div>
+    </section>
+
+    <!-- ================= TEORÍA DEL CASO ================= -->
+    <section class="page" id="page-teoria">
+      <div class="card">
+        <div class="card-title"><span class="ic">🧭</span><h3>Teoría del Caso — Los Tres Elementos</h3></div>
+        <p class="card-sub">Toda posición en un proceso penal — de la fiscalía o de la defensa — se construye sobre tres pilares que deben ser coherentes entre sí</p>
+        <div class="grid-3" id="grid-teoria-elementos"></div>
+        <div class="disclaimer">📌 El analizador de casos de JustiPenal cubre los elementos <b>fáctico</b> (extracción de hechos) y <b>jurídico</b> (matriz de tipicidad). El checklist siguiente orienta el elemento <b>probatorio</b>: qué medios de prueba suelen sustentar cada tipo de caso.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="ic">🔬</span><h3>Checklist Probatorio por Familia de Delito</h3></div>
+        <p class="card-sub">Medios de prueba típicos — referencial: cada caso concreto exige su propia estrategia probatoria</p>
+        <div class="field" style="max-width:420px"><label for="sel-checklist">Familia de delito</label>
+          <select id="sel-checklist"></select></div>
+        <ul class="list-check" id="lista-checklist" style="margin-top:10px"></ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="ic">🛡️</span><h3>Imputación y Defensa — Qué Alegaría la Otra Parte</h3></div>
+        <p class="card-sub">Frente a cada hipótesis acusatoria existe una perspectiva de defensa: causas que excluyen o atenúan la responsabilidad (arts. 14 y 20 CP)</p>
+        <div class="grid-3" id="grid-defensas"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="ic">🏛️</span><h3>Instituciones del Proceso y de la Pena</h3></div>
+        <p class="card-sub">Salidas alternativas, ejecución de la pena, prescripción, detención y regímenes especiales — con su base normativa y sello de revisión</p>
+        <div class="grid-2" id="grid-instituciones"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="ic">📖</span><h3>Glosario Penal</h3></div>
+        <p class="card-sub">Términos técnicos explicados en lenguaje simple</p>
+        <div class="field" style="max-width:420px"><label for="buscar-glosario">Buscar término</label>
+          <input type="text" id="buscar-glosario" placeholder="Ej.: flagrancia, dolo, sobreseimiento…"></div>
+        <div class="grid-3" id="grid-glosario" style="margin-top:10px"></div>
       </div>
     </section>
 

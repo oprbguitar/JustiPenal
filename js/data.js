@@ -82,6 +82,32 @@ const DELITOS = [
       nota: "Pena privativa de libertad no mayor de 3 años, o prestación de servicios comunitarios de 20 a 52 jornadas, sin perjuicio del pago de la pensión alimenticia. La norma no fija un mínimo expreso en este párrafo.", elementos: [] } ],
     fiscalia: "penal-comun" },
 
+  // ================= EL HONOR (acción privada) =================
+  { id: "injuria", familia: "El honor", nombre: "Injuria", articulo: "Art. 130",
+    fuente: { norma: "Código Penal, D. Leg. 635", url: "https://spij.minjus.gob.pe/spij-ext-web/" },
+    sello: "pendiente",
+    fiscaliaNorma: "Delito de ejercicio privado de la acción penal: se persigue mediante querella de la parte agraviada ante el juez penal unipersonal (arts. 459 y ss. CPP), sin intervención del Ministerio Público.",
+    modalidades: [ { id: "b", nombre: "Modalidad básica", min: null, max: null,
+      penaTexto: "Prestación de servicio comunitario de 10 a 40 jornadas o de 60 a 90 días-multa (sin pena privativa de libertad)", elementos: [],
+      nota: "Ofensa o ultraje con palabras, gestos o vías de hecho. Rango referencial: verificar texto vigente." } ],
+    fiscalia: "accion-privada" },
+  { id: "calumnia", familia: "El honor", nombre: "Calumnia", articulo: "Art. 131",
+    fuente: { norma: "Código Penal, D. Leg. 635", url: "https://spij.minjus.gob.pe/spij-ext-web/" },
+    sello: "pendiente",
+    fiscaliaNorma: "Delito de ejercicio privado de la acción penal (querella, arts. 459 y ss. CPP).",
+    modalidades: [ { id: "b", nombre: "Modalidad básica", min: null, max: null,
+      penaTexto: "90 a 120 días-multa (sin pena privativa de libertad)", elementos: [],
+      nota: "Atribuir falsamente a otro un delito. Rango referencial: verificar texto vigente." } ],
+    fiscalia: "accion-privada" },
+  { id: "difamacion", familia: "El honor", nombre: "Difamación", articulo: "Art. 132",
+    fuente: { norma: "Código Penal, D. Leg. 635", url: "https://spij.minjus.gob.pe/spij-ext-web/" },
+    sello: "pendiente",
+    fiscaliaNorma: "Delito de ejercicio privado de la acción penal (querella, arts. 459 y ss. CPP).",
+    modalidades: [
+      { id: "b", nombre: "Modalidad básica", min: null, max: 2, minNoExpreso: true, elementos: [], multa: "30 a 120 días-multa (referencial).", nota: "Difundir ante varias personas una noticia que lesione el honor o la reputación." },
+      { id: "m", nombre: "Por medio de comunicación social", min: 1, max: 3, elementos: [], multa: "120 a 365 días-multa (referencial).", nota: "Incluye libro, prensa u otro medio de comunicación social; verificar criterios sobre redes sociales." } ],
+    fiscalia: "accion-privada" },
+
   // ================= LA LIBERTAD =================
   { id: "coaccion", familia: "La libertad", nombre: "Coacción", articulo: "Art. 151",
     fuente: { norma: "Código Penal, D. Leg. 635", url: "https://spij.minjus.gob.pe/spij-ext-web/" },
@@ -218,6 +244,27 @@ const DELITOS = [
     modalidades: [ { id: "b", nombre: "Pequeñas cantidades (límites del art. 298)", min: 3, max: 7, elementos: [], multa: "180 a 360 días-multa (referencial).", nota: "La posesión no punible para consumo propio se rige por el art. 299." } ],
     fiscalia: "drogas" },
 
+  // ================= AMBIENTAL (arts. 304 a 314) =================
+  { id: "contaminacion", familia: "Ambiental", nombre: "Contaminación del ambiente", articulo: "Art. 304",
+    fuente: { norma: "Código Penal, D. Leg. 635 (Ley 29263 y modificatorias)", url: "https://spij.minjus.gob.pe/spij-ext-web/" },
+    sello: "pendiente",
+    modalidades: [
+      { id: "b", nombre: "Modalidad dolosa", min: 4, max: 6, elementos: [], multa: "100 a 600 días-multa (referencial).", nota: "Infracción de límites máximos permisibles con perjuicio o alteración al ambiente. Formas agravadas en el art. 305." } ],
+    fiscalia: "ambiental" },
+  { id: "mineria-ilegal", familia: "Ambiental", nombre: "Minería ilegal", articulo: "Art. 307-A",
+    fuente: { norma: "Código Penal, D. Leg. 635 (D. Leg. 1102 y modificatorias)", url: "https://spij.minjus.gob.pe/spij-ext-web/" },
+    sello: "pendiente",
+    modalidades: [
+      { id: "b", nombre: "Modalidad básica", min: 4, max: 8, elementos: [], multa: "100 a 600 días-multa (referencial)." },
+      { id: "a", nombre: "Formas agravadas (art. 307-B)", min: 8, max: 10, elementos: ["organizacion"], nota: "Zonas prohibidas, áreas naturales protegidas, uso de dragas, entre otros supuestos." } ],
+    fiscalia: "ambiental" },
+  { id: "delitos-forestales", familia: "Ambiental", nombre: "Delitos contra los bosques o formaciones boscosas (tala ilegal)", articulo: "Art. 310",
+    fuente: { norma: "Código Penal, D. Leg. 635 (Ley 29263 y modificatorias)", url: "https://spij.minjus.gob.pe/spij-ext-web/" },
+    sello: "pendiente",
+    modalidades: [
+      { id: "b", nombre: "Modalidad básica", min: 4, max: 6, elementos: [], nota: "Destrucción, quema o tala sin permiso. Tráfico de productos forestales y agravantes en los arts. 310-A a 310-C." } ],
+    fiscalia: "ambiental" },
+
   // ================= ADMINISTRACIÓN PÚBLICA =================
   { id: "colusion", familia: "Administración pública", nombre: "Colusión", articulo: "Art. 384",
     fuente: { norma: "Código Penal, D. Leg. 635", url: "https://spij.minjus.gob.pe/spij-ext-web/" },
@@ -240,6 +287,32 @@ const DELITOS = [
       { id: "b", nombre: "Aceptar o recibir", min: 5, max: 8, elementos: ["cargo"], multa: "180 a 365 días-multa.", inhab: "Inhabilitación conforme al art. 36." },
       { id: "c", nombre: "Condicionar el acto funcional", min: 8, max: 10, elementos: ["cargo"], multa: "365 a 730 días-multa.", inhab: "Inhabilitación conforme al art. 36." } ],
     fiscalia: "corrupcion" },
+  { id: "malversacion", familia: "Administración pública", nombre: "Malversación de fondos", articulo: "Art. 389",
+    fuente: { norma: "Código Penal, D. Leg. 635", url: "https://spij.minjus.gob.pe/spij-ext-web/" },
+    sello: "pendiente",
+    modalidades: [
+      { id: "b", nombre: "Modalidad básica", min: 1, max: 4, elementos: ["cargo"], inhab: "Inhabilitación conforme al art. 36.", nota: "Dar al dinero o bienes públicos una aplicación definitiva distinta de la destinada." },
+      { id: "a", nombre: "Fondos asistenciales o de apoyo social", min: 3, max: 8, elementos: ["cargo"], inhab: "Inhabilitación conforme al art. 36." } ],
+    fiscalia: "corrupcion" },
+  { id: "negociacion-incompatible", familia: "Administración pública", nombre: "Negociación incompatible", articulo: "Art. 399",
+    fuente: { norma: "Código Penal, D. Leg. 635", url: "https://spij.minjus.gob.pe/spij-ext-web/" },
+    sello: "pendiente",
+    modalidades: [ { id: "b", nombre: "Modalidad básica", min: 4, max: 6, elementos: ["cargo"], multa: "180 a 365 días-multa (referencial).", inhab: "Inhabilitación conforme al art. 36.", nota: "Interesarse indebidamente, en provecho propio o de tercero, en contratos u operaciones en que interviene por razón del cargo." } ],
+    fiscalia: "corrupcion" },
+  { id: "trafico-influencias", familia: "Administración pública", nombre: "Tráfico de influencias", articulo: "Art. 400",
+    fuente: { norma: "Código Penal, D. Leg. 635", url: "https://spij.minjus.gob.pe/spij-ext-web/" },
+    sello: "pendiente",
+    modalidades: [
+      { id: "b", nombre: "Modalidad básica", min: 4, max: 6, elementos: [], multa: "180 a 365 días-multa (referencial)." },
+      { id: "a", nombre: "Cometido por funcionario o servidor público", min: 4, max: 8, elementos: ["cargo"], multa: "365 a 730 días-multa (referencial).", inhab: "Inhabilitación conforme al art. 36." } ],
+    fiscalia: "corrupcion" },
+  { id: "enriquecimiento-ilicito", familia: "Administración pública", nombre: "Enriquecimiento ilícito", articulo: "Art. 401",
+    fuente: { norma: "Código Penal, D. Leg. 635", url: "https://spij.minjus.gob.pe/spij-ext-web/" },
+    sello: "pendiente",
+    modalidades: [
+      { id: "b", nombre: "Modalidad básica", min: 5, max: 10, elementos: ["cargo"], multa: "365 a 730 días-multa (referencial).", inhab: "Inhabilitación conforme al art. 36.", nota: "Incremento patrimonial no justificado en el ejercicio de la función pública." },
+      { id: "a", nombre: "Alto funcionario (art. 99 de la Constitución)", min: 10, max: 15, elementos: ["cargo"], inhab: "Inhabilitación conforme al art. 36." } ],
+    fiscalia: "corrupcion" },
 
   // ================= FE PÚBLICA =================
   { id: "falsedad-doc", familia: "Fe pública", nombre: "Falsificación de documentos", articulo: "Art. 427",
@@ -248,6 +321,16 @@ const DELITOS = [
     modalidades: [
       { id: "pub", nombre: "Documento público", min: 2, max: 10, elementos: [], multa: "Días-multa conforme al tipo." },
       { id: "priv", nombre: "Documento privado", min: 2, max: 4, elementos: [] } ],
+    fiscalia: "penal-comun" },
+  { id: "falsedad-ideologica", familia: "Fe pública", nombre: "Falsedad ideológica", articulo: "Art. 428",
+    fuente: { norma: "Código Penal, D. Leg. 635", url: "https://spij.minjus.gob.pe/spij-ext-web/" },
+    sello: "pendiente",
+    modalidades: [ { id: "b", nombre: "Modalidad básica", min: 3, max: 6, elementos: [], multa: "180 a 365 días-multa (referencial).", nota: "Insertar o hacer insertar declaraciones falsas en instrumento público, sobre hechos que deban probarse con el documento." } ],
+    fiscalia: "penal-comun" },
+  { id: "falsedad-generica", familia: "Fe pública", nombre: "Falsedad genérica", articulo: "Art. 438",
+    fuente: { norma: "Código Penal, D. Leg. 635", url: "https://spij.minjus.gob.pe/spij-ext-web/" },
+    sello: "pendiente",
+    modalidades: [ { id: "b", nombre: "Modalidad básica", min: 2, max: 4, elementos: ["engano"], nota: "Tipo residual: alteración de la verdad en perjuicio de tercero, por palabras, hechos o usurpando nombre o calidad, cuando no encaje en otro tipo de falsedad." } ],
     fiscalia: "penal-comun" },
 
   // ================= ADMINISTRACIÓN DE JUSTICIA =================
@@ -359,7 +442,9 @@ const FISCALIAS = {
   "trata": { nombre: "Fiscalía Especializada en Trata de Personas", desc: "Trata de personas y explotación (arts. 153 y siguientes)." },
   "extorsion": { nombre: "Subsistema Especializado contra la Extorsión y Delitos Conexos", desc: "Norma organizativa: Decreto Legislativo 1735, publicado el 12 de febrero de 2026. No establece penas sustantivas." },
   "tributarios": { nombre: "Fiscalía Especializada en Delitos Tributarios y Aduaneros", desc: "Defraudación tributaria (D. Leg. 813) y delitos aduaneros (Ley 28008)." },
-  "ciber": { nombre: "Fiscalía Especializada en Ciberdelincuencia", desc: "Delitos informáticos (Ley 30096), según la organización de cada distrito fiscal." }
+  "ciber": { nombre: "Fiscalía Especializada en Ciberdelincuencia", desc: "Delitos informáticos (Ley 30096), según la organización de cada distrito fiscal." },
+  "ambiental": { nombre: "Fiscalía Especializada en Materia Ambiental (FEMA)", desc: "Delitos ambientales de los arts. 304 a 314 del Código Penal: contaminación, minería ilegal, delitos forestales y contra la fauna." },
+  "accion-privada": { nombre: "No interviene el Ministerio Público — acción privada", desc: "Los delitos contra el honor se persiguen mediante querella de la parte agraviada directamente ante el juez penal unipersonal (arts. 459 y ss. CPP), sin fiscal ni investigación preparatoria." }
 };
 
 const FISCALIAS_LISTA = [
@@ -560,8 +645,113 @@ const ANALIZADOR_HIPOTESIS = [
     razon: "Si la amenaza no persigue ventaja económica, la conducta podría ser coacción (art. 151) y no extorsión." }
 ];
 
+/* ============================================================
+   Teoría del caso e instituciones (referencial; verificar
+   siempre el texto vigente en SPIJ / El Peruano)
+   ============================================================ */
+
+/* Los tres elementos clásicos de la teoría del caso */
+const TEORIA_ELEMENTOS = [
+  { id: "factico", icono: "📖", nombre: "Elemento fáctico", desc: "Qué pasó: la reconstrucción de los hechos en orden cronológico, con personas, lugares, fechas y circunstancias. El analizador de casos de JustiPenal extrae estos elementos de su relato." },
+  { id: "juridico", icono: "⚖️", nombre: "Elemento jurídico", desc: "Qué norma encaja: la calificación del hecho en un tipo penal concreto (tipicidad), verificando cada requisito legal. La matriz de tipicidad del portal compara sus hechos con los requisitos del delito." },
+  { id: "probatorio", icono: "🔬", nombre: "Elemento probatorio", desc: "Con qué se demuestra: los medios de prueba que acreditan cada afirmación de hecho (documentos, pericias, testigos, actas). Sin prueba, la mejor teoría jurídica no prospera en juicio." }
+];
+
+/* Medios de prueba típicos por familia de delito (referencial) */
+const CHECKLIST_PROBATORIO = {
+  "Vida, el cuerpo y la salud": ["Certificado médico-legal o protocolo de necropsia", "Pericia balística o de arma empleada", "Acta de levantamiento de cadáver y escena del crimen", "Declaraciones de testigos presenciales", "Cámaras de seguridad de la zona", "Pericia de absorción atómica (residuos de disparo)"],
+  "El honor": ["Publicación, audio o video que contiene la frase ofensiva", "Constatación notarial o acta fiscal de la publicación (capturas certificadas)", "Testigos de la difusión ante varias personas", "Pericia informática de autoría de la cuenta o medio", "Prueba de la falsedad de la imputación (en calumnia)"],
+  "La familia": ["Resolución judicial que fija la pensión alimenticia", "Liquidación de pensiones devengadas aprobada", "Notificación válida del requerimiento de pago", "Reporte de depósitos o su ausencia", "Capacidad económica del obligado (boletas, RUC, movimientos)"],
+  "La libertad": ["Certificado médico-legal de la víctima", "Registro de comunicaciones (llamadas, mensajes de los captores)", "Geolocalización y cámaras del recorrido", "Declaración de la víctima con entrevista única cuando corresponda", "Testigos de la privación de libertad o del rescate"],
+  "Libertad sexual": ["Certificado médico-legal (integridad sexual)", "Entrevista única en cámara Gesell", "Pericia psicológica de afectación", "Pericia biológica y de ADN", "Registro de comunicaciones previas entre las partes", "Cadena de custodia de prendas y muestras"],
+  "Patrimonio": ["Preexistencia del bien (facturas, fotos, boletas)", "Certificado médico-legal si hubo violencia", "Cámaras de seguridad del lugar", "Acta de incautación o hallazgo del bien", "Pericia de valorización de lo sustraído", "Registro de comunicaciones en extorsión (audios, chats de cobro)"],
+  "Seguridad pública": ["Acta de intervención policial", "Pericia balística y verificación de licencia (SUCAMEC)", "Dosaje etílico o examen toxicológico", "Certificado del retén o cadena de custodia del arma", "Video del control de tránsito o intervención"],
+  "Drogas": ["Acta de incautación y prueba de campo", "Pericia química de la sustancia (tipo y peso neto)", "Cadena de custodia", "Pesaje en presencia del fiscal", "Registro de vigilancias y seguimientos", "Levantamiento del secreto de comunicaciones autorizado"],
+  "Ambiental": ["Informe fundamentado de la autoridad ambiental (OEFA, SERFOR, ANA)", "Pericia de límites máximos permisibles o muestreo de laboratorio", "Acta de inspección en el lugar", "Imágenes satelitales o de drones de la zona afectada", "Verificación de permisos, concesiones o licencias ambientales"],
+  "Administración pública": ["Informe de control de la Contraloría", "Documentación del proceso de contratación observado", "Pericia contable o financiera", "Registro de visitas y comunicaciones del funcionario", "Levantamiento del secreto bancario y tributario", "Declaraciones juradas de bienes y rentas"],
+  "Fe pública": ["Documento cuestionado en original", "Pericia grafotécnica o documentoscópica", "Cotejo con registros oficiales (RENIEC, SUNARP, notaría)", "Declaración del supuesto emisor del documento", "Trazabilidad del uso del documento falso"],
+  "Administración de justicia": ["Registro del proceso judicial o investigación obstruida", "Comunicaciones con el favorecido", "Testigos del ocultamiento o ayuda", "Documentación de los bienes ocultados"],
+  "Lavado de activos": ["Pericia contable y financiera del desbalance", "Levantamiento del secreto bancario y bursátil", "Reportes de la UIF (Unidad de Inteligencia Financiera)", "Trazabilidad de las operaciones y testaferros", "Vinculación con la actividad criminal previa (no requiere condena previa)"],
+  "Delitos tributarios": ["Informe motivado de SUNAT", "Pericia contable tributaria", "Comprobantes y libros contables observados", "Determinación de la deuda defraudada"],
+  "Delitos informáticos": ["Pericia informática forense de equipos y cuentas", "Preservación de evidencia digital (hash, imagen forense)", "Registros de conexión (IP, logs) solicitados al proveedor", "Trazabilidad de transferencias electrónicas", "Capturas certificadas de la actividad ilícita"],
+  "Criminalidad organizada": ["Levantamiento del secreto de comunicaciones", "Agente encubierto o colaborador eficaz corroborado", "Vigilancias y seguimientos documentados", "Pericia financiera de la estructura", "Organigrama probado de roles y permanencia"]
+};
+
+/* Qué podría alegar la defensa (art. 20 CP y conexos) */
+const DEFENSAS = [
+  { id: "atipicidad", nombre: "Atipicidad", base: "Art. 11 CP y tipo penal concreto", texto: "El hecho no reúne todos los requisitos del delito imputado: falta un elemento del tipo (p. ej. no hubo violencia en el supuesto robo, o el bien era propio). La matriz de tipicidad muestra qué elementos están sin confirmar." },
+  { id: "legitima-defensa", nombre: "Legítima defensa", base: "Art. 20.3 CP", texto: "Quien obra en defensa de bienes jurídicos propios o de terceros no responde penalmente, si hubo agresión ilegítima, necesidad racional del medio empleado y falta de provocación suficiente." },
+  { id: "estado-necesidad", nombre: "Estado de necesidad", base: "Arts. 20.4 y 20.5 CP", texto: "Se sacrifica un bien jurídico para salvar otro de mayor valor ante un peligro actual e insuperable de otro modo (justificante), o de igual valor en situaciones extremas (exculpante)." },
+  { id: "miedo-insuperable", nombre: "Miedo insuperable", base: "Art. 20.7 CP", texto: "Quien obra compelido por miedo insuperable de un mal igual o mayor queda exento de responsabilidad; el miedo debe anular la capacidad de decidir de un ciudadano medio." },
+  { id: "error-tipo", nombre: "Error de tipo", base: "Art. 14, primer párrafo, CP", texto: "El agente desconocía un elemento del tipo penal (p. ej. creía que el bien era suyo). Si el error es invencible excluye el dolo y la culpa; si es vencible, subsiste solo la modalidad culposa cuando la ley la prevé." },
+  { id: "error-prohibicion", nombre: "Error de prohibición", base: "Art. 14, segundo párrafo, CP", texto: "El agente creía que su conducta era lícita. Invencible: exime de responsabilidad; vencible: atenúa la pena." },
+  { id: "inimputabilidad", nombre: "Inimputabilidad", base: "Art. 20.1 y 20.2 CP", texto: "Anomalía psíquica, grave alteración de la conciencia o de la percepción, o minoría de edad (los menores de 18 se rigen por el D. Leg. 1348)." },
+  { id: "consentimiento", nombre: "Consentimiento", base: "Art. 20.10 CP", texto: "Exime de responsabilidad cuando el titular del bien jurídico de libre disposición consintió válidamente la conducta." },
+  { id: "prueba-insuficiente", nombre: "Insuficiencia probatoria / in dubio pro reo", base: "Art. 2.24.e Constitución; art. II TP CPP", texto: "La presunción de inocencia exige prueba de cargo suficiente, lícita y actuada con garantías. La duda razonable favorece al imputado. No es una 'defensa de fondo' sino un estándar que la acusación debe superar." }
+];
+
+/* Instituciones del proceso y de la pena */
+const INSTITUCIONES = [
+  { id: "principio-oportunidad", categoria: "Salidas alternativas", nombre: "Principio de oportunidad", base: "Art. 2 CPP", sello: "pendiente",
+    texto: "El fiscal puede abstenerse de ejercer la acción penal en delitos de mínima gravedad, escasa culpabilidad o cuando el agente resultó afectado por su propio delito, generalmente previo acuerdo de reparación con la víctima. Evita el proceso: la pregunta ciudadana típica '¿puedo evitar el juicio?' suele empezar aquí." },
+  { id: "acuerdo-reparatorio", categoria: "Salidas alternativas", nombre: "Acuerdo reparatorio", base: "Art. 2.6 CPP", sello: "pendiente",
+    texto: "En delitos determinados por ley (p. ej. lesiones leves, hurto simple, daños) el fiscal propicia un acuerdo entre imputado y víctima; cumplida la reparación, se abstiene de ejercer la acción penal." },
+  { id: "terminacion-anticipada", categoria: "Salidas alternativas", nombre: "Terminación anticipada", base: "Arts. 468 a 471 CPP", sello: "verificado",
+    texto: "Acuerdo entre fiscal e imputado sobre pena y reparación civil, aprobado por el juez de investigación preparatoria antes de la acusación. Otorga la reducción de un sexto de la pena concreta, acumulable a la confesión sincera. Ya integrada en la calculadora como bonificación." },
+  { id: "suspension-ejecucion", categoria: "Ejecución de la pena", nombre: "Suspensión de la ejecución de la pena", base: "Arts. 57 a 61 CP (restricciones ampliadas por Ley 32258)", sello: "pendiente",
+    texto: "Responde a la pregunta más frecuente: '¿iré a la cárcel?'. El juez puede suspender la ejecución si la pena concreta no supera 4 años, el agente no es reincidente ni habitual y el pronóstico es favorable, imponiendo reglas de conducta por un periodo de prueba. Numerosos delitos están legalmente excluidos y la Ley 32258 amplió esas exclusiones: una condena de 4 años o menos NO se suspende automáticamente." },
+  { id: "reserva-fallo", categoria: "Ejecución de la pena", nombre: "Reserva del fallo condenatorio", base: "Arts. 62 a 67 CP", sello: "pendiente",
+    texto: "El juez declara la culpabilidad pero se abstiene de dictar la parte condenatoria, sujetando al agente a un régimen de prueba. Procede en supuestos de penas menores establecidos por ley y no genera antecedentes si se supera el periodo de prueba." },
+  { id: "conversion-penas", categoria: "Ejecución de la pena", nombre: "Conversión de penas y vigilancia electrónica", base: "Art. 52 CP; D. Leg. 1300; D. Leg. 1514", sello: "pendiente",
+    texto: "Penas privativas de libertad de corta duración pueden convertirse en prestación de servicios, limitación de días libres o multa; la vigilancia electrónica personal permite cumplir la pena o la comparecencia fuera del penal en supuestos legales." },
+  { id: "beneficios-penitenciarios", categoria: "Ejecución de la pena", nombre: "Beneficios penitenciarios", base: "Código de Ejecución Penal (D. Leg. 654) y modificatorias", sello: "pendiente",
+    texto: "Semilibertad, liberación condicional y redención de pena por trabajo o educación permiten egresar antes del cumplimiento total, según el delito y el cómputo. Advertencia clave: numerosos delitos graves (violación, extorsión, sicariato, corrupción agravada, entre otros) están excluidos o tienen cómputos más exigentes; la ley aplicable es la vigente al momento de solicitar el beneficio." },
+  { id: "prescripcion", categoria: "Extinción de la acción", nombre: "Prescripción de la acción penal y de la pena", base: "Arts. 80 a 88 CP; art. 41 Constitución", sello: "pendiente",
+    texto: "La acción penal prescribe ordinariamente en un plazo igual al máximo de la pena del delito (tope general de 20 años; 30 en cadena perpetua) y extraordinariamente cuando transcurre ese plazo más su mitad. Se suspende e interrumpe por actuaciones fiscales y judiciales. Para delitos contra la administración pública cometidos por funcionarios el plazo se duplica, y la reforma constitucional estableció supuestos de imprescriptibilidad en los casos más graves. El cómputo concreto exige análisis técnico." },
+  { id: "reparacion-civil", categoria: "Consecuencias civiles", nombre: "Reparación civil y tercero civilmente responsable", base: "Arts. 92 a 101 CP", sello: "pendiente",
+    texto: "Comprende la restitución del bien o su valor y la indemnización de daños y perjuicios. Se fija junto con la pena, puede ejecutarse contra el condenado y contra el tercero civilmente responsable (p. ej. la empresa dueña del vehículo), y subsiste aunque la pena se suspenda." },
+  { id: "flagrancia-detencion", categoria: "Detención", nombre: "Flagrancia y detención", base: "Arts. 259 a 264 CPP; art. 2.24.f Constitución", sello: "pendiente",
+    texto: "Hay flagrancia cuando el agente es sorprendido cometiendo el delito, inmediatamente después, o es identificado o encontrado con efectos del delito dentro de las 24 horas. La detención policial en flagrancia y la detención preliminar judicial duran hasta 48 horas (prorrogables por decisión judicial); hasta 15 días en terrorismo, espionaje, TID y criminalidad organizada. La flagrancia habilita además el proceso inmediato." },
+  { id: "adolescentes", categoria: "Regímenes especiales", nombre: "Adolescentes en conflicto con la ley penal", base: "Código de Responsabilidad Penal de Adolescentes — D. Leg. 1348", sello: "pendiente",
+    texto: "Los menores de 18 años no responden bajo el Código Penal de adultos: se aplican medidas socioeducativas (desde amonestación hasta internación en centro juvenil) con fiscales y jueces especializados de familia, enfoque restaurativo y plazos propios. La internación procede solo en los supuestos más graves y con topes de duración según la edad." },
+  { id: "jurisprudencia-vinculante", categoria: "Jurisprudencia", nombre: "Acuerdos plenarios y doctrina jurisprudencial", base: "Corte Suprema de Justicia — art. 116 LOPJ; art. 433.3 CPP", sello: "pendiente",
+    texto: "Los Acuerdos Plenarios de las Salas Penales de la Corte Suprema y las casaciones con doctrina jurisprudencial fijan cómo se aplican las normas: por ejemplo, el AP 5-2008/CJ-116 sobre conclusión anticipada, o la Casación 626-2013-Moquegua y el AP 01-2019/CIJ-116 sobre los presupuestos de la prisión preventiva. Dan el salto del 'texto de la ley' a 'cómo se aplica'; se consultan en el portal del Poder Judicial." }
+];
+
+/* Glosario penal (pseudo-wiki) */
+const GLOSARIO = [
+  { termino: "Tipicidad", def: "Correspondencia exacta entre el hecho real y la descripción del delito en la ley. Si falta un elemento, el hecho es atípico y no hay delito." },
+  { termino: "Antijuridicidad", def: "El hecho típico además debe ser contrario al derecho: no lo es si existe una causa de justificación (legítima defensa, estado de necesidad, cumplimiento de un deber)." },
+  { termino: "Culpabilidad", def: "Juicio de reproche personal al autor: exige imputabilidad, conocimiento de la antijuridicidad y exigibilidad de otra conducta." },
+  { termino: "Dolo", def: "Conocimiento y voluntad de realizar el hecho delictivo. La mayoría de delitos solo se sancionan en su forma dolosa." },
+  { termino: "Culpa", def: "Infracción del deber de cuidado que produce un resultado previsible y evitable (negligencia, imprudencia). Solo es punible cuando la ley lo prevé expresamente." },
+  { termino: "Tentativa", def: "Comienzo de la ejecución del delito que no se consuma por causas ajenas a la voluntad del agente. El juez reduce prudencialmente la pena (art. 16 CP, modificado por la Ley 32258)." },
+  { termino: "Flagrancia", def: "Ser sorprendido cometiendo el delito o inmediatamente después con los efectos del mismo (hasta 24 horas). Permite la detención policial sin orden judicial y el proceso inmediato." },
+  { termino: "Imputado", def: "Persona señalada como presunto autor o partícipe de un delito. Goza de presunción de inocencia durante todo el proceso." },
+  { termino: "Agraviado", def: "Quien resulta directamente ofendido o perjudicado por el delito. Puede constituirse en actor civil para reclamar la reparación." },
+  { termino: "Querella", def: "Demanda penal que la propia víctima presenta ante el juez en los delitos de acción privada (honor), sin intervención del fiscal." },
+  { termino: "Disposición fiscal", def: "Decisión motivada del fiscal (abrir diligencias, formalizar investigación, archivar). Marca el inicio de los plazos de investigación." },
+  { termino: "Formalización", def: "Disposición con la que el fiscal comunica al juez que continúa la investigación preparatoria contra persona determinada. Suspende la prescripción." },
+  { termino: "Sobreseimiento", def: "Resolución judicial que archiva definitivamente el proceso porque el hecho no existió, no es delito, el imputado no participó o no hay prueba suficiente." },
+  { termino: "Acusación", def: "Requerimiento fiscal que pide ir a juicio: describe el hecho, la calificación jurídica, la prueba ofrecida, la pena y la reparación civil solicitadas." },
+  { termino: "Etapa intermedia", def: "Audiencia de control ante el juez de investigación preparatoria donde se depura la acusación y se admite la prueba antes del juicio." },
+  { termino: "Prisión preventiva", def: "Medida excepcional de encarcelamiento durante el proceso. Exige graves elementos de convicción, prognosis de pena mayor a 4 años y peligro de fuga u obstaculización. No es una condena." },
+  { termino: "Comparecencia", def: "Situación procesal de libertad durante el proceso, simple o con restricciones (reglas de conducta, caución, control biométrico)." },
+  { termino: "Reparación civil", def: "Suma que el condenado (y el tercero civilmente responsable) debe pagar a la víctima: restitución del bien más indemnización del daño." },
+  { termino: "Principio de oportunidad", def: "Facultad del fiscal de no ejercer la acción penal en delitos leves, generalmente previo acuerdo reparatorio con la víctima." },
+  { termino: "Terminación anticipada", def: "Acuerdo fiscal-imputado sobre pena y reparación, homologado por el juez antes de la acusación; premia con la reducción de un sexto de la pena." },
+  { termino: "Colaboración eficaz", def: "Proceso especial en el que quien aporta información corroborada sobre una organización criminal recibe beneficios premiales (reducción, exención o remisión de pena)." },
+  { termino: "Casación", def: "Recurso extraordinario ante la Corte Suprema contra sentencias de las salas superiores, por infracción normativa o apartamiento de doctrina jurisprudencial." },
+  { termino: "Acuerdo plenario", def: "Criterio interpretativo adoptado por los jueces supremos penales reunidos en pleno, que orienta y en su caso vincula a todos los jueces del país." },
+  { termino: "Presunción de inocencia", def: "Toda persona es inocente mientras no se declare judicialmente su responsabilidad mediante sentencia firme (art. 2.24.e de la Constitución)." },
+  { termino: "In dubio pro reo", def: "Ante duda razonable sobre la prueba de cargo, el juez debe absolver: la incertidumbre favorece al imputado." },
+  { termino: "Cosa juzgada", def: "Prohibición de perseguir dos veces a la misma persona por el mismo hecho una vez que existe resolución firme (ne bis in idem)." }
+];
+
 /* ---- Registro de cambios (política de actualización) ---- */
 const CHANGELOG = [
+  { fecha: "12/07/2026", cambio: "Nuevo módulo «Teoría del Caso»: tres elementos, checklist probatorio por familia de delito, perspectiva de la defensa (art. 20 y 14 CP), instituciones del proceso y de la pena, y glosario penal. Contenido nuevo con sello «pendiente de revisión» hasta su verificación editorial en SPIJ." },
+  { fecha: "12/07/2026", cambio: "Ampliación del catálogo: delitos contra el honor (arts. 130-132, acción privada), ambientales (arts. 304, 307-A, 310 — FEMA), administración pública ampliada (arts. 389, 399, 400, 401) y fe pública (arts. 428, 438). Sello «pendiente de revisión»." },
   { fecha: "12/07/2026", cambio: "Corrección de la fecha de la Ley 32258: publicada el 14 de marzo de 2025 (antes figuraba 2026)." },
   { fecha: "12/07/2026", cambio: "Separación del D. Leg. 1735 del marco penal de la extorsión: el tipo penal es el art. 200 CP; el DL 1735 es norma organizativa del subsistema fiscal." },
   { fecha: "12/07/2026", cambio: "Revisión del art. 149 (omisión de asistencia familiar): se eliminó el mínimo inventado de 3 meses; la norma no fija mínimo expreso y contempla pena alternativa de 20 a 52 jornadas." },

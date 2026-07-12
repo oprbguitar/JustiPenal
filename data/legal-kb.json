@@ -274,6 +274,106 @@
       ]
     },
     {
+      "id": "injuria",
+      "type": "offense",
+      "family": "El honor",
+      "name": "Injuria",
+      "article": "Art. 130",
+      "aliases": [],
+      "verificationStatus": "pendiente",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": null,
+          "max": null,
+          "penaTexto": "Prestación de servicio comunitario de 10 a 40 jornadas o de 60 a 90 días-multa (sin pena privativa de libertad)",
+          "elementos": [],
+          "nota": "Ofensa o ultraje con palabras, gestos o vías de hecho. Rango referencial: verificar texto vigente."
+        }
+      ],
+      "prosecutorialSpecialtyId": "accion-privada",
+      "prosecutorialNote": "Delito de ejercicio privado de la acción penal: se persigue mediante querella de la parte agraviada ante el juez penal unipersonal (arts. 459 y ss. CPP), sin intervención del Ministerio Público.",
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "calumnia",
+      "type": "offense",
+      "family": "El honor",
+      "name": "Calumnia",
+      "article": "Art. 131",
+      "aliases": [],
+      "verificationStatus": "pendiente",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": null,
+          "max": null,
+          "penaTexto": "90 a 120 días-multa (sin pena privativa de libertad)",
+          "elementos": [],
+          "nota": "Atribuir falsamente a otro un delito. Rango referencial: verificar texto vigente."
+        }
+      ],
+      "prosecutorialSpecialtyId": "accion-privada",
+      "prosecutorialNote": "Delito de ejercicio privado de la acción penal (querella, arts. 459 y ss. CPP).",
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "difamacion",
+      "type": "offense",
+      "family": "El honor",
+      "name": "Difamación",
+      "article": "Art. 132",
+      "aliases": [],
+      "verificationStatus": "pendiente",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": null,
+          "max": 2,
+          "minNoExpreso": true,
+          "elementos": [],
+          "multa": "30 a 120 días-multa (referencial).",
+          "nota": "Difundir ante varias personas una noticia que lesione el honor o la reputación."
+        },
+        {
+          "id": "m",
+          "nombre": "Por medio de comunicación social",
+          "min": 1,
+          "max": 3,
+          "elementos": [],
+          "multa": "120 a 365 días-multa (referencial).",
+          "nota": "Incluye libro, prensa u otro medio de comunicación social; verificar criterios sobre redes sociales."
+        }
+      ],
+      "prosecutorialSpecialtyId": "accion-privada",
+      "prosecutorialNote": "Delito de ejercicio privado de la acción penal (querella, arts. 459 y ss. CPP).",
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
       "id": "coaccion",
       "type": "offense",
       "family": "La libertad",
@@ -1055,6 +1155,104 @@
       ]
     },
     {
+      "id": "contaminacion",
+      "type": "offense",
+      "family": "Ambiental",
+      "name": "Contaminación del ambiente",
+      "article": "Art. 304",
+      "aliases": [],
+      "verificationStatus": "pendiente",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad dolosa",
+          "min": 4,
+          "max": 6,
+          "elementos": [],
+          "multa": "100 a 600 días-multa (referencial).",
+          "nota": "Infracción de límites máximos permisibles con perjuicio o alteración al ambiente. Formas agravadas en el art. 305."
+        }
+      ],
+      "prosecutorialSpecialtyId": "ambiental",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635 (Ley 29263 y modificatorias)",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "mineria-ilegal",
+      "type": "offense",
+      "family": "Ambiental",
+      "name": "Minería ilegal",
+      "article": "Art. 307-A",
+      "aliases": [],
+      "verificationStatus": "pendiente",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": 4,
+          "max": 8,
+          "elementos": [],
+          "multa": "100 a 600 días-multa (referencial)."
+        },
+        {
+          "id": "a",
+          "nombre": "Formas agravadas (art. 307-B)",
+          "min": 8,
+          "max": 10,
+          "elementos": [
+            "organizacion"
+          ],
+          "nota": "Zonas prohibidas, áreas naturales protegidas, uso de dragas, entre otros supuestos."
+        }
+      ],
+      "prosecutorialSpecialtyId": "ambiental",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635 (D. Leg. 1102 y modificatorias)",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "delitos-forestales",
+      "type": "offense",
+      "family": "Ambiental",
+      "name": "Delitos contra los bosques o formaciones boscosas (tala ilegal)",
+      "article": "Art. 310",
+      "aliases": [],
+      "verificationStatus": "pendiente",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": 4,
+          "max": 6,
+          "elementos": [],
+          "nota": "Destrucción, quema o tala sin permiso. Tráfico de productos forestales y agravantes en los arts. 310-A a 310-C."
+        }
+      ],
+      "prosecutorialSpecialtyId": "ambiental",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635 (Ley 29263 y modificatorias)",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
       "id": "colusion",
       "type": "offense",
       "family": "Administración pública",
@@ -1184,6 +1382,164 @@
       ]
     },
     {
+      "id": "malversacion",
+      "type": "offense",
+      "family": "Administración pública",
+      "name": "Malversación de fondos",
+      "article": "Art. 389",
+      "aliases": [],
+      "verificationStatus": "pendiente",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": 1,
+          "max": 4,
+          "elementos": [
+            "cargo"
+          ],
+          "inhab": "Inhabilitación conforme al art. 36.",
+          "nota": "Dar al dinero o bienes públicos una aplicación definitiva distinta de la destinada."
+        },
+        {
+          "id": "a",
+          "nombre": "Fondos asistenciales o de apoyo social",
+          "min": 3,
+          "max": 8,
+          "elementos": [
+            "cargo"
+          ],
+          "inhab": "Inhabilitación conforme al art. 36."
+        }
+      ],
+      "prosecutorialSpecialtyId": "corrupcion",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "negociacion-incompatible",
+      "type": "offense",
+      "family": "Administración pública",
+      "name": "Negociación incompatible",
+      "article": "Art. 399",
+      "aliases": [],
+      "verificationStatus": "pendiente",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": 4,
+          "max": 6,
+          "elementos": [
+            "cargo"
+          ],
+          "multa": "180 a 365 días-multa (referencial).",
+          "inhab": "Inhabilitación conforme al art. 36.",
+          "nota": "Interesarse indebidamente, en provecho propio o de tercero, en contratos u operaciones en que interviene por razón del cargo."
+        }
+      ],
+      "prosecutorialSpecialtyId": "corrupcion",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "trafico-influencias",
+      "type": "offense",
+      "family": "Administración pública",
+      "name": "Tráfico de influencias",
+      "article": "Art. 400",
+      "aliases": [],
+      "verificationStatus": "pendiente",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": 4,
+          "max": 6,
+          "elementos": [],
+          "multa": "180 a 365 días-multa (referencial)."
+        },
+        {
+          "id": "a",
+          "nombre": "Cometido por funcionario o servidor público",
+          "min": 4,
+          "max": 8,
+          "elementos": [
+            "cargo"
+          ],
+          "multa": "365 a 730 días-multa (referencial).",
+          "inhab": "Inhabilitación conforme al art. 36."
+        }
+      ],
+      "prosecutorialSpecialtyId": "corrupcion",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "enriquecimiento-ilicito",
+      "type": "offense",
+      "family": "Administración pública",
+      "name": "Enriquecimiento ilícito",
+      "article": "Art. 401",
+      "aliases": [],
+      "verificationStatus": "pendiente",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": 5,
+          "max": 10,
+          "elementos": [
+            "cargo"
+          ],
+          "multa": "365 a 730 días-multa (referencial).",
+          "inhab": "Inhabilitación conforme al art. 36.",
+          "nota": "Incremento patrimonial no justificado en el ejercicio de la función pública."
+        },
+        {
+          "id": "a",
+          "nombre": "Alto funcionario (art. 99 de la Constitución)",
+          "min": 10,
+          "max": 15,
+          "elementos": [
+            "cargo"
+          ],
+          "inhab": "Inhabilitación conforme al art. 36."
+        }
+      ],
+      "prosecutorialSpecialtyId": "corrupcion",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
       "id": "falsedad-doc",
       "type": "offense",
       "family": "Fe pública",
@@ -1207,6 +1563,67 @@
           "min": 2,
           "max": 4,
           "elementos": []
+        }
+      ],
+      "prosecutorialSpecialtyId": "penal-comun",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "falsedad-ideologica",
+      "type": "offense",
+      "family": "Fe pública",
+      "name": "Falsedad ideológica",
+      "article": "Art. 428",
+      "aliases": [],
+      "verificationStatus": "pendiente",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": 3,
+          "max": 6,
+          "elementos": [],
+          "multa": "180 a 365 días-multa (referencial).",
+          "nota": "Insertar o hacer insertar declaraciones falsas en instrumento público, sobre hechos que deban probarse con el documento."
+        }
+      ],
+      "prosecutorialSpecialtyId": "penal-comun",
+      "prosecutorialNote": null,
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "falsedad-generica",
+      "type": "offense",
+      "family": "Fe pública",
+      "name": "Falsedad genérica",
+      "article": "Art. 438",
+      "aliases": [],
+      "verificationStatus": "pendiente",
+      "verifiedAt": "12/07/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica",
+          "min": 2,
+          "max": 4,
+          "elementos": [
+            "engano"
+          ],
+          "nota": "Tipo residual: alteración de la verdad en perjuicio de tercero, por palabras, hechos o usurpando nombre o calidad, cuando no encaje en otro tipo de falsedad."
         }
       ],
       "prosecutorialSpecialtyId": "penal-comun",
@@ -1751,9 +2168,9 @@
         "plazo",
         "duración"
       ],
-      "deadline": "60 días naturales",
+      "deadline": "60 días naturales (referencia general)",
       "legalBasis": "Art. 334.2 CPP",
-      "extension": "El fiscal puede fijar un plazo distinto según la complejidad; sujeto a control judicial. Se reduce si hay persona detenida.",
+      "extension": "Puede variar conforme al CPP, el control judicial, la complejidad y los regímenes especiales. Se reduce si hay persona detenida.",
       "sources": [
         {
           "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
@@ -2095,6 +2512,42 @@
           "url": "https://www.gob.pe/mpfn"
         }
       ]
+    },
+    {
+      "id": "ambiental",
+      "type": "prosecutorial-specialty",
+      "name": "Fiscalía Especializada en Materia Ambiental (FEMA)",
+      "aliases": [
+        "ambiental",
+        "fiscalía",
+        "competencia fiscal"
+      ],
+      "text": "Delitos ambientales de los arts. 304 a 314 del Código Penal: contaminación, minería ilegal, delitos forestales y contra la fauna.",
+      "competenceRule": "La competencia depende de materia, territorio, condición personal y etapa procesal.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "accion-privada",
+      "type": "prosecutorial-specialty",
+      "name": "No interviene el Ministerio Público — acción privada",
+      "aliases": [
+        "accion privada",
+        "fiscalía",
+        "competencia fiscal"
+      ],
+      "text": "Los delitos contra el honor se persiguen mediante querella de la parte agraviada directamente ante el juez penal unipersonal (arts. 459 y ss. CPP), sin fiscal ni investigación preparatoria.",
+      "competenceRule": "La competencia depende de materia, territorio, condición personal y etapa procesal.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
     }
   ],
   "personalJurisdictionConditions": [
@@ -2190,7 +2643,7 @@
         "etapa procesal",
         "proceso penal"
       ],
-      "text": "60 días. PNP investiga operativamente; el fiscal conduce jurídicamente (Ley 32130).",
+      "text": "60 días como referencia general; puede variar conforme al CPP, el control judicial o regímenes especiales.",
       "sources": [
         {
           "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
@@ -2737,6 +3190,1224 @@
         {
           "name": "Diario Oficial El Peruano",
           "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    }
+  ],
+  "caseTheory": [
+    {
+      "id": "case-theory",
+      "type": "case-theory",
+      "name": "Teoría del caso — elementos fáctico, jurídico y probatorio",
+      "aliases": [
+        "teoría del caso",
+        "elemento fáctico",
+        "elemento jurídico",
+        "elemento probatorio",
+        "estrategia del caso"
+      ],
+      "text": "Elemento fáctico: Qué pasó: la reconstrucción de los hechos en orden cronológico, con personas, lugares, fechas y circunstancias. El analizador de casos de JustiPenal extrae estos elementos de su relato. Elemento jurídico: Qué norma encaja: la calificación del hecho en un tipo penal concreto (tipicidad), verificando cada requisito legal. La matriz de tipicidad del portal compara sus hechos con los requisitos del delito. Elemento probatorio: Con qué se demuestra: los medios de prueba que acreditan cada afirmación de hecho (documentos, pericias, testigos, actas). Sin prueba, la mejor teoría jurídica no prospera en juicio.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "evidence-checklist-1",
+      "type": "evidence-checklist",
+      "name": "Medios de prueba típicos — Vida, el cuerpo y la salud",
+      "aliases": [
+        "Vida, el cuerpo y la salud",
+        "prueba",
+        "medios de prueba",
+        "checklist probatorio",
+        "evidencia"
+      ],
+      "text": "Medios de prueba que suelen sustentar los casos de la familia Vida, el cuerpo y la salud: Certificado médico-legal o protocolo de necropsia; Pericia balística o de arma empleada; Acta de levantamiento de cadáver y escena del crimen; Declaraciones de testigos presenciales; Cámaras de seguridad de la zona; Pericia de absorción atómica (residuos de disparo). Listado referencial: la estrategia probatoria concreta la define la defensa o la fiscalía según el caso.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "evidence-checklist-2",
+      "type": "evidence-checklist",
+      "name": "Medios de prueba típicos — El honor",
+      "aliases": [
+        "El honor",
+        "prueba",
+        "medios de prueba",
+        "checklist probatorio",
+        "evidencia"
+      ],
+      "text": "Medios de prueba que suelen sustentar los casos de la familia El honor: Publicación, audio o video que contiene la frase ofensiva; Constatación notarial o acta fiscal de la publicación (capturas certificadas); Testigos de la difusión ante varias personas; Pericia informática de autoría de la cuenta o medio; Prueba de la falsedad de la imputación (en calumnia). Listado referencial: la estrategia probatoria concreta la define la defensa o la fiscalía según el caso.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "evidence-checklist-3",
+      "type": "evidence-checklist",
+      "name": "Medios de prueba típicos — La familia",
+      "aliases": [
+        "La familia",
+        "prueba",
+        "medios de prueba",
+        "checklist probatorio",
+        "evidencia"
+      ],
+      "text": "Medios de prueba que suelen sustentar los casos de la familia La familia: Resolución judicial que fija la pensión alimenticia; Liquidación de pensiones devengadas aprobada; Notificación válida del requerimiento de pago; Reporte de depósitos o su ausencia; Capacidad económica del obligado (boletas, RUC, movimientos). Listado referencial: la estrategia probatoria concreta la define la defensa o la fiscalía según el caso.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "evidence-checklist-4",
+      "type": "evidence-checklist",
+      "name": "Medios de prueba típicos — La libertad",
+      "aliases": [
+        "La libertad",
+        "prueba",
+        "medios de prueba",
+        "checklist probatorio",
+        "evidencia"
+      ],
+      "text": "Medios de prueba que suelen sustentar los casos de la familia La libertad: Certificado médico-legal de la víctima; Registro de comunicaciones (llamadas, mensajes de los captores); Geolocalización y cámaras del recorrido; Declaración de la víctima con entrevista única cuando corresponda; Testigos de la privación de libertad o del rescate. Listado referencial: la estrategia probatoria concreta la define la defensa o la fiscalía según el caso.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "evidence-checklist-5",
+      "type": "evidence-checklist",
+      "name": "Medios de prueba típicos — Libertad sexual",
+      "aliases": [
+        "Libertad sexual",
+        "prueba",
+        "medios de prueba",
+        "checklist probatorio",
+        "evidencia"
+      ],
+      "text": "Medios de prueba que suelen sustentar los casos de la familia Libertad sexual: Certificado médico-legal (integridad sexual); Entrevista única en cámara Gesell; Pericia psicológica de afectación; Pericia biológica y de ADN; Registro de comunicaciones previas entre las partes; Cadena de custodia de prendas y muestras. Listado referencial: la estrategia probatoria concreta la define la defensa o la fiscalía según el caso.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "evidence-checklist-6",
+      "type": "evidence-checklist",
+      "name": "Medios de prueba típicos — Patrimonio",
+      "aliases": [
+        "Patrimonio",
+        "prueba",
+        "medios de prueba",
+        "checklist probatorio",
+        "evidencia"
+      ],
+      "text": "Medios de prueba que suelen sustentar los casos de la familia Patrimonio: Preexistencia del bien (facturas, fotos, boletas); Certificado médico-legal si hubo violencia; Cámaras de seguridad del lugar; Acta de incautación o hallazgo del bien; Pericia de valorización de lo sustraído; Registro de comunicaciones en extorsión (audios, chats de cobro). Listado referencial: la estrategia probatoria concreta la define la defensa o la fiscalía según el caso.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "evidence-checklist-7",
+      "type": "evidence-checklist",
+      "name": "Medios de prueba típicos — Seguridad pública",
+      "aliases": [
+        "Seguridad pública",
+        "prueba",
+        "medios de prueba",
+        "checklist probatorio",
+        "evidencia"
+      ],
+      "text": "Medios de prueba que suelen sustentar los casos de la familia Seguridad pública: Acta de intervención policial; Pericia balística y verificación de licencia (SUCAMEC); Dosaje etílico o examen toxicológico; Certificado del retén o cadena de custodia del arma; Video del control de tránsito o intervención. Listado referencial: la estrategia probatoria concreta la define la defensa o la fiscalía según el caso.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "evidence-checklist-8",
+      "type": "evidence-checklist",
+      "name": "Medios de prueba típicos — Drogas",
+      "aliases": [
+        "Drogas",
+        "prueba",
+        "medios de prueba",
+        "checklist probatorio",
+        "evidencia"
+      ],
+      "text": "Medios de prueba que suelen sustentar los casos de la familia Drogas: Acta de incautación y prueba de campo; Pericia química de la sustancia (tipo y peso neto); Cadena de custodia; Pesaje en presencia del fiscal; Registro de vigilancias y seguimientos; Levantamiento del secreto de comunicaciones autorizado. Listado referencial: la estrategia probatoria concreta la define la defensa o la fiscalía según el caso.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "evidence-checklist-9",
+      "type": "evidence-checklist",
+      "name": "Medios de prueba típicos — Ambiental",
+      "aliases": [
+        "Ambiental",
+        "prueba",
+        "medios de prueba",
+        "checklist probatorio",
+        "evidencia"
+      ],
+      "text": "Medios de prueba que suelen sustentar los casos de la familia Ambiental: Informe fundamentado de la autoridad ambiental (OEFA, SERFOR, ANA); Pericia de límites máximos permisibles o muestreo de laboratorio; Acta de inspección en el lugar; Imágenes satelitales o de drones de la zona afectada; Verificación de permisos, concesiones o licencias ambientales. Listado referencial: la estrategia probatoria concreta la define la defensa o la fiscalía según el caso.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "evidence-checklist-10",
+      "type": "evidence-checklist",
+      "name": "Medios de prueba típicos — Administración pública",
+      "aliases": [
+        "Administración pública",
+        "prueba",
+        "medios de prueba",
+        "checklist probatorio",
+        "evidencia"
+      ],
+      "text": "Medios de prueba que suelen sustentar los casos de la familia Administración pública: Informe de control de la Contraloría; Documentación del proceso de contratación observado; Pericia contable o financiera; Registro de visitas y comunicaciones del funcionario; Levantamiento del secreto bancario y tributario; Declaraciones juradas de bienes y rentas. Listado referencial: la estrategia probatoria concreta la define la defensa o la fiscalía según el caso.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "evidence-checklist-11",
+      "type": "evidence-checklist",
+      "name": "Medios de prueba típicos — Fe pública",
+      "aliases": [
+        "Fe pública",
+        "prueba",
+        "medios de prueba",
+        "checklist probatorio",
+        "evidencia"
+      ],
+      "text": "Medios de prueba que suelen sustentar los casos de la familia Fe pública: Documento cuestionado en original; Pericia grafotécnica o documentoscópica; Cotejo con registros oficiales (RENIEC, SUNARP, notaría); Declaración del supuesto emisor del documento; Trazabilidad del uso del documento falso. Listado referencial: la estrategia probatoria concreta la define la defensa o la fiscalía según el caso.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "evidence-checklist-12",
+      "type": "evidence-checklist",
+      "name": "Medios de prueba típicos — Administración de justicia",
+      "aliases": [
+        "Administración de justicia",
+        "prueba",
+        "medios de prueba",
+        "checklist probatorio",
+        "evidencia"
+      ],
+      "text": "Medios de prueba que suelen sustentar los casos de la familia Administración de justicia: Registro del proceso judicial o investigación obstruida; Comunicaciones con el favorecido; Testigos del ocultamiento o ayuda; Documentación de los bienes ocultados. Listado referencial: la estrategia probatoria concreta la define la defensa o la fiscalía según el caso.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "evidence-checklist-13",
+      "type": "evidence-checklist",
+      "name": "Medios de prueba típicos — Lavado de activos",
+      "aliases": [
+        "Lavado de activos",
+        "prueba",
+        "medios de prueba",
+        "checklist probatorio",
+        "evidencia"
+      ],
+      "text": "Medios de prueba que suelen sustentar los casos de la familia Lavado de activos: Pericia contable y financiera del desbalance; Levantamiento del secreto bancario y bursátil; Reportes de la UIF (Unidad de Inteligencia Financiera); Trazabilidad de las operaciones y testaferros; Vinculación con la actividad criminal previa (no requiere condena previa). Listado referencial: la estrategia probatoria concreta la define la defensa o la fiscalía según el caso.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "evidence-checklist-14",
+      "type": "evidence-checklist",
+      "name": "Medios de prueba típicos — Delitos tributarios",
+      "aliases": [
+        "Delitos tributarios",
+        "prueba",
+        "medios de prueba",
+        "checklist probatorio",
+        "evidencia"
+      ],
+      "text": "Medios de prueba que suelen sustentar los casos de la familia Delitos tributarios: Informe motivado de SUNAT; Pericia contable tributaria; Comprobantes y libros contables observados; Determinación de la deuda defraudada. Listado referencial: la estrategia probatoria concreta la define la defensa o la fiscalía según el caso.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "evidence-checklist-15",
+      "type": "evidence-checklist",
+      "name": "Medios de prueba típicos — Delitos informáticos",
+      "aliases": [
+        "Delitos informáticos",
+        "prueba",
+        "medios de prueba",
+        "checklist probatorio",
+        "evidencia"
+      ],
+      "text": "Medios de prueba que suelen sustentar los casos de la familia Delitos informáticos: Pericia informática forense de equipos y cuentas; Preservación de evidencia digital (hash, imagen forense); Registros de conexión (IP, logs) solicitados al proveedor; Trazabilidad de transferencias electrónicas; Capturas certificadas de la actividad ilícita. Listado referencial: la estrategia probatoria concreta la define la defensa o la fiscalía según el caso.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "evidence-checklist-16",
+      "type": "evidence-checklist",
+      "name": "Medios de prueba típicos — Criminalidad organizada",
+      "aliases": [
+        "Criminalidad organizada",
+        "prueba",
+        "medios de prueba",
+        "checklist probatorio",
+        "evidencia"
+      ],
+      "text": "Medios de prueba que suelen sustentar los casos de la familia Criminalidad organizada: Levantamiento del secreto de comunicaciones; Agente encubierto o colaborador eficaz corroborado; Vigilancias y seguimientos documentados; Pericia financiera de la estructura; Organigrama probado de roles y permanencia. Listado referencial: la estrategia probatoria concreta la define la defensa o la fiscalía según el caso.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "defense-atipicidad",
+      "type": "defense-theory",
+      "name": "Atipicidad",
+      "article": "Art. 11 CP y tipo penal concreto",
+      "aliases": [
+        "Atipicidad",
+        "defensa",
+        "eximente",
+        "causa de justificación"
+      ],
+      "text": "El hecho no reúne todos los requisitos del delito imputado: falta un elemento del tipo (p. ej. no hubo violencia en el supuesto robo, o el bien era propio). La matriz de tipicidad muestra qué elementos están sin confirmar.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "defense-legitima-defensa",
+      "type": "defense-theory",
+      "name": "Legítima defensa",
+      "article": "Art. 20.3 CP",
+      "aliases": [
+        "Legítima defensa",
+        "defensa",
+        "eximente",
+        "causa de justificación"
+      ],
+      "text": "Quien obra en defensa de bienes jurídicos propios o de terceros no responde penalmente, si hubo agresión ilegítima, necesidad racional del medio empleado y falta de provocación suficiente.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "defense-estado-necesidad",
+      "type": "defense-theory",
+      "name": "Estado de necesidad",
+      "article": "Arts. 20.4 y 20.5 CP",
+      "aliases": [
+        "Estado de necesidad",
+        "defensa",
+        "eximente",
+        "causa de justificación"
+      ],
+      "text": "Se sacrifica un bien jurídico para salvar otro de mayor valor ante un peligro actual e insuperable de otro modo (justificante), o de igual valor en situaciones extremas (exculpante).",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "defense-miedo-insuperable",
+      "type": "defense-theory",
+      "name": "Miedo insuperable",
+      "article": "Art. 20.7 CP",
+      "aliases": [
+        "Miedo insuperable",
+        "defensa",
+        "eximente",
+        "causa de justificación"
+      ],
+      "text": "Quien obra compelido por miedo insuperable de un mal igual o mayor queda exento de responsabilidad; el miedo debe anular la capacidad de decidir de un ciudadano medio.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "defense-error-tipo",
+      "type": "defense-theory",
+      "name": "Error de tipo",
+      "article": "Art. 14, primer párrafo, CP",
+      "aliases": [
+        "Error de tipo",
+        "defensa",
+        "eximente",
+        "causa de justificación"
+      ],
+      "text": "El agente desconocía un elemento del tipo penal (p. ej. creía que el bien era suyo). Si el error es invencible excluye el dolo y la culpa; si es vencible, subsiste solo la modalidad culposa cuando la ley la prevé.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "defense-error-prohibicion",
+      "type": "defense-theory",
+      "name": "Error de prohibición",
+      "article": "Art. 14, segundo párrafo, CP",
+      "aliases": [
+        "Error de prohibición",
+        "defensa",
+        "eximente",
+        "causa de justificación"
+      ],
+      "text": "El agente creía que su conducta era lícita. Invencible: exime de responsabilidad; vencible: atenúa la pena.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "defense-inimputabilidad",
+      "type": "defense-theory",
+      "name": "Inimputabilidad",
+      "article": "Art. 20.1 y 20.2 CP",
+      "aliases": [
+        "Inimputabilidad",
+        "defensa",
+        "eximente",
+        "causa de justificación"
+      ],
+      "text": "Anomalía psíquica, grave alteración de la conciencia o de la percepción, o minoría de edad (los menores de 18 se rigen por el D. Leg. 1348).",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "defense-consentimiento",
+      "type": "defense-theory",
+      "name": "Consentimiento",
+      "article": "Art. 20.10 CP",
+      "aliases": [
+        "Consentimiento",
+        "defensa",
+        "eximente",
+        "causa de justificación"
+      ],
+      "text": "Exime de responsabilidad cuando el titular del bien jurídico de libre disposición consintió válidamente la conducta.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "defense-prueba-insuficiente",
+      "type": "defense-theory",
+      "name": "Insuficiencia probatoria / in dubio pro reo",
+      "article": "Art. 2.24.e Constitución; art. II TP CPP",
+      "aliases": [
+        "Insuficiencia probatoria / in dubio pro reo",
+        "defensa",
+        "eximente",
+        "causa de justificación"
+      ],
+      "text": "La presunción de inocencia exige prueba de cargo suficiente, lícita y actuada con garantías. La duda razonable favorece al imputado. No es una 'defensa de fondo' sino un estándar que la acusación debe superar.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    }
+  ],
+  "legalInstitutions": [
+    {
+      "id": "principio-oportunidad",
+      "type": "legal-institution",
+      "name": "Principio de oportunidad",
+      "article": "Art. 2 CPP",
+      "aliases": [
+        "Principio de oportunidad",
+        "Salidas alternativas"
+      ],
+      "verificationStatus": "pendiente",
+      "verifiedAt": "12/07/2026",
+      "text": "El fiscal puede abstenerse de ejercer la acción penal en delitos de mínima gravedad, escasa culpabilidad o cuando el agente resultó afectado por su propio delito, generalmente previo acuerdo de reparación con la víctima. Evita el proceso: la pregunta ciudadana típica '¿puedo evitar el juicio?' suele empezar aquí.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        },
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "acuerdo-reparatorio",
+      "type": "legal-institution",
+      "name": "Acuerdo reparatorio",
+      "article": "Art. 2.6 CPP",
+      "aliases": [
+        "Acuerdo reparatorio",
+        "Salidas alternativas"
+      ],
+      "verificationStatus": "pendiente",
+      "verifiedAt": "12/07/2026",
+      "text": "En delitos determinados por ley (p. ej. lesiones leves, hurto simple, daños) el fiscal propicia un acuerdo entre imputado y víctima; cumplida la reparación, se abstiene de ejercer la acción penal.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        },
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "terminacion-anticipada",
+      "type": "legal-institution",
+      "name": "Terminación anticipada",
+      "article": "Arts. 468 a 471 CPP",
+      "aliases": [
+        "Terminación anticipada",
+        "Salidas alternativas"
+      ],
+      "verificationStatus": "verificado",
+      "verifiedAt": "12/07/2026",
+      "text": "Acuerdo entre fiscal e imputado sobre pena y reparación civil, aprobado por el juez de investigación preparatoria antes de la acusación. Otorga la reducción de un sexto de la pena concreta, acumulable a la confesión sincera. Ya integrada en la calculadora como bonificación.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        },
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "suspension-ejecucion",
+      "type": "legal-institution",
+      "name": "Suspensión de la ejecución de la pena",
+      "article": "Arts. 57 a 61 CP (restricciones ampliadas por Ley 32258)",
+      "aliases": [
+        "Suspensión de la ejecución de la pena",
+        "Ejecución de la pena"
+      ],
+      "verificationStatus": "pendiente",
+      "verifiedAt": "12/07/2026",
+      "text": "Responde a la pregunta más frecuente: '¿iré a la cárcel?'. El juez puede suspender la ejecución si la pena concreta no supera 4 años, el agente no es reincidente ni habitual y el pronóstico es favorable, imponiendo reglas de conducta por un periodo de prueba. Numerosos delitos están legalmente excluidos y la Ley 32258 amplió esas exclusiones: una condena de 4 años o menos NO se suspende automáticamente.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        },
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "reserva-fallo",
+      "type": "legal-institution",
+      "name": "Reserva del fallo condenatorio",
+      "article": "Arts. 62 a 67 CP",
+      "aliases": [
+        "Reserva del fallo condenatorio",
+        "Ejecución de la pena"
+      ],
+      "verificationStatus": "pendiente",
+      "verifiedAt": "12/07/2026",
+      "text": "El juez declara la culpabilidad pero se abstiene de dictar la parte condenatoria, sujetando al agente a un régimen de prueba. Procede en supuestos de penas menores establecidos por ley y no genera antecedentes si se supera el periodo de prueba.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        },
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "conversion-penas",
+      "type": "legal-institution",
+      "name": "Conversión de penas y vigilancia electrónica",
+      "article": "Art. 52 CP; D. Leg. 1300; D. Leg. 1514",
+      "aliases": [
+        "Conversión de penas y vigilancia electrónica",
+        "Ejecución de la pena"
+      ],
+      "verificationStatus": "pendiente",
+      "verifiedAt": "12/07/2026",
+      "text": "Penas privativas de libertad de corta duración pueden convertirse en prestación de servicios, limitación de días libres o multa; la vigilancia electrónica personal permite cumplir la pena o la comparecencia fuera del penal en supuestos legales.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        },
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "beneficios-penitenciarios",
+      "type": "legal-institution",
+      "name": "Beneficios penitenciarios",
+      "article": "Código de Ejecución Penal (D. Leg. 654) y modificatorias",
+      "aliases": [
+        "Beneficios penitenciarios",
+        "Ejecución de la pena"
+      ],
+      "verificationStatus": "pendiente",
+      "verifiedAt": "12/07/2026",
+      "text": "Semilibertad, liberación condicional y redención de pena por trabajo o educación permiten egresar antes del cumplimiento total, según el delito y el cómputo. Advertencia clave: numerosos delitos graves (violación, extorsión, sicariato, corrupción agravada, entre otros) están excluidos o tienen cómputos más exigentes; la ley aplicable es la vigente al momento de solicitar el beneficio.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        },
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "prescripcion",
+      "type": "legal-institution",
+      "name": "Prescripción de la acción penal y de la pena",
+      "article": "Arts. 80 a 88 CP; art. 41 Constitución",
+      "aliases": [
+        "Prescripción de la acción penal y de la pena",
+        "Extinción de la acción"
+      ],
+      "verificationStatus": "pendiente",
+      "verifiedAt": "12/07/2026",
+      "text": "La acción penal prescribe ordinariamente en un plazo igual al máximo de la pena del delito (tope general de 20 años; 30 en cadena perpetua) y extraordinariamente cuando transcurre ese plazo más su mitad. Se suspende e interrumpe por actuaciones fiscales y judiciales. Para delitos contra la administración pública cometidos por funcionarios el plazo se duplica, y la reforma constitucional estableció supuestos de imprescriptibilidad en los casos más graves. El cómputo concreto exige análisis técnico.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        },
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "reparacion-civil",
+      "type": "legal-institution",
+      "name": "Reparación civil y tercero civilmente responsable",
+      "article": "Arts. 92 a 101 CP",
+      "aliases": [
+        "Reparación civil y tercero civilmente responsable",
+        "Consecuencias civiles"
+      ],
+      "verificationStatus": "pendiente",
+      "verifiedAt": "12/07/2026",
+      "text": "Comprende la restitución del bien o su valor y la indemnización de daños y perjuicios. Se fija junto con la pena, puede ejecutarse contra el condenado y contra el tercero civilmente responsable (p. ej. la empresa dueña del vehículo), y subsiste aunque la pena se suspenda.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        },
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "flagrancia-detencion",
+      "type": "legal-institution",
+      "name": "Flagrancia y detención",
+      "article": "Arts. 259 a 264 CPP; art. 2.24.f Constitución",
+      "aliases": [
+        "Flagrancia y detención",
+        "Detención"
+      ],
+      "verificationStatus": "pendiente",
+      "verifiedAt": "12/07/2026",
+      "text": "Hay flagrancia cuando el agente es sorprendido cometiendo el delito, inmediatamente después, o es identificado o encontrado con efectos del delito dentro de las 24 horas. La detención policial en flagrancia y la detención preliminar judicial duran hasta 48 horas (prorrogables por decisión judicial); hasta 15 días en terrorismo, espionaje, TID y criminalidad organizada. La flagrancia habilita además el proceso inmediato.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        },
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "adolescentes",
+      "type": "legal-institution",
+      "name": "Adolescentes en conflicto con la ley penal",
+      "article": "Código de Responsabilidad Penal de Adolescentes — D. Leg. 1348",
+      "aliases": [
+        "Adolescentes en conflicto con la ley penal",
+        "Regímenes especiales"
+      ],
+      "verificationStatus": "pendiente",
+      "verifiedAt": "12/07/2026",
+      "text": "Los menores de 18 años no responden bajo el Código Penal de adultos: se aplican medidas socioeducativas (desde amonestación hasta internación en centro juvenil) con fiscales y jueces especializados de familia, enfoque restaurativo y plazos propios. La internación procede solo en los supuestos más graves y con topes de duración según la edad.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        },
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "jurisprudencia-vinculante",
+      "type": "legal-institution",
+      "name": "Acuerdos plenarios y doctrina jurisprudencial",
+      "article": "Corte Suprema de Justicia — art. 116 LOPJ; art. 433.3 CPP",
+      "aliases": [
+        "Acuerdos plenarios y doctrina jurisprudencial",
+        "Jurisprudencia"
+      ],
+      "verificationStatus": "pendiente",
+      "verifiedAt": "12/07/2026",
+      "text": "Los Acuerdos Plenarios de las Salas Penales de la Corte Suprema y las casaciones con doctrina jurisprudencial fijan cómo se aplican las normas: por ejemplo, el AP 5-2008/CJ-116 sobre conclusión anticipada, o la Casación 626-2013-Moquegua y el AP 01-2019/CIJ-116 sobre los presupuestos de la prisión preventiva. Dan el salto del 'texto de la ley' a 'cómo se aplica'; se consultan en el portal del Poder Judicial.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        },
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    }
+  ],
+  "glossary": [
+    {
+      "id": "glossary-1",
+      "type": "glossary-term",
+      "name": "Tipicidad",
+      "aliases": [
+        "Tipicidad",
+        "glosario",
+        "definición"
+      ],
+      "text": "Correspondencia exacta entre el hecho real y la descripción del delito en la ley. Si falta un elemento, el hecho es atípico y no hay delito.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "glossary-2",
+      "type": "glossary-term",
+      "name": "Antijuridicidad",
+      "aliases": [
+        "Antijuridicidad",
+        "glosario",
+        "definición"
+      ],
+      "text": "El hecho típico además debe ser contrario al derecho: no lo es si existe una causa de justificación (legítima defensa, estado de necesidad, cumplimiento de un deber).",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "glossary-3",
+      "type": "glossary-term",
+      "name": "Culpabilidad",
+      "aliases": [
+        "Culpabilidad",
+        "glosario",
+        "definición"
+      ],
+      "text": "Juicio de reproche personal al autor: exige imputabilidad, conocimiento de la antijuridicidad y exigibilidad de otra conducta.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "glossary-4",
+      "type": "glossary-term",
+      "name": "Dolo",
+      "aliases": [
+        "Dolo",
+        "glosario",
+        "definición"
+      ],
+      "text": "Conocimiento y voluntad de realizar el hecho delictivo. La mayoría de delitos solo se sancionan en su forma dolosa.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "glossary-5",
+      "type": "glossary-term",
+      "name": "Culpa",
+      "aliases": [
+        "Culpa",
+        "glosario",
+        "definición"
+      ],
+      "text": "Infracción del deber de cuidado que produce un resultado previsible y evitable (negligencia, imprudencia). Solo es punible cuando la ley lo prevé expresamente.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "glossary-6",
+      "type": "glossary-term",
+      "name": "Tentativa",
+      "aliases": [
+        "Tentativa",
+        "glosario",
+        "definición"
+      ],
+      "text": "Comienzo de la ejecución del delito que no se consuma por causas ajenas a la voluntad del agente. El juez reduce prudencialmente la pena (art. 16 CP, modificado por la Ley 32258).",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "glossary-7",
+      "type": "glossary-term",
+      "name": "Flagrancia",
+      "aliases": [
+        "Flagrancia",
+        "glosario",
+        "definición"
+      ],
+      "text": "Ser sorprendido cometiendo el delito o inmediatamente después con los efectos del mismo (hasta 24 horas). Permite la detención policial sin orden judicial y el proceso inmediato.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "glossary-8",
+      "type": "glossary-term",
+      "name": "Imputado",
+      "aliases": [
+        "Imputado",
+        "glosario",
+        "definición"
+      ],
+      "text": "Persona señalada como presunto autor o partícipe de un delito. Goza de presunción de inocencia durante todo el proceso.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "glossary-9",
+      "type": "glossary-term",
+      "name": "Agraviado",
+      "aliases": [
+        "Agraviado",
+        "glosario",
+        "definición"
+      ],
+      "text": "Quien resulta directamente ofendido o perjudicado por el delito. Puede constituirse en actor civil para reclamar la reparación.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "glossary-10",
+      "type": "glossary-term",
+      "name": "Querella",
+      "aliases": [
+        "Querella",
+        "glosario",
+        "definición"
+      ],
+      "text": "Demanda penal que la propia víctima presenta ante el juez en los delitos de acción privada (honor), sin intervención del fiscal.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "glossary-11",
+      "type": "glossary-term",
+      "name": "Disposición fiscal",
+      "aliases": [
+        "Disposición fiscal",
+        "glosario",
+        "definición"
+      ],
+      "text": "Decisión motivada del fiscal (abrir diligencias, formalizar investigación, archivar). Marca el inicio de los plazos de investigación.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "glossary-12",
+      "type": "glossary-term",
+      "name": "Formalización",
+      "aliases": [
+        "Formalización",
+        "glosario",
+        "definición"
+      ],
+      "text": "Disposición con la que el fiscal comunica al juez que continúa la investigación preparatoria contra persona determinada. Suspende la prescripción.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "glossary-13",
+      "type": "glossary-term",
+      "name": "Sobreseimiento",
+      "aliases": [
+        "Sobreseimiento",
+        "glosario",
+        "definición"
+      ],
+      "text": "Resolución judicial que archiva definitivamente el proceso porque el hecho no existió, no es delito, el imputado no participó o no hay prueba suficiente.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "glossary-14",
+      "type": "glossary-term",
+      "name": "Acusación",
+      "aliases": [
+        "Acusación",
+        "glosario",
+        "definición"
+      ],
+      "text": "Requerimiento fiscal que pide ir a juicio: describe el hecho, la calificación jurídica, la prueba ofrecida, la pena y la reparación civil solicitadas.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "glossary-15",
+      "type": "glossary-term",
+      "name": "Etapa intermedia",
+      "aliases": [
+        "Etapa intermedia",
+        "glosario",
+        "definición"
+      ],
+      "text": "Audiencia de control ante el juez de investigación preparatoria donde se depura la acusación y se admite la prueba antes del juicio.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "glossary-16",
+      "type": "glossary-term",
+      "name": "Prisión preventiva",
+      "aliases": [
+        "Prisión preventiva",
+        "glosario",
+        "definición"
+      ],
+      "text": "Medida excepcional de encarcelamiento durante el proceso. Exige graves elementos de convicción, prognosis de pena mayor a 4 años y peligro de fuga u obstaculización. No es una condena.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "glossary-17",
+      "type": "glossary-term",
+      "name": "Comparecencia",
+      "aliases": [
+        "Comparecencia",
+        "glosario",
+        "definición"
+      ],
+      "text": "Situación procesal de libertad durante el proceso, simple o con restricciones (reglas de conducta, caución, control biométrico).",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "glossary-18",
+      "type": "glossary-term",
+      "name": "Reparación civil",
+      "aliases": [
+        "Reparación civil",
+        "glosario",
+        "definición"
+      ],
+      "text": "Suma que el condenado (y el tercero civilmente responsable) debe pagar a la víctima: restitución del bien más indemnización del daño.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "glossary-19",
+      "type": "glossary-term",
+      "name": "Principio de oportunidad",
+      "aliases": [
+        "Principio de oportunidad",
+        "glosario",
+        "definición"
+      ],
+      "text": "Facultad del fiscal de no ejercer la acción penal en delitos leves, generalmente previo acuerdo reparatorio con la víctima.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "glossary-20",
+      "type": "glossary-term",
+      "name": "Terminación anticipada",
+      "aliases": [
+        "Terminación anticipada",
+        "glosario",
+        "definición"
+      ],
+      "text": "Acuerdo fiscal-imputado sobre pena y reparación, homologado por el juez antes de la acusación; premia con la reducción de un sexto de la pena.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "glossary-21",
+      "type": "glossary-term",
+      "name": "Colaboración eficaz",
+      "aliases": [
+        "Colaboración eficaz",
+        "glosario",
+        "definición"
+      ],
+      "text": "Proceso especial en el que quien aporta información corroborada sobre una organización criminal recibe beneficios premiales (reducción, exención o remisión de pena).",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "glossary-22",
+      "type": "glossary-term",
+      "name": "Casación",
+      "aliases": [
+        "Casación",
+        "glosario",
+        "definición"
+      ],
+      "text": "Recurso extraordinario ante la Corte Suprema contra sentencias de las salas superiores, por infracción normativa o apartamiento de doctrina jurisprudencial.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "glossary-23",
+      "type": "glossary-term",
+      "name": "Acuerdo plenario",
+      "aliases": [
+        "Acuerdo plenario",
+        "glosario",
+        "definición"
+      ],
+      "text": "Criterio interpretativo adoptado por los jueces supremos penales reunidos en pleno, que orienta y en su caso vincula a todos los jueces del país.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "glossary-24",
+      "type": "glossary-term",
+      "name": "Presunción de inocencia",
+      "aliases": [
+        "Presunción de inocencia",
+        "glosario",
+        "definición"
+      ],
+      "text": "Toda persona es inocente mientras no se declare judicialmente su responsabilidad mediante sentencia firme (art. 2.24.e de la Constitución).",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "glossary-25",
+      "type": "glossary-term",
+      "name": "In dubio pro reo",
+      "aliases": [
+        "In dubio pro reo",
+        "glosario",
+        "definición"
+      ],
+      "text": "Ante duda razonable sobre la prueba de cargo, el juez debe absolver: la incertidumbre favorece al imputado.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "glossary-26",
+      "type": "glossary-term",
+      "name": "Cosa juzgada",
+      "aliases": [
+        "Cosa juzgada",
+        "glosario",
+        "definición"
+      ],
+      "text": "Prohibición de perseguir dos veces a la misma persona por el mismo hecho una vez que existe resolución firme (ne bis in idem).",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
         }
       ]
     }

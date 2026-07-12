@@ -7,7 +7,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const source = fs.readFileSync(path.join(root, "js", "data.js"), "utf8");
 const context = {};
 vm.createContext(context);
-vm.runInContext(`${source}\nthis.__JP_EXPORT__ = { VERIFICADO_AT, DELITOS, ATENUANTES, AGRAVANTES, REDUCCIONES, CONCURSO_INFO, FISCALIAS, CONDICIONES_PERSONA, PLAZOS, PRISION_PREVENTIVA, MEDIDAS_COERCITIVAS, NORMAS_BASE, NORMAS_RECIENTES, FUENTES_OFICIALES, PROCEDIMIENTO };`, context);
+vm.runInContext(`${source}\nthis.__JP_EXPORT__ = { VERIFICADO_AT, DELITOS, ATENUANTES, AGRAVANTES, REDUCCIONES, CONCURSO_INFO, FISCALIAS, CONDICIONES_PERSONA, PLAZOS, PRISION_PREVENTIVA, MEDIDAS_COERCITIVAS, NORMAS_BASE, NORMAS_RECIENTES, FUENTES_OFICIALES, PROCEDIMIENTO, TEORIA_ELEMENTOS, CHECKLIST_PROBATORIO, DEFENSAS, INSTITUCIONES, GLOSARIO };`, context);
 
 const data = context.__JP_EXPORT__;
 const sourceByName = Object.fromEntries(data.FUENTES_OFICIALES.map((item) => [item.nombre, item]));
@@ -167,6 +167,52 @@ const kb = {
     status: law.estado,
     verifiedAt: law.verificacion,
     sources: [sourceEntry(elPeruano)]
+  })),
+  caseTheory: [
+    {
+      id: "case-theory",
+      type: "case-theory",
+      name: "Teoría del caso — elementos fáctico, jurídico y probatorio",
+      aliases: ["teoría del caso", "elemento fáctico", "elemento jurídico", "elemento probatorio", "estrategia del caso"],
+      text: data.TEORIA_ELEMENTOS.map((item) => `${item.nombre}: ${item.desc}`).join(" "),
+      sources: [sourceEntry(spij)]
+    },
+    ...Object.entries(data.CHECKLIST_PROBATORIO).map(([familia, items], index) => ({
+      id: `evidence-checklist-${index + 1}`,
+      type: "evidence-checklist",
+      name: `Medios de prueba típicos — ${familia}`,
+      aliases: [familia, "prueba", "medios de prueba", "checklist probatorio", "evidencia"],
+      text: `Medios de prueba que suelen sustentar los casos de la familia ${familia}: ${items.join("; ")}. Listado referencial: la estrategia probatoria concreta la define la defensa o la fiscalía según el caso.`,
+      sources: [sourceEntry(mpfn)]
+    })),
+    ...data.DEFENSAS.map((item) => ({
+      id: `defense-${item.id}`,
+      type: "defense-theory",
+      name: item.nombre,
+      article: item.base,
+      aliases: [item.nombre, "defensa", "eximente", "causa de justificación"],
+      text: item.texto,
+      sources: [sourceEntry(spij)]
+    }))
+  ],
+  legalInstitutions: data.INSTITUCIONES.map((item) => ({
+    id: item.id,
+    type: "legal-institution",
+    name: item.nombre,
+    article: item.base,
+    aliases: [item.nombre, item.categoria],
+    verificationStatus: item.sello,
+    verifiedAt: data.VERIFICADO_AT,
+    text: item.texto,
+    sources: [sourceEntry(spij), sourceEntry(elPeruano)]
+  })),
+  glossary: data.GLOSARIO.map((item, index) => ({
+    id: `glossary-${index + 1}`,
+    type: "glossary-term",
+    name: item.termino,
+    aliases: [item.termino, "glosario", "definición"],
+    text: item.def,
+    sources: [sourceEntry(spij)]
   })),
   officialSources: data.FUENTES_OFICIALES.map((item, index) => ({
     id: `official-source-${index + 1}`,

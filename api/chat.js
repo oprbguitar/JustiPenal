@@ -173,7 +173,8 @@ function allRecords() {
     ...KB.proceduralDeadlines, ...KB.preventiveDetentionDeadlines,
     ...KB.prosecutorialSpecialties, ...KB.personalJurisdictionConditions,
     ...KB.proceduralStages, ...KB.coerciveMeasures, ...KB.baseLegislation,
-    ...KB.recentLegislation, ...KB.officialSources
+    ...KB.recentLegislation, ...KB.officialSources,
+    ...(KB.caseTheory || []), ...(KB.legalInstitutions || []), ...(KB.glossary || [])
   ];
 }
 

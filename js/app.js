@@ -149,6 +149,7 @@ function consecuenciasHTML(m) {
   return items.length ? items.map((i) => `<small style="display:block;color:var(--text-muted)">${i}</small>`).join("") : '<small style="color:var(--text-muted)">—</small>';
 }
 function penaHTML(m) {
+  if (m.penaTexto) return esc(m.penaTexto);
   if (m.perpetua && m.min == null && m.max == null) return '<span class="badge red">Cadena perpetua</span>';
   let s;
   if (m.min == null) s = `No mayor de ${fmtAnios(m.max)}` + (m.minNoExpreso ? ' <small style="color:var(--text-muted)">(sin mínimo expreso)</small>' : "");
@@ -206,7 +207,8 @@ function organoJudicial(m) {
 function renderAbstracta() {
   const { d, m } = getSeleccion();
   let rango;
-  if (m.perpetua && m.min == null && m.max == null) rango = '<span class="rng">Cadena perpetua</span>';
+  if (m.penaTexto) rango = `<span class="rng" style="font-size:15px">${esc(m.penaTexto)}</span> <small>no contempla pena privativa de libertad</small>`;
+  else if (m.perpetua && m.min == null && m.max == null) rango = '<span class="rng">Cadena perpetua</span>';
   else if (m.min == null) rango = `<span class="rng">No mayor de ${fmtAnios(m.max)}</span> <small>sin mínimo expreso en la norma</small>`;
   else rango = `<span class="rng">${fmtAnios(m.min)} a ${fmtAnios(m.max)}</span> <small>de pena privativa de libertad</small>`;
   $("#box-abstracta").innerHTML = `
@@ -270,6 +272,7 @@ window.getJustiPenalPortalContext = (type) => {
 
 function calcularTercioBloque(b) {
   const m = b.m;
+  if (m.penaTexto) return { perpetua: false, penaTexto: m.penaTexto };
   if (m.perpetua && m.min == null && m.max == null) return { perpetua: true };
   const minC = m.min == null ? 0 : m.min;
   const span = m.max - minC, t = span / 3;
@@ -293,7 +296,7 @@ function renderBloques() {
     : "Aún no ha agregado delitos.";
   $("#lista-bloques").innerHTML = bloques.map((b, i) => {
     const r = calcularTercioBloque(b);
-    const rango = r.perpetua ? "Cadena perpetua" : `Tercio ${r.tercio}: ${fmtAnios(r.tMin)} a ${fmtAnios(r.tMax)}`;
+    const rango = r.perpetua ? "Cadena perpetua" : r.penaTexto ? r.penaTexto : `Tercio ${r.tercio}: ${fmtAnios(r.tMin)} a ${fmtAnios(r.tMax)}`;
     return `<div class="case-block">
       <div><b>${i + 1}. ${b.d.nombre}</b> <small>${b.d.articulo} — ${b.m.nombre} · ${b.tentativa ? "Tentativa" : "Consumado"}${b.reincidencia !== "no" ? " · " + (b.reincidencia === "reincidencia" ? "Reincidencia" : "Habitualidad") : ""}</small>
       <small>${rango}</small></div>
@@ -342,6 +345,9 @@ $("#btn-calcular").addEventListener("click", () => {
     if (r.perpetua) {
       cuerpo = `<div class="big-range">Cadena perpetua</div>
         <p style="font-size:12.5px;margin-top:4px">${b.m.nota || ""} El sistema de tercios no se aplica a la cadena perpetua. ${chip("judicial", "Valoración judicial")}</p>`;
+    } else if (r.penaTexto) {
+      cuerpo = `<div class="big-range" style="font-size:18px">${esc(r.penaTexto)}</div>
+        <p style="font-size:12.5px;margin-top:4px">${b.m.nota || ""} Este delito no contempla pena privativa de libertad: el sistema de tercios sobre años de pena no resulta aplicable. La individualización corresponde al juez dentro del marco de la pena limitativa o de multa. ${chip("judicial", "Valoración judicial")}</p>`;
     } else {
       const notaMin = b.m.min == null ? `<p style="font-size:11.5px;color:var(--amber-600)">La norma no fija mínimo expreso: se emplea el mínimo legal genérico de la pena privativa de libertad (2 días, art. 29 CP) solo para dividir el marco. ${b.m.alternativa ? "Pena alternativa: " + b.m.alternativa + "." : ""}</p>` : "";
       const exdv = r.agExcluidas.length
@@ -373,12 +379,18 @@ $("#btn-calcular").addEventListener("click", () => {
   let concursoHTML = "";
   if (resultados.length > 1) {
     const conPerpetua = resultados.some(({ r }) => r.perpetua);
-    const finitos = resultados.filter(({ r }) => !r.perpetua);
+    const finitos = resultados.filter(({ r }) => !r.perpetua && !r.penaTexto);
+    const noPrivativas = resultados.filter(({ r }) => r.penaTexto);
     let grave = null;
     if (finitos.length) grave = finitos.reduce((a, c) => (c.r.tMax > a.r.tMax ? c : a));
     const filas = [];
+    if (noPrivativas.length) {
+      filas.push(`<div class="kv"><span><small style="color:var(--amber-600)">No incluidos en el cómputo de años por no contemplar pena privativa de libertad: ${noPrivativas.map(({ b }) => b.d.nombre).join("; ")}. Sus penas (multa o limitativas de derechos) se imponen conforme a su propia regla.</small></span><b></b></div>`);
+    }
     if (conPerpetua) {
       filas.push(`<div class="kv"><span><b>${CONCURSO_INFO.real.nombre}</b><br><small style="color:var(--text-muted)">Uno de los delitos contempla cadena perpetua: esta absorbe a las penas temporales.</small></span><b>Cadena perpetua</b></div>`);
+    } else if (!grave) {
+      filas.push(`<div class="kv"><span><small style="color:var(--text-muted)">Ninguno de los delitos del caso contempla pena privativa de libertad: los escenarios de concurso sobre años de pena no resultan aplicables.</small></span><b></b></div>`);
     } else {
       const sumMin = finitos.reduce((s, { r }) => s + r.tMin, 0);
       const sumMax = finitos.reduce((s, { r }) => s + r.tMax, 0);
@@ -398,8 +410,8 @@ $("#btn-calcular").addEventListener("click", () => {
 
   // ----- bonificaciones procesales: escenarios A/B/C -----
   const reds = [...$$("#chk-reducciones input:checked")].map((c) => REDUCCIONES.find((r) => r.id === c.value));
-  const baseRef = resultados.length === 1 ? resultados[0] : resultados.filter(({ r }) => !r.perpetua).reduce((a, c) => (!a || c.r.tMax > a.r.tMax ? c : a), null);
-  if (reds.length && baseRef && !baseRef.r.perpetua) {
+  const baseRef = resultados.length === 1 ? resultados[0] : resultados.filter(({ r }) => !r.perpetua && !r.penaTexto).reduce((a, c) => (!a || c.r.tMax > a.r.tMax ? c : a), null);
+  if (reds.length && baseRef && !baseRef.r.perpetua && !baseRef.r.penaTexto) {
     const { r, b } = baseRef;
     const puntos = [
       { label: "Escenario A — si la pena base individualizada fuera el extremo inferior del tercio", v: r.tMin },
@@ -462,7 +474,7 @@ $("#btn-calcular").addEventListener("click", () => {
       candidateOffenseIds: resultados.map(({ b }) => b.d.id),
       articles: resultados.map(({ b }) => b.d.articulo),
       selectedModality: resultados.map(({ b }) => ({ offenseId: b.d.id, modalityId: b.m.id, name: b.m.nombre })),
-      applicableThird: resultados.map(({ b, r }) => ({ offenseId: b.d.id, third: r.perpetua ? "No aplicable: cadena perpetua" : r.tercio })),
+      applicableThird: resultados.map(({ b, r }) => ({ offenseId: b.d.id, third: r.perpetua ? "No aplicable: cadena perpetua" : r.penaTexto ? "No aplicable: pena no privativa de libertad" : r.tercio })),
       generalCircumstances: resultados.flatMap(({ b, r }) => [
         ...b.atenuantes.map((item) => item.texto),
         ...(r.agValidas || []).map((item) => item.texto),
@@ -491,6 +503,7 @@ function generarInforme(resultados, reds, cond, territorio, fis) {
   resultados.forEach(({ b, r }, i) => {
     L.push(`### Delito ${i + 1}: ${b.d.nombre} (${b.d.articulo}) — ${b.m.nombre}`);
     if (r.perpetua) L.push("- Pena: cadena perpetua (no se aplica el sistema de tercios).");
+    else if (r.penaTexto) L.push(`- Pena: ${r.penaTexto} (no contempla pena privativa de libertad; el sistema de tercios sobre años no resulta aplicable).`);
     else {
       L.push(`- Pena abstracta: ${b.m.min == null ? "no mayor de " + fmtAnios(b.m.max) : fmtAnios(b.m.min) + " a " + fmtAnios(b.m.max)}.`);
       L.push(`- Tercio aplicado: ${r.tercio} (${r.justif}).`);
@@ -746,6 +759,42 @@ $("#btn-plazo").addEventListener("click", () => {
   animarEntrada("#res-plazo-panel .panel", { stagger: 100 });
 });
 
+// ---------- teoría del caso ----------
+$("#grid-teoria-elementos").innerHTML = TEORIA_ELEMENTOS.map(
+  (e) => `<div class="panel blue"><h4>${e.icono} ${e.nombre}</h4><p style="font-size:13px">${e.desc}</p></div>`
+).join("");
+
+const familiasChecklist = Object.keys(CHECKLIST_PROBATORIO);
+$("#sel-checklist").innerHTML = familiasChecklist.map((f) => `<option value="${esc(f)}">${esc(f)}</option>`).join("");
+function renderChecklist() {
+  const items = CHECKLIST_PROBATORIO[$("#sel-checklist").value] || [];
+  $("#lista-checklist").innerHTML = items.map((i) => `<li>${esc(i)}</li>`).join("");
+  animarEntrada("#lista-checklist li", { stagger: 40 });
+}
+$("#sel-checklist").addEventListener("change", renderChecklist);
+renderChecklist();
+
+$("#grid-defensas").innerHTML = DEFENSAS.map(
+  (d) => `<div class="panel"><h4 style="color:var(--navy-800)">${esc(d.nombre)}</h4><small style="color:var(--text-muted);display:block;margin-bottom:4px">${esc(d.base)}</small><p style="font-size:12.5px">${esc(d.texto)}</p></div>`
+).join("");
+
+$("#grid-instituciones").innerHTML = INSTITUCIONES.map(
+  (i) => `<div class="panel"><h4 style="color:var(--navy-800)">${esc(i.nombre)}</h4>
+    <small style="color:var(--text-muted);display:block;margin-bottom:4px">${esc(i.categoria)} · ${esc(i.base)}</small>
+    <p style="font-size:12.5px">${esc(i.texto)}</p>
+    <div style="margin-top:6px">${selloBadge(i.sello)} <small style="color:var(--text-muted)">al ${VERIFICADO_AT}</small></div></div>`
+).join("");
+
+function renderGlosario(filtro = "") {
+  const f = filtro.trim().toLowerCase();
+  const items = GLOSARIO.filter((g) => !f || g.termino.toLowerCase().includes(f) || g.def.toLowerCase().includes(f));
+  $("#grid-glosario").innerHTML = items.length
+    ? items.map((g) => `<div class="panel blue" style="padding:12px 14px"><h4 style="font-size:13.5px">${esc(g.termino)}</h4><p style="font-size:12.5px">${esc(g.def)}</p></div>`).join("")
+    : '<p style="font-size:13px;color:var(--text-muted)">Sin resultados para la búsqueda.</p>';
+}
+$("#buscar-glosario").addEventListener("input", (e) => renderGlosario(e.target.value));
+renderGlosario();
+
 // ---------- medidas ----------
 $("#grid-medidas").innerHTML = MEDIDAS_COERCITIVAS.map(
   (m) => `<div class="panel"><h4 style="color:var(--navy-800)">${m.nombre}</h4><p style="font-size:12.5px;color:var(--text-muted)">${m.desc}</p></div>`
@@ -791,6 +840,11 @@ const AYUDA = [
   ["Rango Referencial de Individualización", "Intervalo del tercio aplicable según sus circunstancias. La pena exacta dentro del tercio exige motivación judicial (gravedad, dolo, daño, condiciones personales)."],
   ["Competencia y Plazos", "Fiscalía que probablemente conocería el caso (según materia, territorio y condición del investigado), el órgano judicial de juzgamiento y los plazos de investigación aplicables."],
   ["Trazabilidad Normativa", "Repositorio o fuente oficial de consulta de cada delito usado en el cálculo, con enlace, fecha de revisión editorial y su sello correspondiente."],
+  ["Teoría del Caso", "Los tres pilares de toda posición en un proceso penal: qué pasó (fáctico), qué norma encaja (jurídico) y con qué se demuestra (probatorio). El analizador del portal cubre los dos primeros; esta sección orienta el tercero."],
+  ["Checklist Probatorio", "Medios de prueba que típicamente sustentan cada familia de delito. Es orientativo: la estrategia probatoria concreta la define un abogado según el caso."],
+  ["Imputación y Defensa", "Frente a cada acusación existen defensas legales: que el hecho no encaje en el delito (atipicidad), causas de justificación como la legítima defensa, errores del art. 14 o la insuficiencia de la prueba."],
+  ["Instituciones del Proceso", "Figuras que pueden cambiar el rumbo de un caso: salidas alternativas al juicio, suspensión de la pena, prescripción, beneficios penitenciarios y regímenes especiales."],
+  ["Glosario Penal", "Términos técnicos del derecho penal explicados en lenguaje simple. Use el buscador para encontrar un término."],
   ["Procedimiento Penal", "Etapas del proceso penal común peruano, desde la denuncia hasta la sentencia y sus recursos (D. Leg. 957)."],
   ["Rutas procesales especiales", "Caminos distintos al proceso común: proceso inmediato por flagrancia, acuerdos como la terminación anticipada, colaboración eficaz, etc."],
   ["Decisiones fiscales", "Opciones que tiene el fiscal al terminar las diligencias preliminares: archivar, aplicar salidas alternativas, formalizar investigación o acusar directamente."],
