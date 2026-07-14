@@ -3,6 +3,18 @@
   "framework": null,
   "redirects": [
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "header",
+          "key": "host",
+          "value": "justipenal-api\\.vercel\\.app"
+        }
+      ],
+      "destination": "https://justipenal.andesnova.solutions/",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [
         {
