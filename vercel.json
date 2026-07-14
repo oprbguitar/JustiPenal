@@ -1,6 +1,20 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "header",
+          "key": "host",
+          "value": "justipenal-api\\.vercel\\.app"
+        }
+      ],
+      "destination": "https://justipenal.andesnova.solutions/:path*",
+      "permanent": true
+    }
+  ],
   "functions": {
     "api/chat.js": {
       "maxDuration": 30

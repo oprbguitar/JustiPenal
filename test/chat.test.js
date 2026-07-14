@@ -125,22 +125,22 @@ test("CORS normaliza rutas y barras finales del origen configurado", async () =>
   process.env.ALLOWED_ORIGIN = oldOrigin;
 });
 
-test("CORS permite que el despliegue de Vercel llame a su propio backend", async () => {
+test("CORS permite que el dominio de producción llame a su propio backend", async () => {
   const oldOrigin = process.env.ALLOWED_ORIGIN;
   process.env.ALLOWED_ORIGIN = "https://oprbguitar.github.io";
   const req = {
     method: "OPTIONS",
     headers: {
-      origin: "https://justipenal-api.vercel.app",
-      host: "justipenal-api.vercel.app",
-      "x-forwarded-host": "justipenal-api.vercel.app",
+      origin: "https://justipenal.andesnova.solutions",
+      host: "justipenal.andesnova.solutions",
+      "x-forwarded-host": "justipenal.andesnova.solutions",
       "x-forwarded-proto": "https"
     }
   };
   const res = mockResponse();
   await handler(req, res);
   assert.equal(res.statusCode, 204);
-  assert.equal(res.headers["Access-Control-Allow-Origin"], "https://justipenal-api.vercel.app");
+  assert.equal(res.headers["Access-Control-Allow-Origin"], "https://justipenal.andesnova.solutions");
   process.env.ALLOWED_ORIGIN = oldOrigin;
 });
 
