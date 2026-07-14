@@ -525,7 +525,7 @@ table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
 .src-card p { font-size: 12.5px; color: var(--text-muted); margin: 6px 0 8px; }
 
 /* ---------- Directorio fiscal interactivo ---------- */
-.fiscal-directory-notice,.office-tools-notice { margin: 10px 0 16px; padding: 10px 12px; border-left: 3px solid var(--blue-500); background: var(--blue-50); color: var(--navy-800); font-size: 12.5px; }
+.fiscal-directory-notice { margin: 10px 0 16px; padding: 10px 12px; border-left: 3px solid var(--blue-500); background: var(--blue-50); color: var(--navy-800); font-size: 12.5px; }
 .fiscalia-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px; }
 .fiscalia-card,.hierarchy-card { min-width: 0; overflow: hidden; border: 1px solid #bfd3ee; border-radius: 10px; background: #fff; }
 .fiscalia-card:has(.fiscalia-detail.open) { grid-column: 1 / -1; }
@@ -565,10 +565,24 @@ table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
 .supreme-type { padding: 11px; border: 1px solid var(--border); border-radius: 8px; background: #f8fafc; }
 .supreme-type h5 { margin-bottom: 4px; color: var(--navy-800); font-size: 12px; }
 .office-tools-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+.office-tools-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; margin-bottom: 14px; }
+.office-tools-heading-copy { min-width: 0; }
+.office-tools-heading .card-sub { margin-bottom: 0; }
+.office-tools-consult { flex: 0 0 auto; }
 .office-tool { min-width: 0; border: 1px solid var(--border); border-radius: 8px; background: #fff; }
 .office-tool summary { min-height: 44px; padding: 12px 14px; color: var(--navy-800); font-size: 12.5px; font-weight: 700; cursor: pointer; }
 .office-tool p { padding: 0 14px 13px; }
-.office-tools-notice { margin-bottom: 0; }
+.office-solutions-cta { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-top: 14px; padding: 15px 16px; border: 1px solid #bad0ed; border-radius: 10px; background: var(--blue-50); }
+.office-solutions-copy { min-width: 0; }
+.office-solutions-copy > strong { display: block; margin-bottom: 4px; color: var(--navy-800); font-size: 13.5px; }
+.office-solutions-copy p { color: var(--text-muted); font-size: 12.5px; line-height: 1.55; }
+.office-solutions-copy small { display: block; margin-top: 6px; color: var(--navy-700); font-size: 10.5px; }
+.office-solutions-button { flex: 0 0 auto; white-space: nowrap; }
+.andesnova-attribution { display: grid; justify-items: end; gap: 2px; margin-top: 9px; color: var(--text-muted); font-size: 10px; text-align: right; }
+.andesnova-attribution a { display: inline-flex; align-items: center; gap: 6px; color: var(--navy-700); font-size: 11px; }
+.andesnova-attribution a:hover { text-decoration: none; color: var(--blue-600); }
+.andesnova-attribution img { width: 22px; height: 22px; border-radius: 5px; }
+.andesnova-attribution small { font-size: 9.5px; }
 
 /* ---------- Perfil jurídico extendido ---------- */
 .offense-dialog { width: min(1000px,calc(100vw - 28px)); max-height: calc(100dvh - 28px); padding: 0; border: 1px solid #aebfd8; border-radius: 14px; color: var(--text); box-shadow: 0 24px 70px rgba(10,22,51,.35); }
@@ -796,6 +810,10 @@ table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
   .tei-workflow { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .tei-flow-step:not(:nth-child(5n))::after { display: none; }
   .fiscalia-grid,.hierarchy-grid,.office-tools-grid,.supreme-types { grid-template-columns: 1fr; }
+  .office-tools-heading,.office-solutions-cta { align-items: stretch; flex-direction: column; }
+  .office-tools-heading { gap: 10px; }
+  .office-tools-consult,.office-solutions-button { align-self: flex-start; }
+  .andesnova-attribution { justify-items: start; text-align: left; }
   .fiscalia-card:has(.fiscalia-detail.open),.hierarchy-card:has(.hierarchy-detail.open) { grid-column: auto; }
   .fiscalia-toggle { min-height: 76px; }
   .fiscalia-detail,.hierarchy-detail { padding: 14px; }
