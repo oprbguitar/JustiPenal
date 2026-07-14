@@ -37,7 +37,7 @@
   ],
   "functions": {
     "api/chat.js": {
-      "maxDuration": 30
+      "maxDuration": 45
     },
     "api/feedback.js": {
       "maxDuration": 10

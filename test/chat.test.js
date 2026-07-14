@@ -72,6 +72,8 @@ test("usa Interactions API sin almacenamiento ni herramientas", async () => {
   assert.equal(request.tools, undefined);
   assert.equal(request.generation_config.thinking_level, "low");
   assert.match(request.system_instruction, /Nunca inventes/);
+  assert.ok(Buffer.byteLength(request.input, "utf8") < 16_000, "el contexto enviado al proveedor debe estar minimizado");
+  assert.doesNotMatch(request.input, /verificationStatus|verifiedAt/);
 });
 
 test("rechaza inyección directa en español e inglés sin llamar al modelo", async () => {
