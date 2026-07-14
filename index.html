@@ -56,6 +56,7 @@
   <aside class="sidebar" id="sidebar">
     <button class="nav-item active" data-page="inicio"><span class="ic">🏠</span> Inicio</button>
     <button class="nav-item nav-simulator" data-page="simulador"><span class="ic">▶</span> Simular caso <span class="nav-new">NUEVO</span></button>
+    <button class="nav-item nav-featured" data-page="tecnicas"><span class="ic">🕵️</span> Técnicas Especiales <span class="nav-new">NUEVO</span></button>
     <button class="nav-item" data-page="analizar"><span class="ic">🔎</span> Analizar Caso</button>
     <button class="nav-item" data-page="delitos"><span class="ic">⚖️</span> Delitos y Penas</button>
     <button class="nav-item" data-page="calculo"><span class="ic">🧮</span> Cálculo de Penas</button>
@@ -538,6 +539,63 @@
       </div>
     </section>
 
+    <!-- ================= TÉCNICAS ESPECIALES ================= -->
+    <section class="page" id="page-tecnicas" aria-labelledby="tei-title">
+      <div class="tei-hero">
+        <div>
+          <h2 id="tei-title">Técnicas Especiales de Investigación</h2>
+          <p>Herramientas excepcionales y reservadas para investigar criminalidad compleja, sujetas a autorización fiscal, control judicial cuando se afecten derechos fundamentales y criterios de legalidad, necesidad, idoneidad, subsidiariedad y proporcionalidad.</p>
+        </div>
+        <div class="tei-hero-mark" aria-hidden="true">§</div>
+      </div>
+      <div class="disclaimer prominent-disclaimer tei-guide-notice"><b>Guía jurídica referencial.</b> No contiene instrucciones operativas reservadas ni sustituye la evaluación fiscal o judicial del caso.</div>
+
+      <div class="tei-section" aria-labelledby="tei-categories-title">
+        <div class="card-title"><span class="ic">🗂️</span><h3 id="tei-categories-title">Clasificación jurídica</h3></div>
+        <div class="grid-3" id="tei-category-overview"></div>
+      </div>
+
+      <div class="card tei-section" aria-labelledby="tei-catalog-title">
+        <div class="card-title"><span class="ic">🔎</span><h3 id="tei-catalog-title">Buscador y catálogo</h3></div>
+        <p class="card-sub">Filtre por ámbito jurídico. Los resultados son orientativos y cada medida conserva sus propios presupuestos.</p>
+        <form class="tei-filters" id="tei-filters" autocomplete="off">
+          <label class="fld tei-search">Buscar<input id="tei-search" type="search" placeholder="Ej.: agente virtual o remesa controlada"></label>
+          <label class="fld">Categoría<select id="tei-filter-category"><option value="">Todas</option></select></label>
+          <label class="fld">Delito investigado<select id="tei-filter-offense"><option value="">Todos</option><option value="extorsion">Extorsión</option><option value="organizada">Crimen organizado</option><option value="trata">Trata de personas</option><option value="corrupcion">Administración pública</option><option value="lavado">Lavado de activos</option></select></label>
+          <label class="fld">Etapa<select id="tei-filter-stage"><option value="">Todas</option><option value="preliminar">Diligencias preliminares</option><option value="preparatoria">Investigación preparatoria</option><option value="proceso-especial">Proceso especial</option></select></label>
+          <label class="fld">Autorización judicial<select id="tei-filter-judicial"><option value="">Cualquiera</option><option value="si">Sí</option><option value="condicional">Según afectación</option><option value="no">No ordinariamente</option></select></label>
+          <fieldset class="tei-check-filters"><legend>Ámbitos relacionados</legend><label><input type="checkbox" value="organizedCrime"> Crimen organizado</label><label><input type="checkbox" value="extortion"> Extorsión</label><label><input type="checkbox" value="digital"> Entorno digital o virtual</label><label><input type="checkbox" value="transnational"> Operación transnacional</label><label><input type="checkbox" value="fundamentalRight"> Derecho fundamental afectado</label></fieldset>
+        </form>
+        <p class="tei-result-count" id="tei-result-count" aria-live="polite"></p>
+        <div class="tei-card-list" id="tei-card-list"></div>
+      </div>
+
+      <div class="card tei-section" aria-labelledby="tei-checker-title">
+        <div class="card-title"><span class="ic">✓</span><h3 id="tei-checker-title">Verificador educativo de aplicabilidad</h3></div>
+        <p class="card-sub">Evaluación determinista basada en reglas expresas. No utiliza inteligencia artificial ni almacena o transmite los datos.</p>
+        <div class="panel red tei-privacy-warning"><b>No ingrese datos personales, identidades de agentes, expedientes, información reservada ni detalles de investigaciones reales.</b></div>
+        <form id="tei-checker" class="tei-checker" autocomplete="off">
+          <div class="tei-checker-grid">
+            <label class="fld">Técnica a evaluar<select id="tei-technique" required></select></label>
+            <label class="fld">Fecha de los hechos<input id="tei-facts-date" type="date"></label>
+            <label class="fld">Etapa procesal<select id="tei-stage"><option value="">Seleccione</option><option value="preliminar">Diligencias preliminares</option><option value="preparatoria">Investigación preparatoria</option><option value="otra">Otra etapa</option></select></label>
+            <label class="fld">Delito sospechado<select id="tei-offense"><option value="">Seleccione</option><option value="extorsion">Extorsión</option><option value="sicariato">Sicariato</option><option value="secuestro">Secuestro</option><option value="trata">Trata de personas</option><option value="corrupcion">Administración pública (arts. 382–401 CP)</option><option value="drogas">Tráfico ilícito de drogas</option><option value="lavado">Lavado de activos</option><option value="otro">Otro</option></select></label>
+            <label class="fld">Pena máxima legal (años)<input id="tei-penalty" type="number" min="0" max="99" step="0.1" inputmode="decimal"></label>
+          </div>
+          <fieldset class="tei-checker-flags"><legend>Indicadores y circunstancias</legend>
+            <label><input id="tei-band" type="checkbox"> Indicios de banda criminal</label><label><input id="tei-org" type="checkbox"> Indicios de organización criminal conforme a Ley 30077</label><label><input id="tei-trafficking" type="checkbox"> Trata de personas</label><label><input id="tei-public" type="checkbox"> Delito contra la administración pública</label><label><input id="tei-extortion" type="checkbox"> Extorsión o delito relacionado</label><label><input id="tei-goods" type="checkbox"> Bienes o envío controlado comprendidos legalmente</label><label><input id="tei-digital" type="checkbox"> Entorno digital</label><label><input id="tei-transnational" type="checkbox"> Elemento transnacional</label><label><input id="tei-conventional" type="checkbox"> Se intentaron medios convencionales</label><label><input id="tei-rights" type="checkbox"> Posible afectación de derechos fundamentales</label><label><input id="tei-home" type="checkbox"> Ingreso a domicilio o lugar cerrado</label><label><input id="tei-comms" type="checkbox"> Interceptación de comunicaciones</label><label><input id="tei-financial" type="checkbox"> Información financiera</label><label><input id="tei-danger" type="checkbox"> Peligro inminente para vida, integridad o libertad</label><label><input id="tei-flagrante" type="checkbox"> Flagrancia</label><label><input id="tei-device" type="checkbox"> Equipo informático incautado</label>
+          </fieldset>
+          <label class="fld">Justificación de insuficiencia de medios convencionales<textarea id="tei-insufficiency" rows="3" maxlength="600" placeholder="Explique de forma abstracta, sin datos de un caso real"></textarea></label>
+          <button class="btn" type="submit">Evaluar aplicabilidad</button>
+        </form>
+        <div id="tei-checker-result" class="tei-checker-result" aria-live="polite" tabindex="-1"></div>
+      </div>
+
+      <div class="card tei-section" aria-labelledby="tei-matrix-title"><div class="card-title"><span class="ic">▦</span><h3 id="tei-matrix-title">Matriz delito–técnica</h3></div><div class="tbl-wrap" id="tei-matrix"></div></div>
+      <div class="card tei-section" aria-labelledby="tei-workflow-title"><div class="card-title"><span class="ic">→</span><h3 id="tei-workflow-title">Flujo procedimental referencial</h3></div><div class="tei-workflow" id="tei-workflow"></div></div>
+      <div class="card tei-section" aria-labelledby="tei-changes-title"><div class="card-title"><span class="ic">🕐</span><h3 id="tei-changes-title">Cambios legales recientes</h3></div><p class="card-sub">Cronología editorial con enlaces a publicaciones oficiales.</p><div class="tei-timeline" id="tei-timeline"></div></div>
+    </section>
+
     <!-- ================= NORMATIVA ================= -->
     <section class="page" id="page-normativa">
       <div class="card">
@@ -731,8 +789,10 @@
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
 <script src="js/data.js?v=5"></script>
+<script src="data/tei-data.js?v=1"></script>
 <script src="js/config.js?v=5"></script>
 <script src="js/app.js?v=5"></script>
+<script src="js/tei.js?v=1"></script>
 <script src="js/case-simulator.js?v=1"></script>
 <script src="js/feedback.js?v=1"></script>
 <script src="js/chat.js?v=5"></script>
