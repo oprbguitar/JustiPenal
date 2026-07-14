@@ -308,6 +308,11 @@ body.menu-open .overlay { display: block; }
   background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
   padding: 16px 18px; display: flex; align-items: center; gap: 13px;
 }
+.stat-link { width: 100%; min-height: 92px; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.stat-link:hover { border-color: #93b8eb; }
+.stat-link:focus-visible { outline: 3px solid #93c5fd; outline-offset: 3px; border-color: var(--blue-500); }
+.stat-copy { display: block; min-width: 0; }
+.stat-action { display: block; margin-top: 3px; color: var(--blue-600) !important; font-size: 10.5px !important; font-weight: 700; }
 .stat .bubble { width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 21px; flex-shrink: 0; }
 .stat b { display: block; font-size: 21px; color: var(--navy-800); }
 .stat span { font-size: 12px; color: var(--text-muted); }
@@ -509,42 +514,42 @@ table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
 .src-card .lvl { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .5px; }
 .src-card p { font-size: 12.5px; color: var(--text-muted); margin: 6px 0 8px; }
 
-/* ---------- Catálogo de capacidades profesionales ---------- */
-.fiscal-specialty {
-  position: relative; display: grid; grid-template-columns: 28px minmax(0,1fr); gap: 3px 9px; align-items: center;
-  width: 100%; min-height: 82px; margin: 0; padding: 12px 14px; border: 1px solid #bcd5f7;
-  color: var(--navy-800); font: inherit; font-size: 13px; font-weight: 700; text-align: left; cursor: pointer;
-  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
-}
-.fiscal-specialty:hover,.fiscal-specialty:focus-visible,.fiscal-specialty[aria-expanded="true"] { border-color: var(--blue-500); box-shadow: 0 7px 18px rgba(29,78,216,.12); transform: translateY(-1px); outline: none; }
-.fiscal-specialty:focus-visible { box-shadow: 0 0 0 3px #bfdbfe, 0 7px 18px rgba(29,78,216,.12); }
-.fiscal-specialty-icon { grid-row: 1 / 3; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: #dbeafe; color: var(--blue-600); font-family: Georgia,serif; font-size: 17px; }
-.fiscal-specialty-more { color: var(--blue-600); font-size: 10.5px; font-weight: 600; }
-.capabilities-popover {
-  position: fixed; z-index: 120; width: min(560px,calc(100vw - 32px)); max-height: min(690px,calc(100dvh - 96px));
-  overflow: auto; padding: 18px; border: 1px solid #b8c9e1; border-radius: 14px; background: #fff;
-  box-shadow: 0 22px 60px rgba(10,22,51,.3); opacity: 0; transform: translateY(-5px) scale(.985);
-  transition: opacity .15s ease, transform .15s ease;
-}
-.capabilities-popover[hidden] { display: none; }
-.capabilities-popover.open { opacity: 1; transform: translateY(0) scale(1); }
-.capabilities-popover-head { position: sticky; top: -18px; z-index: 1; display: flex; justify-content: space-between; gap: 14px; align-items: flex-start; margin: -18px -18px 12px; padding: 17px 18px 13px; border-bottom: 1px solid var(--border); background: linear-gradient(105deg,var(--navy-900),var(--navy-700)); color: #fff; }
-.capabilities-label { display: block; margin-bottom: 2px; color: #93c5fd; font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
-.capabilities-popover-head h2 { font-size: 19px; }
-.capabilities-close { flex: 0 0 32px; width: 32px; height: 32px; border: 1px solid rgba(255,255,255,.25); border-radius: 8px; background: rgba(255,255,255,.08); color: #fff; font: inherit; cursor: pointer; }
-.capabilities-close:hover,.capabilities-close:focus-visible { background: rgba(255,255,255,.18); outline: 2px solid #93c5fd; outline-offset: 2px; }
-.capabilities-context { margin-bottom: 9px; color: var(--blue-600); font-size: 11px; font-weight: 700; }
-#capabilities-intro { color: var(--text-muted); font-size: 12.5px; }
-#capabilities-intro b { color: var(--navy-800); }
-.capabilities-catalog { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 14px 0; }
-.capability-item { display: grid; grid-template-columns: 30px minmax(0,1fr); gap: 8px; padding: 10px; border: 1px solid var(--border); border-radius: 9px; background: #f8fafc; }
-.capability-icon { font-size: 19px; line-height: 1.3; }
-.capability-item h3 { color: var(--navy-800); font-size: 11.5px; line-height: 1.25; }
-.capability-item ul { margin: 5px 0 0 14px; color: var(--text-muted); }
-.capability-item li { margin: 2px 0; font-size: 10.5px; line-height: 1.3; }
-.capabilities-actions { position: sticky; bottom: -18px; display: flex; justify-content: space-between; gap: 12px; align-items: center; margin: 0 -18px -18px; padding: 12px 18px; border-top: 1px solid var(--border); background: #fff; }
-.capabilities-actions p { max-width: 310px; color: var(--text-muted); font-size: 10px; }
-.capabilities-actions .btn { flex-shrink: 0; margin: 0; }
+/* ---------- Directorio fiscal interactivo ---------- */
+.fiscal-directory-notice,.office-tools-notice { margin: 10px 0 16px; padding: 10px 12px; border-left: 3px solid var(--blue-500); background: var(--blue-50); color: var(--navy-800); font-size: 12.5px; }
+.fiscalia-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px; }
+.fiscalia-card,.hierarchy-card { min-width: 0; overflow: hidden; border: 1px solid #bfd3ee; border-radius: 10px; background: #fff; }
+.fiscalia-card:has(.fiscalia-detail.open) { grid-column: 1 / -1; }
+.fiscalia-toggle,.hierarchy-toggle { display: flex; align-items: center; width: 100%; min-height: 72px; gap: 10px; padding: 13px 14px; border: 0; background: var(--blue-50); color: var(--navy-800); font: inherit; text-align: left; cursor: pointer; }
+.fiscalia-toggle:hover,.hierarchy-toggle:hover,.fiscalia-toggle[aria-expanded="true"],.hierarchy-toggle[aria-expanded="true"] { background: #e4efff; }
+.fiscalia-toggle:focus-visible,.hierarchy-toggle:focus-visible,.office-tool summary:focus-visible { outline: 3px solid #60a5fa; outline-offset: -3px; }
+.fiscalia-icon { display: grid; place-items: center; flex: 0 0 32px; width: 32px; height: 32px; border-radius: 8px; background: #dbeafe; color: var(--blue-600); font: 19px Georgia,serif; }
+.fiscalia-heading { display: grid; gap: 5px; min-width: 0; }
+.fiscalia-heading strong { font-size: 13px; line-height: 1.3; }
+.fiscalia-heading > span { color: var(--text-muted); font-size: 11.5px; font-weight: 400; line-height: 1.4; }
+.accordion-chevron { margin-left: auto; color: var(--blue-600); font-size: 20px; transition: transform .18s ease; }
+[aria-expanded="true"] > .accordion-chevron { transform: rotate(180deg); }
+.fiscalia-detail,.hierarchy-detail { padding: 16px; border-top: 1px solid #bfd3ee; background: #fff; }
+.fiscalia-detail[hidden],.hierarchy-detail[hidden] { display: none; }
+.fiscalia-section { padding: 11px 0; border-bottom: 1px solid var(--border); }
+.fiscalia-section h5,.fiscalia-contact h5 { margin-bottom: 4px; color: var(--navy-800); font-size: 13px; }
+.fiscalia-section p,.fiscalia-contact p,.hierarchy-detail p,.office-tool p { color: var(--text-muted); font-size: 12.5px; line-height: 1.55; }
+.fiscalia-distinction,.hierarchy-clarification { margin-bottom: 10px; padding: 9px 11px; border-left: 3px solid var(--amber-500); background: #fffbeb; color: var(--text) !important; }
+.fiscalia-sources > div { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+.fiscalia-contact { margin-top: 14px; padding: 15px; border: 1px solid #bad0ed; border-radius: 9px; background: #f6f9fe; }
+.fiscalia-contact .btn { display: inline-flex; margin-top: 10px; }
+.fiscalia-contact .contact-warning { margin-top: 10px; color: #9a3412; }
+.fiscalia-contact .contact-disclaimer { margin-top: 7px; font-size: 11px; }
+.hierarchy-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+.hierarchy-card:has(.hierarchy-detail.open) { grid-column: 1 / -1; }
+.hierarchy-toggle { min-height: 54px; font-weight: 700; }
+.supreme-types { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; margin: 14px 0; }
+.supreme-type { padding: 11px; border: 1px solid var(--border); border-radius: 8px; background: #f8fafc; }
+.supreme-type h5 { margin-bottom: 4px; color: var(--navy-800); font-size: 12px; }
+.office-tools-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+.office-tool { min-width: 0; border: 1px solid var(--border); border-radius: 8px; background: #fff; }
+.office-tool summary { min-height: 44px; padding: 12px 14px; color: var(--navy-800); font-size: 12.5px; font-weight: 700; cursor: pointer; }
+.office-tool p { padding: 0 14px 13px; }
+.office-tools-notice { margin-bottom: 0; }
 
 .export-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
 
@@ -687,7 +692,7 @@ table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
   .hero-scales path { stroke-dashoffset: 0 !important; }
   .feedback-star { animation: none !important; }
   .nav-featured .nav-new { animation: none !important; }
-  .fiscal-specialty,.capabilities-popover { transition: none !important; }
+  .stat-link,.accordion-chevron { transition: none !important; }
 }
 
 .legal-text h4 { color: var(--navy-800); margin: 16px 0 6px; font-size: 14.5px; }
@@ -695,6 +700,9 @@ table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
 .legal-text ul { padding-left: 22px; }
 
 /* ---------- Móvil ---------- */
+@media (max-width: 1050px) {
+  .fiscalia-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
 @media (max-width: 800px) {
   .btn-menu { display: block; }
   .topbar { gap: 10px; }
@@ -727,8 +735,10 @@ table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
   .tei-checker-flags { grid-template-columns: 1fr 1fr; }
   .tei-workflow { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .tei-flow-step:not(:nth-child(5n))::after { display: none; }
-  .capabilities-popover { inset: auto 10px 10px !important; width: auto !important; max-height: calc(100dvh - 84px); border-radius: 15px 15px 10px 10px; transform: translateY(12px); }
-  .capabilities-popover.open { transform: translateY(0); }
+  .fiscalia-grid,.hierarchy-grid,.office-tools-grid,.supreme-types { grid-template-columns: 1fr; }
+  .fiscalia-card:has(.fiscalia-detail.open),.hierarchy-card:has(.hierarchy-detail.open) { grid-column: auto; }
+  .fiscalia-toggle { min-height: 76px; }
+  .fiscalia-detail,.hierarchy-detail { padding: 14px; }
   .chat-launcher { right: 14px; bottom: 14px; width: 54px; height: 54px; }
   .chat-panel {
     right: 14px; bottom: 78px; width: calc(100vw - 28px);
@@ -737,6 +747,7 @@ table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
 }
 
 @media (max-width: 480px) {
+  .fiscalia-contact .btn { width: 100%; justify-content: center; text-align: center; }
   .feedback-modal { align-items: end; padding: 10px; }
   .feedback-dialog { max-height: calc(100vh - 20px); border-radius: 12px 12px 8px 8px; }
   .feedback-dialog header { padding: 16px 16px 8px; }

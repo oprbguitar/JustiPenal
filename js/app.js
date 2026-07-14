@@ -93,7 +93,7 @@ overlay.addEventListener("click", () => setMenu(false));
 document.addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
 
 // ---------- navegación ----------
-function goPage(id) {
+function goPage(id, options = {}) {
   $$(".page").forEach((p) => p.classList.remove("active"));
   $$(".nav-item").forEach((n) => n.classList.remove("active"));
   const page = $("#page-" + id);
@@ -103,7 +103,14 @@ function goPage(id) {
   animarPagina(page, nav);
   if (id === "inicio") requestAnimationFrame(() => { animarEstadisticasUnaVez(); animarHeroUnaVez(); });
   setMenu(false);
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  window.scrollTo({ top: 0, behavior: REDUCE_MOTION ? "auto" : "smooth" });
+  if (page && options.focus !== false) {
+    const heading = page.querySelector("h1, h2, h3");
+    if (heading) {
+      if (!heading.hasAttribute("tabindex")) heading.setAttribute("tabindex", "-1");
+      requestAnimationFrame(() => heading.focus({ preventScroll: true }));
+    }
+  }
   if (location.hash !== "#" + id) history.replaceState(null, "", "#" + id);
   if (window.AOS && id === "inicio") setTimeout(() => AOS.refresh(), 60);
   document.dispatchEvent(new CustomEvent("justipenal:pagechange", { detail: id }));
@@ -119,24 +126,25 @@ $$(".topbar-links a, .footer-links a[data-goto]").forEach((a) =>
     if ($("#page-" + target)) { e.preventDefault(); goPage(target); }
   })
 );
-if (location.hash && $("#page-" + location.hash.slice(1))) goPage(location.hash.slice(1));
+if (location.hash && $("#page-" + location.hash.slice(1))) goPage(location.hash.slice(1), { focus: false });
 
 // ---------- inicio ----------
 const STATS = [
-  { icon: "⚖️", color: "#dbeafe", num: DELITOS.length + "+", label: "Delitos frecuentes catalogados" },
-  { icon: "🔎", color: "#f3e8ff", num: ANALIZADOR_PATRONES.length, label: "Patrones del analizador de casos" },
-  { icon: "🏛️", color: "#dcfce7", num: Object.keys(FISCALIAS).length, label: "Especialidades fiscales mapeadas" },
-  { icon: "🕐", color: "#ffedd5", num: PLAZOS.length + PRISION_PREVENTIVA.length, label: "Plazos procesales de referencia" },
-  { icon: "📖", color: "#dbeafe", num: NORMAS_BASE.length + NORMAS_RECIENTES.length, label: "Normas base y recientes" }
+  { icon: "⚖️", color: "#dbeafe", num: DELITOS.length + "+", label: "Delitos frecuentes catalogados", page: "delitos", aria: "Ver delitos frecuentes catalogados" },
+  { icon: "🔎", color: "#f3e8ff", num: ANALIZADOR_PATRONES.length, label: "Patrones del analizador de casos", page: "analizar", aria: "Ver patrones del analizador de casos" },
+  { icon: "🏛️", color: "#dcfce7", num: FISCALIAS_UI_ORDER.length, label: "Especialidades fiscales mapeadas", page: "fiscalias", aria: "Ver especialidades fiscales mapeadas" },
+  { icon: "🕐", color: "#ffedd5", num: PLAZOS.length + PRISION_PREVENTIVA.length, label: "Plazos procesales de referencia", page: "plazos", aria: "Ver plazos procesales de referencia" },
+  { icon: "📖", color: "#dbeafe", num: NORMAS_BASE.length + NORMAS_RECIENTES.length, label: "Normas base y recientes", page: "normativa", aria: "Ver normas base y recientes" }
 ];
 $("#stats-row").innerHTML = STATS.map(
-  (s) => `<div class="stat"><div class="bubble" style="background:${s.color}">${s.icon}</div><div><b>${s.num}</b><span>${s.label}</span></div></div>`
+  (s) => `<button class="stat stat-link" type="button" data-page="${s.page}" aria-label="${s.aria}"><span class="bubble" style="background:${s.color}" aria-hidden="true">${s.icon}</span><span class="stat-copy"><b>${s.num}</b><span>${s.label}</span><span class="stat-action" aria-hidden="true">Ver sección →</span></span></button>`
 ).join("");
+$$("#stats-row .stat-link").forEach((button) => button.addEventListener("click", () => goPage(button.dataset.page)));
 
 $("#mini-flow").innerHTML = PROCEDIMIENTO.slice(0, 4)
   .map((p) => `<div class="flow-step"><span class="ic">${p.icono}</span><b>${p.nombre}</b></div>`)
   .join('<div class="flow-arrow">→</div>');
-$("#mini-fiscalias").innerHTML = FISCALIAS_LISTA.slice(0, 6).map((f) => `<li>${f}</li>`).join("");
+$("#mini-fiscalias").innerHTML = FISCALIAS_UI_ORDER.slice(0, 6).map((id) => `<li>${esc(FISCALIAS[id].nombre)}</li>`).join("");
 $("#mini-plazos").innerHTML = PLAZOS.slice(0, 5).map((p) => `<li><b>${p.etapa}:</b> ${p.plazo}</li>`).join("");
 $("#mini-normas").innerHTML = NORMAS_RECIENTES.map((n) => `<li><b>${n.norma}</b> (${n.publicacion}) — ${n.materia}</li>`).join("");
 
@@ -806,9 +814,98 @@ $("#grid-medidas").innerHTML = MEDIDAS_COERCITIVAS.map(
 ).join("");
 
 // ---------- fiscalías ----------
-$("#grid-fiscalias").innerHTML = FISCALIAS_LISTA.map(
-  (f, index) => `<button class="panel blue fiscal-specialty" type="button" data-fiscal-specialty="${esc(f)}" aria-haspopup="dialog" aria-expanded="false" aria-controls="professional-capabilities-popover"><span class="fiscal-specialty-icon" aria-hidden="true">§</span><span>${esc(f)}</span><span class="fiscal-specialty-more" aria-hidden="true">Capacidades profesionales</span></button>`
-).join("");
+const MPFN_DIRECTORY_URL = "https://www.gob.pe/institucion/mpfn/directorio-fiscalias";
+const MPFN_ORGANIZATION_URL = "https://www.gob.pe/institucion/mpfn/organizacion";
+const EXTERNAL_LINK_ATTRS = 'target="_blank" rel="noopener noreferrer"';
+
+const FISCAL_HIERARCHY = [
+  { id: "provinciales", nombre: "Fiscalías Provinciales", texto: "Es el nivel operativo que interviene directamente en la recepción y evaluación de denuncias, investigación, disposiciones fiscales, solicitudes judiciales, formalización, acusación y actuación en audiencias, según la materia y el procedimiento aplicable." },
+  { id: "superiores", nombre: "Fiscalías Superiores", texto: "Interviene en recursos, elevaciones de actuados, revisiones jerárquicas y actuaciones de segunda instancia conforme al procedimiento aplicable. También puede contribuir a uniformizar criterios y organizar la actuación del subsistema, sin sustituir la autonomía funcional del fiscal competente." },
+  { id: "supremas", nombre: "Fiscalías Supremas", texto: "Las Fiscalías Supremas son órganos de línea de mayor jerarquía. La organización institucional vigente comprende Fiscalías Supremas en lo Penal, Fiscalía Suprema de Familia, Fiscalía Suprema Especializada en Delitos Cometidos por Funcionarios Públicos y Fiscalías Supremas Transitorias Especializadas en esa materia.", tipos: [
+    ["Fiscalías Supremas en lo Penal", "Intervienen ante la Corte Suprema en los asuntos penales que les atribuyen la Constitución, la Ley Orgánica del Ministerio Público y la legislación procesal aplicable."],
+    ["Fiscalía Suprema de Familia", "Interviene en materias de familia, menores y personas especialmente protegidas que corresponden al nivel supremo."],
+    ["Fiscalía Suprema Especializada en Delitos Cometidos por Funcionarios Públicos", "Interviene en los procedimientos y actuaciones de su competencia relacionados con delitos atribuidos a funcionarios públicos."],
+    ["Fiscalías Supremas Transitorias Especializadas", "Órganos temporales creados para atender las materias y cargas que determine la organización institucional."]
+  ], aclaracion: "La cooperación judicial internacional y las extradiciones cuentan con una oficina institucional especializada. No deben presentarse como una función genérica de todas las Fiscalías Supremas." },
+  { id: "coordinaciones", nombre: "Coordinaciones Nacionales o Superiores", texto: "Las coordinaciones nacionales o superiores apoyan la planificación estratégica, estandarización de criterios de gestión, seguimiento de carga, coordinación interinstitucional, capacitación, reportes, identificación de necesidades y fortalecimiento operativo del subsistema. Las herramientas de gestión no deben interferir con la autonomía funcional ni decidir el sentido jurídico de un caso concreto." }
+];
+
+const OFFICE_TOOLS = [
+  ["Ingreso y clasificación", "Registrar denuncias, identificar materia, territorio, condición de las personas y posible despacho competente."],
+  ["Distribución de carga", "Asignar expedientes mediante reglas transparentes, turnos, especialidad, complejidad y carga existente."],
+  ["Plazos y agenda", "Controlar vencimientos, detenidos, diligencias, pericias, audiencias, requerimientos y actuaciones pendientes."],
+  ["Gestión de evidencias", "Registrar documentos, muestras, dispositivos, incautaciones, cadena de custodia, ubicación y responsable."],
+  ["Operativos y diligencias", "Planificar personal, movilidad, entidades participantes, riesgos, actas, evidencias esperadas y resultados."],
+  ["Plantillas y documentos", "Generar borradores de disposiciones, providencias, requerimientos, oficios, informes, actas y cuadros de seguimiento."],
+  ["Coordinación y analítica", "Mostrar carga por despacho, antigüedad, tipo de delito, estado procesal, productividad, cuellos de botella y necesidades de recursos."],
+  ["Conocimiento jurídico", "Organizar normas, jurisprudencia, protocolos, criterios, resoluciones institucionales y fechas de actualización con fuentes verificables."]
+];
+
+function animateAccordion(panel, opening, onComplete) {
+  if (!window.anime || REDUCE_MOTION) { onComplete?.(); return; }
+  anime.remove(panel);
+  anime({ targets: panel, opacity: opening ? [0, 1] : [1, 0], translateY: opening ? [-5, 0] : [0, -4], duration: opening ? 220 : 150, easing: "easeOutCubic", complete: onComplete });
+}
+
+function closeAccordion(button, animate = true) {
+  if (!button || button.getAttribute("aria-expanded") !== "true") return;
+  const panel = document.getElementById(button.getAttribute("aria-controls"));
+  button.setAttribute("aria-expanded", "false");
+  panel?.classList.remove("open");
+  const finish = () => { if (panel) { panel.hidden = true; panel.removeAttribute("style"); } };
+  if (panel && animate) animateAccordion(panel, false, finish); else finish();
+}
+
+function setupExclusiveAccordions(container, buttonSelector) {
+  let openButton = null;
+  container?.addEventListener("click", (event) => {
+    const button = event.target.closest(buttonSelector);
+    if (!button || !container.contains(button)) return;
+    const wasOpen = button.getAttribute("aria-expanded") === "true";
+    if (openButton && openButton !== button) closeAccordion(openButton, false);
+    if (wasOpen) {
+      closeAccordion(button);
+      openButton = null;
+      return;
+    }
+    const panel = document.getElementById(button.getAttribute("aria-controls"));
+    button.setAttribute("aria-expanded", "true");
+    if (panel) { panel.hidden = false; panel.classList.add("open"); animateAccordion(panel, true); }
+    openButton = button;
+  });
+  container?.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape" || !openButton) return;
+    event.preventDefault();
+    const button = openButton;
+    closeAccordion(button);
+    openButton = null;
+    button.focus();
+  });
+}
+
+function hierarchyDetail(item) {
+  const tipos = item.tipos ? `<div class="supreme-types">${item.tipos.map(([title, text]) => `<div class="supreme-type"><h5>${esc(title)}</h5><p>${esc(text)}</p></div>`).join("")}</div>` : "";
+  const clarification = item.aclaracion ? `<p class="hierarchy-clarification"><b>Aclaración:</b> ${esc(item.aclaracion)}</p>` : "";
+  return `<article class="hierarchy-card"><button class="hierarchy-toggle" type="button" aria-expanded="false" aria-controls="hierarchy-detail-${item.id}"><span>${esc(item.nombre)}</span><span class="accordion-chevron" aria-hidden="true">⌄</span></button><div class="hierarchy-detail" id="hierarchy-detail-${item.id}" hidden><p>${esc(item.texto)}</p>${tipos}${clarification}<a href="${MPFN_ORGANIZATION_URL}" ${EXTERNAL_LINK_ATTRS}>Ver organización institucional vigente ↗</a></div></article>`;
+}
+
+$("#fiscal-hierarchy").innerHTML = FISCAL_HIERARCHY.map(hierarchyDetail).join("");
+setupExclusiveAccordions($("#fiscal-hierarchy"), ".hierarchy-toggle");
+
+function fiscalDetail(id) {
+  const fiscalia = FISCALIAS[id];
+  const subject = encodeURIComponent(`Consulta sobre herramientas para despacho fiscal — ${fiscalia.nombre}`);
+  const mailto = `mailto:consultas@andesnova.solutions?subject=${subject}`;
+  const distinction = fiscalia.distincion ? `<p class="fiscalia-distinction"><b>Distinción importante:</b> ${esc(fiscalia.distincion)}</p>` : "";
+  const specificSource = fiscalia.fuenteEspecifica ? `<a href="${fiscalia.fuenteEspecifica}" ${EXTERNAL_LINK_ATTRS}>Ver fuente oficial específica ↗</a>` : "";
+  return `<article class="fiscalia-card"><button class="fiscalia-toggle" type="button" aria-expanded="false" aria-controls="fiscalia-detail-${id}"><span class="fiscalia-icon" aria-hidden="true">§</span><span class="fiscalia-heading"><strong>${esc(fiscalia.nombre)}</strong><span>${esc(fiscalia.desc)}</span></span><span class="accordion-chevron" aria-hidden="true">⌄</span></button><div class="fiscalia-detail" id="fiscalia-detail-${id}" hidden>${distinction}<section class="fiscalia-section"><h5>¿Qué atiende?</h5><p>${esc(fiscalia.atiende)}</p></section><section class="fiscalia-section"><h5>Necesidades principales del despacho</h5><p>${esc(fiscalia.necesidades)}</p></section><section class="fiscalia-section"><h5>Organización y herramientas de apoyo</h5><p>${esc(fiscalia.herramientas)}</p></section><section class="fiscalia-section"><h5>Base normativa referencial</h5><p>${esc(fiscalia.baseNormativa)}</p></section><section class="fiscalia-section fiscalia-sources"><h5>Fuente institucional</h5><div><a href="${MPFN_DIRECTORY_URL}" ${EXTERNAL_LINK_ATTRS}>Directorio oficial de fiscalías ↗</a><a href="${MPFN_ORGANIZATION_URL}" ${EXTERNAL_LINK_ATTRS}>Organización del Ministerio Público ↗</a>${specificSource}</div></section><section class="fiscalia-contact"><h5>Herramientas para organizar o modernizar el despacho</h5><p>¿Necesita adaptar estas funciones a un despacho fiscal, una fiscalía especializada o una coordinación? AndesNova Solutions desarrolla herramientas de organización, distribución de carga, control de plazos, plantillas, trazabilidad, analítica y consulta normativa, incluidas alternativas de funcionamiento local.</p><p><b>Contacto:</b> <a href="mailto:consultas@andesnova.solutions">consultas@andesnova.solutions</a></p><a class="btn small" href="${mailto}">Consultar una solución para este despacho</a><p class="contact-warning"><b>No incluya nombres, DNI, expedientes ni información confidencial en el correo inicial.</b></p><p class="contact-disclaimer">Servicio tecnológico independiente. AndesNova Solutions no pertenece ni representa al Ministerio Público ni sustituye la evaluación jurídica o institucional correspondiente.</p></section></div></article>`;
+}
+
+const directoryFiscalias = FISCALIAS_UI_ORDER.filter((id) => FISCALIAS[id]?.showInDirectory);
+$("#grid-fiscalias").innerHTML = directoryFiscalias.map(fiscalDetail).join("");
+setupExclusiveAccordions($("#grid-fiscalias"), ".fiscalia-toggle");
+
+$("#office-tools-grid").innerHTML = OFFICE_TOOLS.map(([title, text]) => `<details class="office-tool"><summary>${esc(title)}</summary><p>${esc(text)}</p></details>`).join("");
 $("#tabla-condiciones").innerHTML = CONDICIONES_PERSONA.filter((c) => c.nota).map(
   (c) => `<tr><td><b>${c.label}</b></td><td>${c.nota}</td></tr>`
 ).join("");

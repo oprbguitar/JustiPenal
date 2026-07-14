@@ -433,35 +433,134 @@ const CONCURSO_INFO = {
 
 /* ---- Fiscalías por especialidad ---- */
 const FISCALIAS = {
-  "penal-comun": { nombre: "Fiscalía Provincial Penal Corporativa", desc: "Nivel operativo principal: recibe denuncias, conduce jurídicamente la investigación, formaliza, acusa y participa en juicio." },
-  "corrupcion": { nombre: "Fiscalía Especializada en Delitos de Corrupción de Funcionarios", desc: "Delitos contra la administración pública cometidos por funcionarios: colusión, peculado, cohecho y conexos." },
-  "crimen-organizado": { nombre: "Fiscalía Especializada contra la Criminalidad Organizada (FECOR)", desc: "Organizaciones criminales y delitos cometidos en ese contexto (Ley 30077)." },
-  "lavado": { nombre: "Fiscalía Especializada en Lavado de Activos", desc: "Lavado de activos y pérdida de dominio (D. Leg. 1106)." },
-  "drogas": { nombre: "Fiscalía Especializada en Tráfico Ilícito de Drogas", desc: "Delitos de los arts. 296 y siguientes del Código Penal." },
-  "violencia-mujer": { nombre: "Fiscalía Especializada en Violencia contra la Mujer e Integrantes del Grupo Familiar", desc: "Ley 30364 y delitos conexos, incluido el feminicidio." },
-  "trata": { nombre: "Fiscalía Especializada en Trata de Personas", desc: "Trata de personas y explotación (arts. 153 y siguientes)." },
-  "extorsion": { nombre: "Subsistema Especializado contra la Extorsión y Delitos Conexos", desc: "Norma organizativa: Decreto Legislativo 1735, publicado el 12 de febrero de 2026. No establece penas sustantivas." },
-  "tributarios": { nombre: "Fiscalía Especializada en Delitos Tributarios y Aduaneros", desc: "Defraudación tributaria (D. Leg. 813) y delitos aduaneros (Ley 28008)." },
-  "ciber": { nombre: "Fiscalía Especializada en Ciberdelincuencia", desc: "Delitos informáticos (Ley 30096), según la organización de cada distrito fiscal." },
-  "ambiental": { nombre: "Fiscalía Especializada en Materia Ambiental (FEMA)", desc: "Delitos ambientales de los arts. 304 a 314 del Código Penal: contaminación, minería ilegal, delitos forestales y contra la fauna." },
-  "accion-privada": { nombre: "No interviene el Ministerio Público — acción privada", desc: "Los delitos contra el honor se persiguen mediante querella de la parte agraviada directamente ante el juez penal unipersonal (arts. 459 y ss. CPP), sin fiscal ni investigación preparatoria." }
+  "penal-comun": {
+    nombre: "Fiscalías Penales Corporativas o Comunes", showInDirectory: true,
+    desc: "Atienden los delitos que no han sido asignados a una fiscalía especializada y constituyen el nivel operativo ordinario de investigación penal.",
+    atiende: "Reciben denuncias, delimitan los hechos investigados, disponen diligencias, solicitan medidas judiciales, formalizan investigaciones, formulan acusación cuando corresponde y participan en audiencias y juicio.",
+    necesidades: "Clasificación inicial de denuncias, distribución equilibrada de casos, control de plazos, agenda de diligencias y audiencias, seguimiento de detenidos, gestión de víctimas y testigos, organización de evidencias y control de carga.",
+    herramientas: "Registro único del caso, bandeja de pendientes, alertas procesales, matrices de hechos y elementos del delito, plantillas fiscales, control de disposiciones y requerimientos, reportes de carga y trazabilidad documental.",
+    baseNormativa: "Constitución Política del Perú; Decreto Legislativo 052; Código Penal, Decreto Legislativo 635; Código Procesal Penal, Decreto Legislativo 957."
+  },
+  "corrupcion": {
+    nombre: "Fiscalías Especializadas en Delitos de Corrupción de Funcionarios", showInDirectory: true,
+    desc: "Investigan delitos contra la administración pública vinculados con funcionarios, servidores públicos, recursos estatales, contrataciones y decisiones adoptadas en ejercicio de una función pública.",
+    atiende: "Colusión, peculado, cohecho, negociación incompatible, concusión, tráfico de influencias, enriquecimiento ilícito y otros delitos contra la administración pública, según la competencia asignada.",
+    necesidades: "Organizar contratos, expedientes de contratación, órdenes de servicio, comprobantes, informes de control, roles funcionales, decisiones administrativas, flujos de dinero y vínculos entre funcionarios y particulares.",
+    herramientas: "Matriz de contratación pública, línea de tiempo de decisiones, mapa de funcionarios y proveedores, control de pericias contables, seguimiento de levantamientos de secreto bancario y reportes para coordinaciones superiores.",
+    baseNormativa: "Código Penal, delitos contra la administración pública; Código Procesal Penal; Ley Orgánica del Ministerio Público; normativa especial y resoluciones institucionales aplicables.", fuenteEspecifica: "https://www.gob.pe/11414"
+  },
+  "crimen-organizado": {
+    nombre: "Fiscalías Especializadas contra la Criminalidad Organizada", showInDirectory: true,
+    desc: "Intervienen cuando existen elementos que permiten investigar una estructura criminal con permanencia, organización, reparto de roles y actuación coordinada para cometer delitos.",
+    atiende: "Organizaciones criminales y delitos cometidos dentro de ese contexto. La participación de varias personas no debe presentarse automáticamente como organización criminal.",
+    necesidades: "Identificar integrantes, roles, jerarquías, permanencia, comunicaciones, operaciones, fuentes de financiamiento, bienes, empresas vinculadas y delitos ejecutados por la estructura.",
+    herramientas: "Mapa de red criminal, línea de tiempo, matriz de roles, vínculos entre hechos y personas, control de técnicas especiales de investigación, gestión de información reservada y planificación segura de operativos.",
+    baseNormativa: "Ley 30077; artículo 317 y normas conexas del Código Penal; Código Procesal Penal; resoluciones de organización del Ministerio Público."
+  },
+  "lavado": {
+    nombre: "Fiscalías Especializadas en Delitos de Lavado de Activos", showInDirectory: true,
+    desc: "Investigan operaciones destinadas a convertir, transferir, ocultar, transportar, adquirir, utilizar o mantener activos de posible origen ilícito.",
+    atiende: "Flujos patrimoniales, operaciones financieras, utilización de empresas, testaferros, beneficiarios finales, adquisiciones sin sustento económico y vinculación con actividades criminales generadoras de activos.",
+    necesidades: "Reconstrucción patrimonial, análisis bancario, contable, societario, registral y tributario, identificación de beneficiarios finales y seguimiento de operaciones nacionales o internacionales.",
+    herramientas: "Mapa patrimonial, matriz de operaciones, comparación de ingresos y adquisiciones, trazabilidad de activos, cronología financiera, registro de pericias y seguimiento de medidas sobre bienes.",
+    baseNormativa: "Decreto Legislativo 1106 y modificatorias; Código Procesal Penal; normativa sobre cooperación, información financiera y medidas patrimoniales."
+  },
+  "drogas": {
+    nombre: "Fiscalías Especializadas en Tráfico Ilícito de Drogas", showInDirectory: true,
+    desc: "Atienden delitos relacionados con la producción, promoción, favorecimiento, transporte, comercialización y tráfico de drogas, así como determinadas conductas relacionadas con insumos químicos y precursores.",
+    atiende: "Promoción o favorecimiento del tráfico, comercialización, posesión destinada al tráfico, microcomercialización, formas agravadas, insumos químicos, rutas, centros de producción y actuaciones vinculadas con organizaciones criminales.",
+    necesidades: "Controlar incautaciones, prueba de campo, pesaje, pericia química, peso neto, cadena de custodia, muestras, comunicaciones, rutas, inmuebles, vehículos, activos, fuentes de información y coordinación de operativos.",
+    herramientas: "Registro de sustancias y muestras, trazabilidad de cadena de custodia, mapa de rutas, matriz de investigados y roles, control de informes periciales, planificación de operativos, seguimiento de bienes incautados y tablero de carga por despacho.",
+    baseNormativa: "Artículos 296 a 299 y normas conexas del Código Penal; Decreto Legislativo 1241; Código Procesal Penal; Ley 30077 cuando corresponda criminalidad organizada."
+  },
+  "violencia-mujer": {
+    nombre: "Fiscalías Especializadas en Violencia contra las Mujeres y los Integrantes del Grupo Familiar", showInDirectory: true,
+    desc: "Investigan hechos de violencia contra las mujeres o integrantes del grupo familiar, con enfoque de protección, debida diligencia y atención de riesgos para la víctima.",
+    atiende: "Agresiones físicas o psicológicas, violencia sexual, feminicidio y otros delitos vinculados, de acuerdo con la competencia territorial y funcional del despacho.",
+    necesidades: "Evaluación inmediata de riesgo, medidas de protección, certificados médico-legales, pericias psicológicas, entrevista única, antecedentes de violencia, protección de víctimas y coordinación con Policía, Poder Judicial, MIMP y servicios de asistencia.",
+    herramientas: "Alertas de riesgo, cronología de episodios, control de medidas de protección, agenda prioritaria, seguimiento de víctimas, registro de pericias y coordinación con el Programa de Asistencia a Víctimas y Testigos.",
+    baseNormativa: "Ley 30364 y modificatorias; Código Penal; Código Procesal Penal; protocolos y resoluciones institucionales aplicables."
+  },
+  "familia": {
+    nombre: "Fiscalías de Familia", showInDirectory: true,
+    desc: "Protegen la legalidad y los derechos de niñas, niños, adolescentes, personas incapaces y otros sujetos especialmente protegidos en las materias asignadas por la legislación.",
+    atiende: "Intervención fiscal en materias de familia, protección, tutela, derechos de menores y responsabilidad penal de adolescentes, según el nivel, territorio y competencia del despacho.",
+    distincion: "No debe confundirse la Fiscalía de Familia con la Fiscalía Especializada en Violencia contra las Mujeres y los Integrantes del Grupo Familiar. Tienen competencias y procedimientos diferenciados.",
+    necesidades: "Control de medidas de protección, audiencias, informes sociales y psicológicos, entrevistas, situación familiar, seguimiento de adolescentes, coordinación interdisciplinaria y protección del interés superior del niño.",
+    herramientas: "Ficha integral familiar, alertas de protección, agenda de audiencias, registro de informes multidisciplinarios, seguimiento de medidas y coordinación con entidades de protección.",
+    baseNormativa: "Decreto Legislativo 052; Código de los Niños y Adolescentes; Decreto Legislativo 1348; legislación de familia y protección aplicable."
+  },
+  "trata": {
+    nombre: "Fiscalías Especializadas en Trata de Personas", showInDirectory: true,
+    desc: "Investigan la captación, transporte, traslado, acogida o recepción de personas con finalidad de explotación.",
+    atiende: "Explotación sexual o laboral, esclavitud, servidumbre, mendicidad, extracción de órganos y otras finalidades previstas legalmente, incluidas redes de captación y traslado.",
+    necesidades: "Protección de víctimas, identificación de captadores, transportistas y explotadores, rutas, establecimientos, comunicaciones, pagos, documentación migratoria y evidencia digital.",
+    herramientas: "Mapa de rutas, matriz de actores y etapas, control de medidas de protección, seguimiento de víctimas, coordinación migratoria y laboral, y trazabilidad de evidencia financiera y digital.",
+    baseNormativa: "Artículos 153 y siguientes del Código Penal; Código Procesal Penal; normas de protección de víctimas y resoluciones institucionales."
+  },
+  "ambiental": {
+    nombre: "Fiscalías Especializadas en Materia Ambiental", showInDirectory: true,
+    desc: "Investigan delitos que afectan el ambiente, los recursos naturales, los bosques, la fauna, el agua, el suelo y otros componentes ambientales.",
+    atiende: "Contaminación, minería ilegal, tala ilegal, tráfico de especies, afectación de recursos naturales y delitos ambientales conexos.",
+    necesidades: "Ubicación geográfica exacta, imágenes satelitales, inspecciones, muestras, informes técnicos, permisos, concesiones, límites territoriales y coordinación con OEFA, SERFOR, ANA, gobiernos regionales y Policía.",
+    herramientas: "Mapa georreferenciado, comparación temporal de imágenes, control de informes técnicos, registro de muestras, planificación de operativos y matriz de afectación ambiental.",
+    baseNormativa: "Artículos 304 a 314 del Código Penal; normativa ambiental sectorial; Código Procesal Penal; reglamentos y resoluciones institucionales."
+  },
+  "ciber": {
+    nombre: "Fiscalías Especializadas en Ciberdelincuencia", showInDirectory: true,
+    desc: "Investigan delitos cometidos contra sistemas, datos y servicios informáticos o mediante tecnologías digitales, conforme a la competencia establecida en cada distrito fiscal.",
+    atiende: "Acceso ilícito, ataques a datos o sistemas, fraude informático, suplantación, interceptación y otras conductas previstas en la Ley de Delitos Informáticos.",
+    necesidades: "Preservación inmediata de evidencia, registros de conexión, direcciones IP, cuentas, dispositivos, imágenes forenses, hashes, solicitudes a proveedores y trazabilidad de transferencias.",
+    herramientas: "Registro de evidencia digital, control de solicitudes de preservación, línea de tiempo tecnológica, mapa de cuentas y dispositivos, seguimiento de pericias y cadena de custodia digital.",
+    baseNormativa: "Ley 30096 y modificatorias; Código Procesal Penal; convenios y normativa aplicable a cooperación y evidencia digital."
+  },
+  "tributarios": {
+    nombre: "Fiscalías Especializadas en Delitos Tributarios, Aduaneros y Materias Afines", showInDirectory: true,
+    desc: "Atienden delitos tributarios, aduaneros y, cuando la organización institucional lo determine, materias relacionadas con propiedad intelectual.",
+    atiende: "Defraudación tributaria, contrabando, defraudación de rentas de aduana, receptación aduanera y otras conductas asignadas por norma o resolución.",
+    necesidades: "Organizar libros contables, comprobantes, declaraciones, operaciones de importación o exportación, valorizaciones, mercancías, rutas y documentos aduaneros.",
+    herramientas: "Matriz contable y tributaria, cronología de operaciones, registro de mercancías, control de pericias, comparación documental y seguimiento de coordinación con SUNAT, Aduanas y titulares de derechos.",
+    baseNormativa: "Decreto Legislativo 813; Ley 28008; Código Penal; legislación de propiedad intelectual aplicable y resoluciones institucionales."
+  },
+  "terrorismo": {
+    nombre: "Fiscalías Especializadas en Delitos de Terrorismo", showInDirectory: true,
+    desc: "Atienden investigaciones sometidas al régimen especial de delitos de terrorismo, dentro de los límites de la legalidad, el debido proceso y la competencia establecida institucionalmente.",
+    atiende: "Delitos de terrorismo, colaboración, financiamiento y otras conductas previstas en la legislación especial, según la competencia asignada.",
+    necesidades: "Separar información de inteligencia de evidencia procesal, gestionar comunicaciones, fuentes, movimientos financieros, documentación, pericias y coordinación interinstitucional.",
+    herramientas: "Gestión segura de expedientes, control de accesos, matriz de hechos y elementos, registro de fuentes, trazabilidad documental y planificación de diligencias.",
+    baseNormativa: "Decreto Ley 25475 y modificatorias; Código Procesal Penal; Constitución y normativa especial aplicable."
+  },
+  "derechos-humanos": {
+    nombre: "Fiscalías Especializadas en Derechos Humanos e Interculturalidad", showInDirectory: true,
+    desc: "Atienden investigaciones relacionadas con graves afectaciones de derechos humanos y casos que requieren un tratamiento intercultural, conforme a la competencia asignada.",
+    atiende: "Casos vinculados con afectaciones graves de derechos fundamentales, comunidades indígenas, contextos interculturales y otras materias definidas mediante resolución institucional.",
+    necesidades: "Protección de víctimas y testigos, intérpretes, contexto histórico y territorial, evidencia forense, documentación institucional y coordinación con comunidades y entidades públicas.",
+    herramientas: "Registro de víctimas, gestión de intérpretes, mapa territorial, cronología histórica, control de pericias forenses y protocolos de comunicación intercultural.",
+    baseNormativa: "Constitución Política; tratados de derechos humanos; Código Procesal Penal; Ley Orgánica del Ministerio Público y resoluciones institucionales."
+  },
+  "extincion-dominio": {
+    nombre: "Fiscalías Especializadas en Extinción de Dominio", showInDirectory: true,
+    desc: "Intervienen en el proceso patrimonial autónomo dirigido a bienes que podrían provenir de actividades ilícitas o estar destinados a ellas.",
+    atiende: "Bienes, activos, productos, ganancias, instrumentos o efectos relacionados con actividades ilícitas, con independencia del resultado de un proceso penal.",
+    necesidades: "Identificación de bienes, titularidad real, registros públicos, cuentas, empresas, medidas cautelares, administración y trazabilidad patrimonial.",
+    herramientas: "Inventario patrimonial, mapa de titularidad y beneficiarios, control de medidas cautelares, cronología de adquisiciones, seguimiento registral y tablero de bienes.",
+    baseNormativa: "Decreto Legislativo 1373 y su reglamento; normativa procesal de extinción de dominio.", fuenteEspecifica: "https://www.gob.pe/16918"
+  },
+  "extorsion": {
+    nombre: "Subsistema Especializado contra la Extorsión y Delitos Conexos", showInDirectory: true,
+    desc: "Atiende hechos en los que se emplean amenazas, violencia o intimidación para obtener una ventaja económica indebida, incluidos cobros de cupos y delitos conexos.",
+    atiende: "Extorsión, amenazas vinculadas con cobros, utilización de líneas telefónicas, mensajería, cuentas financieras, intermediarios y estructuras dedicadas a esta actividad.",
+    necesidades: "Protección de víctimas, preservación de llamadas y mensajes, identificación de líneas, IMEI, cuentas receptoras, geolocalización, entregas controladas y coordinación de intervenciones.",
+    herramientas: "Matriz de comunicaciones, mapa de teléfonos y cuentas, cronología de amenazas, registro de pagos, alertas de riesgo, planificación de operativos y seguimiento de evidencia digital.",
+    baseNormativa: "Artículo 200 del Código Penal; Código Procesal Penal; Decreto Legislativo 1735 como norma organizativa del subsistema y demás normas aplicables."
+  },
+  "accion-privada": { nombre: "No interviene el Ministerio Público — acción privada", showInDirectory: false, desc: "Los delitos contra el honor se persiguen mediante querella de la parte agraviada directamente ante el juez penal unipersonal (arts. 459 y ss. CPP), sin fiscal ni investigación preparatoria." }
 };
 
-const FISCALIAS_LISTA = [
-  "Fiscalías penales comunes (corporativas)",
-  "Corrupción de funcionarios",
-  "Criminalidad organizada",
-  "Lavado de activos",
-  "Tráfico ilícito de drogas",
-  "Terrorismo",
-  "Trata de personas y explotación",
-  "Delitos ambientales",
-  "Violencia contra las mujeres e integrantes del grupo familiar",
-  "Derechos humanos e interculturalidad",
-  "Delitos aduaneros y contra la propiedad intelectual",
-  "Ciberdelincuencia",
-  "Extinción de dominio (procedimiento patrimonial autónomo)",
-  "Subsistema especializado contra la extorsión y delitos conexos (DL 1735, 12/02/2026)"
+const FISCALIAS_UI_ORDER = [
+  "penal-comun", "corrupcion", "crimen-organizado", "lavado", "drogas",
+  "violencia-mujer", "familia", "trata", "ambiental", "ciber", "tributarios",
+  "terrorismo", "derechos-humanos", "extincion-dominio", "extorsion"
 ];
 
 /* Condiciones personales que alteran la competencia */

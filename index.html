@@ -23,7 +23,7 @@
   <meta name="twitter:description" content="Información penal, simulación educativa de casos, cálculo referencial de penas, plazos procesales y normativa peruana.">
   <meta name="twitter:image" content="https://justipenal-api.vercel.app/og-justipenal-v3.png">
   <meta name="twitter:image:alt" content="JustiPenal, portal informativo y educativo sobre el sistema penal peruano">
-  <link rel="stylesheet" href="css/styles.css?v=4">
+  <link rel="stylesheet" href="css/styles.css?v=5">
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>">
 </head>
@@ -511,16 +511,19 @@
       <div class="card">
         <div class="card-title"><span class="ic">👥</span><h3>Organización de las Fiscalías Penales</h3></div>
         <p class="card-sub">Jerarquía fiscal (D. Leg. 052 — Ley Orgánica del Ministerio Público)</p>
-        <div class="grid-3">
-          <div class="panel blue"><h4>Fiscalías Provinciales</h4><p style="font-size:13px">Nivel operativo principal: reciben denuncias, conducen la investigación, formalizan, acusan y litigan en juicio.</p></div>
-          <div class="panel blue"><h4>Fiscalías Superiores</h4><p style="font-size:13px">Apelaciones, elevación de actuados por archivo, revisión jerárquica y discrepancias sobre sobreseimiento.</p></div>
-          <div class="panel blue"><h4>Fiscalías Supremas</h4><p style="font-size:13px">Casaciones, revisiones de sentencia, procesos contra altos funcionarios y cooperación judicial internacional.</p></div>
-        </div>
+        <div class="hierarchy-grid" id="fiscal-hierarchy"></div>
         <p style="font-size:12.5px;color:var(--text-muted);margin-top:10px">No es correcto asociar «delito grave = fiscalía superior»: la especialidad depende de la materia y de las reglas de competencia, no solo de la pena prevista.</p>
       </div>
       <div class="card">
         <div class="card-title"><span class="ic">🗂️</span><h3>Fiscalías por Especialidad</h3></div>
-        <div class="grid-3" id="grid-fiscalias"></div>
+        <p class="fiscal-directory-notice">Las denominaciones y competencias son referenciales. La competencia material, territorial y funcional debe verificarse en la resolución de creación o reorganización y en el directorio vigente del Ministerio Público.</p>
+        <div class="fiscalia-grid" id="grid-fiscalias"></div>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="ic">🧰</span><h3>Herramientas para organizar un despacho o subsistema fiscal</h3></div>
+        <p class="card-sub">Funciones de apoyo para mejorar la gestión sin modificar competencias, jerarquía ni autonomía fiscal.</p>
+        <div class="office-tools-grid" id="office-tools-grid"></div>
+        <p class="office-tools-notice">Estas funcionalidades son herramientas de apoyo administrativo, analítico y documental. No califican delitos automáticamente, no sustituyen decisiones fiscales y no modifican la competencia establecida por ley o resolución.</p>
       </div>
       <div class="card">
         <div class="card-title"><span class="ic">📍</span><h3>Verificador de Competencia — Cuatro Dimensiones</h3></div>
@@ -756,20 +759,6 @@
   </div>
 </section>
 
-<aside class="capabilities-popover" id="professional-capabilities-popover" role="dialog" aria-labelledby="capabilities-title" aria-describedby="capabilities-intro" hidden>
-  <div class="capabilities-popover-head">
-    <div><span class="capabilities-label">Acceso a funciones avanzadas</span><h2 id="capabilities-title">Capacidades profesionales</h2></div>
-    <button class="capabilities-close" id="capabilities-close" type="button" aria-label="Cerrar capacidades profesionales">✕</button>
-  </div>
-  <p class="capabilities-context" id="capabilities-context"></p>
-  <p id="capabilities-intro"><b>¿Desea ampliar las capacidades de esta especialidad?</b><br>Puede solicitar herramientas profesionales para su despacho o equipo.</p>
-  <div class="capabilities-catalog" id="capabilities-catalog"></div>
-  <div class="capabilities-actions">
-    <p>El mensaje se prepara en su cliente de correo. JustiPenal no recibe ni almacena la solicitud.</p>
-    <a class="btn" id="capabilities-mailto" href="#">Solicitar información</a>
-  </div>
-</aside>
-
 <div class="feedback-modal" id="feedback-modal" role="dialog" aria-modal="true" aria-labelledby="feedback-title" aria-describedby="feedback-question feedback-privacy" hidden>
   <div class="feedback-dialog">
     <header><div><h2 id="feedback-title">Ayúdanos a mejorar</h2><p id="feedback-question">¿Qué agregarías, mejorarías o retirarías?</p></div><button type="button" class="feedback-close" data-feedback-close aria-label="Cerrar">✕</button></header>
@@ -802,11 +791,10 @@
 
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
-<script src="js/data.js?v=5"></script>
+<script src="js/data.js?v=6"></script>
 <script src="data/tei-data.js?v=1"></script>
 <script src="js/config.js?v=5"></script>
-<script src="js/app.js?v=5"></script>
-<script src="js/professional-capabilities.js?v=1"></script>
+<script src="js/app.js?v=6"></script>
 <script src="js/tei.js?v=1"></script>
 <script src="js/case-simulator.js?v=1"></script>
 <script src="js/feedback.js?v=1"></script>
