@@ -3,27 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JustiPenal | Sistema Penal Peruano</title>
-  <meta name="description" content="Información penal, simulación educativa de casos, cálculo referencial de penas, plazos procesales y normativa peruana.">
-  <link rel="canonical" href="https://justipenal-api.vercel.app/">
+  <title>JustiPenal | Análisis y gestión penal en Perú</title>
+  <meta name="description" content="JustiPenal integra análisis jurídico referencial, normativa, cálculo de penas, plazos procesales y herramientas para comprender y organizar información del sistema penal peruano.">
+  <link rel="canonical" href="https://justipenal.andesnova.solutions/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_PE">
   <meta property="og:site_name" content="JustiPenal">
-  <meta property="og:title" content="JustiPenal | Sistema Penal Peruano">
-  <meta property="og:description" content="Información penal, simulación educativa de casos, cálculo referencial de penas, plazos procesales y normativa peruana.">
-  <meta property="og:url" content="https://justipenal-api.vercel.app/">
-  <meta property="og:image" content="https://justipenal-api.vercel.app/og-justipenal-v3.png">
-  <meta property="og:image:secure_url" content="https://justipenal-api.vercel.app/og-justipenal-v3.png">
+  <meta property="og:title" content="JustiPenal | Análisis y gestión penal en Perú">
+  <meta property="og:description" content="JustiPenal integra análisis jurídico referencial, normativa, cálculo de penas, plazos procesales y herramientas para comprender y organizar información del sistema penal peruano.">
+  <meta property="og:url" content="https://justipenal.andesnova.solutions/">
+  <meta property="og:image" content="https://justipenal.andesnova.solutions/og-justipenal-v3.png">
+  <meta property="og:image:secure_url" content="https://justipenal.andesnova.solutions/og-justipenal-v3.png">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="JustiPenal, portal informativo y educativo sobre el sistema penal peruano">
+  <meta property="og:image:alt" content="JustiPenal, análisis, normativa y herramientas para la gestión penal">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="JustiPenal | Sistema Penal Peruano">
-  <meta name="twitter:description" content="Información penal, simulación educativa de casos, cálculo referencial de penas, plazos procesales y normativa peruana.">
-  <meta name="twitter:image" content="https://justipenal-api.vercel.app/og-justipenal-v3.png">
-  <meta name="twitter:image:alt" content="JustiPenal, portal informativo y educativo sobre el sistema penal peruano">
-  <link rel="stylesheet" href="css/styles.css?v=7">
+  <meta name="twitter:title" content="JustiPenal | Análisis y gestión penal en Perú">
+  <meta name="twitter:description" content="JustiPenal integra análisis jurídico referencial, normativa, cálculo de penas, plazos procesales y herramientas para comprender y organizar información del sistema penal peruano.">
+  <meta name="twitter:image" content="https://justipenal.andesnova.solutions/og-justipenal-v3.png">
+  <meta name="twitter:image:alt" content="JustiPenal, análisis, normativa y herramientas para la gestión penal">
+  <script src="js/config.js?v=6"></script>
+  <script>
+    (() => {
+      const siteUrl = window.JUSTIPENAL_CONFIG?.siteUrl?.replace(/\/$/, "");
+      if (!siteUrl) return;
+      const set = (selector, attribute, value) => document.querySelector(selector)?.setAttribute(attribute, value);
+      set('link[rel="canonical"]', "href", `${siteUrl}/`);
+      set('meta[property="og:url"]', "content", `${siteUrl}/`);
+      set('meta[property="og:image"]', "content", `${siteUrl}/og-justipenal-v3.png`);
+      set('meta[property="og:image:secure_url"]', "content", `${siteUrl}/og-justipenal-v3.png`);
+      set('meta[name="twitter:image"]', "content", `${siteUrl}/og-justipenal-v3.png`);
+    })();
+  </script>
+  <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"WebSite","name":"JustiPenal","alternateName":"JustiPenal | Análisis y gestión penal en Perú","url":"https://justipenal.andesnova.solutions/","description":"JustiPenal integra análisis jurídico referencial, normativa, cálculo de penas, plazos procesales y herramientas para comprender y organizar información del sistema penal peruano.","inLanguage":"es-PE"}
+  </script>
+  <link rel="stylesheet" href="css/styles.css?v=8">
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>">
 </head>
@@ -31,7 +47,7 @@
 
 <header class="topbar">
   <button class="btn-menu" id="btn-menu" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="sidebar">☰</button>
-  <div class="brand">
+  <div class="brand" aria-label="JustiPenal">
     <div class="brand-logo" aria-hidden="true">
       <svg viewBox="0 0 36 36" role="img" aria-label="JP"><rect x="1" y="1" width="34" height="34" rx="9"/><text x="18" y="23" text-anchor="middle">JP</text></svg>
     </div>
@@ -39,8 +55,8 @@
   </div>
   <div class="topbar-divider"></div>
   <div class="topbar-title">
-    <h1>Portal Informativo del Sistema Penal Peruano</h1>
-    <p>Información, normativa y cálculo referencial de penas según el Código Penal y el Nuevo Código Procesal Penal</p>
+    <h1>JustiPenal</h1>
+    <p>Análisis, normativa y herramientas para la gestión penal</p>
   </div>
   <div class="topbar-spacer"></div>
   <nav class="topbar-links">
@@ -92,17 +108,23 @@
       <div class="hero">
         <div class="hero-glow" aria-hidden="true"></div>
         <div class="hero-sweep" aria-hidden="true"></div>
-        <div class="hero-title-mask"><h2>Sistema Penal Peruano</h2></div>
-        <p>Información clara, actualizada y herramientas de análisis referencial para profesionales del derecho y ciudadanos.</p>
-        <button class="hero-simulator-cta" type="button" onclick="goPage('simulador')">
-          <b>▶ Simular un caso educativo</b>
-          <span>Explora paso a paso cómo podría avanzar un caso ficticio.</span>
-        </button>
+        <div class="hero-title-mask"><h2>JustiPenal</h2></div>
+        <h3>Análisis, normativa y herramientas para la gestión penal</h3>
+        <a class="hero-developer" href="https://www.andesnova.solutions/" target="_blank" rel="noopener noreferrer" aria-label="Visitar el sitio web de AndesNova, desarrolladora de JustiPenal">Desarrollada por <strong>AndesNova</strong> <span aria-hidden="true">↗</span></a>
+        <p>Información jurídica estructurada, fuentes oficiales y herramientas referenciales para comprender, analizar y organizar situaciones relacionadas con el sistema penal peruano.</p>
+        <div class="hero-actions">
+          <button class="btn" type="button" onclick="goPage('analizar')">Analizar un caso</button>
+          <button class="btn secondary" type="button" onclick="goPage('calculo')">Explorar herramientas</button>
+        </div>
         <svg class="hero-scales" viewBox="0 0 180 120" aria-hidden="true">
           <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M90 15v82M63 97h54M73 106h34M55 38h70M90 26l-35 12M90 26l35 12M55 38 38 66M55 38 72 66M38 66c4 15 30 15 34 0M125 38l-17 28M125 38l17 28M108 66c4 15 30 15 34 0"/>
           </g>
         </svg>
+      </div>
+
+      <div class="trust-strip" aria-label="Características de confianza">
+        <span>Fuentes oficiales</span><i aria-hidden="true">·</i><span>Revisión normativa identificada</span><i aria-hidden="true">·</i><span>Herramientas locales</span><i aria-hidden="true">·</i><span>Plataforma tecnológica independiente</span>
       </div>
 
       <div class="stats" id="stats-row"></div>
@@ -550,9 +572,9 @@
         <div class="andesnova-attribution">
           <a href="https://www.andesnova.solutions/" target="_blank" rel="noopener noreferrer" aria-label="Visitar AndesNova Solutions, proveedor tecnológico independiente">
             <img src="assets/andesnova-mark.png" alt="">
-            <span>Powered by <strong>AndesNova</strong></span>
+            <span>Desarrollada por <strong>AndesNova</strong> <span aria-hidden="true">↗</span></span>
           </a>
-          <small>Implementación tecnológica independiente.</small>
+          <small>Soluciones tecnológicas privadas, configurables y adaptadas a cada organización.</small>
         </div>
       </div>
       <div class="card">
@@ -693,6 +715,7 @@
         <h4>¿Cómo se valida un cambio antes de publicarlo?</h4>
         <p>Todo cambio debe citar la norma modificatoria, su fecha de publicación y su enlace oficial, y queda registrado en el historial de cambios siguiente.</p>
         <h4>Gobernanza de la información</h4>
+        <p class="independence-statement">JustiPenal es una plataforma tecnológica independiente y no se encuentra afiliada a ninguna entidad pública.</p>
         <ul>
           <li>Solo se organizan fuentes públicas oficiales con procedencia, fecha de revisión editorial y advertencias de vigencia temporal.</li>
           <li>La información pública se separa de sistemas, expedientes y datos restringidos; JustiPenal no accede a sistemas internos del Estado.</li>
@@ -726,7 +749,7 @@
         <p>El uso del portal es bajo exclusiva responsabilidad del usuario. Dentro de los límites permitidos por la legislación aplicable, el portal y sus autores <b>no asumen responsabilidad</b> por decisiones adoptadas exclusivamente con base en la información o los cálculos mostrados. Ninguna herramienta de este portal crea una relación abogado-cliente.</p>
 
         <h4>5. Privacidad y datos personales</h4>
-        <p>JustiPenal no utiliza cuentas de usuario ni bases de datos de casos. El módulo «Analizar Caso» y las calculadoras se ejecutan en el navegador. El chat envía el mensaje actual, el historial reciente y, solo con confirmación del usuario, un contexto estructurado y sanitizado; el procesamiento se realiza mediante Vercel y Gemini. No incluya datos personales, confidenciales ni identificadores del caso, conforme a los principios de la Ley 29733 y su Reglamento (D. S. 016-2024-JUS). El portal emplea <b>GoatCounter</b> para estadísticas anónimas y agregadas de visitas (página vista, país y tipo de dispositivo): no usa cookies, no almacena direcciones IP ni perfila personas.</p>
+        <p>JustiPenal no utiliza cuentas de usuario ni bases de datos de casos. El módulo «Analizar Caso» y las calculadoras se ejecutan en el navegador. El chat utiliza proveedores tecnológicos externos para procesar temporalmente el mensaje actual, el historial reciente de la sesión y el contexto que el usuario autorice. No se crea una base persistente de casos. No incluya datos personales, confidenciales ni identificadores del caso, conforme a los principios de la Ley 29733 y su Reglamento (D. S. 016-2024-JUS). El portal emplea <b>GoatCounter</b> para estadísticas anónimas y agregadas de visitas (página vista, país y tipo de dispositivo): no usa cookies, no almacena direcciones IP ni perfila personas.</p>
         <p>El formulario de opinión almacena únicamente la categoría seleccionada, el comentario voluntario, la sección consultada y la fecha de envío. No solicite ni incluya nombres, documentos de identidad, expedientes ni información de casos reales. Estos comentarios se utilizan exclusivamente para evaluar y mejorar el portal.</p>
 
         <h4>6. Enlaces a terceros</h4>
@@ -799,7 +822,7 @@
       </div>
     </form>
     <p class="chat-mobile-privacy">No ingreses datos personales ni información de casos reales.</p>
-    <details class="chat-privacy-details"><summary>Privacidad y uso</summary><p>El analizador permanece en su navegador. El chat envía a Vercel y Gemini el mensaje actual, el historial reciente de esta sesión y cualquier contexto sanitizado que usted confirme. No se crea una base local de casos.</p><p>Servicio tecnológico independiente: <a href="https://www.andesnova.solutions/" target="_blank" rel="noopener noreferrer">AndesNova Solutions</a>.</p></details>
+    <details class="chat-privacy-details"><summary>Privacidad y uso</summary><p>El analizador funciona localmente en el navegador. El chat procesa temporalmente la información enviada mediante servicios tecnológicos externos. No incluya datos personales, confidenciales ni información de casos reales.</p><p>Servicio tecnológico independiente: <a href="https://www.andesnova.solutions/" target="_blank" rel="noopener noreferrer">AndesNova Solutions</a>.</p></details>
   </div>
 </section>
 
@@ -828,8 +851,9 @@
     <a href="#fuentes" data-goto="fuentes">Fuentes oficiales</a>
   </div>
   <div class="footer-row">
-    <span>ℹ️ La información es referencial y no constituye asesoría legal. El analizador y las calculadoras son locales; el chat procesa mediante Vercel y Gemini el mensaje actual, el historial reciente y el contexto sanitizado confirmado. No incluya datos personales o confidenciales. Consulte con un profesional.</span>
-    <span>© 2026 JustiPenal — Portal Informativo del Sistema Penal Peruano</span>
+    <span>La información es referencial y no constituye asesoría legal. Las herramientas locales funcionan en el navegador y el chat procesa temporalmente las consultas mediante servicios tecnológicos externos. No incluya datos personales ni información confidencial.</span>
+    <span>© 2026 JustiPenal. Análisis, normativa y herramientas para la gestión penal.</span>
+    <span>Desarrollada por <a href="https://www.andesnova.solutions/" target="_blank" rel="noopener noreferrer" aria-label="Visitar el sitio web de AndesNova, desarrolladora de JustiPenal">AndesNova</a>.</span>
   </div>
 </footer>
 
@@ -837,7 +861,6 @@
 <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
 <script src="js/data.js?v=7"></script>
 <script src="data/tei-data.js?v=1"></script>
-<script src="js/config.js?v=5"></script>
 <script src="js/app.js?v=7"></script>
 <script src="js/tei.js?v=1"></script>
 <script src="js/case-simulator.js?v=2"></script>
