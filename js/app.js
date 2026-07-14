@@ -807,7 +807,7 @@ $("#grid-medidas").innerHTML = MEDIDAS_COERCITIVAS.map(
 
 // ---------- fiscalías ----------
 $("#grid-fiscalias").innerHTML = FISCALIAS_LISTA.map(
-  (f) => `<div class="panel blue" style="padding:12px 14px"><p style="font-size:13px"><b>${f}</b></p></div>`
+  (f, index) => `<button class="panel blue fiscal-specialty" type="button" data-fiscal-specialty="${esc(f)}" aria-haspopup="dialog" aria-expanded="false" aria-controls="professional-capabilities-popover"><span class="fiscal-specialty-icon" aria-hidden="true">§</span><span>${esc(f)}</span><span class="fiscal-specialty-more" aria-hidden="true">Capacidades profesionales</span></button>`
 ).join("");
 $("#tabla-condiciones").innerHTML = CONDICIONES_PERSONA.filter((c) => c.nota).map(
   (c) => `<tr><td><b>${c.label}</b></td><td>${c.nota}</td></tr>`
