@@ -106,7 +106,7 @@ test("bloquea filtraciones en la salida y elimina URLs generadas", () => {
 
 test("CORS rechaza orígenes no autorizados", async () => {
   const oldOrigin = process.env.ALLOWED_ORIGIN;
-  process.env.ALLOWED_ORIGIN = "https://oprbguitar.github.io";
+  process.env.ALLOWED_ORIGIN = "https://justipenal.andesnova.solutions";
   const req = { method: "POST", headers: { origin: "https://evil.example", "content-type": "application/json" }, body: validPayload() };
   const res = mockResponse();
   await handler(req, res);
@@ -116,18 +116,18 @@ test("CORS rechaza orígenes no autorizados", async () => {
 
 test("CORS normaliza rutas y barras finales del origen configurado", async () => {
   const oldOrigin = process.env.ALLOWED_ORIGIN;
-  process.env.ALLOWED_ORIGIN = "https://oprbguitar.github.io/JustiPenal/";
-  const req = { method: "OPTIONS", headers: { origin: "https://oprbguitar.github.io" } };
+  process.env.ALLOWED_ORIGIN = "https://justipenal.andesnova.solutions/";
+  const req = { method: "OPTIONS", headers: { origin: "https://justipenal.andesnova.solutions" } };
   const res = mockResponse();
   await handler(req, res);
   assert.equal(res.statusCode, 204);
-  assert.equal(res.headers["Access-Control-Allow-Origin"], "https://oprbguitar.github.io");
+  assert.equal(res.headers["Access-Control-Allow-Origin"], "https://justipenal.andesnova.solutions");
   process.env.ALLOWED_ORIGIN = oldOrigin;
 });
 
 test("CORS permite que el dominio de producción llame a su propio backend", async () => {
   const oldOrigin = process.env.ALLOWED_ORIGIN;
-  process.env.ALLOWED_ORIGIN = "https://oprbguitar.github.io";
+  process.env.ALLOWED_ORIGIN = "https://justipenal.andesnova.solutions";
   const req = {
     method: "OPTIONS",
     headers: {
@@ -191,7 +191,7 @@ test("producción no usa fallback silencioso cuando Redis falta", async () => {
   delete process.env.UPSTASH_REDIS_REST_URL;
   delete process.env.UPSTASH_REDIS_REST_TOKEN;
   try {
-    const req = { method: "POST", headers: { "content-type": "application/json", "x-forwarded-for": "203.0.113.88" }, body: validPayload({ message: "xyzqv materia no catalogada" }) };
+    const req = { method: "POST", headers: { origin: "https://justipenal.andesnova.solutions", host: "justipenal.andesnova.solutions", "content-type": "application/json", "x-forwarded-for": "203.0.113.88" }, body: validPayload({ message: "xyzqv materia no catalogada" }) };
     const res = mockResponse();
     await handler(req, res);
     assert.equal(res.statusCode, 503);

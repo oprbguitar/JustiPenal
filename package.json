@@ -4,9 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "build": "node scripts/prepare-vercel-static.mjs",
     "build:kb": "node scripts/build-legal-kb.mjs",
+    "indexnow": "node scripts/notify-indexnow.mjs",
     "test": "node --test",
-    "test:syntax": "node --check api/chat.js && node --check api/feedback.js && node --check js/chat.js && node --check js/app.js && node --check js/feedback.js && node --check js/case-simulator.js && node --check data/tei-data.js && node --check js/tei.js"
+    "test:syntax": "node --check api/chat.js && node --check api/feedback.js && node --check lib/security-alerts.js && node --check js/chat.js && node --check js/app.js && node --check js/share.js && node --check js/feedback.js && node --check js/case-simulator.js && node --check data/tei-data.js && node --check js/tei.js && node --check scripts/prepare-vercel-static.mjs && node --check scripts/notify-indexnow.mjs"
   },
   "dependencies": {
     "@google/genai": "2.11.0",

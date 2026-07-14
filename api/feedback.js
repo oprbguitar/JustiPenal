@@ -1,6 +1,7 @@
 import { Redis } from "@upstash/redis";
 import { Ratelimit } from "@upstash/ratelimit";
-import { checkMemoryBucket, cleanString, clientIdentifier, isPlainObject, normalizeSecurityText } from "./chat.js";
+import { applyCors, checkMemoryBucket, cleanString, clientIdentifier, isPlainObject, normalizeSecurityText } from "./chat.js";
+import { recordSecurityEvent } from "../lib/security-alerts.js";
 
 const CATEGORIES = new Set(["add", "improve", "remove", "error"]);
 const MAX_BODY_BYTES = 4096;
@@ -25,12 +26,14 @@ export function containsSensitiveIdentifier(value) {
 
 export function validateFeedbackPayload(body) {
   if (!isPlainObject(body)) return { status: 400 };
+  if (Object.keys(body).some((key) => !["category", "message", "section", "pathname", "website"].includes(key))) return { status: 400 };
   if (typeof body.website !== "undefined" && typeof body.website !== "string") return { status: 400 };
   if (cleanString(body.website, 200)) return { honeypot: true };
   if (!CATEGORIES.has(body.category)) return { status: 400 };
   if (typeof body.message !== "string") return { status: 400 };
   const message = cleanString(body.message, 501);
   if (message.length < 3 || message.length > 500) return { status: 400 };
+  if (/<\/?[a-z][^>]*>/i.test(message)) return { status: 400 };
   if (containsSensitiveIdentifier(message)) return { status: 400 };
   if (typeof body.section !== "string" || body.section.length > 120) return { status: 400 };
   if (typeof body.pathname !== "string" || body.pathname.length > 200 || !body.pathname.startsWith("/") || /[?#]/.test(body.pathname)) return { status: 400 };
@@ -41,7 +44,7 @@ function securityHeaders(res) {
   res.setHeader("Cache-Control", "no-store, max-age=0");
   res.setHeader("Content-Type", "application/json; charset=utf-8");
   res.setHeader("X-Content-Type-Options", "nosniff");
-  res.setHeader("Referrer-Policy", "no-referrer");
+  res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
   res.setHeader("Content-Security-Policy", "default-src 'none'; frame-ancestors 'none'");
 }
 
@@ -81,24 +84,51 @@ async function storeFeedback(value) {
 
 export default async function handler(req, res) {
   securityHeaders(res);
-  if (req.method !== "POST") { res.setHeader("Allow", "POST"); return res.status(405).json({ error: "method_not_allowed" }); }
-  if (!String(req.headers["content-type"] || "").toLowerCase().startsWith("application/json")) return res.status(415).json({ error: "invalid_request" });
+  if (!applyCors(req, res)) {
+    await recordSecurityEvent(req, { category: "origin_blocked", status: 403, action: "deny" });
+    return res.status(403).json({ error: "invalid_request" });
+  }
+  if (req.method === "OPTIONS") return res.status(204).end();
+  if (req.method !== "POST") { res.setHeader("Allow", "POST, OPTIONS"); return res.status(405).json({ error: "method_not_allowed" }); }
+  if (!String(req.headers["content-type"] || "").toLowerCase().startsWith("application/json")) {
+    await recordSecurityEvent(req, { category: "malformed_request", status: 415, action: "deny" });
+    return res.status(415).json({ error: "invalid_request" });
+  }
   const contentLength = Number(req.headers["content-length"] || 0);
-  if (contentLength > MAX_BODY_BYTES) return res.status(413).json({ error: "invalid_request" });
+  if (contentLength > MAX_BODY_BYTES) {
+    await recordSecurityEvent(req, { category: "oversized_request", status: 413, action: "deny" });
+    return res.status(413).json({ error: "invalid_request" });
+  }
   let serialized;
-  try { serialized = JSON.stringify(req.body); } catch { return res.status(400).json({ error: "invalid_request" }); }
-  if (Buffer.byteLength(serialized || "", "utf8") > MAX_BODY_BYTES) return res.status(413).json({ error: "invalid_request" });
+  try { serialized = JSON.stringify(req.body); } catch {
+    await recordSecurityEvent(req, { category: "malformed_request", status: 400, action: "deny" });
+    return res.status(400).json({ error: "invalid_request" });
+  }
+  if (Buffer.byteLength(serialized || "", "utf8") > MAX_BODY_BYTES) {
+    await recordSecurityEvent(req, { category: "oversized_request", status: 413, action: "deny" });
+    return res.status(413).json({ error: "invalid_request" });
+  }
 
   const validation = validateFeedbackPayload(req.body);
-  if (validation.honeypot) return res.status(202).json({ ok: true });
-  if (!validation.value) return res.status(validation.status || 400).json({ error: "invalid_request" });
+  if (validation.honeypot) {
+    await recordSecurityEvent(req, { category: "malformed_request", status: 202, action: "log" });
+    return res.status(202).json({ ok: true });
+  }
+  if (!validation.value) {
+    await recordSecurityEvent(req, { category: "malformed_request", status: validation.status || 400, action: "deny" });
+    return res.status(validation.status || 400).json({ error: "invalid_request" });
+  }
 
   try {
     const rate = await checkRateLimit(clientIdentifier(req));
-    if (!rate.success) return res.status(429).json({ error: "rate_limited" });
+    if (!rate.success) {
+      await recordSecurityEvent(req, { category: "rate_limited", status: 429, action: "rate-limit" });
+      return res.status(429).json({ error: "rate_limited" });
+    }
     await storeFeedback(validation.value);
     return res.status(201).json({ ok: true });
   } catch {
+    await recordSecurityEvent(req, { category: "server_error", status: 503, action: "log" });
     return res.status(503).json({ error: "service_unavailable" });
   }
 }

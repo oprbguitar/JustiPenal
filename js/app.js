@@ -127,10 +127,6 @@ function goPage(id, options = {}) {
   if (location.hash !== "#" + id) history.replaceState(null, "", "#" + id);
   if (window.AOS && id === "inicio") setTimeout(() => AOS.refresh(), 60);
   document.dispatchEvent(new CustomEvent("justipenal:pagechange", { detail: id }));
-  /* Estadística anónima por módulo (GoatCounter, sin cookies ni IPs) */
-  if (window.goatcounter && typeof window.goatcounter.count === "function") {
-    window.goatcounter.count({ path: "/" + id, title: "JustiPenal — " + id, event: false });
-  }
 }
 $$(".nav-item").forEach((btn) => btn.addEventListener("click", () => goPage(btn.dataset.page)));
 $$(".topbar-links a, .footer-links a[data-goto]").forEach((a) =>

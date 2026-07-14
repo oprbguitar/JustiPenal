@@ -1,6 +1,6 @@
 # ⚖️ JustiPenal — Portal Informativo del Sistema Penal Peruano
 
-### 🌐 Visita el portal aquí: **[https://oprbguitar.github.io/JustiPenal/](https://oprbguitar.github.io/JustiPenal/)**
+### 🌐 Visita JustiPenal: **[https://justipenal.andesnova.solutions/](https://justipenal.andesnova.solutions/)**
 
 Funciona en computadora, tablet y celular. No requiere registro. Las herramientas deterministas siguen siendo gratuitas y locales; el asistente opcional procesa únicamente los mensajes que el usuario decide enviar.
 
