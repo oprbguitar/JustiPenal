@@ -87,10 +87,23 @@ function setMenu(open) {
   document.body.classList.toggle("menu-open", open);
   btnMenu.setAttribute("aria-expanded", String(open));
   btnMenu.textContent = open ? "✕" : "☰";
+  if (open) {
+    btnMenu.classList.remove("menu-attention");
+    btnMenu.classList.add("menu-seen");
+    try { sessionStorage.setItem("justipenal-menu-opened", "1"); } catch { /* Mejora visual opcional. */ }
+  }
 }
 btnMenu.addEventListener("click", () => setMenu(!sidebar.classList.contains("open")));
 overlay.addEventListener("click", () => setMenu(false));
 document.addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
+if (matchMedia("(max-width: 800px)").matches) {
+  let menuOpened = false;
+  try { menuOpened = sessionStorage.getItem("justipenal-menu-opened") === "1"; } catch { /* Sin persistencia. */ }
+  if (!menuOpened) {
+    window.setTimeout(() => { btnMenu.classList.add("menu-attention"); window.setTimeout(() => btnMenu.classList.remove("menu-attention"), 2600); }, 2500);
+    window.setTimeout(() => { try { menuOpened = sessionStorage.getItem("justipenal-menu-opened") === "1"; } catch { /* Sin persistencia. */ } if (!menuOpened) { btnMenu.classList.add("menu-attention"); window.setTimeout(() => btnMenu.classList.remove("menu-attention"), 2600); } }, 20000);
+  }
+}
 
 // ---------- navegación ----------
 function goPage(id, options = {}) {
@@ -182,14 +195,49 @@ function renderTablaDelitos(filtro = "") {
         <td><b>${d.nombre}</b>${m.nota ? `<br><small style="color:var(--text-muted)">${m.nota}</small>` : ""}</td>
         <td><a href="${d.fuente.url}" target="_blank" rel="noopener" title="${esc(d.fuente.norma)}">${d.articulo} ↗</a></td>
         <td>${m.nombre}</td><td>${penaHTML(m)}</td><td>${consecuenciasHTML(m)}</td>
-        <td>${selloBadge(d.sello)}<br><small style="color:var(--text-muted)">al ${VERIFICADO_AT}</small></td></tr>`
+        <td>${selloBadge(d.sello)}<br><small style="color:var(--text-muted)">al ${VERIFICADO_AT}</small></td>
+        <td><button class="btn small secondary offense-analysis-open" type="button" data-offense="${esc(d.id)}">Ver análisis</button></td></tr>`
       );
     }
   }
-  $("#tabla-delitos tbody").innerHTML = rows.join("") || '<tr><td colspan="7">Sin resultados para la búsqueda.</td></tr>';
+  $("#tabla-delitos tbody").innerHTML = rows.join("") || '<tr><td colspan="8">Sin resultados para la búsqueda.</td></tr>';
 }
 renderTablaDelitos();
 $("#buscar-delito").addEventListener("input", (e) => renderTablaDelitos(e.target.value));
+
+// ---------- perfil jurídico extendido ----------
+const offenseDialog = $("#offense-dialog");
+let offenseDialogTrigger = null;
+const officialHosts = ["spij.minjus.gob.pe", "www.gob.pe", "gob.pe", "www.pj.gob.pe", "pj.gob.pe", "www.sunat.gob.pe", "sunat.gob.pe", "www.sbs.gob.pe", "sbs.gob.pe", "www.defensoria.gob.pe", "defensoria.gob.pe"];
+function safeOfficialUrl(value) {
+  try { const url = new URL(value); return url.protocol === "https:" && officialHosts.some((host) => url.hostname === host || url.hostname.endsWith(`.${host}`)) ? url.href : ""; } catch { return ""; }
+}
+const analysisList = (items) => `<ul class="analysis-list">${(items?.length ? items : ["Pendiente de revisión oficial"]).map((item) => `<li>${esc(typeof item === "string" ? item : item.texto)}${typeof item === "object" && item.estado ? ` <span class="result-badge">${esc(item.estado)}</span>` : ""}</li>`).join("")}</ul>`;
+function renderOffenseAnalysis(delito) {
+  const a = delito.analisis;
+  const sections = [
+    ["tipo", "Tipo penal", `<div class="analysis-grid"><section><h4>Resumen</h4><p>${esc(a.resumenTipo)}</p></section><section><h4>Bien jurídico</h4><p>${esc(a.bienJuridico)}</p></section><section><h4>Sujetos</h4><p><b>Activo:</b> ${esc(a.sujetoActivo)}</p><p><b>Pasivo:</b> ${esc(a.sujetoPasivo)}</p></section><section><h4>Verbos rectores</h4>${analysisList(a.verbosRectores)}</section><section><h4>Elementos del tipo</h4>${analysisList(a.elementosObjetivos)}</section><section><h4>Elemento subjetivo</h4><p>${esc(a.elementoSubjetivo)}</p></section><section><h4>Consumación y tentativa</h4><p>${esc(a.consumacion)}</p><p>${esc(a.tentativa)}</p></section><section><h4>Agravantes específicas</h4>${analysisList(a.agravantesEspecificas)}</section></div>`],
+    ["aplica", "Por qué podría aplicar", `${analysisList(a.porQuePodriaAplicar)}<h4>Preguntas críticas</h4>${analysisList(a.preguntasCriticas)}`],
+    ["no-aplica", "Por qué podría no aplicar", `${analysisList(a.porQuePodriaNoAplicar)}<h4>Exclusión o descarte</h4>${analysisList(a.exclusionesODescarte)}<div class="analysis-distinction"><b>Diferencias esenciales:</b> la falta de encaje legal no equivale a insuficiencia de prueba; una atenuante no elimina el delito acreditado; y un beneficio procesal se aplica separadamente a la pena.</div>`],
+    ["prueba", "Prueba y peritos", `<h4>Medios probatorios</h4>${analysisList(a.mediosProbatorios)}<h4>Peritos relacionados</h4>${analysisList(a.peritosRelacionados)}<h4>Riesgos probatorios</h4>${analysisList(a.riesgosProbatorios)}<div class="tbl-wrap"><table class="tbl analysis-matrix"><thead><tr><th>Elemento jurídico</th><th>Hecho relacionado</th><th>Fuente del dato</th><th>Estado</th><th>Explicación</th><th>Qué falta verificar</th></tr></thead><tbody>${a.matriz.map((m) => `<tr><td>${esc(m.elemento)}</td><td>${esc(m.hecho)}</td><td>${esc(m.fuenteDato)}</td><td><span class="result-badge">${esc(m.estado)}</span></td><td>${esc(m.explicacion)}</td><td>${esc(m.falta)}</td></tr>`).join("")}</tbody></table></div>`],
+    ["ruta", "Ruta procesal", `${analysisList(a.rutaProcesal)}<h4>Posiciones procesales</h4><div class="procedural-positions"><details><summary>Investigación</summary><p>Solicitud de aclaración o individualización; oposición cuando proceda; control judicial de medidas restrictivas; tutela de derechos; control de plazo; cuestionamiento de legalidad o integridad de evidencia.</p></details><details><summary>Etapa intermedia</summary><p>Observación de la acusación; pedido de sobreseimiento; exclusión o disputa de admisibilidad probatoria; objeción a una atribución genérica o insuficiente.</p></details><details><summary>Juicio</summary><p>Objeciones a preguntas; contradicción de testigos; cuestionamiento pericial; autenticidad, integridad, pertinencia o cadena de custodia; alegatos finales.</p></details><details><summary>Apelación</summary><p>Error fáctico o jurídico identificado; defecto de motivación; valoración probatoria incorrecta; infracción procesal; alcance y límites del recurso.</p></details></div><p class="analysis-note">Información general: no genera escritos ni estrategia jurídica personalizada.</p>`],
+    ["interpretaciones", "Interpretaciones", analysisList(a.interpretaciones)],
+    ["fuentes", "Fuentes oficiales", a.fuentes.map((source) => { const url = safeOfficialUrl(source.url); return `<article class="analysis-source"><span class="result-badge">${esc(source.estado)}</span><h4>${esc(source.nombre)} — ${esc(source.articulo)}</h4><p>Revisión editorial: ${esc(source.ultimaVerificacion)}. ${esc(source.vigenciaTemporal)}</p><dl class="analysis-source-version"><dt>Versión legal</dt><dd>${esc(source.versionLegal)}</dd><dt>Publicación</dt><dd>${esc(source.fechaPublicacion)}</dd><dt>Vigencia</dt><dd>${esc(source.fechaVigencia)}</dd><dt>Norma modificatoria</dt><dd>${esc(source.normaModificatoria)}</dd></dl>${url ? `<a href="${url}" target="_blank" rel="noopener noreferrer">Consultar fuente oficial ↗</a>` : "<p>Pendiente de enlace oficial válido.</p>"}</article>`; }).join("")]
+  ];
+  $("#offense-dialog-title").textContent = delito.nombre;
+  $("#offense-dialog-meta").textContent = `${delito.familia} · ${delito.articulo} · hipótesis provisional`;
+  $("#offense-tabs").innerHTML = sections.map(([id, label], index) => `<button type="button" role="tab" id="offense-tab-${id}" aria-controls="offense-panel-${id}" aria-selected="${index === 0}" tabindex="${index === 0 ? 0 : -1}">${esc(label)}</button>`).join("");
+  $("#offense-tabpanels").innerHTML = sections.map(([id, , content], index) => `<section role="tabpanel" id="offense-panel-${id}" aria-labelledby="offense-tab-${id}" ${index ? "hidden" : ""}>${content}</section>`).join("");
+}
+function selectOffenseTab(tab) {
+  $$("#offense-tabs [role=tab]").forEach((item) => { const selected = item === tab; item.setAttribute("aria-selected", String(selected)); item.tabIndex = selected ? 0 : -1; $("#" + item.getAttribute("aria-controls")).hidden = !selected; });
+}
+$("#offense-tabs").addEventListener("click", (event) => { const tab = event.target.closest("[role=tab]"); if (tab) selectOffenseTab(tab); });
+$("#offense-tabs").addEventListener("keydown", (event) => { if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return; const tabs = [...$$("#offense-tabs [role=tab]")]; let index = tabs.indexOf(document.activeElement); if (event.key === "Home") index = 0; else if (event.key === "End") index = tabs.length - 1; else index = (index + (event.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length; event.preventDefault(); selectOffenseTab(tabs[index]); tabs[index].focus(); });
+$("#tabla-delitos tbody").addEventListener("click", (event) => { const button = event.target.closest(".offense-analysis-open"); if (!button) return; const delito = DELITOS.find((item) => item.id === button.dataset.offense); if (!delito) return; offenseDialogTrigger = button; renderOffenseAnalysis(delito); offenseDialog.showModal(); $("#offense-tabs [role=tab]")?.focus(); });
+$(".offense-dialog-close").addEventListener("click", () => offenseDialog.close());
+offenseDialog.addEventListener("click", (event) => { if (event.target === offenseDialog) offenseDialog.close(); });
+offenseDialog.addEventListener("close", () => offenseDialogTrigger?.focus());
 
 // ---------- calculadora: formulario del delito ----------
 const familias = [...new Set(DELITOS.map((d) => d.familia))];
@@ -898,7 +946,14 @@ function fiscalDetail(id) {
   const mailto = `mailto:consultas@andesnova.solutions?subject=${subject}`;
   const distinction = fiscalia.distincion ? `<p class="fiscalia-distinction"><b>Distinción importante:</b> ${esc(fiscalia.distincion)}</p>` : "";
   const specificSource = fiscalia.fuenteEspecifica ? `<a href="${fiscalia.fuenteEspecifica}" ${EXTERNAL_LINK_ATTRS}>Ver fuente oficial específica ↗</a>` : "";
-  return `<article class="fiscalia-card"><button class="fiscalia-toggle" type="button" aria-expanded="false" aria-controls="fiscalia-detail-${id}"><span class="fiscalia-icon" aria-hidden="true">§</span><span class="fiscalia-heading"><strong>${esc(fiscalia.nombre)}</strong><span>${esc(fiscalia.desc)}</span></span><span class="accordion-chevron" aria-hidden="true">⌄</span></button><div class="fiscalia-detail" id="fiscalia-detail-${id}" hidden>${distinction}<section class="fiscalia-section"><h5>¿Qué atiende?</h5><p>${esc(fiscalia.atiende)}</p></section><section class="fiscalia-section"><h5>Necesidades principales del despacho</h5><p>${esc(fiscalia.necesidades)}</p></section><section class="fiscalia-section"><h5>Organización y herramientas de apoyo</h5><p>${esc(fiscalia.herramientas)}</p></section><section class="fiscalia-section"><h5>Base normativa referencial</h5><p>${esc(fiscalia.baseNormativa)}</p></section><section class="fiscalia-section fiscalia-sources"><h5>Fuente institucional</h5><div><a href="${MPFN_DIRECTORY_URL}" ${EXTERNAL_LINK_ATTRS}>Directorio oficial de fiscalías ↗</a><a href="${MPFN_ORGANIZATION_URL}" ${EXTERNAL_LINK_ATTRS}>Organización del Ministerio Público ↗</a>${specificSource}</div></section><section class="fiscalia-contact"><h5>Herramientas para organizar o modernizar el despacho</h5><p>¿Necesita adaptar estas funciones a un despacho fiscal, una fiscalía especializada o una coordinación? AndesNova Solutions desarrolla herramientas de organización, distribución de carga, control de plazos, plantillas, trazabilidad, analítica y consulta normativa, incluidas alternativas de funcionamiento local.</p><p><b>Contacto:</b> <a href="mailto:consultas@andesnova.solutions">consultas@andesnova.solutions</a></p><a class="btn small" href="${mailto}">Consultar una solución para este despacho</a><p class="contact-warning"><b>No incluya nombres, DNI, expedientes ni información confidencial en el correo inicial.</b></p><p class="contact-disclaimer">Servicio tecnológico independiente. AndesNova Solutions no pertenece ni representa al Ministerio Público ni sustituye la evaluación jurídica o institucional correspondiente.</p></section></div></article>`;
+  const compactList = (title, items) => `<details class="fiscalia-extra"><summary>${esc(title)}</summary>${analysisList(items)}</details>`;
+  const resources = fiscalia.directorioApoyo.map((resource) => {
+    const url = safeOfficialUrl(resource.url);
+    const badge = resource.acceso === "restringido" ? "Información restringida no disponible" : resource.acceso === "requiere solicitud formal" ? "Requiere trámite formal" : resource.categoria === "normativa" ? "Fuente normativa" : resource.categoria === "estadística" ? "Estadística" : resource.categoria === "directorio" ? "Directorio" : resource.categoria === "consulta pública" ? "Consulta pública" : "Canal oficial";
+    return `<article class="support-resource"><span class="result-badge">${esc(badge)}</span><h6>${esc(resource.nombre)}</h6><p>${esc(resource.rolReferencial)} ${esc(resource.advertencia)}</p>${url ? `<a href="${url}" target="_blank" rel="noopener noreferrer">${esc(resource.recurso)} ↗</a>` : "<span class=\"result-badge\">Acceso restringido</span>"}<small>Verificación editorial: ${esc(resource.ultimaVerificacion)}</small></article>`;
+  }).join("");
+  const extras = `<section class="fiscalia-section"><h5>Casuísticas y gestión del despacho</h5><div class="fiscalia-extra-grid">${compactList("Casuísticas ficticias", fiscalia.casuisticas)}${compactList("Documentos frecuentes", fiscalia.documentosFrecuentes)}${compactList("Peritos y especialistas", fiscalia.peritosYEspecialistas)}${compactList("Entidades relacionadas", fiscalia.entidadesRelacionadas)}${compactList("Riesgos de gestión", fiscalia.riesgosDeGestion)}${compactList("Controles recomendados", fiscalia.controlesRecomendados)}</div></section><section class="fiscalia-section"><h5>Directorio público de apoyo institucional</h5><div class="support-directory">${resources}</div><p class="support-disclaimer">JustiPenal únicamente organiza enlaces públicos de entidades oficiales. No accede a sistemas internos, expedientes, registros reservados, información de inteligencia, datos bancarios, comunicaciones privadas ni bases de datos protegidas. La disponibilidad de un enlace no autoriza el acceso, tratamiento o reutilización de información personal.</p></section>`;
+  return `<article class="fiscalia-card"><button class="fiscalia-toggle" type="button" aria-expanded="false" aria-controls="fiscalia-detail-${id}"><span class="fiscalia-icon" aria-hidden="true">§</span><span class="fiscalia-heading"><strong>${esc(fiscalia.nombre)}</strong><span>${esc(fiscalia.desc)}</span></span><span class="accordion-chevron" aria-hidden="true">⌄</span></button><div class="fiscalia-detail" id="fiscalia-detail-${id}" hidden>${distinction}<section class="fiscalia-section"><h5>¿Qué atiende?</h5><p>${esc(fiscalia.atiende)}</p></section><section class="fiscalia-section"><h5>Necesidades principales del despacho</h5><p>${esc(fiscalia.necesidades)}</p></section><section class="fiscalia-section"><h5>Organización y herramientas de apoyo</h5><p>${esc(fiscalia.herramientas)}</p></section><section class="fiscalia-section"><h5>Base normativa referencial</h5><p>${esc(fiscalia.baseNormativa)}</p></section>${extras}<section class="fiscalia-section fiscalia-sources"><h5>Fuente institucional</h5><div><a href="${MPFN_DIRECTORY_URL}" ${EXTERNAL_LINK_ATTRS}>Directorio oficial de fiscalías ↗</a><a href="${MPFN_ORGANIZATION_URL}" ${EXTERNAL_LINK_ATTRS}>Organización del Ministerio Público ↗</a>${specificSource}</div></section><section class="fiscalia-contact"><h5>Herramientas para organizar o modernizar el despacho</h5><p>¿Necesita adaptar estas funciones a un despacho fiscal, una fiscalía especializada o una coordinación? AndesNova Solutions desarrolla herramientas de organización, distribución de carga, control de plazos, plantillas, trazabilidad, analítica y consulta normativa, incluidas alternativas de funcionamiento local.</p><p><b>Contacto:</b> <a href="mailto:consultas@andesnova.solutions">consultas@andesnova.solutions</a></p><a class="btn small" href="${mailto}">Consultar una solución para este despacho</a><p class="contact-warning"><b>No incluya nombres, DNI, expedientes ni información confidencial en el correo inicial.</b></p><p class="contact-disclaimer">Servicio tecnológico independiente. AndesNova Solutions no pertenece ni representa al Ministerio Público ni sustituye la evaluación jurídica o institucional correspondiente.</p></section></div></article>`;
 }
 
 const directoryFiscalias = FISCALIAS_UI_ORDER.filter((id) => FISCALIAS[id]?.showInDirectory);

@@ -23,7 +23,7 @@
   <meta name="twitter:description" content="Información penal, simulación educativa de casos, cálculo referencial de penas, plazos procesales y normativa peruana.">
   <meta name="twitter:image" content="https://justipenal-api.vercel.app/og-justipenal-v3.png">
   <meta name="twitter:image:alt" content="JustiPenal, portal informativo y educativo sobre el sistema penal peruano">
-  <link rel="stylesheet" href="css/styles.css?v=5">
+  <link rel="stylesheet" href="css/styles.css?v=6">
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>">
 </head>
@@ -237,6 +237,7 @@
           <button class="btn secondary" id="btn-preguntar-analisis" style="display:none">💬 Preguntar sobre este resultado</button>
         </div>
         <div class="disclaimer">⚠️ El análisis es una orientación preliminar generada por reglas heurísticas locales. Diferencia entre hechos escritos, inferencias y datos faltantes, pero <b>no convierte sospechas en hechos probados</b> ni reemplaza la investigación fiscal.</div>
+        <div class="disclaimer analysis-output-warning">Este resultado organiza información pública y hechos hipotéticos. No constituye imputación, dictamen fiscal, estrategia de defensa, resolución judicial, peritaje ni asesoría legal.</div>
       </div>
     </section>
 
@@ -248,13 +249,22 @@
         <input type="text" id="buscar-delito" class="search-input" placeholder="🔎 Buscar delito, artículo o familia…">
         <div class="tbl-wrap">
           <table class="tbl" id="tabla-delitos">
-            <thead><tr><th>Familia</th><th>Delito</th><th>Artículo / Norma</th><th>Modalidad</th><th>Pena referencial</th><th>Otras consecuencias</th><th>Verificación</th></tr></thead>
+            <thead><tr><th>Familia</th><th>Delito</th><th>Artículo / Norma</th><th>Modalidad</th><th>Pena referencial</th><th>Otras consecuencias</th><th>Verificación</th><th>Análisis</th></tr></thead>
             <tbody></tbody>
           </table>
         </div>
         <div class="disclaimer">⚠️ Los rangos son referenciales y pueden haber sido modificados por leyes posteriores. Cada delito enlaza a su fuente oficial; verifique la versión vigente a la fecha del hecho.</div>
       </div>
     </section>
+
+    <dialog class="offense-dialog" id="offense-dialog" aria-labelledby="offense-dialog-title">
+      <div class="offense-dialog-shell">
+        <header><div><span class="analysis-kicker">Perfil jurídico extendido</span><h2 id="offense-dialog-title"></h2><p id="offense-dialog-meta"></p></div><button type="button" class="offense-dialog-close" aria-label="Cerrar análisis">✕</button></header>
+        <div class="offense-tabs" id="offense-tabs" role="tablist" aria-label="Secciones del análisis"></div>
+        <div class="offense-tabpanels" id="offense-tabpanels"></div>
+        <p class="analysis-global-warning">Este resultado organiza información pública y hechos hipotéticos. No constituye imputación, dictamen fiscal, estrategia de defensa, resolución judicial, peritaje ni asesoría legal.</p>
+      </div>
+    </dialog>
 
     <!-- ================= CÁLCULO ================= -->
     <section class="page" id="page-calculo">
@@ -360,6 +370,7 @@
           </div>
         </div>
         <div class="disclaimer prominent-disclaimer">⚠️ Resultado referencial y orientador: <b>Informe preliminar de análisis penal referencial</b>. No constituye sentencia, dictamen fiscal ni determinación definitiva de pena. Verifique la versión vigente de cada norma a la fecha del hecho (legalidad y retroactividad favorable, art. 103 Const.).</div>
+        <div class="disclaimer analysis-output-warning">Este resultado organiza información pública y hechos hipotéticos. No constituye imputación, dictamen fiscal, estrategia de defensa, resolución judicial, peritaje ni asesoría legal.</div>
       </div>
     </section>
 
@@ -662,6 +673,16 @@
         <p>Una norma derogada no se elimina: se marca con su estado y fechas, porque puede seguir siendo aplicable a hechos anteriores (vigencia temporal y favorabilidad).</p>
         <h4>¿Cómo se valida un cambio antes de publicarlo?</h4>
         <p>Todo cambio debe citar la norma modificatoria, su fecha de publicación y su enlace oficial, y queda registrado en el historial de cambios siguiente.</p>
+        <h4>Gobernanza de la información</h4>
+        <ul>
+          <li>Solo se organizan fuentes públicas oficiales con procedencia, fecha de revisión editorial y advertencias de vigencia temporal.</li>
+          <li>La información pública se separa de sistemas, expedientes y datos restringidos; JustiPenal no accede a sistemas internos del Estado.</li>
+          <li>Se aplica minimización de datos: no se crean perfiles personales ni atribuciones penales automatizadas.</li>
+          <li>El portal no está afiliado a entidades públicas, no crea relación de asesoría y sus resultados carecen de valor probatorio oficial.</li>
+          <li>No debe utilizarse para planificación delictiva, evasión de controles o identificación de fuentes confidenciales.</li>
+          <li>Las herramientas locales procesan en el navegador. El chat externo procesa el mensaje y el historial reciente de la sesión; solo adjunta contexto sanitizado tras confirmación del usuario.</li>
+          <li>El historial del chat dura únicamente durante la sesión abierta y no se almacena de forma persistente.</li>
+        </ul>
         <h4>Registro de cambios</h4>
         <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Fecha</th><th>Cambio</th></tr></thead><tbody id="tabla-changelog"></tbody></table></div>
       </div>
@@ -697,6 +718,8 @@
 
         <h4>8. Uso aceptable</h4>
         <p>Queda prohibido usar el portal para fines ilícitos, para presentar sus resultados como documentos oficiales, o para atribuir responsabilidad penal a personas concretas. Los resultados no son aptos como prueba ni como sustento único de decisiones legales.</p>
+        <h4>9. Información pública y acceso restringido</h4>
+        <p>JustiPenal únicamente organiza enlaces públicos de entidades oficiales. No accede a sistemas internos, expedientes, registros reservados, información de inteligencia, datos bancarios, comunicaciones privadas ni bases de datos protegidas. La disponibilidad de un enlace no autoriza el acceso, tratamiento o reutilización de información personal.</p>
         <div class="disclaimer prominent-disclaimer">Si usted enfrenta una situación legal real, busque de inmediato la asistencia de un abogado colegiado o de la defensa pública gratuita del Ministerio de Justicia (<a href="https://www.gob.pe/minjus" target="_blank" rel="noopener">gob.pe/minjus</a>).</div>
       </div>
     </section>
@@ -716,6 +739,7 @@
 <button class="chat-launcher" id="chat-launcher" type="button" aria-label="Abrir Asistente JustiPenal" aria-controls="chat-panel" aria-expanded="false" title="Abrir Asistente JustiPenal">
   <img class="chat-avatar" src="assets/justipenal-chatbot.svg" alt="" aria-hidden="true">
 </button>
+<div class="chat-invitation" id="chat-invitation" hidden>Consulta aquí</div>
 
 <section class="chat-panel" id="chat-panel" aria-label="Asistente JustiPenal" aria-hidden="true">
   <header class="chat-header">
@@ -725,6 +749,7 @@
       <span class="chat-status" id="chat-status"></span>
     </div>
     <div class="chat-window-actions">
+      <button type="button" id="chat-expand" aria-label="Expandir el asistente" title="Expandir">↗</button>
       <button type="button" id="chat-minimize" aria-label="Minimizar el asistente" title="Minimizar">—</button>
       <button type="button" id="chat-close" aria-label="Cerrar el asistente" title="Cerrar">✕</button>
     </div>
@@ -747,15 +772,15 @@
       <p class="chat-privacy-warning">No ingrese nombres, DNI, números de expediente, domicilios, documentos, datos de víctimas, menores de edad ni otra información personal o confidencial.</p>
       <p class="chat-usage-limit">Límite de uso: 10 consultas por dirección de red cada 2 horas.</p>
       <label for="chat-input">Consulta</label>
-      <textarea id="chat-input" rows="3" maxlength="4000" placeholder="Escriba una consulta sobre derecho penal peruano"></textarea>
+      <textarea id="chat-input" rows="2" maxlength="4000" placeholder="Escriba una consulta sobre derecho penal peruano"></textarea>
       <div class="chat-form-actions">
         <button class="btn small secondary" type="button" id="chat-clear">Borrar conversación</button>
         <span class="chat-loading" id="chat-loading" role="status" hidden>Consultando<span class="chat-dots" aria-hidden="true"><i></i><i></i><i></i></span></span>
         <button class="btn small" type="submit" id="chat-send">Enviar</button>
       </div>
     </form>
-    <p class="chat-privacy">El analizador permanece en su navegador. El chat envía a Vercel y Gemini el mensaje actual, el historial reciente y cualquier contexto sanitizado que usted confirme. No incluya datos personales, confidenciales ni identificadores del caso.</p>
-    <p class="chat-service-cta">¿Necesita un chatbot avanzado para su organización? Implementación y gestión tecnológica con <a href="https://www.andesnova.solutions/" target="_blank" rel="noopener noreferrer">AndesNova Solutions</a>.</p>
+    <p class="chat-mobile-privacy">No ingreses datos personales ni información de casos reales.</p>
+    <details class="chat-privacy-details"><summary>Privacidad y uso</summary><p>El analizador permanece en su navegador. El chat envía a Vercel y Gemini el mensaje actual, el historial reciente de esta sesión y cualquier contexto sanitizado que usted confirme. No se crea una base local de casos.</p><p>Servicio tecnológico independiente: <a href="https://www.andesnova.solutions/" target="_blank" rel="noopener noreferrer">AndesNova Solutions</a>.</p></details>
   </div>
 </section>
 
@@ -791,14 +816,14 @@
 
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
-<script src="js/data.js?v=6"></script>
+<script src="js/data.js?v=7"></script>
 <script src="data/tei-data.js?v=1"></script>
 <script src="js/config.js?v=5"></script>
-<script src="js/app.js?v=6"></script>
+<script src="js/app.js?v=7"></script>
 <script src="js/tei.js?v=1"></script>
-<script src="js/case-simulator.js?v=1"></script>
+<script src="js/case-simulator.js?v=2"></script>
 <script src="js/feedback.js?v=1"></script>
-<script src="js/chat.js?v=5"></script>
+<script src="js/chat.js?v=6"></script>
 <!-- Estadísticas anónimas de visitas (GoatCounter): sin cookies, sin almacenar IPs,
      sin rastrear personas. Solo agregados: páginas vistas, país y tipo de dispositivo. -->
 <script data-goatcounter="https://oprbguitar.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

@@ -563,6 +563,133 @@ const FISCALIAS_UI_ORDER = [
   "terrorismo", "derechos-humanos", "extincion-dominio", "extorsion"
 ];
 
+/* ---- Perfiles jurídicos extendidos ----
+   La capa extendida se construye desde los artículos y fuentes ya registrados.
+   Cuando no se ha contrastado el texto consolidado artículo por artículo, el
+   perfil lo declara expresamente en vez de completar información por inferencia. */
+const ANALISIS_FAMILIA = {
+  "Patrimonio": { bien: "Patrimonio y facultades de disposición, según el tipo concreto.", verbos: ["apoderarse", "sustraer", "obtener", "afectar"], pruebas: ["declaraciones y documentos de titularidad", "registros audiovisuales lícitamente obtenidos", "pericia de valoración, cuando corresponda"], peritos: ["documentoscopía", "informática forense", "valoración especializada"] },
+  "Drogas": { bien: "Salud pública.", verbos: ["promover", "favorecer", "facilitar", "comercializar"], pruebas: ["acta e integridad de incautación", "pericia química y peso neto", "cadena de custodia"], peritos: ["química y toxicología", "informática forense", "telecomunicaciones"] },
+  "Ambiental": { bien: "Ambiente y recursos naturales protegidos.", verbos: ["contaminar", "extraer", "afectar", "traficar"], pruebas: ["inspección y georreferenciación", "muestras con trazabilidad", "informes técnicos sectoriales"], peritos: ["ingeniería ambiental", "forestal o minería, según los hechos", "biología"] },
+  "Administración pública": { bien: "Correcto funcionamiento e imparcialidad de la administración pública, según el tipo.", verbos: ["concertar", "apropiarse", "solicitar", "interesarse"], pruebas: ["expediente administrativo íntegro", "documentación contable y contractual", "trazabilidad de decisiones"], peritos: ["contabilidad forense", "contratación y gestión pública", "documentoscopía"] },
+  "Lavado de activos": { bien: "Orden socioeconómico y licitud del circuito patrimonial, conforme al régimen especial.", verbos: ["convertir", "transferir", "ocultar", "tener"], pruebas: ["trazabilidad patrimonial y financiera lícita", "documentación societaria y registral", "pericia contable"], peritos: ["contabilidad forense", "análisis financiero", "informática forense"] },
+  "Delitos tributarios": { bien: "Recaudación tributaria y control aduanero, según la norma especial.", verbos: ["defraudar", "omitir", "ocultar"], pruebas: ["declaraciones y libros contables", "documentación tributaria o aduanera", "pericia contable"], peritos: ["contabilidad forense", "tributación y aduanas", "documentoscopía"] },
+  "Delitos informáticos": { bien: "Sistemas, datos y patrimonio afectados mediante tecnologías digitales, según el tipo.", verbos: ["acceder", "alterar", "interferir", "suplantar"], pruebas: ["preservación forense de dispositivos", "registros técnicos obtenidos legalmente", "hashes y cadena de custodia digital"], peritos: ["informática forense", "telecomunicaciones", "análisis financiero cuando corresponda"] },
+  "Criminalidad organizada": { bien: "Bienes jurídicos protegidos por el tipo vigente y seguridad frente a estructuras criminales.", verbos: ["constituir", "integrar", "organizar", "promover"], pruebas: ["individualización de conductas y roles", "continuidad y estructura corroboradas", "comunicaciones y movimientos obtenidos legalmente"], peritos: ["análisis financiero", "informática forense", "telecomunicaciones"] },
+  "La libertad": { bien: "Libertad personal y autodeterminación, según el tipo concreto.", verbos: ["obligar", "privar", "captar", "trasladar"], pruebas: ["declaraciones con garantías", "documentación y registros lícitos", "corroboración periférica"], peritos: ["psicología", "medicina legal", "trabajo social o interpretación, según los hechos"] },
+  "Vida, el cuerpo y la salud": { bien: "Vida, integridad corporal y salud.", verbos: ["matar", "lesionar", "agredir"], pruebas: ["examen médico-legal", "declaraciones y registros lícitos", "pericias sobre mecanismo y resultado"], peritos: ["medicina legal", "psicología", "criminalística según los hechos"] }
+};
+
+function construirAnalisisDelito(delito) {
+  const familia = ANALISIS_FAMILIA[delito.familia] || { bien: "Bien jurídico definido por la disposición citada; pendiente de revisión oficial específica.", verbos: [], pruebas: ["documentación pertinente", "declaraciones obtenidas con garantías", "corroboración independiente"], peritos: ["especialidad determinada por los hechos"] };
+  const elementos = [...new Set(delito.modalidades.flatMap((modalidad) => modalidad.elementos || []))];
+  const estado = delito.sello === "verificado" ? "Criterio interpretativo" : "Pendiente de revisión";
+  return {
+    resumenTipo: `La conducta podría configurar ${delito.nombre} solo si se acreditan los elementos de ${delito.articulo} en la versión aplicable a la fecha del hecho.`,
+    bienJuridico: familia.bien,
+    sujetoActivo: "Debe individualizarse conforme al tipo y a la participación atribuida; no se presume por pertenencia a un grupo.",
+    sujetoPasivo: "Persona, colectividad o entidad titular del bien jurídico, según la disposición aplicable.",
+    verbosRectores: familia.verbos.length ? familia.verbos : ["Pendiente de revisión oficial"],
+    elementosObjetivos: elementos.length ? elementos.map((item) => `Elemento registrado: ${item}; requiere corroboración y contraste normativo.`) : ["Pendiente de revisión oficial del texto consolidado y sus elementos objetivos."],
+    elementoSubjetivo: "Requiere determinar el elemento subjetivo previsto por la norma vigente; no se infiere automáticamente del resultado.",
+    consumacion: "Debe establecerse según el verbo rector, el resultado exigido y la versión temporalmente aplicable.",
+    tentativa: "Su procedencia depende del iter de ejecución y de la regulación vigente; requiere evaluación jurídica individual.",
+    agravantesEspecificas: delito.modalidades.filter((m) => m.id !== "b").map((m) => `${m.nombre}: ${m.nota || "verificar supuesto específico en la fuente oficial"}`),
+    atenuantesRelacionadas: ["Las circunstancias genéricas se evalúan separadamente y solo cuando sean legalmente aplicables."],
+    exclusionesODescarte: ["Falta de un elemento del tipo", "atribución no individualizada", "evidencia insuficiente o ilícita", "explicación lícita alternativa no descartada"],
+    porQuePodriaAplicar: [{ texto: `El hecho indicado coincide provisionalmente con conductas descritas en ${delito.articulo}.`, estado: "Inferencia" }, { texto: "Existen datos que requieren corroboración independiente.", estado: "Dato faltante" }],
+    porQuePodriaNoAplicar: [{ texto: "La información puede no acreditar todos los elementos del tipo o la intervención individual.", estado: "No acreditado" }, { texto: "Puede existir una explicación lícita o una calificación alternativa.", estado: "Dato controvertido" }],
+    hipotesisAlternativas: ["Otra calificación jurídica compatible con los hechos acreditados", "conducta atípica o insuficientemente probada"],
+    preguntasCriticas: ["¿Qué conducta concreta se atribuye a cada persona?", "¿Qué fuente acredita cada elemento?", "¿Qué versión legal regía al momento del hecho?", "¿Qué explicación alternativa debe descartarse?"],
+    mediosProbatorios: familia.pruebas,
+    peritosRelacionados: familia.peritos.map((item) => `Puede requerir ${item}, según los hechos.`),
+    riesgosProbatorios: ["pérdida de contexto", "ruptura de cadena de custodia", "inferencia presentada como hecho", "doble valoración de una misma circunstancia"],
+    rutaProcesal: ["investigación y control de legalidad", "etapa intermedia y control de acusación", "juicio con contradicción", "impugnación dentro de sus límites"],
+    interpretaciones: [{ texto: "Encaje legal posible, pero todavía no suficientemente probado.", estado }, { texto: "La atipicidad se diferencia de la insuficiencia probatoria y de una eventual atenuación.", estado: "Criterio interpretativo" }],
+    matriz: [{ elemento: delito.articulo, hecho: "Hecho hipotético indicado por el usuario", fuenteDato: "Relato local no verificado", estado: "Hecho indicado", explicacion: "No equivale a un hecho probado.", falta: "Corroboración y versión legal aplicable" }],
+    fuentes: [{
+      nombre: delito.fuente.norma,
+      articulo: delito.articulo,
+      url: delito.fuente.url,
+      ultimaVerificacion: VERIFICADO_AT,
+      estado: "Pendiente de revisión oficial",
+      vigenciaTemporal: delito.vigenteDesde || "Verificar texto vigente y modificatorias a la fecha del hecho.",
+      versionLegal: delito.familia === "Criminalidad organizada" ? "Texto consolidado aplicable: pendiente de revisión oficial" : "Versión aplicable a la fecha del hecho: pendiente de revisión oficial",
+      fechaPublicacion: "Pendiente de revisión oficial",
+      fechaVigencia: "Pendiente de revisión oficial",
+      normaModificatoria: "Pendiente de revisión oficial"
+    }]
+  };
+}
+
+DELITOS.forEach((delito) => { delito.analisis = construirAnalisisDelito(delito); });
+
+/* Recursos públicos comprobados como páginas oficiales. No representan acceso
+   a registros internos ni a información reservada. */
+const PUBLIC_SUPPORT_RESOURCES = {
+  mpfn: { nombre: "Ministerio Público", rolReferencial: "Directorio público de fiscalías.", recurso: "Directorio institucional", categoria: "directorio", url: "https://www.gob.pe/institucion/mpfn/directorio-fiscalias", acceso: "público", advertencia: "Verifique competencia territorial y funcional vigente.", ultimaVerificacion: VERIFICADO_AT },
+  iml: { nombre: "Instituto de Medicina Legal y Ciencias Forenses", rolReferencial: "Directorio público del servicio forense del Ministerio Público.", recurso: "Directorio del IML", categoria: "directorio", url: "https://www.gob.pe/institucion/mpfn/informes-publicaciones/6312812-directorio-del-instituto-de-medicina-legal", acceso: "público", advertencia: "No concede acceso a informes periciales ni datos de personas.", ultimaVerificacion: VERIFICADO_AT },
+  pj: { nombre: "Poder Judicial", rolReferencial: "Información institucional y servicios públicos.", recurso: "Portal institucional", categoria: "consulta pública", url: "https://www.pj.gob.pe/", acceso: "público", advertencia: "Los expedientes y actuaciones se sujetan a sus propias reglas de acceso.", ultimaVerificacion: VERIFICADO_AT },
+  pnp: { nombre: "Policía Nacional del Perú", rolReferencial: "Información institucional y orientación pública.", recurso: "Portal institucional", categoria: "orientación", url: "https://www.gob.pe/pnp", acceso: "público", advertencia: "No brinda acceso a sistemas policiales internos.", ultimaVerificacion: VERIFICADO_AT },
+  defensa: { nombre: "Defensa Pública", rolReferencial: "Orientación y asistencia legal pública según requisitos.", recurso: "Servicios de Defensa Pública", categoria: "orientación", url: "https://www.gob.pe/defensapublica", acceso: "requiere identificación", advertencia: "La atención depende de evaluación y requisitos del servicio.", ultimaVerificacion: VERIFICADO_AT },
+  sunat: { nombre: "SUNAT", rolReferencial: "Normativa, orientación y consultas públicas tributarias y aduaneras.", recurso: "Portal institucional", categoria: "consulta pública", url: "https://www.sunat.gob.pe/", acceso: "público", advertencia: "La información protegida requiere legitimación y autenticación.", ultimaVerificacion: VERIFICADO_AT },
+  uif: { nombre: "UIF-Perú / SBS", rolReferencial: "Información pública sobre prevención de lavado de activos.", recurso: "Reseña institucional UIF-Perú", categoria: "orientación", url: "https://www.sbs.gob.pe/prevencion-de-lavado-activos/resena-de-la-unidad-de-inteligencia-financiera-del-peru/Acuerdos-Suscritos/Internacionales", acceso: "público", advertencia: "No ofrece acceso público a reportes de inteligencia financiera.", ultimaVerificacion: VERIFICADO_AT },
+  contraloria: { nombre: "Contraloría General de la República", rolReferencial: "Información pública de control gubernamental.", recurso: "Portal institucional", categoria: "consulta pública", url: "https://www.gob.pe/contraloria", acceso: "público", advertencia: "No sustituye la solicitud formal de documentación.", ultimaVerificacion: VERIFICADO_AT },
+  oece: { nombre: "OECE", rolReferencial: "Orientación y fuentes públicas sobre contratación estatal.", recurso: "Información institucional", categoria: "consulta pública", url: "https://www.gob.pe/institucion/oece/institucional", acceso: "público", advertencia: "Los sistemas autenticados mantienen sus propias condiciones de acceso.", ultimaVerificacion: VERIFICADO_AT },
+  linea100: { nombre: "MIMP — Línea 100", rolReferencial: "Orientación y soporte frente a violencia.", recurso: "Campaña oficial Línea 100", categoria: "orientación", url: "https://www.gob.pe/institucion/mimp/campa%C3%B1as/23869-buscas-ayuda-llama-a-la-linea-100", acceso: "público", advertencia: "Canal de orientación; una emergencia exige acudir a los servicios competentes.", ultimaVerificacion: VERIFICADO_AT },
+  oefa: { nombre: "OEFA", rolReferencial: "Información y orientación pública en fiscalización ambiental.", recurso: "Portal institucional", categoria: "consulta pública", url: "https://www.gob.pe/oefa", acceso: "público", advertencia: "No concede acceso a expedientes restringidos.", ultimaVerificacion: VERIFICADO_AT },
+  serfor: { nombre: "SERFOR", rolReferencial: "Información pública forestal y de fauna silvestre.", recurso: "Portal institucional", categoria: "consulta pública", url: "https://www.gob.pe/serfor", acceso: "público", advertencia: "La emisión de información técnica puede requerir trámite formal.", ultimaVerificacion: VERIFICADO_AT },
+  pronabi: { nombre: "PRONABI", rolReferencial: "Información pública sobre gestión de bienes bajo su competencia.", recurso: "Información institucional", categoria: "consulta pública", url: "https://www.gob.pe/institucion/pronabi/institucional", acceso: "público", advertencia: "No autoriza acceso ni disposición de bienes; los trámites siguen reglas propias.", ultimaVerificacion: VERIFICADO_AT }
+};
+
+const FISCALIA_SUPPORT_MAP = {
+  "penal-comun": ["mpfn", "iml", "pj", "pnp", "defensa"], corrupcion: ["mpfn", "contraloria", "oece", "pj"],
+  "crimen-organizado": ["mpfn", "pnp", "pj", "uif"], lavado: ["mpfn", "uif", "sunat", "pronabi"], drogas: ["mpfn", "iml", "pnp"],
+  "violencia-mujer": ["mpfn", "iml", "linea100", "defensa"], familia: ["mpfn", "iml", "defensa"], trata: ["mpfn", "iml", "pnp", "defensa"],
+  ambiental: ["mpfn", "oefa", "serfor"], ciber: ["mpfn", "pnp"], tributarios: ["mpfn", "sunat"], terrorismo: ["mpfn", "pnp", "pj"],
+  "derechos-humanos": ["mpfn", "iml", "defensa"], "extincion-dominio": ["mpfn", "pronabi", "pj"], extorsion: ["mpfn", "pnp", "uif"]
+};
+
+const FISCALIA_CASE_PATTERNS = {
+  "penal-comun": ["Sustracción ficticia de un bien con modalidad por determinar.", "Agresión ficticia con alcance médico-legal aún no establecido.", "Documento ficticio presuntamente alterado cuya autenticidad requiere pericia."],
+  corrupcion: ["Contratación pública ficticia con posible concertación por corroborar.", "Entrega ficticia de una ventaja vinculada a un acto funcional.", "Uso ficticio de fondos públicos con destino documentalmente controvertido."],
+  "crimen-organizado": ["Pluralidad ficticia con continuidad y estructura todavía no acreditadas.", "Hechos ilícitos ficticios conexos con roles que requieren individualización.", "Comunicaciones ficticias compatibles con coordinación, sujetas a explicaciones alternativas."],
+  lavado: ["Conversión ficticia de fondos cuyo origen y conocimiento requieren corroboración.", "Incremento patrimonial ficticio con documentación de respaldo controvertida.", "Transferencias ficticias entre empresas con finalidad económica por esclarecer."],
+  drogas: ["Sustancia ficticia incautada pendiente de pericia química y peso neto.", "Posesión ficticia cuya finalidad de tráfico no está determinada.", "Traslado ficticio de paquetes con conocimiento y participación por individualizar."],
+  "violencia-mujer": ["Agresión física ficticia con evaluación de riesgo y pericia pendientes.", "Violencia psicológica ficticia que requiere contexto y corroboración especializada.", "Incumplimiento ficticio de medidas de protección sujeto a verificación documental."],
+  familia: ["Situación ficticia de desprotección que requiere evaluación interdisciplinaria.", "Conflicto familiar ficticio con interés superior de una persona menor por proteger.", "Medida de protección ficticia cuyo seguimiento institucional debe verificarse."],
+  trata: ["Captación laboral ficticia con finalidad de explotación aún no acreditada.", "Traslado ficticio de una persona con consentimiento y contexto controvertidos.", "Alojamiento ficticio vinculado a posible explotación que requiere corroboración."],
+  ambiental: ["Vertimiento ficticio con impacto ambiental pendiente de medición técnica.", "Extracción forestal ficticia con permisos y origen por verificar.", "Actividad minera ficticia con ubicación, autorización y afectación controvertidas."],
+  ciber: ["Acceso ficticio a una cuenta sin autorización pendiente de atribución técnica.", "Transferencia ficticia posiblemente inducida mediante suplantación digital.", "Alteración ficticia de datos con integridad y cadena de custodia por verificar."],
+  tributarios: ["Declaración tributaria ficticia con omisión y dolo por determinar.", "Ingreso ficticio de mercancías con documentación aduanera controvertida.", "Operaciones ficticias sustentadas por comprobantes cuya autenticidad requiere revisión."],
+  terrorismo: ["Aporte ficticio cuya finalidad y conocimiento requieren prueba suficiente.", "Material ficticio cuya relevancia penal depende del contexto legal vigente.", "Vinculación ficticia basada en contactos que no acredita por sí sola responsabilidad."],
+  "derechos-humanos": ["Afectación ficticia de derechos con contexto territorial por documentar.", "Intervención ficticia que requiere enfoque intercultural e interpretación.", "Hecho histórico ficticio con evidencia forense y documental aún incompleta."],
+  "extincion-dominio": ["Bien ficticio con origen patrimonial pendiente de trazabilidad.", "Activo ficticio presuntamente instrumental con uso lícito alternativo por evaluar.", "Titularidad ficticia controvertida que requiere contraste registral y financiero."],
+  extorsion: ["Amenaza ficticia vinculada a un cobro cuya autoría requiere corroboración.", "Mensajes ficticios y cuenta receptora que no acreditan por sí solos participación.", "Cobro ficticio mediante intermediario con conocimiento y rol por individualizar."]
+};
+
+const FISCALIA_EXPERTS = {
+  "penal-comun": ["medicina legal", "balística", "documentoscopía"], corrupcion: ["contabilidad forense", "contratación y gestión pública", "documentoscopía"],
+  "crimen-organizado": ["análisis financiero", "informática forense", "telecomunicaciones"], lavado: ["contabilidad forense", "análisis financiero", "informática forense"],
+  drogas: ["química y toxicología", "telecomunicaciones", "balística, cuando corresponda"], "violencia-mujer": ["medicina legal", "psicología", "trabajo social"],
+  familia: ["psicología", "trabajo social", "medicina legal, cuando corresponda"], trata: ["psicología", "medicina legal", "traducción e interpretación"],
+  ambiental: ["ingeniería ambiental", "forestal o minería, según los hechos", "biología"], ciber: ["informática forense", "telecomunicaciones", "análisis financiero, cuando corresponda"],
+  tributarios: ["contabilidad forense", "tributación y aduanas", "documentoscopía"], terrorismo: ["informática forense", "telecomunicaciones", "análisis financiero"],
+  "derechos-humanos": ["medicina legal", "antropología", "traducción e interpretación"], "extincion-dominio": ["contabilidad forense", "análisis financiero", "valoración especializada"],
+  extorsion: ["informática forense", "telecomunicaciones", "análisis financiero"]
+};
+
+FISCALIAS_UI_ORDER.forEach((id) => {
+  const fiscalia = FISCALIAS[id];
+  fiscalia.casuisticas = FISCALIA_CASE_PATTERNS[id];
+  fiscalia.documentosFrecuentes = ["disposiciones y providencias", "actas e informes incorporados legalmente", "requerimientos y oficios, según la etapa"];
+  fiscalia.peritosYEspecialistas = FISCALIA_EXPERTS[id].map((item) => `Puede requerir ${item}, según los hechos.`);
+  fiscalia.entidadesRelacionadas = (FISCALIA_SUPPORT_MAP[id] || ["mpfn", "pj"]).map((key) => PUBLIC_SUPPORT_RESOURCES[key].nombre);
+  fiscalia.riesgosDeGestion = ["vencimientos sin alerta", "documentos sin trazabilidad", "distribución sin criterios verificables"];
+  fiscalia.controlesRecomendados = ["control de plazos", "registro de accesos y cambios", "revisión humana y respeto de la autonomía funcional"];
+  fiscalia.directorioApoyo = (FISCALIA_SUPPORT_MAP[id] || ["mpfn", "pj"]).map((key) => PUBLIC_SUPPORT_RESOURCES[key]);
+});
+
 /* Condiciones personales que alteran la competencia */
 const CONDICIONES_PERSONA = [
   { id: "ninguna", label: "Ninguna condición especial", nota: null },
