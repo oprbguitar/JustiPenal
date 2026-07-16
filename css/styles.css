@@ -395,7 +395,11 @@ select:focus, input:focus, textarea:focus { outline: 2px solid var(--blue-100); 
 .feedback-meta output { white-space: nowrap; font-variant-numeric: tabular-nums; }
 .feedback-honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 .feedback-status { min-height: 22px; margin-top: 8px; font-size: 12px; color: var(--red-600); }
-.feedback-status.success { color: var(--green-600); }
+.feedback-status.success { display: flex; align-items: center; gap: 10px; min-height: 58px; padding: 10px 12px; border: 1px solid #a7d8bd; border-radius: 9px; background: #effaf4; color: #17663a; }
+.feedback-status.success strong,.feedback-status.success small { display: block; }
+.feedback-status.success strong { margin-bottom: 2px; font-size: 14px; }
+.feedback-status.success small { color: #367753; font-size: 12px; }
+.feedback-success-icon { display: grid; flex: 0 0 32px; width: 32px; height: 32px; place-items: center; border-radius: 50%; background: #218653; color: #fff; font-size: 19px; font-weight: 700; }
 .feedback-actions { display: flex; justify-content: flex-end; gap: 8px; }
 .feedback-actions .btn { margin-top: 4px; }
 body.feedback-open { overflow: hidden; }

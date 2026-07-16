@@ -1,7 +1,7 @@
 import { Redis } from "@upstash/redis";
 import { Ratelimit } from "@upstash/ratelimit";
 import { applyCors, checkMemoryBucket, cleanString, clientIdentifier, isPlainObject, normalizeSecurityText } from "./chat.js";
-import { recordSecurityEvent } from "../lib/security-alerts.js";
+import { escapeHtml, recordSecurityEvent } from "../lib/security-alerts.js";
 
 const CATEGORIES = new Set(["add", "improve", "remove", "error"]);
 const MAX_BODY_BYTES = 4096;
@@ -10,6 +10,13 @@ const RATE_LIMIT_WINDOW_MS = 24 * 60 * 60 * 1000;
 const memoryBuckets = new Map();
 let limiter;
 let limiterKey = "";
+
+const CATEGORY_LABELS = Object.freeze({
+  add: "Agregar",
+  improve: "Mejorar",
+  remove: "Retirar",
+  error: "Reportar un error"
+});
 
 export function containsSensitiveIdentifier(value) {
   const text = normalizeSecurityText(value);
@@ -69,7 +76,8 @@ async function checkRateLimit(identifier) {
 
 async function storeFeedback(value) {
   const baseUrl = String(process.env.SUPABASE_URL || "").replace(/\/$/, "");
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+  const key = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+  if (!baseUrl || !key) return false;
   let url;
   try { url = new URL(`${baseUrl}/rest/v1/site_feedback`); } catch { throw new Error("storage_unavailable"); }
   if (url.protocol !== "https:" || !key) throw new Error("storage_unavailable");
@@ -80,6 +88,52 @@ async function storeFeedback(value) {
     signal: AbortSignal.timeout(8000)
   });
   if (!response.ok) throw new Error("storage_unavailable");
+  return true;
+}
+
+export async function sendFeedbackEmail(value) {
+  const apiKey = process.env.RESEND_API_KEY || "";
+  const to = process.env.FEEDBACK_TO || process.env.SECURITY_ALERT_TO || "";
+  const from = process.env.FEEDBACK_FROM || process.env.SECURITY_ALERT_FROM || "";
+  if (!apiKey || !to || !from) return false;
+  if (![to, from].every((address) => address.length <= 254 && !/[\r\n]/.test(address))) throw new Error("email_unavailable");
+
+  const receivedAt = new Intl.DateTimeFormat("es-PE", {
+    timeZone: "America/Lima", dateStyle: "medium", timeStyle: "short"
+  }).format(new Date());
+  const rows = [
+    ["Categoría", CATEGORY_LABELS[value.category]],
+    ["Sugerencia", value.message],
+    ["Sección", value.section || "No identificada"],
+    ["Ruta", value.pathname],
+    ["Recibida", `${receivedAt} (hora de Perú)`]
+  ];
+  const htmlRows = rows.map(([label, content]) => `<tr><th align="left" style="padding:8px 12px;border-bottom:1px solid #dbe3f0;vertical-align:top">${escapeHtml(label)}</th><td style="padding:8px 12px;border-bottom:1px solid #dbe3f0">${escapeHtml(content)}</td></tr>`).join("");
+  const textRows = rows.map(([label, content]) => `${label}: ${content}`).join("\n");
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+    body: JSON.stringify({
+      from,
+      to: [to],
+      subject: `[JustiPenal] Nueva opinión: ${CATEGORY_LABELS[value.category]}`,
+      html: `<div style="font-family:Arial,sans-serif;color:#10243f"><h2>Nueva opinión en JustiPenal</h2><table style="border-collapse:collapse;width:100%;max-width:680px">${htmlRows}</table><p style="color:#526581;font-size:12px">Mensaje automático del formulario de opinión. No respondas a este correo.</p></div>`,
+      text: `Nueva opinión en JustiPenal\n\n${textRows}\n\nMensaje automático del formulario de opinión.`
+    }),
+    signal: AbortSignal.timeout(8000)
+  });
+  if (!response.ok) throw new Error("email_unavailable");
+  return true;
+}
+
+export async function deliverFeedback(value) {
+  const results = await Promise.allSettled([storeFeedback(value), sendFeedbackEmail(value)]);
+  const delivered = results.some((result) => result.status === "fulfilled" && result.value === true);
+  if (!delivered) throw new Error("delivery_unavailable");
+  return {
+    stored: results[0].status === "fulfilled" && results[0].value === true,
+    emailed: results[1].status === "fulfilled" && results[1].value === true
+  };
 }
 
 export default async function handler(req, res) {
@@ -125,7 +179,7 @@ export default async function handler(req, res) {
       await recordSecurityEvent(req, { category: "rate_limited", status: 429, action: "rate-limit" });
       return res.status(429).json({ error: "rate_limited" });
     }
-    await storeFeedback(validation.value);
+    await deliverFeedback(validation.value);
     return res.status(201).json({ ok: true });
   } catch {
     await recordSecurityEvent(req, { category: "server_error", status: 503, action: "log" });
