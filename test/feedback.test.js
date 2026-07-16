@@ -79,7 +79,7 @@ test("envía la opinión por correo sin exponer el destinatario en la respuesta"
   global.fetch = async (url, options) => { request = { url, options }; return { ok: true }; };
   try {
     const result = await deliverFeedback(valid());
-    assert.deepEqual(result, { stored: false, emailed: true });
+    assert.deepEqual(result, { stored: false, emailed: true, queued: false });
     assert.equal(request.url, "https://api.resend.com/emails");
     const email = JSON.parse(request.options.body);
     assert.deepEqual(email.to, ["destino@example.com"]);
