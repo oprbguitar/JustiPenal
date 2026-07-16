@@ -16,6 +16,8 @@
   const quickEl = el("chat-quick");
   const contextBanner = el("chat-context-banner");
   const limitCta = el("chat-limit-cta");
+  const invitation = el("chat-invitation");
+  const expandButton = el("chat-expand");
   const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
   const config = window.JUSTIPENAL_CONFIG || {};
   const apiBaseUrl = String(config.apiBaseUrl || "").replace(/\/$/, "");
@@ -211,6 +213,9 @@
     lastFocused = document.activeElement;
     panel.classList.add("open");
     panel.classList.remove("minimized");
+    invitation.hidden = true;
+    launcher.classList.remove("invitation-pulse");
+    try { sessionStorage.setItem("justipenal-chat-opened", "1"); } catch { /* Sin seguimiento persistente. */ }
     panel.setAttribute("aria-hidden", "false");
     launcher.setAttribute("aria-expanded", "true");
     launcher.classList.add("panel-open");
@@ -226,7 +231,7 @@
     launcher.setAttribute("aria-expanded", "false");
     (lastFocused && document.contains(lastFocused) ? lastFocused : launcher).focus();
     const finish = () => {
-      panel.classList.remove("open", "minimized");
+      panel.classList.remove("open", "minimized", "expanded");
       launcher.classList.remove("panel-open");
       panel.style.opacity = "";
       panel.style.transform = "";
@@ -285,9 +290,22 @@
   launcher.addEventListener("click", handleLauncherClick);
   el("chat-close").addEventListener("click", closePanel);
   el("chat-minimize").addEventListener("click", () => {
-    panel.classList.toggle("minimized");
-    if (panel.classList.contains("minimized")) launcher.focus();
-    else input.focus();
+    const minimized = panel.classList.toggle("minimized");
+    if (minimized) {
+      panel.classList.remove("expanded");
+      expandButton.setAttribute("aria-label", "Expandir el asistente");
+      expandButton.title = "Expandir";
+      launcher.focus();
+    } else {
+      input.focus();
+    }
+  });
+  expandButton.addEventListener("click", () => {
+    const expanded = panel.classList.toggle("expanded");
+    panel.classList.remove("minimized");
+    expandButton.setAttribute("aria-label", expanded ? "Restaurar tamaño del asistente" : "Expandir el asistente");
+    expandButton.title = expanded ? "Restaurar" : "Expandir";
+    input.focus();
   });
   el("chat-clear").addEventListener("click", () => {
     history = [];
@@ -341,12 +359,28 @@
     else localStorage.removeItem(RATE_LIMIT_RESET_KEY);
   } catch { /* La continuidad visual es opcional; el límite real se aplica en el servidor. */ }
 
-  try {
-    if (!localStorage.getItem("justipenal-chat-pulse-seen")) {
-      localStorage.setItem("justipenal-chat-pulse-seen", "1");
-      if (!reduceMotion) launcher.classList.add("first-visit-pulse");
-    }
-  } catch { /* El almacenamiento puede estar bloqueado; el chat sigue funcionando. */ }
+  const invitePhrases = ["Consulta aquí", "Explora un delito", "Pregunta por un plazo", "Revisa una fiscalía", "Analiza una duda"];
+  function showInvitation(index) {
+    if (panel.classList.contains("open")) return;
+    let opened = false, count = 0;
+    try { opened = sessionStorage.getItem("justipenal-chat-opened") === "1"; count = Number(sessionStorage.getItem("justipenal-chat-invites") || 0); } catch { /* Sin persistencia. */ }
+    if (opened || count >= 2) return;
+    invitation.textContent = invitePhrases[index % invitePhrases.length];
+    invitation.hidden = false;
+    if (!reduceMotion) launcher.classList.add("invitation-pulse");
+    try { sessionStorage.setItem("justipenal-chat-invites", String(count + 1)); } catch { /* Sin persistencia. */ }
+    window.setTimeout(() => { invitation.hidden = true; launcher.classList.remove("invitation-pulse"); }, 4000);
+  }
+  if (matchMedia("(max-width: 800px)").matches) {
+    window.setTimeout(() => showInvitation(0), 3000);
+    window.setTimeout(() => showInvitation(1), 22000);
+  }
+  function syncVisualViewport() {
+    const height = window.visualViewport?.height || window.innerHeight;
+    panel.style.setProperty("--chat-visual-height", `${Math.round(height)}px`);
+  }
+  window.visualViewport?.addEventListener("resize", syncVisualViewport);
+  syncVisualViewport();
 
   if (configured) {
     statusEl.textContent = "● Configurado";

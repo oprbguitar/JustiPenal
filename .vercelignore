@@ -1,0 +1,11 @@
+.git
+.github
+.claude
+.playwright-cli
+test
+supabase
+*.md
+.env*
+**/*.map
+og-justipenal.png
+og-justipenal-v3.png

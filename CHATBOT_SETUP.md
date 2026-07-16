@@ -1,6 +1,6 @@
 # Configuración del Asistente JustiPenal
 
-El frontend público continúa en GitHub Pages. La clave de Gemini solo existe como variable de entorno cifrada de Vercel y nunca debe incluirse en HTML, JavaScript del navegador, archivos `.env` versionados ni el historial de Git.
+El frontend público se sirve desde `https://justipenal.andesnova.solutions`. La clave de Gemini solo existe como variable de entorno cifrada de Vercel y nunca debe incluirse en HTML, JavaScript del navegador, archivos `.env` versionados ni el historial de Git.
 
 ## 1. Crear una clave segura de Gemini
 
@@ -18,7 +18,7 @@ Configure en Project Settings → Environment Variables, para Production y, si c
 ```text
 GEMINI_API_KEY=<clave secreta>
 GEMINI_MODEL=gemini-3.5-flash
-ALLOWED_ORIGIN=https://oprbguitar.github.io
+ALLOWED_ORIGIN=https://justipenal.andesnova.solutions
 CHAT_MAX_INPUT_CHARS=4000
 UPSTASH_REDIS_REST_URL=<URL REST de Upstash Redis>
 UPSTASH_REDIS_REST_TOKEN=<token REST de Upstash Redis>
@@ -27,7 +27,7 @@ RATE_LIMIT_SALT=<secreto aleatorio de alta entropía>
 
 - `GEMINI_API_KEY` es obligatoria y secreta.
 - `GEMINI_MODEL` es opcional; el backend usa `gemini-3.5-flash` cuando falta.
-- `ALLOWED_ORIGIN` admite una URL con ruta o barra final y el backend la normaliza al origen. También puede contener varios orígenes separados por comas. Para GitHub Pages se recomienda `https://oprbguitar.github.io`.
+- `ALLOWED_ORIGIN` admite una URL con ruta o barra final y el backend la normaliza al origen. También puede contener varios orígenes separados por comas. En producción debe incluir `https://justipenal.andesnova.solutions`.
 - `CHAT_MAX_INPUT_CHARS` es opcional; el valor predeterminado es 4000.
 - `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN` y `RATE_LIMIT_SALT` son obligatorias en producción para aplicar el límite persistente. La dirección de red se identifica únicamente mediante HMAC-SHA256 y no se guarda en texto claro.
 - Alternativa recomendada: instalar **Upstash for Redis desde el Marketplace de Vercel** (Storage → Upstash → Redis, o `npx vercel integration add upstash/upstash-kv`). El recurso inyecta automáticamente `KV_REST_API_URL` y `KV_REST_API_TOKEN`, que el backend acepta como equivalentes; solo queda `RATE_LIMIT_SALT` por definir manualmente.
@@ -45,15 +45,16 @@ npx vercel link
 npx vercel --prod
 ```
 
-Vercel detecta `api/chat.js` como función Node.js. El endpoint público es `POST https://<proyecto>.vercel.app/api/chat`.
+Vercel detecta `api/chat.js` como función Node.js. El endpoint público es `POST https://justipenal.andesnova.solutions/api/chat`.
 
 ## 4. Configurar el frontend público
 
-Edite `js/config.js` únicamente con la URL pública del proyecto Vercel:
+Edite `js/config.js` únicamente con la URL pública de producción:
 
 ```js
 window.JUSTIPENAL_CONFIG = {
-  apiBaseUrl: "https://justipenal-api.vercel.app"
+  apiBaseUrl: "https://justipenal.andesnova.solutions",
+  siteUrl: "https://justipenal.andesnova.solutions"
 };
 ```
 

@@ -1,6 +1,6 @@
 # ⚖️ JustiPenal — Portal Informativo del Sistema Penal Peruano
 
-### 🌐 Visita el portal aquí: **[https://oprbguitar.github.io/JustiPenal/](https://oprbguitar.github.io/JustiPenal/)**
+### 🌐 Visita JustiPenal: **[https://justipenal.andesnova.solutions/](https://justipenal.andesnova.solutions/)**
 
 Funciona en computadora, tablet y celular. No requiere registro. Las herramientas deterministas siguen siendo gratuitas y locales; el asistente opcional procesa únicamente los mensajes que el usuario decide enviar.
 
@@ -85,14 +85,13 @@ La página de **Metodología** del portal explica quién actualiza los datos, qu
 - **Diseño responsive**: menú lateral deslizable con botón hamburguesa accesible en celulares (soporte de teclado, `aria-expanded`, bloqueo de scroll de fondo) y panel de fuentes oficiales en pantallas anchas.
 - Publicado automáticamente en **GitHub Pages** mediante GitHub Actions en cada actualización.
 
-### Configurar el formulario de opinión con Supabase
+### Configurar el formulario de opinión por correo y Supabase
 
-1. Cree un proyecto en [Supabase](https://supabase.com/dashboard) o seleccione uno existente.
-2. Abra **SQL Editor**, copie y ejecute [`supabase/site_feedback.sql`](supabase/site_feedback.sql). El script crea la tabla con RLS, sin acceso anónimo, y habilita únicamente la inserción server-side.
-3. En Vercel, abra **Project Settings → Environment Variables** y agregue `SUPABASE_URL` y `SUPABASE_SERVICE_ROLE_KEY` para producción. Marque `SUPABASE_SERVICE_ROLE_KEY` como variable sensible y manténgala exclusivamente del lado del servidor.
-4. Vuelva a desplegar el proyecto en Vercel después de agregar las variables.
-5. Revise los comentarios desde **Supabase → Table Editor → site_feedback**. Actualice la columna `status` a `reviewed`, `implemented` o `dismissed` según corresponda.
-6. Para exportarlos, abra la tabla y use la opción **Export data → CSV** del Table Editor.
+1. En Vercel, abra **Project Settings → Environment Variables** y configure `RESEND_API_KEY`, `FEEDBACK_TO` y `FEEDBACK_FROM`. La dirección destinataria permanece exclusivamente en el servidor y nunca se envía al navegador. `FEEDBACK_FROM` debe usar un dominio verificado en Resend.
+2. Para conservar además un historial consultable, cree o seleccione un proyecto en [Supabase](https://supabase.com/dashboard), abra **SQL Editor** y ejecute [`supabase/site_feedback.sql`](supabase/site_feedback.sql). El script crea la tabla con RLS, sin acceso anónimo, y habilita únicamente la inserción server-side.
+3. Agregue `SUPABASE_URL` y, preferentemente, `SUPABASE_SECRET_KEY` en Vercel. `SUPABASE_SERVICE_ROLE_KEY` continúa admitida para proyectos existentes. Ambas claves deben permanecer exclusivamente del lado servidor.
+4. Vuelva a desplegar después de agregar las variables. El formulario funciona si al menos uno de los dos canales seguros —correo o Supabase— está disponible.
+5. Si usa Supabase, revise los comentarios desde **Table Editor → site_feedback** y actualice `status` a `reviewed`, `implemented` o `dismissed` según corresponda.
 
 ## ¿Encontraste un error?
 

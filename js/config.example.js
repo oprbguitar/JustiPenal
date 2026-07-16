@@ -1,3 +1,4 @@
 window.JUSTIPENAL_CONFIG = {
-  apiBaseUrl: "https://YOUR-JUSTIPENAL-API.vercel.app"
+  apiBaseUrl: "https://justipenal.andesnova.solutions",
+  siteUrl: "https://justipenal.andesnova.solutions"
 };

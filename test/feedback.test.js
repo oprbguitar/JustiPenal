@@ -1,13 +1,14 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import handler, { containsSensitiveIdentifier, validateFeedbackPayload } from "../api/feedback.js";
+import handler, { containsSensitiveIdentifier, deliverFeedback, sendFeedbackEmail, validateFeedbackPayload } from "../api/feedback.js";
 
 function response() {
   return {
     statusCode: 200, headers: {}, body: undefined,
     setHeader(name, value) { this.headers[name] = value; },
     status(code) { this.statusCode = code; return this; },
-    json(body) { this.body = body; return this; }
+    json(body) { this.body = body; return this; },
+    end() { return this; }
   };
 }
 
@@ -20,6 +21,8 @@ test("valida y recorta una opinión segura", () => {
   assert.equal(validateFeedbackPayload(valid({ category: "otro" })).status, 400);
   assert.equal(validateFeedbackPayload(valid({ message: "ok" })).status, 400);
   assert.equal(validateFeedbackPayload(valid({ pathname: "/?dato=1" })).status, 400);
+  assert.equal(validateFeedbackPayload(valid({ message: "<b>texto</b>" })).status, 400);
+  assert.equal(validateFeedbackPayload({ ...valid(), attachment: "no" }).status, 400);
 });
 
 test("rechaza identificadores sensibles frecuentes", () => {
@@ -41,9 +44,67 @@ test("endpoint acepta solo POST JSON", async () => {
   const methodRes = response();
   await handler({ method: "GET", headers: {}, body: undefined }, methodRes);
   assert.equal(methodRes.statusCode, 405);
-  assert.equal(methodRes.headers.Allow, "POST");
+  assert.equal(methodRes.headers.Allow, "POST, OPTIONS");
   const typeRes = response();
   await handler({ method: "POST", headers: { "content-type": "text/plain" }, body: valid() }, typeRes);
   assert.equal(typeRes.statusCode, 415);
   assert.match(typeRes.headers["Cache-Control"], /no-store/);
+});
+
+test("producción exige un Origin autorizado", async () => {
+  const oldNodeEnv = process.env.NODE_ENV;
+  const oldAllowedOrigin = process.env.ALLOWED_ORIGIN;
+  process.env.NODE_ENV = "production";
+  process.env.ALLOWED_ORIGIN = "https://justipenal.andesnova.solutions";
+  try {
+    const res = response();
+    await handler({ method: "POST", headers: { "content-type": "application/json" }, body: valid() }, res);
+    assert.equal(res.statusCode, 403);
+  } finally {
+    if (oldNodeEnv === undefined) delete process.env.NODE_ENV; else process.env.NODE_ENV = oldNodeEnv;
+    if (oldAllowedOrigin === undefined) delete process.env.ALLOWED_ORIGIN; else process.env.ALLOWED_ORIGIN = oldAllowedOrigin;
+  }
+});
+
+test("envía la opinión por correo sin exponer el destinatario en la respuesta", async () => {
+  const previous = { ...process.env };
+  const originalFetch = global.fetch;
+  process.env.RESEND_API_KEY = "re_test";
+  process.env.FEEDBACK_TO = "destino@example.com";
+  process.env.FEEDBACK_FROM = "JustiPenal <opinion@example.org>";
+  delete process.env.SUPABASE_URL;
+  delete process.env.SUPABASE_SECRET_KEY;
+  delete process.env.SUPABASE_SERVICE_ROLE_KEY;
+  let request;
+  global.fetch = async (url, options) => { request = { url, options }; return { ok: true }; };
+  try {
+    const result = await deliverFeedback(valid());
+    assert.deepEqual(result, { stored: false, emailed: true });
+    assert.equal(request.url, "https://api.resend.com/emails");
+    const email = JSON.parse(request.options.body);
+    assert.deepEqual(email.to, ["destino@example.com"]);
+    assert.match(email.subject, /Nueva opinión: Mejorar/);
+    assert.doesNotMatch(JSON.stringify(result), /destino@example\.com/);
+  } finally {
+    global.fetch = originalFetch;
+    process.env = previous;
+  }
+});
+
+test("escapa HTML incluido en una opinión antes de armar el correo", async () => {
+  const previous = { ...process.env };
+  const originalFetch = global.fetch;
+  process.env.RESEND_API_KEY = "re_test";
+  process.env.FEEDBACK_TO = "destino@example.com";
+  process.env.FEEDBACK_FROM = "opinion@example.org";
+  let body;
+  global.fetch = async (_url, options) => { body = JSON.parse(options.body); return { ok: true }; };
+  try {
+    await sendFeedbackEmail({ ...valid(), message: "Mejorar A & B" });
+    assert.match(body.html, /Mejorar A &amp; B/);
+    assert.doesNotMatch(body.html, /Mejorar A & B/);
+  } finally {
+    global.fetch = originalFetch;
+    process.env = previous;
+  }
 });

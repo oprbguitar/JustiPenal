@@ -26,6 +26,7 @@
     returnFocus = trigger;
     status.textContent = "";
     status.classList.remove("success");
+    status.replaceChildren();
     modal.hidden = false;
     document.body.classList.add("feedback-open");
     requestAnimationFrame(() => document.querySelector("#feedback-category")?.focus());
@@ -64,6 +65,7 @@
 
     pending = true;
     submit.disabled = true;
+    submit.textContent = "Enviando…";
     status.textContent = "";
     try {
       const response = await fetch("/api/feedback", {
@@ -77,17 +79,34 @@
           website: form.elements.website.value
         })
       });
-      if (!response.ok) throw new Error("feedback_failed");
+      if (!response.ok) {
+        const error = new Error("feedback_failed");
+        error.status = response.status;
+        throw error;
+      }
       form.reset();
       updateCounter();
-      status.textContent = "Gracias. Tu opinión fue registrada.";
+      const icon = document.createElement("span");
+      icon.className = "feedback-success-icon";
+      icon.setAttribute("aria-hidden", "true");
+      icon.textContent = "✓";
+      const copy = document.createElement("span");
+      const title = document.createElement("strong");
+      title.textContent = "¡Opinión enviada!";
+      const detail = document.createElement("small");
+      detail.textContent = "Gracias por ayudarnos a mejorar JustiPenal.";
+      copy.append(title, detail);
+      status.replaceChildren(icon, copy);
       status.classList.add("success");
-    } catch {
-      status.textContent = "No se pudo enviar la opinión. Inténtalo nuevamente.";
+    } catch (error) {
+      if (error.status === 429) status.textContent = "Ya recibimos varias opiniones desde este dispositivo. Inténtalo mañana.";
+      else if (error.status === 400) status.textContent = "Revisa que la sugerencia no incluya datos personales e inténtalo nuevamente.";
+      else status.textContent = "No se pudo enviar la opinión en este momento. Inténtalo nuevamente en unos minutos.";
       status.classList.remove("success");
     } finally {
       pending = false;
       submit.disabled = false;
+      submit.textContent = "Enviar opinión";
     }
   });
 
