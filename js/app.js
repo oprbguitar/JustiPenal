@@ -862,11 +862,35 @@ const MPFN_DIRECTORY_URL = "https://www.gob.pe/institucion/mpfn/directorio-fisca
 const MPFN_ORGANIZATION_URL = "https://www.gob.pe/institucion/mpfn/organizacion";
 const EXTERNAL_LINK_ATTRS = 'target="_blank" rel="noopener noreferrer"';
 
+const SUPREME_PENAL_ANALYSIS = {
+  title: "Fiscalías Supremas en lo Penal",
+  description: "Interviene ante la Corte Suprema en los procesos, recursos y actuaciones que el ordenamiento jurídico atribuye al nivel supremo. Su actuación comprende el control de legalidad, el análisis de garantías procesales, la interpretación de normas penales y procesales, y la formulación de una posición fiscal especializada.",
+  metadata: [
+    ["Nivel funcional", "Supremo"],
+    ["Ámbito", "Nacional"],
+    ["Intervención", "Ante la Corte Suprema"]
+  ],
+  areas: [
+    ["Control de legalidad", "Examen de la correcta aplicación e interpretación de las normas penales y procesales."],
+    ["Garantías procesales", "Evaluación del debido proceso, derecho de defensa, presunción de inocencia y debida motivación."],
+    ["Coherencia jurisprudencial", "Contraste del caso con acuerdos plenarios, doctrina jurisprudencial y criterios relevantes de la Corte Suprema."],
+    ["Vía procesal", "Identificación del recurso o procedimiento que habilita la intervención fiscal en el nivel supremo."],
+    ["Impacto jurídico", "Evaluación de los efectos que una interpretación puede producir en casos semejantes y en la actuación institucional."]
+  ],
+  references: [
+    "Constitución Política del Perú, artículos 158 y 159.",
+    "Decreto Legislativo N.º 052, Ley Orgánica del Ministerio Público.",
+    "Decreto Legislativo N.º 957, Código Procesal Penal.",
+    "Legislación especial y jurisprudencia aplicables según la materia."
+  ],
+  disclaimer: "La competencia y el alcance de la intervención deben verificarse conforme a la vía procesal, la normativa vigente y las particularidades del caso concreto."
+};
+
 const FISCAL_HIERARCHY = [
   { id: "provinciales", nombre: "Fiscalías Provinciales", texto: "Es el nivel operativo que interviene directamente en la recepción y evaluación de denuncias, investigación, disposiciones fiscales, solicitudes judiciales, formalización, acusación y actuación en audiencias, según la materia y el procedimiento aplicable." },
   { id: "superiores", nombre: "Fiscalías Superiores", texto: "Interviene en recursos, elevaciones de actuados, revisiones jerárquicas y actuaciones de segunda instancia conforme al procedimiento aplicable. También puede contribuir a uniformizar criterios y organizar la actuación del subsistema, sin sustituir la autonomía funcional del fiscal competente." },
   { id: "supremas", nombre: "Fiscalías Supremas", texto: "Las Fiscalías Supremas son órganos de línea de mayor jerarquía. La organización institucional vigente comprende Fiscalías Supremas en lo Penal, Fiscalía Suprema de Familia, Fiscalía Suprema Especializada en Delitos Cometidos por Funcionarios Públicos y Fiscalías Supremas Transitorias Especializadas en esa materia.", tipos: [
-    ["Fiscalías Supremas en lo Penal", "Intervienen ante la Corte Suprema en los asuntos penales que les atribuyen la Constitución, la Ley Orgánica del Ministerio Público y la legislación procesal aplicable."],
+    [SUPREME_PENAL_ANALYSIS.title, SUPREME_PENAL_ANALYSIS.description],
     ["Fiscalía Suprema de Familia", "Interviene en materias de familia, menores y personas especialmente protegidas que corresponden al nivel supremo."],
     ["Fiscalía Suprema Especializada en Delitos Cometidos por Funcionarios Públicos", "Interviene en los procedimientos y actuaciones de su competencia relacionados con delitos atribuidos a funcionarios públicos."],
     ["Fiscalías Supremas Transitorias Especializadas", "Órganos temporales creados para atender las materias y cargas que determine la organización institucional."]
@@ -928,13 +952,35 @@ function setupExclusiveAccordions(container, buttonSelector) {
 }
 
 function hierarchyDetail(item) {
-  const tipos = item.tipos ? `<div class="supreme-types">${item.tipos.map(([title, text]) => `<div class="supreme-type"><h5>${esc(title)}</h5><p>${esc(text)}</p></div>`).join("")}</div>` : "";
+  const supremePenalCard = () => {
+    const metadata = SUPREME_PENAL_ANALYSIS.metadata.map(([label, value]) => `<span><b>${esc(label)}:</b> ${esc(value)}</span>`).join("");
+    const areas = SUPREME_PENAL_ANALYSIS.areas.map(([title, text]) => `<li><b>${esc(title)}</b><span>${esc(text)}</span></li>`).join("");
+    const references = SUPREME_PENAL_ANALYSIS.references.map((reference) => `<li>${esc(reference)}</li>`).join("");
+    return `<article class="supreme-type supreme-penal-card"><div class="supreme-penal-badge"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 3h8l4 4v14H7zM15 3v5h4M10 12h6M10 16h6"/></svg><span>ANÁLISIS ESPECIALIZADO</span></div><h5>${esc(SUPREME_PENAL_ANALYSIS.title)}</h5><p>${esc(SUPREME_PENAL_ANALYSIS.description)}</p><div class="supreme-penal-metadata" aria-label="Datos funcionales">${metadata}</div><button class="supreme-analysis-toggle" id="supreme-penal-analysis-toggle" type="button" aria-expanded="false" aria-controls="supreme-penal-analysis-detail"><span>Ver análisis institucional</span><span class="accordion-chevron" aria-hidden="true">⌄</span></button><div class="supreme-analysis-detail" id="supreme-penal-analysis-detail" hidden><h6>Ámbitos de análisis</h6><ol class="supreme-analysis-list">${areas}</ol><section class="supreme-normative"><h6>Marco normativo principal</h6><ul>${references}</ul></section><p class="supreme-disclaimer">${esc(SUPREME_PENAL_ANALYSIS.disclaimer)}</p></div></article>`;
+  };
+  const tipos = item.tipos ? `<div class="supreme-types">${item.tipos.map(([title, text]) => title === SUPREME_PENAL_ANALYSIS.title ? supremePenalCard() : `<div class="supreme-type"><h5>${esc(title)}</h5><p>${esc(text)}</p></div>`).join("")}</div>` : "";
   const clarification = item.aclaracion ? `<p class="hierarchy-clarification"><b>Aclaración:</b> ${esc(item.aclaracion)}</p>` : "";
   return `<article class="hierarchy-card"><button class="hierarchy-toggle" type="button" aria-expanded="false" aria-controls="hierarchy-detail-${item.id}"><span>${esc(item.nombre)}</span><span class="accordion-chevron" aria-hidden="true">⌄</span></button><div class="hierarchy-detail" id="hierarchy-detail-${item.id}" hidden><p>${esc(item.texto)}</p>${tipos}${clarification}<a href="${MPFN_ORGANIZATION_URL}" ${EXTERNAL_LINK_ATTRS}>Ver organización institucional vigente ↗</a></div></article>`;
 }
 
 $("#fiscal-hierarchy").innerHTML = FISCAL_HIERARCHY.map(hierarchyDetail).join("");
 setupExclusiveAccordions($("#fiscal-hierarchy"), ".hierarchy-toggle");
+
+const supremeAnalysisButton = $("#supreme-penal-analysis-toggle");
+supremeAnalysisButton?.addEventListener("click", () => {
+  const panel = document.getElementById(supremeAnalysisButton.getAttribute("aria-controls"));
+  const opening = supremeAnalysisButton.getAttribute("aria-expanded") !== "true";
+  supremeAnalysisButton.setAttribute("aria-expanded", String(opening));
+  if (!panel) return;
+  if (opening) {
+    panel.hidden = false;
+    panel.classList.add("open");
+    animateAccordion(panel, true);
+  } else {
+    panel.classList.remove("open");
+    animateAccordion(panel, false, () => { panel.hidden = true; panel.removeAttribute("style"); });
+  }
+});
 
 function fiscalDetail(id) {
   const fiscalia = FISCALIAS[id];

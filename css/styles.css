@@ -600,6 +600,29 @@ table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
 .supreme-types { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; margin: 14px 0; }
 .supreme-type { padding: 11px; border: 1px solid var(--border); border-radius: 8px; background: #f8fafc; }
 .supreme-type h5 { margin-bottom: 4px; color: var(--navy-800); font-size: 12px; }
+.supreme-penal-card { position: relative; display: flex; flex-direction: column; min-width: 0; padding: 13px 13px 13px 16px; overflow: hidden; border-color: #a9c7ee; background: #f4f8ff; box-shadow: 0 5px 16px rgba(20,48,107,.09); scroll-margin-bottom: 90px; transition: transform .18s ease, box-shadow .18s ease; }
+.supreme-penal-card::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 4px; background: linear-gradient(180deg,var(--blue-600),#60a5fa); }
+.supreme-penal-card:hover,.supreme-penal-card:focus-within { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(20,48,107,.13); }
+.supreme-penal-badge { display: inline-flex; align-items: center; align-self: flex-start; gap: 5px; margin-bottom: 7px; color: var(--blue-600); font-size: 9px; font-weight: 800; letter-spacing: .55px; line-height: 1.2; }
+.supreme-penal-badge svg { flex: 0 0 14px; width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.supreme-penal-card > p { overflow-wrap: anywhere; }
+.supreme-penal-metadata { display: flex; flex-wrap: wrap; gap: 5px 7px; margin-top: 10px; }
+.supreme-penal-metadata span { padding: 3px 6px; border: 1px solid #c9daf2; border-radius: 5px; background: rgba(255,255,255,.72); color: var(--text-muted); font-size: 10px; line-height: 1.35; }
+.supreme-penal-metadata b { color: var(--navy-700); }
+.supreme-analysis-toggle { display: inline-flex; align-items: center; align-self: flex-start; gap: 7px; min-height: 34px; margin-top: 11px; padding: 7px 9px; border: 1px solid #9dbde8; border-radius: 7px; background: #fff; color: var(--navy-700); font-family: inherit; font-size: 11px; font-weight: 700; line-height: 1.3; text-align: left; cursor: pointer; }
+.supreme-analysis-toggle:hover { border-color: var(--blue-500); background: var(--blue-50); }
+.supreme-analysis-toggle:focus-visible { outline: 3px solid #60a5fa; outline-offset: 2px; }
+.supreme-analysis-toggle .accordion-chevron { font-size: 16px; }
+.supreme-analysis-detail { min-width: 0; margin-top: 12px; padding-top: 12px; border-top: 1px solid #c9daf2; }
+.supreme-analysis-detail[hidden] { display: none; }
+.supreme-analysis-detail h6 { margin-bottom: 7px; color: var(--navy-800); font-size: 11.5px; }
+.supreme-analysis-list { display: grid; gap: 8px; padding-left: 18px; }
+.supreme-analysis-list li,.supreme-normative li { color: var(--text-muted); font-size: 10.75px; line-height: 1.45; overflow-wrap: anywhere; }
+.supreme-analysis-list b { display: block; color: var(--navy-700); font-size: 11px; }
+.supreme-analysis-list span { display: block; }
+.supreme-normative { margin-top: 12px; padding: 10px; border: 1px solid #d2e0f3; border-radius: 7px; background: rgba(255,255,255,.68); }
+.supreme-normative ul { display: grid; gap: 4px; padding-left: 17px; }
+.supreme-disclaimer { margin-top: 9px; color: var(--text-muted) !important; font-size: 9.75px !important; line-height: 1.45 !important; }
 .office-tools-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
 .office-tools-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; margin-bottom: 14px; }
 .office-tools-heading-copy { min-width: 0; }
@@ -801,7 +824,7 @@ table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
   .hero-scales path { stroke-dashoffset: 0 !important; }
   .feedback-star { animation: none !important; }
   .nav-featured .nav-new { animation: none !important; }
-  .stat-link,.accordion-chevron { transition: none !important; }
+  .stat-link,.accordion-chevron,.supreme-penal-card { transition: none !important; }
   .btn-menu.menu-attention,.chat-launcher.invitation-pulse { animation: none !important; outline: 2px solid #93c5fd; outline-offset: 2px; }
 }
 
@@ -851,6 +874,7 @@ table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
   .tei-workflow { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .tei-flow-step:not(:nth-child(5n))::after { display: none; }
   .fiscalia-grid,.hierarchy-grid,.office-tools-grid,.supreme-types { grid-template-columns: 1fr; }
+  .supreme-penal-card { padding-right: 44px; }
   .office-tools-heading,.office-solutions-cta { align-items: stretch; flex-direction: column; }
   .office-tools-heading { gap: 10px; }
   .office-tools-consult,.office-solutions-button { align-self: flex-start; }
