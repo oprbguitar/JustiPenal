@@ -90,7 +90,7 @@ La página de **Metodología** del portal explica quién actualiza los datos, qu
 1. En Vercel, abra **Project Settings → Environment Variables** y configure `RESEND_API_KEY`, `FEEDBACK_TO` y `FEEDBACK_FROM`. La dirección destinataria permanece exclusivamente en el servidor y nunca se envía al navegador. `FEEDBACK_FROM` debe usar un dominio verificado en Resend.
 2. Para conservar además un historial consultable, cree o seleccione un proyecto en [Supabase](https://supabase.com/dashboard), abra **SQL Editor** y ejecute [`supabase/site_feedback.sql`](supabase/site_feedback.sql). El script crea la tabla con RLS, sin acceso anónimo, y habilita únicamente la inserción server-side.
 3. Agregue `SUPABASE_URL` y, preferentemente, `SUPABASE_SECRET_KEY` en Vercel. `SUPABASE_SERVICE_ROLE_KEY` continúa admitida para proyectos existentes. Ambas claves deben permanecer exclusivamente del lado servidor.
-4. Vuelva a desplegar después de agregar las variables. El formulario funciona si al menos uno de los dos canales seguros —correo o Supabase— está disponible.
+4. Vuelva a desplegar después de agregar las variables. El formulario funciona si al menos uno de los canales seguros —correo, Supabase o el Redis/KV ya usado para protección antiabuso— está disponible.
 5. Si usa Supabase, revise los comentarios desde **Table Editor → site_feedback** y actualice `status` a `reviewed`, `implemented` o `dismissed` según corresponda.
 
 ## ¿Encontraste un error?

@@ -10,6 +10,8 @@ const RATE_LIMIT_WINDOW_MS = 24 * 60 * 60 * 1000;
 const memoryBuckets = new Map();
 let limiter;
 let limiterKey = "";
+let feedbackStore;
+let feedbackStoreKey = "";
 
 const CATEGORY_LABELS = Object.freeze({
   add: "Agregar",
@@ -67,6 +69,18 @@ function getLimiter() {
   return limiter;
 }
 
+function getFeedbackStore() {
+  const url = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL || "";
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN || "";
+  if (!url || !token) return null;
+  const key = `${url}\u0000${token}`;
+  if (!feedbackStore || feedbackStoreKey !== key) {
+    feedbackStore = new Redis({ url, token });
+    feedbackStoreKey = key;
+  }
+  return feedbackStore;
+}
+
 async function checkRateLimit(identifier) {
   const persistent = getLimiter();
   if (persistent) return persistent.limit(identifier);
@@ -88,6 +102,15 @@ async function storeFeedback(value) {
     signal: AbortSignal.timeout(8000)
   });
   if (!response.ok) throw new Error("storage_unavailable");
+  return true;
+}
+
+async function storeFeedbackInRedis(value) {
+  const store = getFeedbackStore();
+  if (!store) return false;
+  const entry = { ...value, status: "new", created_at: new Date().toISOString() };
+  await store.lpush("justipenal:feedback:inbox", JSON.stringify(entry));
+  await store.ltrim("justipenal:feedback:inbox", 0, 999);
   return true;
 }
 
@@ -127,12 +150,13 @@ export async function sendFeedbackEmail(value) {
 }
 
 export async function deliverFeedback(value) {
-  const results = await Promise.allSettled([storeFeedback(value), sendFeedbackEmail(value)]);
+  const results = await Promise.allSettled([storeFeedback(value), sendFeedbackEmail(value), storeFeedbackInRedis(value)]);
   const delivered = results.some((result) => result.status === "fulfilled" && result.value === true);
   if (!delivered) throw new Error("delivery_unavailable");
   return {
     stored: results[0].status === "fulfilled" && results[0].value === true,
-    emailed: results[1].status === "fulfilled" && results[1].value === true
+    emailed: results[1].status === "fulfilled" && results[1].value === true,
+    queued: results[2].status === "fulfilled" && results[2].value === true
   };
 }
 
