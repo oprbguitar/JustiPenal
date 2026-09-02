@@ -10,15 +10,16 @@ async function loadData() {
   return context.__extended;
 }
 
-test("los 53 delitos incluyen un perfil extendido completo y trazable", async () => {
+test("los 54 delitos incluyen una ficha segura y el artículo 122-B tiene perfil específico", async () => {
   const { DELITOS } = await loadData();
-  const fields = ["resumenTipo", "bienJuridico", "sujetoActivo", "sujetoPasivo", "verbosRectores", "elementosObjetivos", "elementoSubjetivo", "consumacion", "tentativa", "agravantesEspecificas", "atenuantesRelacionadas", "exclusionesODescarte", "porQuePodriaAplicar", "porQuePodriaNoAplicar", "hipotesisAlternativas", "preguntasCriticas", "mediosProbatorios", "peritosRelacionados", "riesgosProbatorios", "rutaProcesal", "interpretaciones", "fuentes", "matriz"];
-  assert.equal(DELITOS.length, 53);
+  const fields = ["estadoPerfil", "resumenTipo", "estructura", "sujetosContexto", "resultadoConsumacion", "penasAgravantes", "fuentes"];
+  assert.equal(DELITOS.length, 54);
   for (const delito of DELITOS) {
     for (const field of fields) assert.ok(field in delito.analisis, `${delito.id}: falta ${field}`);
     assert.ok(delito.analisis.fuentes.every((source) => source.url.startsWith("https://") && source.articulo && source.ultimaVerificacion && source.estado));
-    assert.equal(delito.analisis.fuentes[0].estado, "Pendiente de revisión oficial");
+    if (delito.id !== "agresiones-mujer") assert.match(delito.analisis.estadoPerfil, /pendiente de revisión artículo por artículo/i);
   }
+  assert.equal(DELITOS.find((item) => item.id === "agresiones-mujer").analisis.estadoPerfil, "Contrastado con fuente oficial");
 });
 
 test("cada fiscalía incluye casuística, gestión y directorio oficial seguro", async () => {
@@ -42,8 +43,9 @@ test("la interfaz y el simulador incorporan los controles solicitados", async ()
     readFile(new URL("../js/chat.js", import.meta.url), "utf8"),
     readFile(new URL("../index.html", import.meta.url), "utf8")
   ]);
-  assert.match(app, /Ver análisis/);
-  assert.match(app, /Por qué podría no aplicar/);
+  assert.match(app, /Ver ficha jurídica/);
+  assert.match(app, /Resultado y consumación/);
+  assert.doesNotMatch(app, /Por qué podría no aplicar/);
   assert.match(simulator, /Estructura coordinada de cobros ilícitos y movimiento de fondos/);
   assert.match(simulator, /Persona A/);
   assert.match(simulator, /pluralidad de personas[\s\S]*no acreditan por sí solos/);

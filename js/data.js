@@ -2,13 +2,15 @@
    JustiPenal — Base de datos referencial (v2)
    Fuentes: Código Penal (D. Leg. 635) y modificatorias,
    Código Procesal Penal (D. Leg. 957), Ley 30077, DL 1106,
-   Ley 30096, DL 813, Ley 32258 (14/03/2025), DL 1735 (12/02/2026).
-   Última revisión editorial: 12 de julio de 2026.
+   Ley 30096, DL 813, Ley 32258 (14/03/2025), D. Leg. 1731, 1733,
+   1734 y 1735 (12/02/2026), Ley 32684 (02/07/2026) y Ley 32735
+   (21/07/2026).
+   Última revisión editorial: 1 de septiembre de 2026.
    Los rangos son REFERENCIALES: siempre debe verificarse el
    texto vigente en SPIJ / El Peruano a la fecha del hecho.
    ============================================================ */
 
-const VERIFICADO_AT = "12/07/2026";
+const VERIFICADO_AT = "01/09/2026";
 
 /* Sellos de revisión editorial:
    verificado | pendiente | posiblemente-modificado */
@@ -67,10 +69,14 @@ const DELITOS = [
       { id: "b", nombre: "Modalidad básica", min: 2, max: 5, elementos: [] },
       { id: "a", nombre: "Con agravantes", min: 3, max: 6, elementos: [], nota: "Rango referencial; varía según la condición de la víctima." } ],
     fiscalia: "penal-comun" },
-  { id: "agresiones-mujer", familia: "Vida, el cuerpo y la salud", nombre: "Agresiones contra mujeres o integrantes del grupo familiar", articulo: "Art. 122-B",
-    fuente: { norma: "Código Penal, D. Leg. 635 (Ley 30364 y modificatorias)", url: "https://spij.minjus.gob.pe/spij-ext-web/" },
-    sello: "verificado",
-    modalidades: [ { id: "b", nombre: "Modalidad básica", min: 1, max: 3, elementos: [], inhab: "Inhabilitación conforme al art. 36 (incisos aplicables)." } ],
+  { id: "agresiones-mujer", familia: "Vida, el cuerpo y la salud", nombre: "Agresiones en contra de las mujeres o integrantes del grupo familiar", articulo: "Art. 122-B",
+    fuente: { norma: "Código Penal — Decreto Legislativo 635, artículo 122-B; modificado por Ley 30819", url: "https://www2.congreso.gob.pe/sicr/cendocbib/con6_uibd.nsf/DB60F84B5D157DD605258AB3005DEC4B/%24FILE/codigo_penal.pdf" },
+    sello: "verificado", vigenteDesde: "Ley 30819, publicada el 13 de julio de 2018; texto consolidado contrastado con fuente oficial",
+    verificacion: { penaRevisada: true, estructuraTipicaRevisada: true, fuenteOficialRevisada: true, fechaRevision: VERIFICADO_AT, estado: "Contrastado con fuente oficial" },
+    modalidades: [
+      { id: "b", nombre: "Modalidad básica", min: 1, max: 3, elementos: [], inhab: "Inhabilitación conforme a los numerales 5 y 11 del artículo 36 del Código Penal y a los artículos 75 y 77 del Código de los Niños y Adolescentes, según corresponda." },
+      { id: "a", nombre: "Forma agravada", min: 2, max: 3, elementos: [], inhab: "Inhabilitación conforme a los numerales 5 y 11 del artículo 36 del Código Penal y a los artículos 75 y 77 del Código de los Niños y Adolescentes, según corresponda." }
+    ],
     fiscalia: "violencia-mujer" },
 
   // ================= LA FAMILIA =================
@@ -193,7 +199,15 @@ const DELITOS = [
     fiscaliaNorma: "La competencia corresponde al Subsistema Especializado contra la Extorsión y sus Delitos Conexos, creado por el D. Leg. 1735 (publicado el 12/02/2026). El DL 1735 es una norma organizativa: no establece la pena del delito.",
     modalidades: [
       { id: "b", nombre: "Modalidad básica (referencial)", min: 10, max: 15, elementos: ["violencia", "amenaza"], nota: "Área sometida a sucesivas reformas: verificar el texto vigente del art. 200 y sus leyes modificatorias a la fecha del hecho." },
-      { id: "a", nombre: "Niveles agravados", min: 15, max: 30, perpetua: true, elementos: ["violencia", "amenaza", "pluralidad", "arma"], nota: "Algunos supuestos con cadena perpetua." } ],
+      { id: "a", nombre: "Niveles agravados", min: 15, max: 30, perpetua: true, elementos: ["violencia", "amenaza", "pluralidad", "arma"], nota: "Algunos supuestos con cadena perpetua." },
+      { id: "penal", nombre: "Agravante desde establecimiento penitenciario (Ley 32684)", min: 15, max: 25, elementos: ["amenaza"], nota: "La Ley 32684 (publicada el 02/07/2026) incorporó como supuesto agravado del art. 200 el empleo de los servicios de telefonía autorizados del establecimiento penitenciario, con pena privativa de libertad e inhabilitación. Verificar el texto consolidado del art. 200 y el numeral aplicable a la fecha del hecho." } ],
+    fiscalia: "extorsion" },
+  { id: "exigencia-extorsiva", familia: "Patrimonio", nombre: "Exigencia extorsiva", articulo: "Art. 200-A",
+    fuente: { norma: "Código Penal, D. Leg. 635, artículo incorporado por el D. Leg. 1731 (12/02/2026)", url: "https://spij.minjus.gob.pe/spij-ext-web/" },
+    sello: "pendiente",
+    fiscaliaNorma: "Delito conexo a la extorsión: la competencia puede corresponder al Subsistema Especializado contra la Extorsión y sus Delitos Conexos (D. Leg. 1735).",
+    modalidades: [
+      { id: "b", nombre: "Modalidad básica (referencial)", min: 9, max: 12, elementos: ["violencia", "amenaza"], nota: "Conducta previa y autónoma a la extorsión: exigir o requerir sin derecho, mediante violencia o amenaza explícita o implícita, una ventaja económica u de otra índole indebida. Contenido pendiente de revisión editorial: verificar el texto vigente del art. 200-A en SPIJ antes de usarlo." } ],
     fiscalia: "extorsion" },
   { id: "usurpacion", familia: "Patrimonio", nombre: "Usurpación", articulo: "Arts. 202 y 204",
     fuente: { norma: "Código Penal, D. Leg. 635", url: "https://spij.minjus.gob.pe/spij-ext-web/" },
@@ -567,62 +581,34 @@ const FISCALIAS_UI_ORDER = [
    La capa extendida se construye desde los artículos y fuentes ya registrados.
    Cuando no se ha contrastado el texto consolidado artículo por artículo, el
    perfil lo declara expresamente en vez de completar información por inferencia. */
-const ANALISIS_FAMILIA = {
-  "Patrimonio": { bien: "Patrimonio y facultades de disposición, según el tipo concreto.", verbos: ["apoderarse", "sustraer", "obtener", "afectar"], pruebas: ["declaraciones y documentos de titularidad", "registros audiovisuales lícitamente obtenidos", "pericia de valoración, cuando corresponda"], peritos: ["documentoscopía", "informática forense", "valoración especializada"] },
-  "Drogas": { bien: "Salud pública.", verbos: ["promover", "favorecer", "facilitar", "comercializar"], pruebas: ["acta e integridad de incautación", "pericia química y peso neto", "cadena de custodia"], peritos: ["química y toxicología", "informática forense", "telecomunicaciones"] },
-  "Ambiental": { bien: "Ambiente y recursos naturales protegidos.", verbos: ["contaminar", "extraer", "afectar", "traficar"], pruebas: ["inspección y georreferenciación", "muestras con trazabilidad", "informes técnicos sectoriales"], peritos: ["ingeniería ambiental", "forestal o minería, según los hechos", "biología"] },
-  "Administración pública": { bien: "Correcto funcionamiento e imparcialidad de la administración pública, según el tipo.", verbos: ["concertar", "apropiarse", "solicitar", "interesarse"], pruebas: ["expediente administrativo íntegro", "documentación contable y contractual", "trazabilidad de decisiones"], peritos: ["contabilidad forense", "contratación y gestión pública", "documentoscopía"] },
-  "Lavado de activos": { bien: "Orden socioeconómico y licitud del circuito patrimonial, conforme al régimen especial.", verbos: ["convertir", "transferir", "ocultar", "tener"], pruebas: ["trazabilidad patrimonial y financiera lícita", "documentación societaria y registral", "pericia contable"], peritos: ["contabilidad forense", "análisis financiero", "informática forense"] },
-  "Delitos tributarios": { bien: "Recaudación tributaria y control aduanero, según la norma especial.", verbos: ["defraudar", "omitir", "ocultar"], pruebas: ["declaraciones y libros contables", "documentación tributaria o aduanera", "pericia contable"], peritos: ["contabilidad forense", "tributación y aduanas", "documentoscopía"] },
-  "Delitos informáticos": { bien: "Sistemas, datos y patrimonio afectados mediante tecnologías digitales, según el tipo.", verbos: ["acceder", "alterar", "interferir", "suplantar"], pruebas: ["preservación forense de dispositivos", "registros técnicos obtenidos legalmente", "hashes y cadena de custodia digital"], peritos: ["informática forense", "telecomunicaciones", "análisis financiero cuando corresponda"] },
-  "Criminalidad organizada": { bien: "Bienes jurídicos protegidos por el tipo vigente y seguridad frente a estructuras criminales.", verbos: ["constituir", "integrar", "organizar", "promover"], pruebas: ["individualización de conductas y roles", "continuidad y estructura corroboradas", "comunicaciones y movimientos obtenidos legalmente"], peritos: ["análisis financiero", "informática forense", "telecomunicaciones"] },
-  "La libertad": { bien: "Libertad personal y autodeterminación, según el tipo concreto.", verbos: ["obligar", "privar", "captar", "trasladar"], pruebas: ["declaraciones con garantías", "documentación y registros lícitos", "corroboración periférica"], peritos: ["psicología", "medicina legal", "trabajo social o interpretación, según los hechos"] },
-  "Vida, el cuerpo y la salud": { bien: "Vida, integridad corporal y salud.", verbos: ["matar", "lesionar", "agredir"], pruebas: ["examen médico-legal", "declaraciones y registros lícitos", "pericias sobre mecanismo y resultado"], peritos: ["medicina legal", "psicología", "criminalística según los hechos"] }
-};
-
 function construirAnalisisDelito(delito) {
-  const familia = ANALISIS_FAMILIA[delito.familia] || { bien: "Bien jurídico definido por la disposición citada; pendiente de revisión oficial específica.", verbos: [], pruebas: ["documentación pertinente", "declaraciones obtenidas con garantías", "corroboración independiente"], peritos: ["especialidad determinada por los hechos"] };
-  const elementos = [...new Set(delito.modalidades.flatMap((modalidad) => modalidad.elementos || []))];
-  const estado = delito.sello === "verificado" ? "Criterio interpretativo" : "Pendiente de revisión";
   return {
-    resumenTipo: `La conducta podría configurar ${delito.nombre} solo si se acreditan los elementos de ${delito.articulo} en la versión aplicable a la fecha del hecho.`,
-    bienJuridico: familia.bien,
-    sujetoActivo: "Debe individualizarse conforme al tipo y a la participación atribuida; no se presume por pertenencia a un grupo.",
-    sujetoPasivo: "Persona, colectividad o entidad titular del bien jurídico, según la disposición aplicable.",
-    verbosRectores: familia.verbos.length ? familia.verbos : ["Pendiente de revisión oficial"],
-    elementosObjetivos: elementos.length ? elementos.map((item) => `Elemento registrado: ${item}; requiere corroboración y contraste normativo.`) : ["Pendiente de revisión oficial del texto consolidado y sus elementos objetivos."],
-    elementoSubjetivo: "Requiere determinar el elemento subjetivo previsto por la norma vigente; no se infiere automáticamente del resultado.",
-    consumacion: "Debe establecerse según el verbo rector, el resultado exigido y la versión temporalmente aplicable.",
-    tentativa: "Su procedencia depende del iter de ejecución y de la regulación vigente; requiere evaluación jurídica individual.",
-    agravantesEspecificas: delito.modalidades.filter((m) => m.id !== "b").map((m) => `${m.nombre}: ${m.nota || "verificar supuesto específico en la fuente oficial"}`),
-    atenuantesRelacionadas: ["Las circunstancias genéricas se evalúan separadamente y solo cuando sean legalmente aplicables."],
-    exclusionesODescarte: ["Falta de un elemento del tipo", "atribución no individualizada", "evidencia insuficiente o ilícita", "explicación lícita alternativa no descartada"],
-    porQuePodriaAplicar: [{ texto: `El hecho indicado coincide provisionalmente con conductas descritas en ${delito.articulo}.`, estado: "Inferencia" }, { texto: "Existen datos que requieren corroboración independiente.", estado: "Dato faltante" }],
-    porQuePodriaNoAplicar: [{ texto: "La información puede no acreditar todos los elementos del tipo o la intervención individual.", estado: "No acreditado" }, { texto: "Puede existir una explicación lícita o una calificación alternativa.", estado: "Dato controvertido" }],
-    hipotesisAlternativas: ["Otra calificación jurídica compatible con los hechos acreditados", "conducta atípica o insuficientemente probada"],
-    preguntasCriticas: ["¿Qué conducta concreta se atribuye a cada persona?", "¿Qué fuente acredita cada elemento?", "¿Qué versión legal regía al momento del hecho?", "¿Qué explicación alternativa debe descartarse?"],
-    mediosProbatorios: familia.pruebas,
-    peritosRelacionados: familia.peritos.map((item) => `Puede requerir ${item}, según los hechos.`),
-    riesgosProbatorios: ["pérdida de contexto", "ruptura de cadena de custodia", "inferencia presentada como hecho", "doble valoración de una misma circunstancia"],
-    rutaProcesal: ["investigación y control de legalidad", "etapa intermedia y control de acusación", "juicio con contradicción", "impugnación dentro de sus límites"],
-    interpretaciones: [{ texto: "Encaje legal posible, pero todavía no suficientemente probado.", estado }, { texto: "La atipicidad se diferencia de la insuficiencia probatoria y de una eventual atenuación.", estado: "Criterio interpretativo" }],
-    matriz: [{ elemento: delito.articulo, hecho: "Hecho hipotético indicado por el usuario", fuenteDato: "Relato local no verificado", estado: "Hecho indicado", explicacion: "No equivale a un hecho probado.", falta: "Corroboración y versión legal aplicable" }],
-    fuentes: [{
-      nombre: delito.fuente.norma,
-      articulo: delito.articulo,
-      url: delito.fuente.url,
-      ultimaVerificacion: VERIFICADO_AT,
-      estado: "Pendiente de revisión oficial",
-      vigenciaTemporal: delito.vigenteDesde || "Verificar texto vigente y modificatorias a la fecha del hecho.",
-      versionLegal: delito.familia === "Criminalidad organizada" ? "Texto consolidado aplicable: pendiente de revisión oficial" : "Versión aplicable a la fecha del hecho: pendiente de revisión oficial",
-      fechaPublicacion: "Pendiente de revisión oficial",
-      fechaVigencia: "Pendiente de revisión oficial",
-      normaModificatoria: "Pendiente de revisión oficial"
-    }]
+    estadoPerfil: "Orientación general pendiente de revisión artículo por artículo",
+    resumenTipo: `Ficha general de ${delito.nombre}. Consulte el texto completo de ${delito.articulo} antes de emplear esta referencia.`,
+    estructura: ["La estructura típica específica está pendiente de revisión individual."],
+    sujetosContexto: ["Los sujetos y contextos deben obtenerse del artículo y de sus remisiones expresas."],
+    resultadoConsumacion: ["El resultado, la consumación y la tentativa requieren revisión específica del tipo penal."],
+    penasAgravantes: delito.modalidades.map((m) => `${m.nombre}: ${m.perpetua ? "cadena perpetua" : `${m.min ?? "sin mínimo expreso"} a ${m.max ?? "—"} años`}. ${m.inhab || m.nota || ""}`),
+    fuentes: [{ nombre: delito.fuente.norma, articulo: delito.articulo, url: delito.fuente.url, ultimaVerificacion: VERIFICADO_AT, estado: "Pendiente de revisión específica" }]
   };
 }
 
-DELITOS.forEach((delito) => { delito.analisis = construirAnalisisDelito(delito); });
+const PERFILES_JURIDICOS_ESPECIFICOS = {
+  "agresiones-mujer": {
+    estadoPerfil: "Contrastado con fuente oficial",
+    resumenTipo: "El artículo 122-B sanciona a quien causa lesiones corporales leves o una afectación psicológica, cognitiva o conductual, en alguno de los contextos expresamente remitidos al artículo 108-B.",
+    estructura: ["Verbo rector: causar.", "Resultado físico: lesiones corporales que requieran menos de diez días de asistencia o descanso, según prescripción facultativa, o algún tipo de afectación física que no alcance el nivel de daño psíquico previsto por la norma.", "Resultado no físico: afectación psicológica, cognitiva o conductual que no califique como daño psíquico."],
+    sujetosContexto: ["Primera alternativa de sujeto pasivo: una mujer, por su condición de tal.", "Segunda alternativa de sujeto pasivo: un integrante del grupo familiar.", "Contextos del primer párrafo del artículo 108-B: violencia familiar; coacción, hostigamiento o acoso sexual; abuso de poder, confianza o cualquier posición o relación que confiera autoridad al agente; y cualquier forma de discriminación contra la mujer, exista o no una relación conyugal o de convivencia."],
+    resultadoConsumacion: ["Elemento subjetivo: conducta dolosa; el conocimiento y la voluntad deben abarcar los elementos objetivos y el contexto típico.", "Consumación: se produce con la causación del resultado físico o de la afectación psicológica, cognitiva o conductual exigida por la disposición.", "Tentativa: su admisibilidad requiere cautela y debe examinarse conforme al iter de ejecución y a la naturaleza del resultado atribuido; la ficha no adopta una conclusión automática."],
+    penasAgravantes: ["Modalidad básica: pena privativa de libertad no menor de uno ni mayor de tres años.", "Forma agravada: pena privativa de libertad no menor de dos ni mayor de tres años.", "Agravantes específicas: 1) uso de arma, objeto contundente o instrumento que ponga en riesgo la vida; 2) ensañamiento o alevosía; 3) víctima embarazada; 4) víctima menor de edad, adulta mayor, con discapacidad o con enfermedad terminal, cuando el agente se aprovecha de esa condición; 5) intervención de dos o más personas; 6) contravención de una medida de protección emitida por la autoridad competente; 7) comisión del acto en presencia de una niña, niño o adolescente.", "Inhabilitación: conforme a los numerales 5 y 11 del artículo 36 del Código Penal y a los artículos 75 y 77 del Código de los Niños y Adolescentes, según corresponda."],
+    fuentes: [
+      { nombre: "Código Penal — Decreto Legislativo 635", articulo: "Artículo 122-B", url: "https://www2.congreso.gob.pe/sicr/cendocbib/con6_uibd.nsf/DB60F84B5D157DD605258AB3005DEC4B/%24FILE/codigo_penal.pdf", ultimaVerificacion: VERIFICADO_AT, estado: "Texto consolidado contrastado con fuente oficial" },
+      { nombre: "Ley 30819", articulo: "Publicada el 13 de julio de 2018", url: "https://busquedas.elperuano.pe/dispositivo/NL/1669642-1", ultimaVerificacion: VERIFICADO_AT, estado: "Publicación oficial" }
+    ]
+  }
+};
+
+DELITOS.forEach((delito) => { delito.analisis = PERFILES_JURIDICOS_ESPECIFICOS[delito.id] || construirAnalisisDelito(delito); });
 
 /* Recursos públicos comprobados como páginas oficiales. No representan acceso
    a registros internos ni a información reservada. */
@@ -695,8 +681,8 @@ const CONDICIONES_PERSONA = [
   { id: "ninguna", label: "Ninguna condición especial", nota: null },
   { id: "funcionario", label: "Funcionario o servidor público", nota: "Puede activar la competencia de la Fiscalía Especializada en Corrupción de Funcionarios o procedimientos por razón de la función." },
   { id: "aforado", label: "Alto funcionario con prerrogativa (congresista, ministro, juez supremo…)", nota: "Puede requerir antejuicio o proceso especial por razón de la función ante la Fiscalía de la Nación y la Corte Suprema." },
-  { id: "policia-militar", label: "Efectivo policial o militar", nota: "Si el hecho es delito de función, puede corresponder al fuero militar-policial; los delitos comunes van al fuero ordinario." },
-  { id: "adolescente", label: "Adolescente (menor de 18 años)", nota: "No se aplica el Código Penal de adultos: rige el Código de Responsabilidad Penal de Adolescentes (D. Leg. 1348), con fiscalías y juzgados de familia especializados." }
+  { id: "policia-militar", label: "Efectivo policial o militar", nota: "Si el hecho es delito de función, puede corresponder al fuero militar-policial; los delitos comunes van al fuero ordinario. La Ley 32735 (21/07/2026) redefinió el delito de función y amplió la competencia militar policial respecto de hechos ocurridos en actividades de prevención e investigación del delito: verificar el criterio vigente y su control constitucional." },
+  { id: "adolescente", label: "Adolescente (menor de 18 años)", nota: "No se aplica el Código Penal de adultos: rige el Código de Responsabilidad Penal de Adolescentes (D. Leg. 1348), con fiscalías y juzgados de familia especializados. El Tribunal Constitucional declaró inconstitucional (sentencia publicada el 16/01/2026) el juzgamiento de adolescentes de 16 y 17 años bajo el régimen penal ordinario." }
 ];
 
 /* ---- Plazos procesales (CPP, arts. 334 y 342; Ley 30077) ---- */
@@ -722,15 +708,231 @@ const PRISION_PREVENTIVA = [
   { tipo: "Criminalidad organizada", plazo: "36 meses", meses: 36 }
 ];
 
+const MEDIDAS_REVISION_NORMATIVA = "16 de julio de 2026";
+
+const MEDIDAS_PRINCIPIOS = [
+  { id: "legalidad", nombre: "Legalidad", desc: "La restricción debe estar expresamente autorizada por la ley." },
+  { id: "finalidad", nombre: "Finalidad procesal", desc: "La medida debe perseguir una finalidad concreta vinculada al proceso." },
+  { id: "idoneidad", nombre: "Idoneidad", desc: "La medida debe ser apta para controlar el riesgo identificado." },
+  { id: "necesidad", nombre: "Necesidad", desc: "Debe descartarse una alternativa menos restrictiva igualmente eficaz." },
+  { id: "proporcionalidad", nombre: "Proporcionalidad", desc: "La intensidad de la medida debe guardar equilibrio con el riesgo procesal." },
+  { id: "temporalidad", nombre: "Temporalidad", desc: "La medida solo puede mantenerse durante el tiempo estrictamente necesario." },
+  { id: "motivacion", nombre: "Motivación", desc: "La decisión debe explicar hechos, riesgos, fundamentos y duración." },
+  { id: "revision", nombre: "Revisión judicial", desc: "La medida debe poder ser revisada, sustituida, variada o cesada cuando cambien sus presupuestos." }
+];
+
+const MEDIDAS_TEST_LEGITIMIDAD = [
+  "¿La medida está expresamente prevista por la ley?",
+  "¿Existe una finalidad procesal concreta?",
+  "¿La medida es idónea para controlar el riesgo identificado?",
+  "¿Existe una medida menos gravosa igualmente eficaz?",
+  "¿La intensidad de la restricción resulta proporcional?",
+  "¿El plazo está individualmente motivado?",
+  "¿Se ha previsto su control o revisión judicial?"
+];
+
 const MEDIDAS_COERCITIVAS = [
-  { nombre: "Comparecencia simple", desc: "El imputado sigue el proceso en libertad, con la obligación de concurrir a las citaciones." },
-  { nombre: "Comparecencia con restricciones", desc: "Libertad sujeta a reglas: no ausentarse, firmar periódicamente, caución u otras restricciones." },
-  { nombre: "Impedimento de salida", desc: "Prohibición de salir del país o de la localidad, dispuesta judicialmente." },
-  { nombre: "Detención preliminar judicial", desc: "Privación breve de libertad al inicio de la investigación, ordenada por el juez." },
-  { nombre: "Prisión preventiva", desc: "Requiere graves y fundados elementos, prognosis de pena superior a 4 años y peligro procesal. No es una pena." },
-  { nombre: "Arresto domiciliario", desc: "Alternativa a la prisión preventiva para supuestos legalmente previstos." },
-  { nombre: "Embargo / incautación / inhibición", desc: "Medidas reales sobre bienes para asegurar la reparación civil o el decomiso." },
-  { nombre: "Suspensión preventiva de derechos", desc: "Suspensión temporal de cargos o actividades vinculadas al delito." }
+  {
+    id: "detencion", categoria: "personal", nombre: "Detención", intensidad: "alta",
+    desc: "Privación temporal de libertad sometida a supuestos legales, control de plazo y control judicial.",
+    finalidad: "Asegurar la sujeción inmediata al procedimiento en los supuestos expresamente habilitados.",
+    detalles: [
+      ["Presupuestos esenciales", ["Detención policial en flagrancia.", "Arresto ciudadano.", "Detención preliminar judicial.", "Detención judicial en los casos legalmente previstos.", "Incomunicación excepcional."]],
+      ["Autoridad competente", "Depende de la modalidad: intervención policial o ciudadana en los supuestos permitidos y decisión judicial cuando la ley la exige."],
+      ["Duración o control temporal", "Se sujeta al límite y al control previstos para cada modalidad; no existe un plazo único aplicable a todas."],
+      ["Alternativas o medidas relacionadas", ["Comparecencia.", "Impedimento de salida.", "Otras restricciones idóneas según el riesgo."]],
+      ["Revisión, variación o cese", "Debe cesar al vencer el plazo o desaparecer el supuesto habilitante, sin perjuicio del control judicial correspondiente."],
+      ["Base normativa", "Código Procesal Penal: régimen de detención e incomunicación."],
+      ["Criterio práctico", "Identificar primero la modalidad concreta, su presupuesto habilitante, la autoridad y el inicio del cómputo."]
+    ],
+    advertencias: ["La modalidad, el plazo y la autoridad competente dependen del supuesto legal aplicable."]
+  },
+  {
+    id: "prision-preventiva", categoria: "personal", nombre: "Prisión preventiva", intensidad: "máxima",
+    desc: "Medida excepcional de privación cautelar de libertad aplicable cuando otras medidas resultan insuficientes para controlar el peligro procesal.",
+    finalidad: "Controlar un peligro concreto de fuga u obstaculización que no pueda neutralizarse con una medida menos gravosa.",
+    detalles: [
+      ["Presupuestos esenciales", ["Fundados y graves elementos de convicción.", "Prognosis de pena conforme al umbral legal vigente.", "Peligro de fuga o peligro de obstaculización.", "Necesidad e insuficiencia de alternativas menos gravosas.", "Proporcionalidad.", "Plazo individualmente motivado."]],
+      ["Análisis del peligro procesal", ["Arraigo domiciliario, familiar y laboral.", "Conducta procesal.", "Facilidades para abandonar el país o permanecer oculto.", "Posibilidad concreta de influir en testigos, peritos o coimputados.", "Riesgo de destruir, ocultar, alterar o falsificar elementos de prueba."]],
+      ["Autoridad competente", "Órgano jurisdiccional competente, previa solicitud y audiencia conforme al régimen procesal aplicable."],
+      ["Plazos", ["Proceso común: dentro del límite legal vigente y con motivación individual.", "Proceso complejo: conforme a su régimen específico.", "Criminalidad organizada: conforme a su régimen específico.", "Prolongación: exige presupuesto y decisión judicial propios.", "Adecuación o modificación: según el régimen aplicable.", "Revisión periódica: debe comprobar la subsistencia de los presupuestos."]],
+      ["Alternativas a examinar", ["Comparecencia con restricciones.", "Caución.", "Vigilancia electrónica personal.", "Prohibición de comunicación.", "Restricciones de desplazamiento.", "Impedimento de salida.", "Detención domiciliaria, cuando corresponda."]],
+      ["Control judicial", "Puede ser revisada, variada, sustituida, prolongada o cesada según subsistan o cambien sus fundamentos legales."],
+      ["Base normativa", "Código Procesal Penal; Acuerdo Plenario 01-2019/CIJ-116; jurisprudencia constitucional sobre motivación reforzada y libertad personal."],
+      ["Criterio práctico", "La decisión requiere justificar el riesgo con datos verificables y explicar por qué las alternativas no bastan."]
+    ],
+    advertencias: ["La gravedad de la imputación o de la pena esperada no demuestra, por sí sola, peligro de fuga u obstaculización."]
+  },
+  {
+    id: "comparecencia", categoria: "personal", nombre: "Comparecencia", intensidad: "baja o media",
+    desc: "Medida que permite afrontar el proceso en libertad, con o sin restricciones, según la intensidad del peligro procesal.",
+    finalidad: "Mantener la sujeción al proceso mediante el nivel de control estrictamente necesario.",
+    detalles: [
+      ["Presupuestos esenciales", ["Comparecencia simple: deber de concurrir a las citaciones y sujeción al proceso.", "Comparecencia con restricciones: peligro controlable mediante reglas proporcionales."]],
+      ["Restricciones posibles", ["Control periódico.", "Prohibición de ausentarse.", "Prohibición de comunicarse con determinadas personas.", "Restricción de acercamiento.", "Caución.", "Vigilancia electrónica.", "Otras reglas proporcionales al riesgo identificado."]],
+      ["Autoridad competente", "Órgano jurisdiccional competente, conforme al supuesto y a la regla solicitada."],
+      ["Duración o control temporal", "Las reglas deben fijarse y revisarse según su necesidad y vigencia."],
+      ["Alternativas o medidas relacionadas", ["Variación de reglas.", "Impedimento de salida.", "Caución.", "Vigilancia electrónica personal."]],
+      ["Revisión, variación o cese", "Las reglas pueden sustituirse, acumularse proporcionalmente o cesar cuando cambien los presupuestos."],
+      ["Base normativa", "Código Procesal Penal: régimen de comparecencia simple y con restricciones."],
+      ["Criterio práctico", "Se aplica cuando el peligro procesal puede ser razonablemente controlado sin privación cautelar de libertad."]
+    ]
+  },
+  {
+    id: "detencion-domiciliaria", categoria: "personal", nombre: "Detención domiciliaria", intensidad: "alta",
+    desc: "Restricción de la libertad ambulatoria ejecutada en un domicilio determinado bajo condiciones de control.",
+    finalidad: "Controlar el peligro procesal fuera de un establecimiento penitenciario en supuestos legalmente habilitados.",
+    detalles: [
+      ["Presupuestos esenciales", ["Supuesto legal habilitante.", "Evaluación personal y procesal.", "Verificación de que el peligro pueda controlarse bajo esta modalidad."]],
+      ["Autoridad competente", "Órgano jurisdiccional competente."],
+      ["Lugar y condiciones", ["Domicilio determinado.", "Mecanismos de vigilancia.", "Restricciones complementarias necesarias."]],
+      ["Duración o control temporal", "Debe fijarse, motivarse y controlarse conforme al régimen aplicable."],
+      ["Alternativas o medidas relacionadas", ["Comparecencia con restricciones.", "Vigilancia electrónica.", "Otras reglas compatibles."]],
+      ["Revisión, variación o cese", "Puede sustituirse, variarse o cesar si cambian los presupuestos o el nivel de riesgo."],
+      ["Base normativa", "Código Procesal Penal: régimen de detención domiciliaria."],
+      ["Criterio práctico", "La edad o la salud no producen automáticamente la medida; deben verificarse los requisitos legales y la evaluación judicial del caso."]
+    ]
+  },
+  {
+    id: "impedimento-salida", categoria: "personal", nombre: "Impedimento de salida", intensidad: "media",
+    desc: "Restricción temporal para impedir que una persona abandone el país o un ámbito territorial determinado durante la investigación o el proceso.",
+    finalidad: "Asegurar la presencia de la persona y evitar un desplazamiento relevante para el riesgo procesal." ,
+    detalles: [
+      ["Presupuestos esenciales", ["Necesidad vinculada a un riesgo concreto.", "Ámbito territorial definido.", "Motivación individual.", "Sujeto procesal comprendido conforme a ley."]],
+      ["Autoridad competente", "Órgano jurisdiccional competente, a solicitud legitimada."],
+      ["Duración o control temporal", "El plazo y su eventual prórroga requieren fundamento conforme al régimen aplicable."],
+      ["Alternativas o medidas relacionadas", ["Comparecencia con restricciones.", "Control periódico.", "Restricciones de desplazamiento menos intensas."]],
+      ["Revisión, variación o cese", "Puede revisarse, variarse o levantarse cuando la necesidad desaparezca o pueda controlarse de otro modo."],
+      ["Base normativa", "Código Procesal Penal: régimen de impedimento de salida."],
+      ["Criterio práctico", "Precisar el riesgo, el territorio, la duración y la relación entre la restricción y la finalidad perseguida."]
+    ],
+    advertencias: ["No debe utilizarse como restricción automática; requiere justificar su relación con un riesgo procesal concreto."]
+  },
+  {
+    id: "suspension-derechos", categoria: "personal", nombre: "Suspensión preventiva de derechos", intensidad: "media o alta",
+    desc: "Restricción temporal del ejercicio de determinados derechos, cargos, actividades o facultades vinculadas al riesgo investigado.",
+    finalidad: "Neutralizar riesgos relacionados directamente con el ejercicio de un derecho, función o actividad.",
+    detalles: [
+      ["Presupuestos esenciales", ["Relación concreta entre el derecho restringido y el riesgo.", "Necesidad y proporcionalidad de la medida."]],
+      ["Ámbitos posibles", ["Ejercicio de cargo o función.", "Actividad profesional.", "Conducción de vehículos.", "Tenencia o uso de armas.", "Acercamiento o comunicación.", "Actividad empresarial o institucional, cuando legalmente corresponda."]],
+      ["Autoridad competente", "Órgano jurisdiccional competente."],
+      ["Duración o control temporal", "El plazo debe estar individualmente motivado y sujeto a control judicial."],
+      ["Alternativas o medidas relacionadas", ["Restricción parcial.", "Reglas de conducta.", "Prohibiciones específicas menos intensas."]],
+      ["Revisión, variación o cese", "Procede cuando cambian el riesgo, la vinculación o la necesidad de la restricción."],
+      ["Base normativa", "Código Procesal Penal: régimen de suspensión preventiva de derechos."],
+      ["Criterio práctico", "Delimitar con precisión el derecho afectado y su conexión con el riesgo que se busca controlar."]
+    ]
+  },
+  {
+    id: "embargo", categoria: "patrimonial", nombre: "Embargo", intensidad: "patrimonial",
+    desc: "Afectación cautelar de bienes destinada a asegurar responsabilidades económicas derivadas del proceso.",
+    finalidad: "Asegurar la reparación civil, las costas y otras responsabilidades económicas legalmente vinculadas al proceso.",
+    detalles: [
+      ["Bien, derecho o patrimonio afectado", "Bienes o derechos identificados, hasta un monto cautelar proporcional."],
+      ["Presupuestos", ["Apariencia suficiente de la pretensión económica.", "Riesgo para su eficacia.", "Identificación del bien y monto de afectación.", "Modalidad idónea y proporcional."]],
+      ["Autoridad competente", "Órgano jurisdiccional competente, a solicitud legitimada."],
+      ["Alcance y duración", "La modalidad y el monto deben limitarse a la finalidad cautelar mientras subsistan sus presupuestos."],
+      ["Variación, sustitución o cese", "Puede variarse, sustituirse, reducirse o levantarse conforme cambien la garantía o los presupuestos."],
+      ["Base normativa", "Código Procesal Penal y normas de aplicación supletoria sobre embargo cautelar."],
+      ["Criterio práctico", "Individualizar el bien, justificar el monto y escoger la modalidad menos gravosa que mantenga eficacia."]
+    ]
+  },
+  {
+    id: "inhibicion", categoria: "patrimonial", nombre: "Orden de inhibición", intensidad: "patrimonial",
+    desc: "Restricción para disponer o gravar determinados bienes mientras subsista la finalidad cautelar.",
+    finalidad: "Evitar actos de disposición que frustren la eficacia económica del proceso.",
+    detalles: [
+      ["Bien, derecho o patrimonio afectado", "Bienes o derechos registrables individualizados."],
+      ["Presupuestos", ["Finalidad cautelar concreta.", "Riesgo de disposición o gravamen.", "Necesidad y proporcionalidad."]],
+      ["Autoridad competente", "Órgano jurisdiccional competente, a solicitud legitimada."],
+      ["Alcance y duración", "Impide disponer o gravar; a diferencia del embargo, se centra en la prohibición registral y no necesariamente fija una modalidad de afectación para ejecución."],
+      ["Variación, sustitución o cese", "Puede sustituirse por garantía suficiente o levantarse al desaparecer su necesidad."],
+      ["Base normativa", "Código Procesal Penal: medidas reales y orden de inhibición."],
+      ["Criterio práctico", "Verificar la titularidad, la identificación registral y que la prohibición guarde relación con la pretensión asegurada."]
+    ]
+  },
+  {
+    id: "incautacion", categoria: "patrimonial", nombre: "Incautación", intensidad: "patrimonial alta",
+    desc: "Aprehensión o indisponibilidad de bienes vinculados al delito, la investigación o las consecuencias jurídicas del proceso.",
+    finalidad: "Preservar evidencia o asegurar bienes sujetos a una consecuencia jurídica, según la finalidad concreta de la medida.",
+    detalles: [
+      ["Bien, derecho o patrimonio afectado", "Objetos, instrumentos, efectos, ganancias u otros bienes vinculados conforme a ley."],
+      ["Presupuestos", ["Vinculación objetiva con el delito o la investigación.", "Finalidad probatoria o cautelar identificada.", "Necesidad y proporcionalidad."]],
+      ["Autoridad competente", "Fiscalía y órgano jurisdiccional intervienen según el supuesto; corresponde control o confirmación judicial cuando la ley lo exige."],
+      ["Alcance y duración", "Comprende custodia e indisponibilidad durante el tiempo necesario para su finalidad."],
+      ["Variación, sustitución o cese", "Proceden la devolución, conservación, sustitución o destino conforme al régimen aplicable."],
+      ["Base normativa", "Código Procesal Penal: incautación con finalidad probatoria y cautelar."],
+      ["Criterio práctico", "Distinguir la finalidad probatoria de la cautelar y documentar la cadena de custodia cuando corresponda."]
+    ]
+  },
+  {
+    id: "desalojo-preventivo", categoria: "patrimonial", nombre: "Desalojo preventivo y ministración provisional de posesión", intensidad: "patrimonial alta",
+    desc: "Medida provisional destinada a restablecer o proteger la posesión en los supuestos expresamente previstos por la ley.",
+    finalidad: "Evitar la consolidación del perjuicio posesorio y proteger provisionalmente la situación acreditada." ,
+    detalles: [
+      ["Bien, derecho o patrimonio afectado", "Inmueble y situación posesoria materia de investigación."],
+      ["Presupuestos", ["Supuesto legal aplicable.", "Elementos iniciales de convicción.", "Situación posesoria relevante.", "Urgencia y necesidad de tutela provisional."]],
+      ["Autoridad competente", "Órgano jurisdiccional competente, conforme al trámite legal."],
+      ["Alcance y duración", "Puede comprender desalojo preventivo y ministración provisional de posesión, sin resolver definitivamente el derecho discutido."],
+      ["Variación, sustitución o cese", "Está sujeta a control judicial y puede variarse o cesar si cambian sus presupuestos."],
+      ["Base normativa", "Código Procesal Penal: desalojo preventivo y ministración provisional."],
+      ["Criterio práctico", "Diferenciar la tutela provisional de una decisión definitiva sobre propiedad o posesión."]
+    ]
+  },
+  {
+    id: "personas-juridicas", categoria: "patrimonial", nombre: "Medidas aplicables a personas jurídicas", intensidad: "institucional",
+    desc: "Medidas temporales que pueden afectar la actividad, organización o funcionamiento de una persona jurídica vinculada al proceso.",
+    finalidad: "Controlar riesgos concretos de continuidad, reiteración, ocultamiento o interferencia vinculados a la actividad de la entidad.",
+    detalles: [
+      ["Bien, derecho o patrimonio afectado", "Actividad, locales, organización o facultades de la persona jurídica, en el alcance permitido por la ley."],
+      ["Presupuestos", ["Vinculación procesal suficiente.", "Riesgo concreto.", "Necesidad y proporcionalidad."]],
+      ["Medidas posibles", ["Clausura temporal.", "Suspensión de actividades.", "Intervención.", "Vigilancia.", "Prohibición de determinadas actividades.", "Otras medidas previstas legalmente."]],
+      ["Autoridad competente", "Órgano jurisdiccional competente."],
+      ["Alcance y duración", "Deben delimitarse por actividad, establecimiento o facultad y mantenerse solo mientras resulten necesarias."],
+      ["Variación, sustitución o cese", "Pueden reducirse, sustituirse o levantarse según la evolución del riesgo."],
+      ["Base normativa", "Código Procesal Penal: medidas preventivas contra personas jurídicas."],
+      ["Criterio práctico", "Evitar afectaciones indiscriminadas y considerar el impacto sobre terceros ajenos al proceso."]
+    ],
+    advertencias: ["La medida debe estar vinculada a riesgos concretos y no puede imponerse como sanción anticipada."]
+  },
+  {
+    id: "pension-anticipada", categoria: "patrimonial", nombre: "Pensión anticipada de alimentos", intensidad: "patrimonial",
+    desc: "Asignación provisional destinada a atender necesidades alimentarias en los supuestos expresamente contemplados por la legislación procesal.",
+    finalidad: "Atender provisionalmente una necesidad alimentaria conectada con las consecuencias económicas del proceso penal cuando la ley lo permite.",
+    detalles: [
+      ["Bien, derecho o patrimonio afectado", "Prestación económica provisional a cargo del sujeto procesal comprendido."],
+      ["Presupuestos", "Supuesto procesal expresamente habilitado y elementos suficientes sobre necesidad y vinculación."],
+      ["Autoridad competente", "Órgano jurisdiccional competente."],
+      ["Alcance y duración", "Se limita al proceso penal y al período en que subsista su fundamento provisional."],
+      ["Variación, sustitución o cese", "Puede adecuarse o cesar según cambien las circunstancias procesales."],
+      ["Base normativa", "Código Procesal Penal: medidas anticipadas vinculadas a alimentos."],
+      ["Criterio práctico", "No es una herramienta general de derecho de familia; aquí se explica solo su conexión procesal dentro del caso penal."]
+    ]
+  }
+];
+
+const MEDIDAS_COMPARACION = [
+  { criterio: "Privación de libertad", simple: "No", restringida: "No", preventiva: "Sí, cautelar" },
+  { criterio: "Reglas de conducta", simple: "Deberes básicos", restringida: "Sí", preventiva: "Régimen de privación" },
+  { criterio: "Intensidad", simple: "Baja", restringida: "Media", preventiva: "Máxima" },
+  { criterio: "Peligro procesal", simple: "No exige restricciones adicionales", restringida: "Controlable con reglas", preventiva: "Concreto y no controlable con alternativas" },
+  { criterio: "Control judicial", simple: "Sí", restringida: "Sí", preventiva: "Sí, reforzado" },
+  { criterio: "Posibilidad de revisión", simple: "Sí", restringida: "Sí", preventiva: "Sí, periódica" },
+  { criterio: "Carácter excepcional", simple: "No", restringida: "Según necesidad", preventiva: "Sí" }
+];
+
+const MEDIDAS_JURISPRUDENCIA = [
+  { id: "ap-01-2019", nombre: "Acuerdo Plenario 01-2019/CIJ-116", tema: "Presupuestos y requisitos de la prisión preventiva", regla: "Exige examen diferenciado de sus presupuestos, proporcionalidad y duración.", aplicacion: "Ordena estructurar el debate y la motivación de cada presupuesto sin fórmulas generales.", url: "https://www.pj.gob.pe/wps/wcm/connect/ObservatorioPJ/s_ojpj/as_plenos/as_psupremos/as_pleno_penal/as_2019/" },
+  { id: "cas-626-2013", nombre: "Casación 626-2013, Moquegua", tema: "Audiencia y motivación de la prisión preventiva", regla: "Los presupuestos requieren sustento en datos objetivos y debate ordenado.", aplicacion: "Permite controlar que la resolución responda de modo concreto a lo discutido.", url: "https://www.pj.gob.pe/wps/wcm/connect/e7003c804d8db104a16df1db524a342a/Bolet%C3%ADn_18-2016.pdf?CACHEID=e7003c804d8db104a16df1db524a342a&MOD=AJPERES" },
+  { id: "stc-03248-2019", nombre: "STC Exp. 03248-2019-PHC/TC (caso Yoshiyama Tanaka)", tema: "Motivación reforzada, excepcionalidad y revisión", regla: "La prisión preventiva es provisional, excepcional y no punitiva; el peligro procesal no puede fundarse en conjeturas.", aplicacion: "Exige explicar el riesgo concreto, la duración y la insuficiencia de alternativas.", url: "https://www.tc.gob.pe/institucional/notas-de-prensa/tribunal-constitucional-establece-importante-doctrina-jurisprudencial-vinculante-en-materia-de-prision-preventiva/" },
+  { id: "stc-00800-2024", nombre: "STC Exp. 00800-2024-PHC/TC", tema: "Peligro de fuga y valoración del arraigo", regla: "La prognosis de pena y referencias genéricas al arraigo no sustituyen razones objetivas sobre el peligro procesal.", aplicacion: "Obliga a contrastar circunstancias verificables del caso al motivar una restricción de libertad.", url: "https://www.tc.gob.pe/jurisprudencia/2026/00800-2024-HC.html" }
+];
+
+const MEDIDAS_REFERENCIAS = [
+  { label: "Código Procesal Penal peruano: disposiciones sobre coerción procesal", url: "https://leyes.congreso.gob.pe/DetLeyNume_1p.aspx?xNorma=3&xNumero=957&xTipoNorma=3" },
+  { label: "Normativa modificatoria vigente", url: "https://diariooficial.elperuano.pe/Normas" },
+  { label: "Acuerdos Plenarios y jurisprudencia vinculada", url: "https://www.pj.gob.pe/wps/wcm/connect/cij-juris/s_jurisprudencia_sistematizada" },
+  { label: "Jurisprudencia constitucional sobre libertad personal, motivación y proporcionalidad", url: "https://www.tc.gob.pe/jurisprudencia/" }
 ];
 
 /* ---- Normativa base y reciente ---- */
@@ -746,24 +948,43 @@ const NORMAS_BASE = [
   { norma: "Decreto Legislativo 813", contenido: "Ley Penal Tributaria." },
   { norma: "Ley 28008", contenido: "Delitos aduaneros." },
   { norma: "Decreto Ley 25475", contenido: "Delitos de terrorismo." },
-  { norma: "Decreto Legislativo 1348", contenido: "Código de Responsabilidad Penal de Adolescentes." }
+  { norma: "Decreto Legislativo 1348", contenido: "Código de Responsabilidad Penal de Adolescentes. El Tribunal Constitucional (sentencia publicada el 16/01/2026) declaró inconstitucional aplicar responsabilidad penal ordinaria a adolescentes de 16 y 17 años." },
+  { norma: "Decreto Legislativo 654 — Código de Ejecución Penal (TUO, D.S. 003-2021-JUS)", contenido: "Régimen penitenciario y beneficios; modificado por la Ley 32684 (02/07/2026) en materia de equipos de comunicación." },
+  { norma: "Decreto Legislativo 1094 — Código Penal Militar Policial", contenido: "Delitos de función del personal militar y policial; modificado por la Ley 32735 (21/07/2026)." }
 ];
 
 /* Estructura: número, publicación, vigencia, materia, fuente, estado, revisión editorial */
 const NORMAS_RECIENTES = [
-  { norma: "Ley 32258", publicacion: "14/03/2025", vigencia: "Verificar disposición correspondiente", materia: "Modifica el tratamiento de la tentativa y amplía las restricciones para suspender la ejecución de determinadas penas.", fuenteOficial: "El Peruano", estado: "Vigente", verificacion: VERIFICADO_AT },
-  { norma: "Decreto Legislativo 1735", publicacion: "12/02/2026", vigencia: "Conforme a su texto", materia: "Norma organizativa: crea el Subsistema Especializado contra la Extorsión y sus Delitos Conexos. No establece penas sustantivas.", fuenteOficial: "El Peruano", estado: "Vigente", verificacion: VERIFICADO_AT },
-  { norma: "Ley 32130 y STC Exp. 00005-2025-PI/TC", publicacion: "2024 / sentencia 2026", vigencia: "Conforme a su texto e interpretación del TC", materia: "Distribución de funciones entre la Policía Nacional y el Ministerio Público en la investigación preliminar: la Policía investiga operativamente; el fiscal conserva la conducción jurídica.", fuenteOficial: "El Peruano / TC", estado: "Vigente (interpretada)", verificacion: VERIFICADO_AT },
-  { norma: "Ley 32314", publicacion: "2025", vigencia: "Conforme a su texto", materia: "Incorpora el empleo de inteligencia artificial en los delitos informáticos (modifica la Ley 30096).", fuenteOficial: "El Peruano", estado: "Vigente", verificacion: VERIFICADO_AT }
+  { norma: "Ley 32735", publicacion: "21/07/2026", categoria: "Competencia y fuero militar policial", vigencia: "Conforme a sus disposiciones", materia: "Modifica el Código Penal Militar Policial (D. Leg. 1094) y el Código Procesal Penal (art. III del Título Preliminar y art. 26.5) para redefinir el delito de función y ampliar la competencia del fuero militar policial respecto de hechos cometidos por personal policial y militar en actividades de prevención e investigación del delito. Su alcance es discutido y puede ser objeto de control constitucional.", fuenteOficial: "Diario Oficial El Peruano", url: "https://diariooficial.elperuano.pe/Normas", estado: "Publicada; alcance en debate", verificacion: VERIFICADO_AT },
+  { norma: "Ley 32684", publicacion: "02/07/2026", categoria: "Reforma penal sustantiva y de ejecución penal", vigencia: "Conforme a sus disposiciones", materia: "Modifica el Código Penal (entre otros, arts. 200, 368-A y 368-D), el Código de Ejecución Penal (arts. 37-A y 37-C) y el D. Leg. 1688 para endurecer el ingreso, la posesión y el uso indebido de equipos de comunicación en establecimientos penitenciarios, e incorpora como supuesto agravado de extorsión el empleo de los servicios de telefonía autorizados del penal.", fuenteOficial: "Diario Oficial El Peruano", url: "https://elperuano.pe/noticia/299308-celulares-en-penales-estas-son-las-nuevas-penas-que-establece-la-ley-32684", estado: "Publicada", verificacion: VERIFICADO_AT },
+  { norma: "STC sobre el D. Leg. 1589 (arts. 283-A y 315-B CP)", publicacion: "22/07/2026", categoria: "Jurisprudencia constitucional", vigencia: "Sentencia del Tribunal Constitucional", materia: "Declara inconstitucionales los artículos 283-A y 315-B del Código Penal, que sancionaban como actos de colaboración el aporte de dinero, alimentos, transporte o suministros a movilizaciones sociales. Se mantienen los tipos de disturbios y entorpecimiento de servicios públicos.", fuenteOficial: "Tribunal Constitucional", url: "https://www.tc.gob.pe/jurisprudencia/", estado: "Sentencia publicada", verificacion: VERIFICADO_AT },
+  { norma: "D. Leg. 1731", publicacion: "12/02/2026", categoria: "Reforma penal sustantiva", vigencia: "Conforme a sus disposiciones", materia: "Incorpora el artículo 200-A del Código Penal (exigencia extorsiva) como conducta autónoma previa a la extorsión, con pena privativa de libertad referencial de 9 a 12 años.", fuenteOficial: "Diario Oficial El Peruano", url: "https://busquedas.elperuano.pe/", estado: "Publicado", verificacion: VERIFICADO_AT },
+  { norma: "D. Leg. 1733", publicacion: "12/02/2026", categoria: "Reforma penal sustantiva", vigencia: "Conforme a sus disposiciones", materia: "Sanciona el suministro ilegal de servicios de telecomunicaciones en establecimientos penitenciarios y fija obligaciones a los operadores.", fuenteOficial: "Diario Oficial El Peruano", url: "https://busquedas.elperuano.pe/", estado: "Publicado", verificacion: VERIFICADO_AT },
+  { norma: "D. Leg. 1734", publicacion: "12/02/2026", categoria: "Reforma penal sustantiva", vigencia: "Conforme a sus disposiciones", materia: "Regula la reserva de información sobre operaciones desarrolladas en estados de emergencia e incorpora el delito de revelación de información reservada.", fuenteOficial: "Diario Oficial El Peruano", url: "https://busquedas.elperuano.pe/", estado: "Publicado", verificacion: VERIFICADO_AT },
+  { norma: "STC Exps. 00008-2025-PI/TC y acumulados", publicacion: "16/01/2026", categoria: "Jurisprudencia constitucional", vigencia: "Sentencia del Tribunal Constitucional", materia: "Declara inconstitucionales las disposiciones de la Ley 32330 que permitían aplicar responsabilidad penal ordinaria a adolescentes de 16 y 17 años. La imputabilidad penal se mantiene a partir de los 18 años y esos casos corresponden al sistema penal juvenil (D. Leg. 1348).", fuenteOficial: "Tribunal Constitucional", url: "https://www.tc.gob.pe/jurisprudencia/", estado: "Sentencia publicada", verificacion: VERIFICADO_AT },
+  { norma: "Ley 32258", publicacion: "14/03/2025", categoria: "Reforma penal sustantiva", vigencia: "Conforme a sus disposiciones", materia: "Modifica los artículos 16 y 57 del Código Penal sobre tentativa y suspensión de la ejecución de la pena.", fuenteOficial: "Congreso de la República", url: "https://leyes.congreso.gob.pe/Documentos/2021_2026/ADLP/Texto_Consolidado/32258-TXM.pdf", estado: "Publicada", verificacion: VERIFICADO_AT },
+  { norma: "Decreto Legislativo 1735", publicacion: "12/02/2026", categoria: "Organización institucional", vigencia: "Conforme a sus disposiciones", materia: "Crea el Subsistema Especializado contra la Extorsión y sus Delitos Conexos y dicta medidas para su implementación; su objeto es organizativo y operativo.", fuenteOficial: "Diario Oficial El Peruano", url: "https://busquedas.elperuano.pe/dispositivo/NL/2486266-9", estado: "Publicado", verificacion: VERIFICADO_AT },
+  { norma: "Ley 32130", publicacion: "10/10/2024", categoria: "Reforma procesal", vigencia: "Interpretada bajo control constitucional", materia: "Regula la distribución de actuaciones operativas de investigación, sin eliminar la dirección jurídica, supervisión y responsabilidad constitucional del Ministerio Público.", fuenteOficial: "Diario Oficial El Peruano", url: "https://busquedas.elperuano.pe/dispositivo/NL/2332876-1", estado: "Publicada; alcance sujeto a interpretación constitucional", verificacion: VERIFICADO_AT },
+  { norma: "STC Exp. 00005-2025-PI/TC", publicacion: "06/02/2026", categoria: "Jurisprudencia constitucional", vigencia: "Sentencia del Tribunal Constitucional", materia: "Delimita la actuación operativa policial y preserva la conducción jurídica, supervisión y responsabilidad fiscal dentro del marco constitucional.", fuenteOficial: "Tribunal Constitucional", url: "https://www.tc.gob.pe/jurisprudencia/2026/00005-2025-AI.html", estado: "Sentencia publicada", verificacion: VERIFICADO_AT },
+  { norma: "Ley 32314", publicacion: "29/04/2025", categoria: "Delitos informáticos", vigencia: "Conforme a su texto", materia: "Modifica el Código Penal y la Ley 30096 para incorporar el empleo de inteligencia artificial en determinados delitos.", fuenteOficial: "Diario Oficial El Peruano", url: "https://busquedas.elperuano.pe/dispositivo/NL/2394851-2", estado: "Publicada", verificacion: VERIFICADO_AT }
 ];
 
 const FUENTES_OFICIALES = [
-  { nivel: "Nivel 1", nombre: "Diario Oficial El Peruano", uso: "Texto oficialmente publicado, fechas de publicación y vigencia, derogaciones, fe de erratas, precedentes publicados.", url: "https://diariooficial.elperuano.pe/Normas" },
-  { nivel: "Nivel 2", nombre: "SPIJ — Ministerio de Justicia y Derechos Humanos", uso: "Textos sistematizados, concordancias, modificaciones, normas vigentes y derogadas, legislación por materia.", url: "https://spij.minjus.gob.pe/spij-ext-web/" },
-  { nivel: "Nivel 3", nombre: "Congreso de la República — Archivo Digital", uso: "Textos originales de leyes y decretos legislativos, fichas técnicas, antecedentes y leyes modificatorias.", url: "https://leyes.congreso.gob.pe/" },
-  { nivel: "Nivel 4", nombre: "Ministerio Público — Fiscalía de la Nación", uso: "Directorios por distrito fiscal, fiscalías especializadas, resoluciones de creación y reorganización, protocolos.", url: "https://www.gob.pe/mpfn" },
-  { nivel: "Nivel 5", nombre: "Poder Judicial del Perú", uso: "Acuerdos plenarios, casaciones, doctrina jurisprudencial, ejecutorias vinculantes y criterios de determinación de la pena.", url: "https://www.pj.gob.pe/wps/wcm/connect/cij-juris/s_jurisprudencia_sistematizada" },
-  { nivel: "Nivel 6", nombre: "Tribunal Constitucional", uso: "Debido proceso, legalidad penal, libertad personal, plazo razonable, retroactividad favorable.", url: "https://www.tc.gob.pe/" }
+  { categoria: "Publicación oficial", nombre: "Diario Oficial El Peruano", uso: "Permite consultar el texto oficialmente publicado de leyes, decretos, resoluciones, fe de erratas y otras disposiciones, así como su fecha de publicación.", ayuda: "¿Para qué sirve? Para comprobar cómo y cuándo fue publicada oficialmente una norma.", url: "https://diariooficial.elperuano.pe/Normas" },
+  { categoria: "Legislación sistematizada", nombre: "SPIJ — Ministerio de Justicia y Derechos Humanos", uso: "Reúne textos normativos sistematizados, concordancias, modificaciones y referencias sobre vigencia o derogación.", ayuda: "¿Para qué sirve? Para seguir la evolución de una norma y revisar su texto sistematizado.", url: "https://spij.minjus.gob.pe/spij-ext-web/" },
+  { categoria: "Archivo legislativo", nombre: "Congreso de la República — Archivo Digital", uso: "Ofrece leyes, decretos legislativos, antecedentes, fichas y documentos del procedimiento legislativo.", ayuda: "¿Para qué sirve? Para consultar el documento legislativo y sus antecedentes oficiales.", url: "https://leyes.congreso.gob.pe/" },
+  { categoria: "Información institucional", nombre: "Ministerio Público — Fiscalía de la Nación", uso: "Publica información sobre organización fiscal, directorios, resoluciones, protocolos y servicios institucionales.", ayuda: "¿Para qué sirve? Para conocer la organización y los canales públicos del Ministerio Público.", url: "https://www.gob.pe/mpfn" },
+  { categoria: "Jurisprudencia judicial", nombre: "Poder Judicial del Perú", uso: "Permite localizar acuerdos plenarios, casaciones, doctrina jurisprudencial y otros criterios emitidos por órganos judiciales.", ayuda: "¿Para qué sirve? Para revisar cómo los órganos judiciales interpretan y aplican normas penales y procesales.", url: "https://www.pj.gob.pe/wps/wcm/connect/cij-juris/s_jurisprudencia_sistematizada" },
+  { categoria: "Jurisprudencia constitucional", nombre: "Tribunal Constitucional", uso: "Publica sentencias sobre derechos fundamentales, legalidad penal, debido proceso, libertad personal y control constitucional.", ayuda: "¿Para qué sirve? Para consultar criterios constitucionales relacionados con el sistema penal.", url: "https://www.tc.gob.pe/" }
+];
+
+const GUIA_ETAPAS = [
+  { titulo: "1. Conceptos básicos", texto: "Conoce qué es un delito, cómo se estructura un tipo penal y cuál es la diferencia entre conducta, resultado, responsabilidad, pena y reparación civil.", accion: "Conocer lo esencial", destino: "delitos" },
+  { titulo: "2. Personas e instituciones", texto: "Identifica las funciones de la persona agraviada, la persona investigada, la Policía Nacional, el Ministerio Público, la defensa y el Poder Judicial.", accion: "Ver instituciones", destino: "fiscalias" },
+  { titulo: "3. Inicio de una investigación", texto: "Comprende cómo puede iniciarse una investigación mediante denuncia, intervención en flagrancia, noticia criminal o actuación de oficio.", accion: "Revisar el procedimiento", destino: "procedimientos" },
+  { titulo: "4. Etapas del proceso penal", texto: "Revisa el tránsito general por diligencias preliminares, investigación preparatoria, etapa intermedia, juzgamiento, sentencia e impugnación.", accion: "Ver etapas", destino: "procedimientos" },
+  { titulo: "5. Medidas y decisiones procesales", texto: "Distingue las principales medidas de coerción, sus finalidades, sus requisitos generales y la necesidad de control judicial.", accion: "Consultar medidas", destino: "medidas" },
+  { titulo: "6. Verificación en fuentes oficiales", texto: "Aprende dónde consultar el texto publicado de una norma, su versión sistematizada, sus antecedentes y la jurisprudencia que orienta su interpretación.", accion: "Abrir fuentes oficiales", destino: "fuentes" }
 ];
 
 const PROCEDIMIENTO = [
@@ -775,112 +996,106 @@ const PROCEDIMIENTO = [
   { icono: "📜", nombre: "Sentencia", desc: "Absolución o condena. Apelación ante la Sala Penal Superior y casación ante la Corte Suprema." }
 ];
 
-/* ---- Analizador de casos: reglas heurísticas (sin IA externa;
-   todo el texto se procesa localmente en el navegador) ---- */
-const ANALIZADOR_PATRONES = [
-  { tag: "arma-fuego", re: /pistola|rev[oó]lver|arma de fuego|escopeta|fusil|bal[ae]|dispar/i, etiqueta: "Arma de fuego" },
-  { tag: "arma-blanca", re: /cuchill|navaj|machete|pu[ñn]al|verduguillo/i, etiqueta: "Arma blanca" },
-  { tag: "arma", re: /\barma\b|armad[oa]s?\b/i, etiqueta: "Arma (tipo no precisado)" },
-  { tag: "amenaza", re: /amenaz|intimid|extorsion(?!ar[íi])|cupo|advirti[oó] que|si no pagas?/i, etiqueta: "Amenaza o intimidación" },
-  { tag: "violencia", re: /golpe|patad|pu[ñn]etazo|empuj|agredi|forcejeo|redujeron|maniat/i, etiqueta: "Violencia física" },
-  { tag: "lesion", re: /lesi[oó]n|herid|descanso m[eé]dico|incapacidad|fractur|sangr|hospital/i, etiqueta: "Lesiones" },
-  { tag: "muerte", re: /muri[oó]|falleci|mat[oó]|asesin|sin vida|cad[aá]ver/i, etiqueta: "Resultado muerte" },
-  { tag: "apoderamiento", re: /rob(?!o de identidad)|sustra|apoder|(?:se )?llev(?:[oó]|aron)|arrebat|hurt|despoj|tom(?:[oó]|aron)\s|cogi(?:[oó]|eron)|sac(?:[oó]|aron)/i, etiqueta: "Apoderamiento de bienes" },
-  { tag: "engano", re: /enga[ñn]|estaf|fingi|se hizo pasar|falso dep[oó]sito|promes[ao] fals/i, etiqueta: "Engaño o ardid" },
-  { tag: "drogas", re: /droga|coca[íi]na|marihuana|pbc|clorhidrato|ketes?|paquetes? de/i, etiqueta: "Sustancias fiscalizadas" },
-  { tag: "insumos", re: /insumo|precursor|acetona|[aá]cido sulf[uú]rico|kerosene/i, etiqueta: "Insumos químicos" },
-  { tag: "funcionario", re: /funcionari|servidor p[uú]blico|alcalde|regidor|municipalidad|gobierno regional|licitaci[oó]n|obra p[uú]blica|coima|soborno/i, etiqueta: "Contexto de función pública" },
-  { tag: "informatico", re: /hacke|inform[aá]tic|contrase[ñn]a|cuenta bancaria.*(acced|vulner)|phishing|transferencia no autorizada|suplantaci[oó]n/i, etiqueta: "Medio informático" },
-  { tag: "sexual", re: /viol[oó] sexual|violaci[oó]n|tocamient|acoso sexual|abus[oó] sexual/i, etiqueta: "Connotación sexual" },
-  { tag: "secuestro", re: /secuestr|retuvieron|privaron de.*libertad|no la dejaron salir/i, etiqueta: "Privación de libertad" },
-  { tag: "usurpacion", re: /invadi|usurp|se meti[oó] al terreno|despojo del inmueble|lote/i, etiqueta: "Ocupación de inmueble" },
-  { tag: "alimentos", re: /pensi[oó]n de alimentos|no paga.*alimentos|alimentista|demanda de alimentos/i, etiqueta: "Obligación alimentaria" },
-  { tag: "falsedad", re: /document[oa].*fals|falsific|adulter[oó]|firma falsa/i, etiqueta: "Documento falso" },
-  { tag: "lavado", re: /lavado de (activos|dinero)|dinero de origen il[ií]cito|testaferr/i, etiqueta: "Posible lavado de activos" },
-  { tag: "organizacion", re: /banda|organizaci[oó]n criminal|mafia|red criminal/i, etiqueta: "Posible actuación organizada" },
-  { tag: "pluralidad", re: /dos (personas|sujetos|hombres|mujeres|individuos)|tres |cuatro |varios sujetos|un grupo/i, etiqueta: "Pluralidad de agentes" },
-  { tag: "tentativa", re: /intent[oó]|no logr[oó]|no pudo|frustrad|fue detenido antes|no lleg[oó] a/i, etiqueta: "Posible tentativa" },
-  { tag: "lugar-comercio", re: /tienda|local|bodega|farmacia|establecimiento|negocio|minimarket/i, etiqueta: "Establecimiento comercial" },
-  { tag: "lugar-vivienda", re: /casa|vivienda|domicilio|departamento/i, etiqueta: "Vivienda" },
-  { tag: "nocturnidad", re: /de noche|madrugada|noche/i, etiqueta: "Horario nocturno" },
-  { tag: "vehiculo", re: /auto|veh[ií]culo|mototaxi|moto|cami[oó]n|combi/i, etiqueta: "Vehículo involucrado" }
-];
-
-/* Hipótesis: condiciones sobre los tags detectados → delito candidato */
-const ANALIZADOR_HIPOTESIS = [
-  { delitoId: "robo-agravado", modalidadId: "n1", tipo: "principal",
-    cuando: (t) => t.has("apoderamiento") && (t.has("violencia") || t.has("amenaza")) && (t.has("arma") || t.has("arma-fuego") || t.has("arma-blanca") || t.has("pluralidad") || t.has("nocturnidad")),
-    razon: "Apoderamiento con violencia o amenaza, más al menos una circunstancia agravante del art. 189 (arma, pluralidad de agentes u horario nocturno)." },
-  { delitoId: "robo-simple", modalidadId: "b", tipo: "alternativa",
-    cuando: (t) => t.has("apoderamiento") && (t.has("violencia") || t.has("amenaza")),
-    razon: "Apoderamiento mediante violencia o amenaza; si no se confirma ninguna agravante específica, la calificación bajaría al art. 188." },
-  { delitoId: "hurto-agravado", modalidadId: "n1", tipo: "alternativa",
-    cuando: (t) => t.has("apoderamiento") && !t.has("violencia") && !t.has("amenaza") && (t.has("pluralidad") || t.has("nocturnidad") || t.has("lugar-vivienda")),
-    razon: "Apoderamiento sin violencia ni amenaza contra la persona, con circunstancias del art. 186." },
-  { delitoId: "hurto-simple", modalidadId: "b", tipo: "alternativa",
-    cuando: (t) => t.has("apoderamiento") && !t.has("violencia") && !t.has("amenaza"),
-    razon: "Apoderamiento sin violencia ni amenaza contra la persona." },
-  { delitoId: "lesiones-leves", modalidadId: "b", tipo: "conexo",
-    cuando: (t) => t.has("lesion") && !t.has("muerte"),
-    razon: "Se mencionan lesiones: puede constituir delito autónomo o quedar absorbida en el delito principal, según la gravedad médico-legal (concurso aparente o real)." },
-  { delitoId: "hom-simple", modalidadId: "b", tipo: "principal",
-    cuando: (t) => t.has("muerte"),
-    razon: "Se menciona un resultado muerte: la calificación exacta (homicidio simple, calificado, o robo con muerte del art. 189 in fine) depende del contexto y del dolo." },
-  { delitoId: "extorsion", modalidadId: "b", tipo: "principal",
-    cuando: (t) => t.has("amenaza") && !t.has("apoderamiento") && /cupo|pago peri[oó]dico|si no pagas?/i.test("" ) === false && t.has("amenaza"),
-    razon: "Amenaza dirigida a obtener una ventaja económica sin apoderamiento directo: evaluar extorsión (art. 200) frente a coacción (art. 151)." ,
-    soloSi: (texto) => /cupo|extorsion|pago para (no|que)|amenaza.*pag|si no paga/i.test(texto) },
-  { delitoId: "tid", modalidadId: "b", tipo: "principal",
-    cuando: (t) => t.has("drogas"),
-    razon: "Se mencionan sustancias fiscalizadas: la calificación depende de la cantidad (art. 296, 297 o microcomercialización del art. 298; la posesión para consumo propio se rige por el art. 299)." },
-  { delitoId: "tid-insumos", modalidadId: "b", tipo: "conexo",
-    cuando: (t) => t.has("insumos"),
-    razon: "Se mencionan insumos químicos o precursores (art. 296-B)." },
-  { delitoId: "estafa", modalidadId: "b", tipo: "principal",
-    cuando: (t) => t.has("engano") && !t.has("informatico"),
-    razon: "Disposición patrimonial inducida por engaño (art. 196)." },
-  { delitoId: "fraude-informatico", modalidadId: "b", tipo: "principal",
-    cuando: (t) => t.has("informatico"),
-    razon: "Interferencia o manipulación de sistemas o datos informáticos con perjuicio patrimonial (Ley 30096, art. 8)." },
-  { delitoId: "violacion", modalidadId: "b", tipo: "principal",
-    cuando: (t) => t.has("sexual"),
-    razon: "Connotación sexual descrita: la calificación exacta depende de la edad de la víctima y las circunstancias (arts. 170 a 177)." },
-  { delitoId: "secuestro", modalidadId: "b", tipo: "principal",
-    cuando: (t) => t.has("secuestro"),
-    razon: "Privación de la libertad personal descrita (art. 152); diferenciarla de la retención momentánea propia del robo." },
-  { delitoId: "usurpacion", modalidadId: "b", tipo: "principal",
-    cuando: (t) => t.has("usurpacion"),
-    razon: "Ocupación o despojo de inmueble (arts. 202 y 204)." },
-  { delitoId: "oaf", modalidadId: "b", tipo: "principal",
-    cuando: (t) => t.has("alimentos"),
-    razon: "Incumplimiento de obligación alimentaria establecida en resolución judicial (art. 149)." },
-  { delitoId: "falsedad-doc", modalidadId: "pub", tipo: "conexo",
-    cuando: (t) => t.has("falsedad"),
-    razon: "Documento presuntamente falsificado o adulterado (art. 427)." },
-  { delitoId: "lavado", modalidadId: "b", tipo: "conexo",
-    cuando: (t) => t.has("lavado"),
-    razon: "Posibles actos de conversión o transferencia de activos de origen ilícito (D. Leg. 1106)." },
-  { delitoId: "org-criminal", modalidadId: "b", tipo: "conexo",
-    cuando: (t) => t.has("organizacion"),
-    razon: "Posible pertenencia a organización criminal (art. 317); requiere estructura, permanencia y reparto de roles." },
-  { delitoId: "tenencia-armas", modalidadId: "b", tipo: "conexo",
-    cuando: (t) => t.has("arma-fuego"),
-    razon: "El empleo de arma de fuego puede configurar además tenencia ilegal (art. 279-G) si no existe licencia." },
-  { delitoId: "coaccion", modalidadId: "b", tipo: "alternativa",
-    cuando: (t) => t.has("amenaza") && !t.has("apoderamiento"),
-    razon: "Si la amenaza no persigue ventaja económica, la conducta podría ser coacción (art. 151) y no extorsión." }
-];
-
 /* ============================================================
    Teoría del caso e instituciones (referencial; verificar
    siempre el texto vigente en SPIJ / El Peruano)
    ============================================================ */
 
-/* Los tres elementos clásicos de la teoría del caso */
-const TEORIA_ELEMENTOS = [
-  { id: "factico", icono: "📖", nombre: "Elemento fáctico", desc: "Qué pasó: la reconstrucción de los hechos en orden cronológico, con personas, lugares, fechas y circunstancias. El analizador de casos de JustiPenal extrae estos elementos de su relato." },
-  { id: "juridico", icono: "⚖️", nombre: "Elemento jurídico", desc: "Qué norma encaja: la calificación del hecho en un tipo penal concreto (tipicidad), verificando cada requisito legal. La matriz de tipicidad del portal compara sus hechos con los requisitos del delito." },
-  { id: "probatorio", icono: "🔬", nombre: "Elemento probatorio", desc: "Con qué se demuestra: los medios de prueba que acreditan cada afirmación de hecho (documentos, pericias, testigos, actas). Sin prueba, la mejor teoría jurídica no prospera en juicio." }
+/* Módulo analítico de teoría del caso */
+const TEORIA_PILARES = [
+  { id: "tesis", nombre: "Tesis central", desc: "Enunciado provisional que explica el caso y articula hechos, norma y prueba." },
+  { id: "factico", nombre: "Componente fáctico", desc: "Proposiciones relevantes, secuencia temporal, sujetos, medios y resultado." },
+  { id: "juridico", nombre: "Componente jurídico", desc: "Correspondencia entre los hechos atribuidos y los elementos del tipo penal." },
+  { id: "probatorio", nombre: "Componente probatorio", desc: "Fuentes, datos e inferencias que sustentan o debilitan cada proposición." },
+  { id: "alternativa", nombre: "Hipótesis alternativa", desc: "Explicación rival plausible que debe contrastarse con evidencia discriminante." },
+  { id: "estandar", nombre: "Estándar procesal", desc: "Nivel de respaldo exigible según la etapa y la decisión que se pretende adoptar." }
+];
+
+const TEORIA_ELEMENTOS = TEORIA_PILARES;
+
+const TEORIA_TABS = [
+  {
+    id: "tesis", label: "Tesis del caso", title: "Construir una tesis provisional clara",
+    intro: "La teoría comienza con una hipótesis comprensible, verificable y abierta a corrección. Debe identificar la conducta atribuida y su conexión inicial con el derecho y la prueba.",
+    items: [
+      ["Quién actuó", "Individualizar al sujeto y su intervención atribuida."],
+      ["Qué conducta", "Precisar la acción u omisión y sus circunstancias relevantes."],
+      ["Contra quién o qué", "Identificar la persona, bien o interés afectado."],
+      ["Por qué medio", "Explicar el mecanismo, instrumento o forma de ejecución."],
+      ["Qué resultado", "Delimitar el resultado producido o el peligro generado."],
+      ["Elemento subjetivo", "Diferenciar dolo, culpa u otra exigencia subjetiva aplicable."],
+      ["Clasificación provisional", "Vincular la hipótesis con el tipo penal tentativamente considerado."]
+    ],
+    model: "Se atribuye provisionalmente a [persona] haber realizado [conducta], mediante [medio], en perjuicio de [persona o bien], produciendo [resultado], con [elemento subjetivo], hecho que se analiza inicialmente bajo [clasificación jurídica]."
+  },
+  {
+    id: "hechos", label: "Hechos relevantes", title: "Distinguir hechos jurídicamente relevantes",
+    intro: "No todo dato del relato tiene el mismo valor. Una proposición fáctica es útil cuando puede relacionarse con un elemento jurídico y cuenta con algún sustento susceptible de contraste.",
+    matrix: [
+      ["Entrega de un bien individualizado", "Conducta y objeto material", "Acta, registro o declaración", "Por corroborar"],
+      ["Conocimiento del origen ilícito alegado", "Elemento subjetivo", "Comunicaciones y contexto verificable", "Hipótesis en contraste"],
+      ["Resultado económico atribuido", "Resultado o consecuencia", "Pericia y trazabilidad documental", "Sustento parcial"]
+    ]
+  },
+  {
+    id: "prueba", label: "Prueba e inferencias", title: "Separar la fuente, el dato y la conclusión",
+    intro: "La evidencia no acredita automáticamente la conclusión final. El razonamiento debe mostrar qué dato se obtiene, qué inferencia permite y qué elemento se intenta sostener.",
+    sequence: ["Fuente de prueba", "Dato obtenido", "Inferencia", "Elemento que se busca acreditar"],
+    criteria: [
+      ["Pertinencia", "Relación con el objeto del proceso."], ["Utilidad", "Aporte concreto al esclarecimiento."],
+      ["Conducencia", "Aptitud jurídica del medio empleado."], ["Legalidad", "Obtención e incorporación conforme a las garantías."],
+      ["Autenticidad", "Correspondencia e integridad de la fuente."], ["Corroboración", "Convergencia con fuentes independientes."],
+      ["Limitaciones", "Sesgos, vacíos o explicaciones alternativas que reducen su fuerza."]
+    ]
+  },
+  {
+    id: "rival", label: "Hipótesis rival", title: "Contrastar explicaciones alternativas",
+    intro: "Una teoría robusta no ignora la explicación contraria: identifica qué evidencia permitiría distinguir entre hipótesis y reconoce sus propias debilidades.",
+    comparison: [
+      ["Hipótesis principal", "La conducta atribuida responde a la explicación central del caso."],
+      ["Hipótesis alternativa", "El mismo dato puede responder a una explicación lícita, accidental o atribuible a otra persona."],
+      ["Evidencia discriminante", "Dato independiente que favorece una explicación frente a la otra."],
+      ["Riesgo detectado", "Ambigüedad, vacío probatorio o inferencia que aún admite una explicación rival."]
+    ]
+  },
+  {
+    id: "control", label: "Control jurídico", title: "Verificar imputación, congruencia y defensa",
+    intro: "La hipótesis debe conservar correspondencia entre el hecho atribuido, la calificación jurídica provisional y el objeto de contradicción. La precisión exigible aumenta conforme avanza el proceso.",
+    checks: [
+      "¿La imputación describe circunstancias personales, temporales y espaciales suficientes?",
+      "¿Cada proposición se vincula con un elemento jurídico identificable?",
+      "¿La calificación respeta el núcleo fáctico comunicado y el derecho de contradicción?",
+      "¿Los cambios de hipótesis se explican sin producir una acusación sorpresiva?"
+    ]
+  },
+  {
+    id: "resultado", label: "Resultado analítico", title: "Sintetizar sin convertir la hipótesis en certeza",
+    intro: "El resultado no declara responsabilidad. Ordena el grado de respaldo de la hipótesis, sus fortalezas, vacíos, riesgos y diligencias pendientes para orientar una revisión profesional.",
+    summary: [
+      ["Hipótesis principal", "Explicación provisional mejor conectada con los hechos, el derecho y la evidencia disponible."],
+      ["Fortalezas", "Proposiciones corroboradas por fuentes convergentes y obtenidas legalmente."],
+      ["Vacíos", "Elementos jurídicos o fácticos sin respaldo suficiente."],
+      ["Riesgos", "Inferencias débiles, contradicciones o hipótesis rivales no descartadas."],
+      ["Pendientes", "Actos de corroboración necesarios para madurar o corregir la hipótesis."],
+      ["Madurez analítica", "Inicial, en desarrollo o consolidada según el respaldo disponible; nunca equivale a culpabilidad."]
+    ]
+  }
+];
+
+const TEORIA_ESTANDARES = [
+  { etapa: "Diligencias preliminares", nivel: "Sospecha inicial simple", desc: "Puntos de partida objetivos para verificar un posible hecho punible." },
+  { etapa: "Formalización", nivel: "Sospecha reveladora", desc: "Datos básicos que sostienen provisionalmente una imputación formal." },
+  { etapa: "Acusación", nivel: "Sospecha suficiente", desc: "Respaldo que permite un juicio positivo de probabilidad para acusar." },
+  { etapa: "Medidas coercitivas intensas", nivel: "Sospecha grave", desc: "Alto grado de probabilidad, además de los demás presupuestos propios de la medida." },
+  { etapa: "Sentencia condenatoria", nivel: "Más allá de duda razonable", desc: "Convicción judicial obtenida mediante prueba actuada con garantías." }
+];
+
+const TEORIA_REFERENCIAS = [
+  { label: "Constitución Política del Perú, artículo 139 inciso 14", desc: "Garantiza el derecho de defensa en todo estado del proceso.", url: "https://www.congreso.gob.pe/Docs/files/constitucion/constitucion-politica-14-03-18.pdf" },
+  { label: "Código Procesal Penal, Título Preliminar, artículo IX", desc: "Reconoce el derecho de defensa y el conocimiento de la imputación.", url: "https://leyes.congreso.gob.pe/DetLeyNume_1p.aspx?xNorma=3&xNumero=957&xTipoNorma=3" },
+  { label: "CPP, artículos 336, 349, 350 y 352", desc: "Referencias sobre formalización, contenido de la acusación y su control.", url: "https://leyes.congreso.gob.pe/DetLeyNume_1p.aspx?xNorma=3&xNumero=957&xTipoNorma=3" },
+  { label: "Acuerdo Plenario 6-2009/CJ-116", desc: "Desarrolla el control de la acusación fiscal y su fundamento fáctico-jurídico.", url: "https://www.pj.gob.pe/wps/wcm/connect/9316758047e1159aaaedeadbd6456c83/V%2BPleno%2BJurisdiccional%2BSupremo%2BPenal%2B-%2B2009.pdf?CACHEID=9316758047e1159aaaedeadbd6456c83&MOD=AJPERES" },
+  { label: "TC, Exp. 02803-2023-PHC/TC", desc: "Imputación necesaria, congruencia y conocimiento oportuno de los cargos para ejercer defensa.", url: "https://tc.gob.pe/jurisprudencia/2024/02803-2023-HC.html" }
 ];
 
 /* Medios de prueba típicos por familia de delito (referencial) */
@@ -905,7 +1120,7 @@ const CHECKLIST_PROBATORIO = {
 
 /* Qué podría alegar la defensa (art. 20 CP y conexos) */
 const DEFENSAS = [
-  { id: "atipicidad", nombre: "Atipicidad", base: "Art. 11 CP y tipo penal concreto", texto: "El hecho no reúne todos los requisitos del delito imputado: falta un elemento del tipo (p. ej. no hubo violencia en el supuesto robo, o el bien era propio). La matriz de tipicidad muestra qué elementos están sin confirmar." },
+  { id: "atipicidad", nombre: "Atipicidad", base: "Art. 11 CP y tipo penal concreto", texto: "La atipicidad supone que falta uno o más elementos exigidos por el tipo penal. Debe distinguirse de la insuficiencia probatoria y examinarse a partir del texto legal aplicable." },
   { id: "legitima-defensa", nombre: "Legítima defensa", base: "Art. 20.3 CP", texto: "Quien obra en defensa de bienes jurídicos propios o de terceros no responde penalmente, si hubo agresión ilegítima, necesidad racional del medio empleado y falta de provocación suficiente." },
   { id: "estado-necesidad", nombre: "Estado de necesidad", base: "Arts. 20.4 y 20.5 CP", texto: "Se sacrifica un bien jurídico para salvar otro de mayor valor ante un peligro actual e insuperable de otro modo (justificante), o de igual valor en situaciones extremas (exculpante)." },
   { id: "miedo-insuperable", nombre: "Miedo insuperable", base: "Art. 20.7 CP", texto: "Quien obra compelido por miedo insuperable de un mal igual o mayor queda exento de responsabilidad; el miedo debe anular la capacidad de decidir de un ciudadano medio." },
@@ -1000,6 +1215,13 @@ const GLOSARIO = [
 
 /* ---- Registro de cambios (política de actualización) ---- */
 const CHANGELOG = [
+  { fecha: "01/09/2026", cambio: "Revisión editorial general al 1 de septiembre de 2026: se actualizó la fecha de verificación de todo el contenido y se contrastó la normativa penal publicada hasta esta fecha." },
+  { fecha: "01/09/2026", cambio: "Ley 32735 (21/07/2026): redefinición del delito de función y ampliación de la competencia del fuero militar policial (arts. III TP y 26.5 CPP). Incorporada en Normativa y en la nota de la condición «efectivo policial o militar» del verificador de competencia." },
+  { fecha: "01/09/2026", cambio: "Ley 32684 (02/07/2026): equipos de comunicación en establecimientos penitenciarios (arts. 368-A y 368-D CP; arts. 37-A y 37-C del Código de Ejecución Penal) y nuevo supuesto agravado de extorsión por uso de la telefonía autorizada del penal (15 a 25 años), añadido a la calculadora." },
+  { fecha: "01/09/2026", cambio: "Sentencia del Tribunal Constitucional publicada el 22/07/2026: se declararon inconstitucionales los arts. 283-A y 315-B del Código Penal (actos de colaboración con movilizaciones sociales) del D. Leg. 1589; subsisten disturbios y entorpecimiento de servicios públicos." },
+  { fecha: "01/09/2026", cambio: "Nuevo delito en el catálogo: exigencia extorsiva (art. 200-A CP, incorporado por el D. Leg. 1731 del 12/02/2026), con sello «pendiente de revisión»." },
+  { fecha: "01/09/2026", cambio: "Se incorporaron a Normativa los D. Leg. 1731, 1733 y 1734 (12/02/2026), antes ausentes, junto al ya registrado D. Leg. 1735." },
+  { fecha: "01/09/2026", cambio: "Sentencia del Tribunal Constitucional publicada el 16/01/2026 (Exps. 00008-2025-PI/TC y acumulados): la responsabilidad penal ordinaria no se aplica a adolescentes de 16 y 17 años; la imputabilidad se mantiene a los 18. Reflejado en el régimen de adolescentes." },
   { fecha: "12/07/2026", cambio: "Jurisprudencia vinculante en Normativa y en la base del asistente (AP 5-2008, AP 3-2010, AP 1-2011, Casación 626-2013-Moquegua, AP 01-2019). El asistente cita los plenarios por su denominación cuando son pertinentes." },
   { fecha: "12/07/2026", cambio: "Sugerencias de preguntas del asistente ahora contextuales según la página activa (calculadora, plazos, medidas, teoría del caso, etc.)." },
   { fecha: "12/07/2026", cambio: "Estadísticas anónimas de visitas con GoatCounter: sin cookies, sin IPs, solo agregados por página, país y dispositivo. Declarado en el Aviso Legal §5." },
@@ -1011,5 +1233,5 @@ const CHANGELOG = [
   { fecha: "12/07/2026", cambio: "Renombrado el resultado a «Rango referencial de individualización de la pena» (antes «pena concreta sugerida»)." },
   { fecha: "12/07/2026", cambio: "Bonificaciones procesales: escenarios A/B/C sobre extremos e hipótesis media del tercio, en lugar de un promedio único." },
   { fecha: "12/07/2026", cambio: "Ampliación del catálogo de delitos: drogas (arts. 296, 296-B, 297, 298), armas (279-G), fe pública (427), encubrimiento (404, 405), trata (153), estafa (196), sicariato (108-C) y otros." },
-  { fecha: "12/07/2026", cambio: "Nuevos módulos: Analizar Caso, cálculo multi-delito con reglas de concurso, informe descargable, aviso legal y metodología." }
+  { fecha: "12/07/2026", cambio: "Se incorporaron el cálculo multi-delito con reglas de concurso, el informe descargable, el aviso legal y la metodología." }
 ];

@@ -45,7 +45,7 @@ npx vercel link
 npx vercel --prod
 ```
 
-Vercel detecta `api/chat.js` como función Node.js. El endpoint público es `POST https://justipenal.andesnova.solutions/api/chat`.
+Vercel detecta `api/chat.js` y `api/health.js` como funciones Node.js. Los endpoints públicos son `POST /api/chat` y `GET /api/health`.
 
 ## 4. Configurar el frontend público
 
@@ -58,7 +58,7 @@ window.JUSTIPENAL_CONFIG = {
 };
 ```
 
-Esta URL no es un secreto. Si falta o conserva el marcador `YOUR-JUSTIPENAL-API`, el envío queda deshabilitado sin afectar las herramientas locales.
+Esta URL no es un secreto. Cuando frontend y backend comparten origen, el navegador usa siempre la ruta relativa `/api/chat`; la URL configurada no se interpreta como prueba de disponibilidad. Al iniciar, el frontend consulta `/api/health` y muestra `Online`, `Degradado` u `Offline` según las comprobaciones reales.
 
 ## 5. Pruebas locales
 
@@ -74,14 +74,18 @@ Abra la URL indicada por Vercel. En desarrollo, el backend acepta `localhost` y 
 
 ## 6. Privacidad y límites actuales
 
-- El analizador de casos sigue ejecutándose íntegramente en el navegador y nunca se envía al abrir el chat.
+- Las calculadoras educativas siguen ejecutándose íntegramente en el navegador y solo transfieren un resumen estructurado cuando el usuario lo solicita.
 - Cada mensaje escrito en el chat sí se envía a Vercel y Gemini.
-- “Preguntar sobre este resultado” requiere confirmación y transmite solo campos estructurados permitidos; excluye el relato, nombres, DNI, domicilios, fechas, lugar y documentos.
+- “Profundizar explicación con IA” requiere confirmación y transmite solo el resumen estructurado del cálculo, sus normas y fuentes; excluye nombres, DNI, domicilios, documentos y cualquier información confidencial.
 - El historial visible permanece en memoria del navegador y se pierde al recargar; el mensaje actual y hasta cuatro mensajes recientes del usuario se procesan mediante Vercel y Gemini.
 - Gemini se invoca con `store: false`, sin búsqueda web, URL context, ejecución de código ni funciones.
 - El límite de 10 consultas por cada 2 horas se aplica mediante Upstash Redis usando un identificador HMAC de la dirección de red. En desarrollo local existe un fallback en memoria; en producción el chat se deshabilita si Redis o la sal criptográfica no están configurados.
 - Supabase no es necesario para el funcionamiento actual y no contiene tablas del chatbot.
 
-## 7. Desactivar el asistente
+## 7. Diagnóstico seguro
 
-Vacíe `apiBaseUrl` o restablezca el marcador en `js/config.js`. El botón seguirá informando que la IA no está configurada y el portal local permanecerá operativo. También puede retirar `GEMINI_API_KEY` de Vercel para desactivar el backend.
+`GET /api/health` devuelve únicamente booleanos sobre clave, modelo, límite persistente, sal y origen permitido. Nunca devuelve valores. Las respuestas de error del chat incluyen un código seguro y un `requestId`; revise los registros de Vercel mediante ese identificador. Los códigos operativos son `CHAT_NOT_CONFIGURED`, `MODEL_NOT_AVAILABLE`, `UPSTREAM_RATE_LIMIT`, `PERSISTENT_RATE_LIMIT_NOT_CONFIGURED`, `PERSISTENT_RATE_LIMIT_UNAVAILABLE`, `ORIGIN_BLOCKED`, `INVALID_REQUEST` y `REQUEST_TIMEOUT`.
+
+## 8. Desactivar el asistente
+
+Retire `GEMINI_API_KEY` de Vercel para desactivar el backend. El health check marcará el chat como `Offline` y el portal local permanecerá operativo. Vaciar `apiBaseUrl` no desactiva un backend servido en el mismo origen: en ese caso se usa deliberadamente `/api/chat`.

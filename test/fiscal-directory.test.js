@@ -36,7 +36,7 @@ test("la interfaz enlaza navegación interna, directorio oficial y contacto cont
     readFile(new URL("../js/app.js", import.meta.url), "utf8"),
     readFile(new URL("../index.html", import.meta.url), "utf8")
   ]);
-  for (const page of ["delitos", "analizar", "fiscalias", "plazos", "normativa"]) {
+  for (const page of ["delitos", "guia", "fiscalias", "plazos", "normativa"]) {
     assert.match(app, new RegExp(`page: "${page}"`));
   }
   assert.match(app, /FISCALIAS_UI_ORDER\.length/);

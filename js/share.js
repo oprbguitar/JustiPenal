@@ -3,7 +3,7 @@
   "use strict";
   const URL = "https://justipenal.andesnova.solutions/";
   const TITLE = "JustiPenal";
-  const TEXT = "Herramientas jurídicas referenciales, normativa penal peruana, análisis de casos, cálculo de penas, plazos procesales y fuentes oficiales.";
+  const TEXT = "Guía informativa sobre derecho penal peruano, delitos, penas, etapas procesales, fiscalías, normativa y fuentes oficiales.";
   const dialog = document.querySelector("#share-dialog");
   const triggers = [...document.querySelectorAll("[data-share-open]")];
   if (!dialog || !triggers.length) return;

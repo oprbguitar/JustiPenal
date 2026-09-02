@@ -19,23 +19,28 @@
   const invitation = el("chat-invitation");
   const expandButton = el("chat-expand");
   const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-  const config = window.JUSTIPENAL_CONFIG || {};
-  const apiBaseUrl = String(config.apiBaseUrl || "").replace(/\/$/, "");
-  const configured = /^https:\/\//.test(apiBaseUrl) && !/YOUR-JUSTIPENAL-API/i.test(apiBaseUrl);
+  function getChatEndpoint() {
+    const configuredBase = String(window.JUSTIPENAL_CONFIG?.apiBaseUrl || "").replace(/\/$/, "");
+    if (!configuredBase || configuredBase === window.location.origin) return "/api/chat";
+    return `${configuredBase}/api/chat`;
+  }
+  const chatEndpoint = getChatEndpoint();
+  let serviceState = "checking";
   /* Sugerencias contextuales: cambian según la página activa del portal. */
   const QUICK_DEFAULT = [
-    "¿Cuál es la diferencia entre hurto y robo?",
-    "¿Qué significa el sistema de tercios?",
-    "¿Cuánto dura la investigación preparatoria ordinaria?",
-    "¿Qué función cumple una fiscalía superior?",
-    "¿Por qué la tentativa no se calcula automáticamente?"
+    "¿Qué es un tipo penal?",
+    "¿Qué función cumple el Ministerio Público?",
+    "¿Cuáles son las etapas del proceso penal?",
+    "¿Dónde consulto una ley vigente?",
+    "¿Qué diferencia existe entre El Peruano y el SPIJ?",
+    "¿Qué regula el artículo 122-B?"
   ];
   const QUICK_BY_PAGE = {
-    analizar: [
-      "¿Qué es la matriz de tipicidad?",
-      "¿Qué diferencia hay entre hipótesis principal y alternativa?",
-      "¿Qué significa que un elemento esté «inferido»?",
-      "¿Qué es un delito conexo?"
+    guia: [
+      "¿Qué es un tipo penal?",
+      "¿Qué función cumple el Ministerio Público?",
+      "¿Cuáles son las etapas del proceso penal?",
+      "¿Dónde consulto una ley vigente?"
     ],
     delitos: [
       "¿Cuál es la diferencia entre hurto y robo?",
@@ -153,7 +158,7 @@
   }
 
   function updateControls() {
-    const disabled = busy || !configured || isRateLimited();
+    const disabled = busy || serviceState === "offline" || isRateLimited();
     sendButton.disabled = disabled;
     input.disabled = disabled;
     quickEl.querySelectorAll("button").forEach((button) => { button.disabled = disabled; });
@@ -223,7 +228,7 @@
       anime.remove(panel);
       anime({ targets: panel, opacity: [0, 1], translateY: [12, 0], scale: [.985, 1], duration: 320, easing: "easeOutCubic" });
     }
-    requestAnimationFrame(() => (configured ? input : el("chat-close")).focus());
+    requestAnimationFrame(() => (serviceState === "offline" ? el("chat-close") : input).focus());
   }
 
   function closePanel() {
@@ -245,17 +250,18 @@
   function attachPortalContext(type) {
     const context = window.getJustiPenalPortalContext?.(type);
     if (!context) return;
-    const confirmed = window.confirm("Se enviará únicamente un resumen estructurado y sanitizado del resultado. No se enviará el relato original, nombres, documentos, domicilios ni otros identificadores. ¿Desea continuar?");
+    const confirmed = window.confirm("Se enviará únicamente un resumen estructurado y sanitizado del cálculo. No se enviarán nombres, documentos, domicilios ni otros identificadores. ¿Desea continuar?");
     if (!confirmed) return;
     pendingPortalContext = context;
     contextBanner.textContent = "Contexto generado por el motor local de JustiPenal. Se adjuntará a la próxima consulta.";
     contextBanner.hidden = false;
+    if (type === "analysis") input.value = "Explica el resultado determinista sin añadir hechos, artículos, penas ni pruebas que no estén en el contexto estructurado.";
     openPanel();
   }
 
   async function submitMessage(text) {
     const message = text.trim();
-    if (!message || busy || !configured) return;
+    if (!message || busy || serviceState === "offline") return;
     clearError();
     addMessage("user", message);
     input.value = "";
@@ -266,20 +272,24 @@
     contextBanner.hidden = true;
 
     try {
-      const response = await fetch(`${apiBaseUrl}/api/chat`, {
+      const controller = new AbortController();
+      const timeout = window.setTimeout(() => controller.abort(), 40_000);
+      const response = await fetch(chatEndpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message, history: requestHistory, portalContext })
-      });
+        body: JSON.stringify({ message, history: requestHistory, portalContext }),
+        signal: controller.signal
+      }).finally(() => window.clearTimeout(timeout));
       const data = await response.json().catch(() => ({}));
       if (response.status === 429) throw Object.assign(new Error(data.error || "Se alcanzó el límite de uso."), { rateLimit: data });
-      if (!response.ok) throw new Error(data.error || "No fue posible completar la consulta.");
+      if (!response.ok) throw Object.assign(new Error(data.error || "No fue posible completar la consulta."), { code: data.code, requestId: data.requestId });
       addMessage("assistant", data.reply, Array.isArray(data.sources) ? data.sources : []);
       successReaction();
       history.push({ role: "user", content: message }, { role: "assistant", content: data.reply });
       history = history.slice(-10);
     } catch (error) {
       if (error.rateLimit) activateRateLimit(error.rateLimit, error.message);
+      else if (error.name === "AbortError" || error.code === "REQUEST_TIMEOUT") showError("La consulta excedió el tiempo de espera. Intente nuevamente más tarde o consulte las fuentes oficiales del portal.");
       else showError(error.message || "El asistente no está disponible. Las demás herramientas continúan funcionando localmente.");
     } finally {
       setBusy(false);
@@ -332,8 +342,7 @@
     window.goPage?.(button.dataset.chatGoto);
     closePanel();
   }));
-  el("btn-preguntar-analisis").addEventListener("click", () => attachPortalContext("analysis"));
-  el("btn-preguntar-calculo").addEventListener("click", () => attachPortalContext("calculation"));
+  el("btn-preguntar-calculo")?.addEventListener("click", () => attachPortalContext("calculation"));
 
   function renderQuickQuestions() {
     const questions = QUICK_BY_PAGE[currentPage] || QUICK_DEFAULT;
@@ -342,7 +351,7 @@
       const button = document.createElement("button");
       button.type = "button";
       button.textContent = question;
-      button.disabled = busy || !configured || isRateLimited();
+      button.disabled = busy || serviceState === "offline" || isRateLimited();
       button.addEventListener("click", () => submitMessage(question));
       quickEl.appendChild(button);
     }
@@ -359,7 +368,7 @@
     else localStorage.removeItem(RATE_LIMIT_RESET_KEY);
   } catch { /* La continuidad visual es opcional; el límite real se aplica en el servidor. */ }
 
-  const invitePhrases = ["Consulta aquí", "Explora un delito", "Pregunta por un plazo", "Revisa una fiscalía", "Analiza una duda"];
+  const invitePhrases = ["Consulta aquí", "Explora un concepto", "Pregunta por un plazo", "Revisa una institución", "Abre una fuente"];
   function showInvitation(index) {
     if (panel.classList.contains("open")) return;
     let opened = false, count = 0;
@@ -382,15 +391,35 @@
   window.visualViewport?.addEventListener("resize", syncVisualViewport);
   syncVisualViewport();
 
-  if (configured) {
-    statusEl.textContent = "● Configurado";
-    statusEl.classList.add("ready");
-    addMessage("assistant", "Puedo explicar la información legal verificada por JustiPenal. No incluyo ni leo automáticamente el relato del analizador local.");
-  } else {
-    statusEl.textContent = "● No configurado";
-    statusEl.classList.add("offline");
-    addMessage("assistant", "El asistente de IA todavía no ha sido configurado. Las demás herramientas de JustiPenal continúan disponibles localmente.");
-    showError("Configure la URL pública del backend en js/config.js para habilitar el envío.");
+  async function checkHealth() {
+    const healthEndpoint = chatEndpoint.replace(/\/chat$/, "/health");
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 8_000);
+    try {
+      const response = await fetch(healthEndpoint, { method: "GET", headers: { Accept: "application/json" }, signal: controller.signal, cache: "no-store" });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || !data.checks) throw new Error("Health check no disponible");
+      const checks = data.checks;
+      const unavailable = !checks.geminiKeyConfigured || !checks.modelConfigured || !checks.persistentRateLimitConfigured || !checks.rateLimitSaltConfigured;
+      serviceState = unavailable ? "offline" : data.ok ? "online" : "degraded";
+      statusEl.textContent = serviceState === "online" ? "● Online" : serviceState === "degraded" ? "● Degradado" : "● Offline";
+      statusEl.classList.toggle("ready", serviceState === "online");
+      statusEl.classList.toggle("degraded", serviceState === "degraded");
+      statusEl.classList.toggle("offline", serviceState === "offline");
+      if (serviceState === "offline") showError(!checks.geminiKeyConfigured ? "El modelo de IA no está configurado. El análisis jurídico local sigue disponible." : "El control persistente de uso no está disponible. El chat permanece deshabilitado de forma segura.");
+      else if (serviceState === "degraded") showError("El chat está disponible, pero una comprobación operativa no esencial requiere revisión.");
+    } catch {
+      serviceState = "offline";
+      statusEl.textContent = "● Offline";
+      statusEl.classList.add("offline");
+      showError("No se pudo verificar el servicio del chat. El análisis jurídico local continúa funcionando sin red.");
+    } finally {
+      window.clearTimeout(timeout);
+      updateControls();
+    }
   }
+  statusEl.textContent = "● Verificando";
+  addMessage("assistant", "Puedo explicar conceptos, normas, instituciones y fuentes organizadas por JustiPenal. Formula una consulta general y evita ingresar datos personales o información confidencial.");
+  checkHealth();
   setBusy(false);
 })();

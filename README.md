@@ -10,22 +10,15 @@ Funciona en computadora, tablet y celular. No requiere registro. Las herramienta
 
 **JustiPenal** es un portal web informativo y gratuito sobre el sistema penal del Perú. Está pensado para dos públicos a la vez:
 
-- **Ciudadanos sin conocimientos jurídicos** que quieren entender qué delito podría configurar un hecho, qué pena contempla la ley o cuánto puede durar una investigación.
+- **Ciudadanos sin conocimientos jurídicos** que quieren comprender conceptos, penas abstractas, instituciones, etapas y fuentes oficiales.
 - **Abogados, estudiantes de derecho y analistas** que necesitan una referencia rápida de rangos de pena, plazos, competencia fiscal y normativa reciente, con enlace a la fuente oficial de cada dato.
 
 En cada sección del portal encontrarás un **símbolo (?)** junto al título: haz clic en él y una ventana breve te explica qué hace esa herramienta y cómo interpretarla, en lenguaje simple.
 
 ## ¿Qué puedes hacer en el portal? — Guía de módulos
 
-### 🔎 Analizar un caso con tus propias palabras
-Escribe lo que pasó — por ejemplo: *"Dos personas entraron a una tienda, amenazaron al vendedor con un cuchillo y se llevaron tres teléfonos"* — y el portal:
-1. **Extrae los hechos relevantes**: violencia, amenaza, armas, número de personas, lesiones, lugar.
-2. **Propone hipótesis delictivas**: una principal (p. ej. robo agravado), alternativas (si algo no se confirma, la calificación baja a robo simple o hurto) y delitos conexos (p. ej. lesiones).
-3. **Construye una matriz de tipicidad**: una tabla que compara cada requisito legal del delito con lo que relataste, clasificando cada elemento como *confirmado, compatible, inferido, no determinado o ausente* — así entiendes **por qué** aparece esa hipótesis y qué podría descartarla.
-4. **Te dice qué información falta**: certificado médico-legal, tipo de arma, valor de los bienes, fecha del hecho.
-5. Con un clic, **carga la hipótesis en la calculadora de penas**.
-
-> 🔒 **Privacidad**: el análisis se ejecuta íntegramente en tu navegador. El texto que escribes **no se envía a ningún servidor** y desaparece al cerrar la página. Aun así, evita ingresar nombres o datos de personas reales.
+### 🧭 Guía penal para comenzar
+Un recorrido de seis etapas explica conceptos básicos, personas e instituciones, el inicio de una investigación, las etapas del proceso, las medidas procesales y la forma de verificar información en fuentes oficiales. El recorrido es educativo: no solicita relatos ni clasifica hechos reales.
 
 ### 🧮 Calcular una pena referencial — con uno o varios delitos
 Arma un caso agregando **uno o más delitos** (por ejemplo, robo agravado + lesiones). Para cada uno marcas sus circunstancias y el portal muestra:
@@ -57,7 +50,7 @@ Diagrama del proceso penal común paso a paso (denuncia → investigación preli
 La jerarquía del Ministerio Público (provinciales, superiores, supremas), las **14 especialidades fiscales** y el verificador de competencia por sus **cuatro dimensiones**: materia, territorio, condición de la persona y etapa del proceso.
 
 ### 📄 Revisar la normativa vigente
-Las normas base del sistema penal y las **modificaciones recientes** con fecha de publicación, materia, fuente, estado y fecha de verificación — por ejemplo, la Ley 32258 (14/03/2025, tentativa y suspensión de penas) y el D. Leg. 1735 (12/02/2026, subsistema contra la extorsión).
+Las normas base del sistema penal y las **modificaciones recientes** con fecha de publicación, materia, fuente, estado y fecha de verificación — por ejemplo, la Ley 32258 (14/03/2025, tentativa y suspensión de penas), los D. Leg. 1731, 1733, 1734 y 1735 (12/02/2026, exigencia extorsiva, telecomunicaciones en penales, reserva de información y subsistema contra la extorsión), la Ley 32684 (02/07/2026, equipos de comunicación en establecimientos penitenciarios y agravante de extorsión), la Ley 32735 (21/07/2026, delito de función y fuero militar policial) y las sentencias del Tribunal Constitucional sobre los arts. 283-A y 315-B del Código Penal (22/07/2026) y sobre la responsabilidad penal de adolescentes de 16 y 17 años (16/01/2026).
 
 ## ¿De dónde sale la información?
 
@@ -77,7 +70,7 @@ La página de **Metodología** del portal explica quién actualiza los datos, qu
 ## Tecnología
 
 - Frontend estático en GitHub Pages (HTML + CSS + JavaScript puro) y un endpoint serverless aislado en Vercel para el asistente opcional.
-- El analizador y las calculadoras continúan ejecutándose localmente, sin enviar relatos ni campos del caso.
+- Las calculadoras educativas continúan ejecutándose localmente y no solicitan datos identificatorios.
 - El asistente usa la API de Interactions de Gemini mediante `@google/genai`, con `store: false`, recuperación determinista desde `data/legal-kb.json` y sin herramientas de navegación.
 - Supabase no almacena conversaciones ni datos de casos.
 - Estadísticas de visitas con **GoatCounter**: anónimas y agregadas (página, país, dispositivo), sin cookies y sin almacenar direcciones IP; cada módulo interno se cuenta como página propia para conocer qué herramientas se usan más. Declarado en el Aviso Legal.
@@ -99,7 +92,7 @@ Abre un *Issue* en este repositorio indicando: la norma o dato observado, lo que
 
 ## ⚠️ Importante — Aviso legal
 
-> Este portal es **informativo y referencial**. No constituye asesoría legal ni reemplaza la evaluación de un abogado, la investigación fiscal o la decisión de un juez. La pena concreta de un caso real solo la determina el **Poder Judicial** tras un proceso con todas las garantías. El analizador y las calculadoras se ejecutan íntegramente en el navegador. Solo los mensajes que el usuario escribe en el asistente —o el resumen estructurado que confirma expresamente— se procesan mediante Vercel y Gemini; no deben incluir datos personales o reservados. Consulte [CHATBOT_SETUP.md](CHATBOT_SETUP.md) para la arquitectura, configuración y límites de privacidad.
+> Este portal es **informativo y referencial**. No constituye asesoría legal ni reemplaza la evaluación de un abogado, la investigación fiscal o la decisión de un juez. La pena concreta de un caso real solo la determina el **Poder Judicial** tras un proceso con todas las garantías. Las calculadoras se ejecutan íntegramente en el navegador. Solo los mensajes que el usuario escribe en el orientador —o el resumen estructurado de un cálculo que confirma expresamente— se procesan mediante Vercel y Gemini; no deben incluir datos personales o reservados. Consulte [CHATBOT_SETUP.md](CHATBOT_SETUP.md) para la arquitectura, configuración y límites de privacidad.
 
 ---
 

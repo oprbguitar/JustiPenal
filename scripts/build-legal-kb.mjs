@@ -79,7 +79,7 @@ const kb = {
       name: "Participación",
       article: "Código Penal",
       aliases: ["autor", "coautor", "cómplice", "participación"],
-      text: "La participación específica de cada interviniente requiere información y prueba; el analizador local la trata como información faltante cuando detecta pluralidad de agentes.",
+      text: "La participación específica de cada interviniente requiere individualización y prueba; no se presume por la sola existencia de una pluralidad de agentes.",
       sources: [sourceEntry(spij)]
     }
   ],
@@ -229,9 +229,9 @@ const kb = {
     id: `official-source-${index + 1}`,
     type: "official-source",
     name: item.nombre,
-    aliases: [item.nombre, item.nivel, "fuente oficial"],
-    text: item.uso,
-    level: item.nivel,
+    aliases: [item.nombre, item.categoria, "fuente oficial"],
+    text: `${item.uso} ${item.ayuda}`,
+    category: item.categoria,
     sources: [sourceEntry(item)]
   }))
 };

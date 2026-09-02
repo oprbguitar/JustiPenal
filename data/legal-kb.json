@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "editorialVerificationDate": "12/07/2026",
+  "editorialVerificationDate": "01/09/2026",
   "scope": "Catálogo legal verificado y ya publicado por JustiPenal; no es exhaustivo.",
   "offenses": [
     {
@@ -11,7 +11,7 @@
       "article": "Art. 106",
       "aliases": [],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -39,7 +39,7 @@
       "article": "Art. 108",
       "aliases": [],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -70,7 +70,7 @@
       "article": "Art. 108-C",
       "aliases": [],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -113,7 +113,7 @@
       "article": "Art. 108-B",
       "aliases": [],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -149,7 +149,7 @@
       "article": "Art. 121",
       "aliases": [],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -185,7 +185,7 @@
       "article": "Art. 122",
       "aliases": [],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -217,11 +217,11 @@
       "id": "agresiones-mujer",
       "type": "offense",
       "family": "Vida, el cuerpo y la salud",
-      "name": "Agresiones contra mujeres o integrantes del grupo familiar",
+      "name": "Agresiones en contra de las mujeres o integrantes del grupo familiar",
       "article": "Art. 122-B",
       "aliases": [],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -229,16 +229,24 @@
           "min": 1,
           "max": 3,
           "elementos": [],
-          "inhab": "Inhabilitación conforme al art. 36 (incisos aplicables)."
+          "inhab": "Inhabilitación conforme a los numerales 5 y 11 del artículo 36 del Código Penal y a los artículos 75 y 77 del Código de los Niños y Adolescentes, según corresponda."
+        },
+        {
+          "id": "a",
+          "nombre": "Forma agravada",
+          "min": 2,
+          "max": 3,
+          "elementos": [],
+          "inhab": "Inhabilitación conforme a los numerales 5 y 11 del artículo 36 del Código Penal y a los artículos 75 y 77 del Código de los Niños y Adolescentes, según corresponda."
         }
       ],
       "prosecutorialSpecialtyId": "violencia-mujer",
       "prosecutorialNote": null,
-      "effectiveNote": null,
+      "effectiveNote": "Ley 30819, publicada el 13 de julio de 2018; texto consolidado contrastado con fuente oficial",
       "sources": [
         {
-          "name": "Código Penal, D. Leg. 635 (Ley 30364 y modificatorias)",
-          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+          "name": "Código Penal — Decreto Legislativo 635, artículo 122-B; modificado por Ley 30819",
+          "url": "https://www2.congreso.gob.pe/sicr/cendocbib/con6_uibd.nsf/DB60F84B5D157DD605258AB3005DEC4B/%24FILE/codigo_penal.pdf"
         }
       ]
     },
@@ -250,7 +258,7 @@
       "article": "Art. 149",
       "aliases": [],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -281,7 +289,7 @@
       "article": "Art. 130",
       "aliases": [],
       "verificationStatus": "pendiente",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -311,7 +319,7 @@
       "article": "Art. 131",
       "aliases": [],
       "verificationStatus": "pendiente",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -341,7 +349,7 @@
       "article": "Art. 132",
       "aliases": [],
       "verificationStatus": "pendiente",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -381,7 +389,7 @@
       "article": "Art. 151",
       "aliases": [],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -413,7 +421,7 @@
       "article": "Art. 152",
       "aliases": [],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -452,7 +460,7 @@
       "article": "Art. 153",
       "aliases": [],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -490,7 +498,7 @@
       "article": "Art. 170",
       "aliases": [],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -531,7 +539,7 @@
       "article": "Art. 173",
       "aliases": [],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -564,7 +572,7 @@
         "sustracción sin violencia"
       ],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -595,7 +603,7 @@
         "sustracción agravada"
       ],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "n1",
@@ -648,7 +656,7 @@
         "apoderamiento con amenaza"
       ],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -683,7 +691,7 @@
         "apoderamiento con arma"
       ],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "n1",
@@ -743,7 +751,7 @@
       "article": "Art. 190",
       "aliases": [],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -772,7 +780,7 @@
       "article": "Art. 194",
       "aliases": [],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -802,7 +810,7 @@
       "article": "Art. 196",
       "aliases": [],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -846,7 +854,7 @@
         "cobro de cupos"
       ],
       "verificationStatus": "posiblemente-modificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -872,6 +880,16 @@
             "arma"
           ],
           "nota": "Algunos supuestos con cadena perpetua."
+        },
+        {
+          "id": "penal",
+          "nombre": "Agravante desde establecimiento penitenciario (Ley 32684)",
+          "min": 15,
+          "max": 25,
+          "elementos": [
+            "amenaza"
+          ],
+          "nota": "La Ley 32684 (publicada el 02/07/2026) incorporó como supuesto agravado del art. 200 el empleo de los servicios de telefonía autorizados del establecimiento penitenciario, con pena privativa de libertad e inhabilitación. Verificar el texto consolidado del art. 200 y el numeral aplicable a la fecha del hecho."
         }
       ],
       "prosecutorialSpecialtyId": "extorsion",
@@ -885,6 +903,38 @@
       ]
     },
     {
+      "id": "exigencia-extorsiva",
+      "type": "offense",
+      "family": "Patrimonio",
+      "name": "Exigencia extorsiva",
+      "article": "Art. 200-A",
+      "aliases": [],
+      "verificationStatus": "pendiente",
+      "verifiedAt": "01/09/2026",
+      "modalities": [
+        {
+          "id": "b",
+          "nombre": "Modalidad básica (referencial)",
+          "min": 9,
+          "max": 12,
+          "elementos": [
+            "violencia",
+            "amenaza"
+          ],
+          "nota": "Conducta previa y autónoma a la extorsión: exigir o requerir sin derecho, mediante violencia o amenaza explícita o implícita, una ventaja económica u de otra índole indebida. Contenido pendiente de revisión editorial: verificar el texto vigente del art. 200-A en SPIJ antes de usarlo."
+        }
+      ],
+      "prosecutorialSpecialtyId": "extorsion",
+      "prosecutorialNote": "Delito conexo a la extorsión: la competencia puede corresponder al Subsistema Especializado contra la Extorsión y sus Delitos Conexos (D. Leg. 1735).",
+      "effectiveNote": null,
+      "sources": [
+        {
+          "name": "Código Penal, D. Leg. 635, artículo incorporado por el D. Leg. 1731 (12/02/2026)",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
       "id": "usurpacion",
       "type": "offense",
       "family": "Patrimonio",
@@ -892,7 +942,7 @@
       "article": "Arts. 202 y 204",
       "aliases": [],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -934,7 +984,7 @@
       "article": "Art. 205",
       "aliases": [],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -964,7 +1014,7 @@
       "article": "Art. 279-G",
       "aliases": [],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -995,7 +1045,7 @@
       "article": "Art. 274",
       "aliases": [],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -1028,7 +1078,7 @@
         "drogas"
       ],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -1058,7 +1108,7 @@
       "article": "Art. 296-B",
       "aliases": [],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -1088,7 +1138,7 @@
       "article": "Art. 297",
       "aliases": [],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -1132,7 +1182,7 @@
       "article": "Art. 298",
       "aliases": [],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -1162,7 +1212,7 @@
       "article": "Art. 304",
       "aliases": [],
       "verificationStatus": "pendiente",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -1192,7 +1242,7 @@
       "article": "Art. 307-A",
       "aliases": [],
       "verificationStatus": "pendiente",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -1231,7 +1281,7 @@
       "article": "Art. 310",
       "aliases": [],
       "verificationStatus": "pendiente",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -1260,7 +1310,7 @@
       "article": "Art. 384",
       "aliases": [],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "s",
@@ -1303,7 +1353,7 @@
       "article": "Art. 387",
       "aliases": [],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -1346,7 +1396,7 @@
       "article": "Art. 393",
       "aliases": [],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -1389,7 +1439,7 @@
       "article": "Art. 389",
       "aliases": [],
       "verificationStatus": "pendiente",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -1431,7 +1481,7 @@
       "article": "Art. 399",
       "aliases": [],
       "verificationStatus": "pendiente",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -1464,7 +1514,7 @@
       "article": "Art. 400",
       "aliases": [],
       "verificationStatus": "pendiente",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -1504,7 +1554,7 @@
       "article": "Art. 401",
       "aliases": [],
       "verificationStatus": "pendiente",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -1547,7 +1597,7 @@
       "article": "Art. 427",
       "aliases": [],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "pub",
@@ -1583,7 +1633,7 @@
       "article": "Art. 428",
       "aliases": [],
       "verificationStatus": "pendiente",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -1613,7 +1663,7 @@
       "article": "Art. 438",
       "aliases": [],
       "verificationStatus": "pendiente",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -1644,7 +1694,7 @@
       "article": "Art. 404",
       "aliases": [],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -1673,7 +1723,7 @@
       "article": "Art. 405",
       "aliases": [],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -1704,7 +1754,7 @@
         "lavado de dinero"
       ],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -1745,7 +1795,7 @@
       "article": "D. Leg. 813",
       "aliases": [],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -1786,7 +1836,7 @@
       "article": "Ley 30096, art. 2",
       "aliases": [],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -1815,7 +1865,7 @@
       "article": "Ley 30096, art. 8",
       "aliases": [],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -1856,7 +1906,7 @@
       "article": "Ley 30096, art. 9",
       "aliases": [],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -1884,7 +1934,7 @@
       "article": "Art. 317",
       "aliases": [],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "modalities": [
         {
           "id": "b",
@@ -1989,7 +2039,7 @@
         "cómplice",
         "participación"
       ],
-      "text": "La participación específica de cada interviniente requiere información y prueba; el analizador local la trata como información faltante cuando detecta pluralidad de agentes.",
+      "text": "La participación específica de cada interviniente requiere individualización y prueba; no se presume por la sola existencia de una pluralidad de agentes.",
       "sources": [
         {
           "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
@@ -2336,13 +2386,13 @@
     {
       "id": "penal-comun",
       "type": "prosecutorial-specialty",
-      "name": "Fiscalía Provincial Penal Corporativa",
+      "name": "Fiscalías Penales Corporativas o Comunes",
       "aliases": [
         "penal comun",
         "fiscalía",
         "competencia fiscal"
       ],
-      "text": "Nivel operativo principal: recibe denuncias, conduce jurídicamente la investigación, formaliza, acusa y participa en juicio.",
+      "text": "Atienden los delitos que no han sido asignados a una fiscalía especializada y constituyen el nivel operativo ordinario de investigación penal.",
       "competenceRule": "La competencia depende de materia, territorio, condición personal y etapa procesal.",
       "sources": [
         {
@@ -2354,13 +2404,13 @@
     {
       "id": "corrupcion",
       "type": "prosecutorial-specialty",
-      "name": "Fiscalía Especializada en Delitos de Corrupción de Funcionarios",
+      "name": "Fiscalías Especializadas en Delitos de Corrupción de Funcionarios",
       "aliases": [
         "corrupcion",
         "fiscalía",
         "competencia fiscal"
       ],
-      "text": "Delitos contra la administración pública cometidos por funcionarios: colusión, peculado, cohecho y conexos.",
+      "text": "Investigan delitos contra la administración pública vinculados con funcionarios, servidores públicos, recursos estatales, contrataciones y decisiones adoptadas en ejercicio de una función pública.",
       "competenceRule": "La competencia depende de materia, territorio, condición personal y etapa procesal.",
       "sources": [
         {
@@ -2372,13 +2422,13 @@
     {
       "id": "crimen-organizado",
       "type": "prosecutorial-specialty",
-      "name": "Fiscalía Especializada contra la Criminalidad Organizada (FECOR)",
+      "name": "Fiscalías Especializadas contra la Criminalidad Organizada",
       "aliases": [
         "crimen organizado",
         "fiscalía",
         "competencia fiscal"
       ],
-      "text": "Organizaciones criminales y delitos cometidos en ese contexto (Ley 30077).",
+      "text": "Intervienen cuando existen elementos que permiten investigar una estructura criminal con permanencia, organización, reparto de roles y actuación coordinada para cometer delitos.",
       "competenceRule": "La competencia depende de materia, territorio, condición personal y etapa procesal.",
       "sources": [
         {
@@ -2390,13 +2440,13 @@
     {
       "id": "lavado",
       "type": "prosecutorial-specialty",
-      "name": "Fiscalía Especializada en Lavado de Activos",
+      "name": "Fiscalías Especializadas en Delitos de Lavado de Activos",
       "aliases": [
         "lavado",
         "fiscalía",
         "competencia fiscal"
       ],
-      "text": "Lavado de activos y pérdida de dominio (D. Leg. 1106).",
+      "text": "Investigan operaciones destinadas a convertir, transferir, ocultar, transportar, adquirir, utilizar o mantener activos de posible origen ilícito.",
       "competenceRule": "La competencia depende de materia, territorio, condición personal y etapa procesal.",
       "sources": [
         {
@@ -2408,13 +2458,13 @@
     {
       "id": "drogas",
       "type": "prosecutorial-specialty",
-      "name": "Fiscalía Especializada en Tráfico Ilícito de Drogas",
+      "name": "Fiscalías Especializadas en Tráfico Ilícito de Drogas",
       "aliases": [
         "drogas",
         "fiscalía",
         "competencia fiscal"
       ],
-      "text": "Delitos de los arts. 296 y siguientes del Código Penal.",
+      "text": "Atienden delitos relacionados con la producción, promoción, favorecimiento, transporte, comercialización y tráfico de drogas, así como determinadas conductas relacionadas con insumos químicos y precursores.",
       "competenceRule": "La competencia depende de materia, territorio, condición personal y etapa procesal.",
       "sources": [
         {
@@ -2426,13 +2476,31 @@
     {
       "id": "violencia-mujer",
       "type": "prosecutorial-specialty",
-      "name": "Fiscalía Especializada en Violencia contra la Mujer e Integrantes del Grupo Familiar",
+      "name": "Fiscalías Especializadas en Violencia contra las Mujeres y los Integrantes del Grupo Familiar",
       "aliases": [
         "violencia mujer",
         "fiscalía",
         "competencia fiscal"
       ],
-      "text": "Ley 30364 y delitos conexos, incluido el feminicidio.",
+      "text": "Investigan hechos de violencia contra las mujeres o integrantes del grupo familiar, con enfoque de protección, debida diligencia y atención de riesgos para la víctima.",
+      "competenceRule": "La competencia depende de materia, territorio, condición personal y etapa procesal.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "familia",
+      "type": "prosecutorial-specialty",
+      "name": "Fiscalías de Familia",
+      "aliases": [
+        "familia",
+        "fiscalía",
+        "competencia fiscal"
+      ],
+      "text": "Protegen la legalidad y los derechos de niñas, niños, adolescentes, personas incapaces y otros sujetos especialmente protegidos en las materias asignadas por la legislación.",
       "competenceRule": "La competencia depende de materia, territorio, condición personal y etapa procesal.",
       "sources": [
         {
@@ -2444,13 +2512,121 @@
     {
       "id": "trata",
       "type": "prosecutorial-specialty",
-      "name": "Fiscalía Especializada en Trata de Personas",
+      "name": "Fiscalías Especializadas en Trata de Personas",
       "aliases": [
         "trata",
         "fiscalía",
         "competencia fiscal"
       ],
-      "text": "Trata de personas y explotación (arts. 153 y siguientes).",
+      "text": "Investigan la captación, transporte, traslado, acogida o recepción de personas con finalidad de explotación.",
+      "competenceRule": "La competencia depende de materia, territorio, condición personal y etapa procesal.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "ambiental",
+      "type": "prosecutorial-specialty",
+      "name": "Fiscalías Especializadas en Materia Ambiental",
+      "aliases": [
+        "ambiental",
+        "fiscalía",
+        "competencia fiscal"
+      ],
+      "text": "Investigan delitos que afectan el ambiente, los recursos naturales, los bosques, la fauna, el agua, el suelo y otros componentes ambientales.",
+      "competenceRule": "La competencia depende de materia, territorio, condición personal y etapa procesal.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "ciber",
+      "type": "prosecutorial-specialty",
+      "name": "Fiscalías Especializadas en Ciberdelincuencia",
+      "aliases": [
+        "ciber",
+        "fiscalía",
+        "competencia fiscal"
+      ],
+      "text": "Investigan delitos cometidos contra sistemas, datos y servicios informáticos o mediante tecnologías digitales, conforme a la competencia establecida en cada distrito fiscal.",
+      "competenceRule": "La competencia depende de materia, territorio, condición personal y etapa procesal.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "tributarios",
+      "type": "prosecutorial-specialty",
+      "name": "Fiscalías Especializadas en Delitos Tributarios, Aduaneros y Materias Afines",
+      "aliases": [
+        "tributarios",
+        "fiscalía",
+        "competencia fiscal"
+      ],
+      "text": "Atienden delitos tributarios, aduaneros y, cuando la organización institucional lo determine, materias relacionadas con propiedad intelectual.",
+      "competenceRule": "La competencia depende de materia, territorio, condición personal y etapa procesal.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "terrorismo",
+      "type": "prosecutorial-specialty",
+      "name": "Fiscalías Especializadas en Delitos de Terrorismo",
+      "aliases": [
+        "terrorismo",
+        "fiscalía",
+        "competencia fiscal"
+      ],
+      "text": "Atienden investigaciones sometidas al régimen especial de delitos de terrorismo, dentro de los límites de la legalidad, el debido proceso y la competencia establecida institucionalmente.",
+      "competenceRule": "La competencia depende de materia, territorio, condición personal y etapa procesal.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "derechos-humanos",
+      "type": "prosecutorial-specialty",
+      "name": "Fiscalías Especializadas en Derechos Humanos e Interculturalidad",
+      "aliases": [
+        "derechos humanos",
+        "fiscalía",
+        "competencia fiscal"
+      ],
+      "text": "Atienden investigaciones relacionadas con graves afectaciones de derechos humanos y casos que requieren un tratamiento intercultural, conforme a la competencia asignada.",
+      "competenceRule": "La competencia depende de materia, territorio, condición personal y etapa procesal.",
+      "sources": [
+        {
+          "name": "Ministerio Público — Fiscalía de la Nación",
+          "url": "https://www.gob.pe/mpfn"
+        }
+      ]
+    },
+    {
+      "id": "extincion-dominio",
+      "type": "prosecutorial-specialty",
+      "name": "Fiscalías Especializadas en Extinción de Dominio",
+      "aliases": [
+        "extincion dominio",
+        "fiscalía",
+        "competencia fiscal"
+      ],
+      "text": "Intervienen en el proceso patrimonial autónomo dirigido a bienes que podrían provenir de actividades ilícitas o estar destinados a ellas.",
       "competenceRule": "La competencia depende de materia, territorio, condición personal y etapa procesal.",
       "sources": [
         {
@@ -2468,61 +2644,7 @@
         "fiscalía",
         "competencia fiscal"
       ],
-      "text": "Norma organizativa: Decreto Legislativo 1735, publicado el 12 de febrero de 2026. No establece penas sustantivas.",
-      "competenceRule": "La competencia depende de materia, territorio, condición personal y etapa procesal.",
-      "sources": [
-        {
-          "name": "Ministerio Público — Fiscalía de la Nación",
-          "url": "https://www.gob.pe/mpfn"
-        }
-      ]
-    },
-    {
-      "id": "tributarios",
-      "type": "prosecutorial-specialty",
-      "name": "Fiscalía Especializada en Delitos Tributarios y Aduaneros",
-      "aliases": [
-        "tributarios",
-        "fiscalía",
-        "competencia fiscal"
-      ],
-      "text": "Defraudación tributaria (D. Leg. 813) y delitos aduaneros (Ley 28008).",
-      "competenceRule": "La competencia depende de materia, territorio, condición personal y etapa procesal.",
-      "sources": [
-        {
-          "name": "Ministerio Público — Fiscalía de la Nación",
-          "url": "https://www.gob.pe/mpfn"
-        }
-      ]
-    },
-    {
-      "id": "ciber",
-      "type": "prosecutorial-specialty",
-      "name": "Fiscalía Especializada en Ciberdelincuencia",
-      "aliases": [
-        "ciber",
-        "fiscalía",
-        "competencia fiscal"
-      ],
-      "text": "Delitos informáticos (Ley 30096), según la organización de cada distrito fiscal.",
-      "competenceRule": "La competencia depende de materia, territorio, condición personal y etapa procesal.",
-      "sources": [
-        {
-          "name": "Ministerio Público — Fiscalía de la Nación",
-          "url": "https://www.gob.pe/mpfn"
-        }
-      ]
-    },
-    {
-      "id": "ambiental",
-      "type": "prosecutorial-specialty",
-      "name": "Fiscalía Especializada en Materia Ambiental (FEMA)",
-      "aliases": [
-        "ambiental",
-        "fiscalía",
-        "competencia fiscal"
-      ],
-      "text": "Delitos ambientales de los arts. 304 a 314 del Código Penal: contaminación, minería ilegal, delitos forestales y contra la fauna.",
+      "text": "Atiende hechos en los que se emplean amenazas, violencia o intimidación para obtener una ventaja económica indebida, incluidos cobros de cupos y delitos conexos.",
       "competenceRule": "La competencia depende de materia, territorio, condición personal y etapa procesal.",
       "sources": [
         {
@@ -2591,7 +2713,7 @@
         "Efectivo policial o militar",
         "competencia"
       ],
-      "text": "Si el hecho es delito de función, puede corresponder al fuero militar-policial; los delitos comunes van al fuero ordinario.",
+      "text": "Si el hecho es delito de función, puede corresponder al fuero militar-policial; los delitos comunes van al fuero ordinario. La Ley 32735 (21/07/2026) redefinió el delito de función y amplió la competencia militar policial respecto de hechos ocurridos en actividades de prevención e investigación del delito: verificar el criterio vigente y su control constitucional.",
       "sources": [
         {
           "name": "Ministerio Público — Fiscalía de la Nación",
@@ -2607,7 +2729,7 @@
         "Adolescente (menor de 18 años)",
         "competencia"
       ],
-      "text": "No se aplica el Código Penal de adultos: rige el Código de Responsabilidad Penal de Adolescentes (D. Leg. 1348), con fiscalías y juzgados de familia especializados.",
+      "text": "No se aplica el Código Penal de adultos: rige el Código de Responsabilidad Penal de Adolescentes (D. Leg. 1348), con fiscalías y juzgados de familia especializados. El Tribunal Constitucional declaró inconstitucional (sentencia publicada el 16/01/2026) el juzgamiento de adolescentes de 16 y 17 años bajo el régimen penal ordinario.",
       "sources": [
         {
           "name": "Ministerio Público — Fiscalía de la Nación",
@@ -2724,13 +2846,13 @@
     {
       "id": "measure-1",
       "type": "coercive-measure",
-      "name": "Comparecencia simple",
+      "name": "Detención",
       "aliases": [
-        "Comparecencia simple",
+        "Detención",
         "medida coercitiva",
         "coerción procesal"
       ],
-      "text": "El imputado sigue el proceso en libertad, con la obligación de concurrir a las citaciones.",
+      "text": "Privación temporal de libertad sometida a supuestos legales, control de plazo y control judicial.",
       "sources": [
         {
           "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
@@ -2741,13 +2863,13 @@
     {
       "id": "measure-2",
       "type": "coercive-measure",
-      "name": "Comparecencia con restricciones",
+      "name": "Prisión preventiva",
       "aliases": [
-        "Comparecencia con restricciones",
+        "Prisión preventiva",
         "medida coercitiva",
         "coerción procesal"
       ],
-      "text": "Libertad sujeta a reglas: no ausentarse, firmar periódicamente, caución u otras restricciones.",
+      "text": "Medida excepcional de privación cautelar de libertad aplicable cuando otras medidas resultan insuficientes para controlar el peligro procesal.",
       "sources": [
         {
           "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
@@ -2758,13 +2880,13 @@
     {
       "id": "measure-3",
       "type": "coercive-measure",
-      "name": "Impedimento de salida",
+      "name": "Comparecencia",
       "aliases": [
-        "Impedimento de salida",
+        "Comparecencia",
         "medida coercitiva",
         "coerción procesal"
       ],
-      "text": "Prohibición de salir del país o de la localidad, dispuesta judicialmente.",
+      "text": "Medida que permite afrontar el proceso en libertad, con o sin restricciones, según la intensidad del peligro procesal.",
       "sources": [
         {
           "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
@@ -2775,13 +2897,13 @@
     {
       "id": "measure-4",
       "type": "coercive-measure",
-      "name": "Detención preliminar judicial",
+      "name": "Detención domiciliaria",
       "aliases": [
-        "Detención preliminar judicial",
+        "Detención domiciliaria",
         "medida coercitiva",
         "coerción procesal"
       ],
-      "text": "Privación breve de libertad al inicio de la investigación, ordenada por el juez.",
+      "text": "Restricción de la libertad ambulatoria ejecutada en un domicilio determinado bajo condiciones de control.",
       "sources": [
         {
           "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
@@ -2792,13 +2914,13 @@
     {
       "id": "measure-5",
       "type": "coercive-measure",
-      "name": "Prisión preventiva",
+      "name": "Impedimento de salida",
       "aliases": [
-        "Prisión preventiva",
+        "Impedimento de salida",
         "medida coercitiva",
         "coerción procesal"
       ],
-      "text": "Requiere graves y fundados elementos, prognosis de pena superior a 4 años y peligro procesal. No es una pena.",
+      "text": "Restricción temporal para impedir que una persona abandone el país o un ámbito territorial determinado durante la investigación o el proceso.",
       "sources": [
         {
           "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
@@ -2809,13 +2931,13 @@
     {
       "id": "measure-6",
       "type": "coercive-measure",
-      "name": "Arresto domiciliario",
+      "name": "Suspensión preventiva de derechos",
       "aliases": [
-        "Arresto domiciliario",
+        "Suspensión preventiva de derechos",
         "medida coercitiva",
         "coerción procesal"
       ],
-      "text": "Alternativa a la prisión preventiva para supuestos legalmente previstos.",
+      "text": "Restricción temporal del ejercicio de determinados derechos, cargos, actividades o facultades vinculadas al riesgo investigado.",
       "sources": [
         {
           "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
@@ -2826,13 +2948,13 @@
     {
       "id": "measure-7",
       "type": "coercive-measure",
-      "name": "Embargo / incautación / inhibición",
+      "name": "Embargo",
       "aliases": [
-        "Embargo / incautación / inhibición",
+        "Embargo",
         "medida coercitiva",
         "coerción procesal"
       ],
-      "text": "Medidas reales sobre bienes para asegurar la reparación civil o el decomiso.",
+      "text": "Afectación cautelar de bienes destinada a asegurar responsabilidades económicas derivadas del proceso.",
       "sources": [
         {
           "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
@@ -2843,13 +2965,81 @@
     {
       "id": "measure-8",
       "type": "coercive-measure",
-      "name": "Suspensión preventiva de derechos",
+      "name": "Orden de inhibición",
       "aliases": [
-        "Suspensión preventiva de derechos",
+        "Orden de inhibición",
         "medida coercitiva",
         "coerción procesal"
       ],
-      "text": "Suspensión temporal de cargos o actividades vinculadas al delito.",
+      "text": "Restricción para disponer o gravar determinados bienes mientras subsista la finalidad cautelar.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "measure-9",
+      "type": "coercive-measure",
+      "name": "Incautación",
+      "aliases": [
+        "Incautación",
+        "medida coercitiva",
+        "coerción procesal"
+      ],
+      "text": "Aprehensión o indisponibilidad de bienes vinculados al delito, la investigación o las consecuencias jurídicas del proceso.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "measure-10",
+      "type": "coercive-measure",
+      "name": "Desalojo preventivo y ministración provisional de posesión",
+      "aliases": [
+        "Desalojo preventivo y ministración provisional de posesión",
+        "medida coercitiva",
+        "coerción procesal"
+      ],
+      "text": "Medida provisional destinada a restablecer o proteger la posesión en los supuestos expresamente previstos por la ley.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "measure-11",
+      "type": "coercive-measure",
+      "name": "Medidas aplicables a personas jurídicas",
+      "aliases": [
+        "Medidas aplicables a personas jurídicas",
+        "medida coercitiva",
+        "coerción procesal"
+      ],
+      "text": "Medidas temporales que pueden afectar la actividad, organización o funcionamiento de una persona jurídica vinculada al proceso.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        }
+      ]
+    },
+    {
+      "id": "measure-12",
+      "type": "coercive-measure",
+      "name": "Pensión anticipada de alimentos",
+      "aliases": [
+        "Pensión anticipada de alimentos",
+        "medida coercitiva",
+        "coerción procesal"
+      ],
+      "text": "Asignación provisional destinada a atender necesidades alimentarias en los supuestos expresamente contemplados por la legislación procesal.",
       "sources": [
         {
           "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
@@ -3099,7 +3289,49 @@
         "normativa",
         "base legal"
       ],
-      "text": "Código de Responsabilidad Penal de Adolescentes.",
+      "text": "Código de Responsabilidad Penal de Adolescentes. El Tribunal Constitucional (sentencia publicada el 16/01/2026) declaró inconstitucional aplicar responsabilidad penal ordinaria a adolescentes de 16 y 17 años.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        },
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "base-law-13",
+      "type": "base-legislation",
+      "name": "Decreto Legislativo 654 — Código de Ejecución Penal (TUO, D.S. 003-2021-JUS)",
+      "aliases": [
+        "Decreto Legislativo 654 — Código de Ejecución Penal (TUO, D.S. 003-2021-JUS)",
+        "normativa",
+        "base legal"
+      ],
+      "text": "Régimen penitenciario y beneficios; modificado por la Ley 32684 (02/07/2026) en materia de equipos de comunicación.",
+      "sources": [
+        {
+          "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
+          "url": "https://spij.minjus.gob.pe/spij-ext-web/"
+        },
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "base-law-14",
+      "type": "base-legislation",
+      "name": "Decreto Legislativo 1094 — Código Penal Militar Policial",
+      "aliases": [
+        "Decreto Legislativo 1094 — Código Penal Militar Policial",
+        "normativa",
+        "base legal"
+      ],
+      "text": "Delitos de función del personal militar y policial; modificado por la Ley 32735 (21/07/2026).",
       "sources": [
         {
           "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
@@ -3116,16 +3348,16 @@
     {
       "id": "recent-law-1",
       "type": "recent-legislation",
-      "name": "Ley 32258",
+      "name": "Ley 32735",
       "aliases": [
-        "Ley 32258",
-        "Modifica el tratamiento de la tentativa y amplía las restricciones para suspender la ejecución de determinadas penas."
+        "Ley 32735",
+        "Modifica el Código Penal Militar Policial (D. Leg. 1094) y el Código Procesal Penal (art. III del Título Preliminar y art. 26.5) para redefinir el delito de función y ampliar la competencia del fuero militar policial respecto de hechos cometidos por personal policial y militar en actividades de prevención e investigación del delito. Su alcance es discutido y puede ser objeto de control constitucional."
       ],
-      "publicationDate": "14/03/2025",
-      "effectiveDate": "Verificar disposición correspondiente",
-      "text": "Modifica el tratamiento de la tentativa y amplía las restricciones para suspender la ejecución de determinadas penas.",
-      "status": "Vigente",
-      "verifiedAt": "12/07/2026",
+      "publicationDate": "21/07/2026",
+      "effectiveDate": "Conforme a sus disposiciones",
+      "text": "Modifica el Código Penal Militar Policial (D. Leg. 1094) y el Código Procesal Penal (art. III del Título Preliminar y art. 26.5) para redefinir el delito de función y ampliar la competencia del fuero militar policial respecto de hechos cometidos por personal policial y militar en actividades de prevención e investigación del delito. Su alcance es discutido y puede ser objeto de control constitucional.",
+      "status": "Publicada; alcance en debate",
+      "verifiedAt": "01/09/2026",
       "sources": [
         {
           "name": "Diario Oficial El Peruano",
@@ -3136,16 +3368,16 @@
     {
       "id": "recent-law-2",
       "type": "recent-legislation",
-      "name": "Decreto Legislativo 1735",
+      "name": "Ley 32684",
       "aliases": [
-        "Decreto Legislativo 1735",
-        "Norma organizativa: crea el Subsistema Especializado contra la Extorsión y sus Delitos Conexos. No establece penas sustantivas."
+        "Ley 32684",
+        "Modifica el Código Penal (entre otros, arts. 200, 368-A y 368-D), el Código de Ejecución Penal (arts. 37-A y 37-C) y el D. Leg. 1688 para endurecer el ingreso, la posesión y el uso indebido de equipos de comunicación en establecimientos penitenciarios, e incorpora como supuesto agravado de extorsión el empleo de los servicios de telefonía autorizados del penal."
       ],
-      "publicationDate": "12/02/2026",
-      "effectiveDate": "Conforme a su texto",
-      "text": "Norma organizativa: crea el Subsistema Especializado contra la Extorsión y sus Delitos Conexos. No establece penas sustantivas.",
-      "status": "Vigente",
-      "verifiedAt": "12/07/2026",
+      "publicationDate": "02/07/2026",
+      "effectiveDate": "Conforme a sus disposiciones",
+      "text": "Modifica el Código Penal (entre otros, arts. 200, 368-A y 368-D), el Código de Ejecución Penal (arts. 37-A y 37-C) y el D. Leg. 1688 para endurecer el ingreso, la posesión y el uso indebido de equipos de comunicación en establecimientos penitenciarios, e incorpora como supuesto agravado de extorsión el empleo de los servicios de telefonía autorizados del penal.",
+      "status": "Publicada",
+      "verifiedAt": "01/09/2026",
       "sources": [
         {
           "name": "Diario Oficial El Peruano",
@@ -3156,16 +3388,16 @@
     {
       "id": "recent-law-3",
       "type": "recent-legislation",
-      "name": "Ley 32130 y STC Exp. 00005-2025-PI/TC",
+      "name": "STC sobre el D. Leg. 1589 (arts. 283-A y 315-B CP)",
       "aliases": [
-        "Ley 32130 y STC Exp. 00005-2025-PI/TC",
-        "Distribución de funciones entre la Policía Nacional y el Ministerio Público en la investigación preliminar: la Policía investiga operativamente; el fiscal conserva la conducción jurídica."
+        "STC sobre el D. Leg. 1589 (arts. 283-A y 315-B CP)",
+        "Declara inconstitucionales los artículos 283-A y 315-B del Código Penal, que sancionaban como actos de colaboración el aporte de dinero, alimentos, transporte o suministros a movilizaciones sociales. Se mantienen los tipos de disturbios y entorpecimiento de servicios públicos."
       ],
-      "publicationDate": "2024 / sentencia 2026",
-      "effectiveDate": "Conforme a su texto e interpretación del TC",
-      "text": "Distribución de funciones entre la Policía Nacional y el Ministerio Público en la investigación preliminar: la Policía investiga operativamente; el fiscal conserva la conducción jurídica.",
-      "status": "Vigente (interpretada)",
-      "verifiedAt": "12/07/2026",
+      "publicationDate": "22/07/2026",
+      "effectiveDate": "Sentencia del Tribunal Constitucional",
+      "text": "Declara inconstitucionales los artículos 283-A y 315-B del Código Penal, que sancionaban como actos de colaboración el aporte de dinero, alimentos, transporte o suministros a movilizaciones sociales. Se mantienen los tipos de disturbios y entorpecimiento de servicios públicos.",
+      "status": "Sentencia publicada",
+      "verifiedAt": "01/09/2026",
       "sources": [
         {
           "name": "Diario Oficial El Peruano",
@@ -3176,16 +3408,176 @@
     {
       "id": "recent-law-4",
       "type": "recent-legislation",
+      "name": "D. Leg. 1731",
+      "aliases": [
+        "D. Leg. 1731",
+        "Incorpora el artículo 200-A del Código Penal (exigencia extorsiva) como conducta autónoma previa a la extorsión, con pena privativa de libertad referencial de 9 a 12 años."
+      ],
+      "publicationDate": "12/02/2026",
+      "effectiveDate": "Conforme a sus disposiciones",
+      "text": "Incorpora el artículo 200-A del Código Penal (exigencia extorsiva) como conducta autónoma previa a la extorsión, con pena privativa de libertad referencial de 9 a 12 años.",
+      "status": "Publicado",
+      "verifiedAt": "01/09/2026",
+      "sources": [
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "recent-law-5",
+      "type": "recent-legislation",
+      "name": "D. Leg. 1733",
+      "aliases": [
+        "D. Leg. 1733",
+        "Sanciona el suministro ilegal de servicios de telecomunicaciones en establecimientos penitenciarios y fija obligaciones a los operadores."
+      ],
+      "publicationDate": "12/02/2026",
+      "effectiveDate": "Conforme a sus disposiciones",
+      "text": "Sanciona el suministro ilegal de servicios de telecomunicaciones en establecimientos penitenciarios y fija obligaciones a los operadores.",
+      "status": "Publicado",
+      "verifiedAt": "01/09/2026",
+      "sources": [
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "recent-law-6",
+      "type": "recent-legislation",
+      "name": "D. Leg. 1734",
+      "aliases": [
+        "D. Leg. 1734",
+        "Regula la reserva de información sobre operaciones desarrolladas en estados de emergencia e incorpora el delito de revelación de información reservada."
+      ],
+      "publicationDate": "12/02/2026",
+      "effectiveDate": "Conforme a sus disposiciones",
+      "text": "Regula la reserva de información sobre operaciones desarrolladas en estados de emergencia e incorpora el delito de revelación de información reservada.",
+      "status": "Publicado",
+      "verifiedAt": "01/09/2026",
+      "sources": [
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "recent-law-7",
+      "type": "recent-legislation",
+      "name": "STC Exps. 00008-2025-PI/TC y acumulados",
+      "aliases": [
+        "STC Exps. 00008-2025-PI/TC y acumulados",
+        "Declara inconstitucionales las disposiciones de la Ley 32330 que permitían aplicar responsabilidad penal ordinaria a adolescentes de 16 y 17 años. La imputabilidad penal se mantiene a partir de los 18 años y esos casos corresponden al sistema penal juvenil (D. Leg. 1348)."
+      ],
+      "publicationDate": "16/01/2026",
+      "effectiveDate": "Sentencia del Tribunal Constitucional",
+      "text": "Declara inconstitucionales las disposiciones de la Ley 32330 que permitían aplicar responsabilidad penal ordinaria a adolescentes de 16 y 17 años. La imputabilidad penal se mantiene a partir de los 18 años y esos casos corresponden al sistema penal juvenil (D. Leg. 1348).",
+      "status": "Sentencia publicada",
+      "verifiedAt": "01/09/2026",
+      "sources": [
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "recent-law-8",
+      "type": "recent-legislation",
+      "name": "Ley 32258",
+      "aliases": [
+        "Ley 32258",
+        "Modifica los artículos 16 y 57 del Código Penal sobre tentativa y suspensión de la ejecución de la pena."
+      ],
+      "publicationDate": "14/03/2025",
+      "effectiveDate": "Conforme a sus disposiciones",
+      "text": "Modifica los artículos 16 y 57 del Código Penal sobre tentativa y suspensión de la ejecución de la pena.",
+      "status": "Publicada",
+      "verifiedAt": "01/09/2026",
+      "sources": [
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "recent-law-9",
+      "type": "recent-legislation",
+      "name": "Decreto Legislativo 1735",
+      "aliases": [
+        "Decreto Legislativo 1735",
+        "Crea el Subsistema Especializado contra la Extorsión y sus Delitos Conexos y dicta medidas para su implementación; su objeto es organizativo y operativo."
+      ],
+      "publicationDate": "12/02/2026",
+      "effectiveDate": "Conforme a sus disposiciones",
+      "text": "Crea el Subsistema Especializado contra la Extorsión y sus Delitos Conexos y dicta medidas para su implementación; su objeto es organizativo y operativo.",
+      "status": "Publicado",
+      "verifiedAt": "01/09/2026",
+      "sources": [
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "recent-law-10",
+      "type": "recent-legislation",
+      "name": "Ley 32130",
+      "aliases": [
+        "Ley 32130",
+        "Regula la distribución de actuaciones operativas de investigación, sin eliminar la dirección jurídica, supervisión y responsabilidad constitucional del Ministerio Público."
+      ],
+      "publicationDate": "10/10/2024",
+      "effectiveDate": "Interpretada bajo control constitucional",
+      "text": "Regula la distribución de actuaciones operativas de investigación, sin eliminar la dirección jurídica, supervisión y responsabilidad constitucional del Ministerio Público.",
+      "status": "Publicada; alcance sujeto a interpretación constitucional",
+      "verifiedAt": "01/09/2026",
+      "sources": [
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "recent-law-11",
+      "type": "recent-legislation",
+      "name": "STC Exp. 00005-2025-PI/TC",
+      "aliases": [
+        "STC Exp. 00005-2025-PI/TC",
+        "Delimita la actuación operativa policial y preserva la conducción jurídica, supervisión y responsabilidad fiscal dentro del marco constitucional."
+      ],
+      "publicationDate": "06/02/2026",
+      "effectiveDate": "Sentencia del Tribunal Constitucional",
+      "text": "Delimita la actuación operativa policial y preserva la conducción jurídica, supervisión y responsabilidad fiscal dentro del marco constitucional.",
+      "status": "Sentencia publicada",
+      "verifiedAt": "01/09/2026",
+      "sources": [
+        {
+          "name": "Diario Oficial El Peruano",
+          "url": "https://diariooficial.elperuano.pe/Normas"
+        }
+      ]
+    },
+    {
+      "id": "recent-law-12",
+      "type": "recent-legislation",
       "name": "Ley 32314",
       "aliases": [
         "Ley 32314",
-        "Incorpora el empleo de inteligencia artificial en los delitos informáticos (modifica la Ley 30096)."
+        "Modifica el Código Penal y la Ley 30096 para incorporar el empleo de inteligencia artificial en determinados delitos."
       ],
-      "publicationDate": "2025",
+      "publicationDate": "29/04/2025",
       "effectiveDate": "Conforme a su texto",
-      "text": "Incorpora el empleo de inteligencia artificial en los delitos informáticos (modifica la Ley 30096).",
-      "status": "Vigente",
-      "verifiedAt": "12/07/2026",
+      "text": "Modifica el Código Penal y la Ley 30096 para incorporar el empleo de inteligencia artificial en determinados delitos.",
+      "status": "Publicada",
+      "verifiedAt": "01/09/2026",
       "sources": [
         {
           "name": "Diario Oficial El Peruano",
@@ -3206,7 +3598,7 @@
         "elemento probatorio",
         "estrategia del caso"
       ],
-      "text": "Elemento fáctico: Qué pasó: la reconstrucción de los hechos en orden cronológico, con personas, lugares, fechas y circunstancias. El analizador de casos de JustiPenal extrae estos elementos de su relato. Elemento jurídico: Qué norma encaja: la calificación del hecho en un tipo penal concreto (tipicidad), verificando cada requisito legal. La matriz de tipicidad del portal compara sus hechos con los requisitos del delito. Elemento probatorio: Con qué se demuestra: los medios de prueba que acreditan cada afirmación de hecho (documentos, pericias, testigos, actas). Sin prueba, la mejor teoría jurídica no prospera en juicio.",
+      "text": "Tesis central: Enunciado provisional que explica el caso y articula hechos, norma y prueba. Componente fáctico: Proposiciones relevantes, secuencia temporal, sujetos, medios y resultado. Componente jurídico: Correspondencia entre los hechos atribuidos y los elementos del tipo penal. Componente probatorio: Fuentes, datos e inferencias que sustentan o debilitan cada proposición. Hipótesis alternativa: Explicación rival plausible que debe contrastarse con evidencia discriminante. Estándar procesal: Nivel de respaldo exigible según la etapa y la decisión que se pretende adoptar.",
       "sources": [
         {
           "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
@@ -3529,7 +3921,7 @@
         "eximente",
         "causa de justificación"
       ],
-      "text": "El hecho no reúne todos los requisitos del delito imputado: falta un elemento del tipo (p. ej. no hubo violencia en el supuesto robo, o el bien era propio). La matriz de tipicidad muestra qué elementos están sin confirmar.",
+      "text": "La atipicidad supone que falta uno o más elementos exigidos por el tipo penal. Debe distinguirse de la insuficiencia probatoria y examinarse a partir del texto legal aplicable.",
       "sources": [
         {
           "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
@@ -3701,7 +4093,7 @@
         "Salidas alternativas"
       ],
       "verificationStatus": "pendiente",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "text": "El fiscal puede abstenerse de ejercer la acción penal en delitos de mínima gravedad, escasa culpabilidad o cuando el agente resultó afectado por su propio delito, generalmente previo acuerdo de reparación con la víctima. Evita el proceso: la pregunta ciudadana típica '¿puedo evitar el juicio?' suele empezar aquí.",
       "sources": [
         {
@@ -3724,7 +4116,7 @@
         "Salidas alternativas"
       ],
       "verificationStatus": "pendiente",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "text": "En delitos determinados por ley (p. ej. lesiones leves, hurto simple, daños) el fiscal propicia un acuerdo entre imputado y víctima; cumplida la reparación, se abstiene de ejercer la acción penal.",
       "sources": [
         {
@@ -3747,7 +4139,7 @@
         "Salidas alternativas"
       ],
       "verificationStatus": "verificado",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "text": "Acuerdo entre fiscal e imputado sobre pena y reparación civil, aprobado por el juez de investigación preparatoria antes de la acusación. Otorga la reducción de un sexto de la pena concreta, acumulable a la confesión sincera. Ya integrada en la calculadora como bonificación.",
       "sources": [
         {
@@ -3770,7 +4162,7 @@
         "Ejecución de la pena"
       ],
       "verificationStatus": "pendiente",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "text": "Responde a la pregunta más frecuente: '¿iré a la cárcel?'. El juez puede suspender la ejecución si la pena concreta no supera 4 años, el agente no es reincidente ni habitual y el pronóstico es favorable, imponiendo reglas de conducta por un periodo de prueba. Numerosos delitos están legalmente excluidos y la Ley 32258 amplió esas exclusiones: una condena de 4 años o menos NO se suspende automáticamente.",
       "sources": [
         {
@@ -3793,7 +4185,7 @@
         "Ejecución de la pena"
       ],
       "verificationStatus": "pendiente",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "text": "El juez declara la culpabilidad pero se abstiene de dictar la parte condenatoria, sujetando al agente a un régimen de prueba. Procede en supuestos de penas menores establecidos por ley y no genera antecedentes si se supera el periodo de prueba.",
       "sources": [
         {
@@ -3816,7 +4208,7 @@
         "Ejecución de la pena"
       ],
       "verificationStatus": "pendiente",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "text": "Penas privativas de libertad de corta duración pueden convertirse en prestación de servicios, limitación de días libres o multa; la vigilancia electrónica personal permite cumplir la pena o la comparecencia fuera del penal en supuestos legales.",
       "sources": [
         {
@@ -3839,7 +4231,7 @@
         "Ejecución de la pena"
       ],
       "verificationStatus": "pendiente",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "text": "Semilibertad, liberación condicional y redención de pena por trabajo o educación permiten egresar antes del cumplimiento total, según el delito y el cómputo. Advertencia clave: numerosos delitos graves (violación, extorsión, sicariato, corrupción agravada, entre otros) están excluidos o tienen cómputos más exigentes; la ley aplicable es la vigente al momento de solicitar el beneficio.",
       "sources": [
         {
@@ -3862,7 +4254,7 @@
         "Extinción de la acción"
       ],
       "verificationStatus": "pendiente",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "text": "La acción penal prescribe ordinariamente en un plazo igual al máximo de la pena del delito (tope general de 20 años; 30 en cadena perpetua) y extraordinariamente cuando transcurre ese plazo más su mitad. Se suspende e interrumpe por actuaciones fiscales y judiciales. Para delitos contra la administración pública cometidos por funcionarios el plazo se duplica, y la reforma constitucional estableció supuestos de imprescriptibilidad en los casos más graves. El cómputo concreto exige análisis técnico.",
       "sources": [
         {
@@ -3885,7 +4277,7 @@
         "Consecuencias civiles"
       ],
       "verificationStatus": "pendiente",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "text": "Comprende la restitución del bien o su valor y la indemnización de daños y perjuicios. Se fija junto con la pena, puede ejecutarse contra el condenado y contra el tercero civilmente responsable (p. ej. la empresa dueña del vehículo), y subsiste aunque la pena se suspenda.",
       "sources": [
         {
@@ -3908,7 +4300,7 @@
         "Detención"
       ],
       "verificationStatus": "pendiente",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "text": "Hay flagrancia cuando el agente es sorprendido cometiendo el delito, inmediatamente después, o es identificado o encontrado con efectos del delito dentro de las 24 horas. La detención policial en flagrancia y la detención preliminar judicial duran hasta 48 horas (prorrogables por decisión judicial); hasta 15 días en terrorismo, espionaje, TID y criminalidad organizada. La flagrancia habilita además el proceso inmediato.",
       "sources": [
         {
@@ -3931,7 +4323,7 @@
         "Regímenes especiales"
       ],
       "verificationStatus": "pendiente",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "text": "Los menores de 18 años no responden bajo el Código Penal de adultos: se aplican medidas socioeducativas (desde amonestación hasta internación en centro juvenil) con fiscales y jueces especializados de familia, enfoque restaurativo y plazos propios. La internación procede solo en los supuestos más graves y con topes de duración según la edad.",
       "sources": [
         {
@@ -3954,7 +4346,7 @@
         "Jurisprudencia"
       ],
       "verificationStatus": "pendiente",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "text": "Los Acuerdos Plenarios de las Salas Penales de la Corte Suprema y las casaciones con doctrina jurisprudencial fijan cómo se aplican las normas: por ejemplo, el AP 5-2008/CJ-116 sobre conclusión anticipada, o la Casación 626-2013-Moquegua y el AP 01-2019/CIJ-116 sobre los presupuestos de la prisión preventiva. Dan el salto del 'texto de la ley' a 'cómo se aplica'; se consultan en el portal del Poder Judicial.",
       "sources": [
         {
@@ -3985,7 +4377,7 @@
         "bonificaciones procesales"
       ],
       "verificationStatus": "pendiente",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "text": "Conclusión anticipada del juicio oral. Fija los alcances de la conformidad procesal: el acusado que acepta los cargos al inicio del juicio obtiene una reducción de un séptimo de la pena concreta. Es la base de la bonificación por conclusión anticipada que muestra la calculadora. Verifique el texto completo y la vigencia del criterio en la jurisprudencia sistematizada del Poder Judicial.",
       "sources": [
         {
@@ -4010,7 +4402,7 @@
         "prueba"
       ],
       "verificationStatus": "pendiente",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "text": "Apreciación de la prueba en delitos contra la libertad sexual. La declaración de la víctima puede constituir prueba de cargo suficiente si cumple garantías de certeza: ausencia de incredibilidad subjetiva, verosimilitud corroborada periféricamente y persistencia en la incriminación. Orienta la actividad probatoria en violación sexual y delitos conexos. Verifique el texto completo y la vigencia del criterio en la jurisprudencia sistematizada del Poder Judicial.",
       "sources": [
         {
@@ -4035,7 +4427,7 @@
         "prueba indiciaria"
       ],
       "verificationStatus": "pendiente",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "text": "Lavado de activos: autonomía y prueba indiciaria. El lavado de activos es un delito autónomo: no requiere condena previa por el delito fuente, cuya existencia puede acreditarse mediante prueba indiciaria (desbalance patrimonial, operaciones inusuales, vínculos con la actividad ilícita). Verifique el texto completo y la vigencia del criterio en la jurisprudencia sistematizada del Poder Judicial.",
       "sources": [
         {
@@ -4060,7 +4452,7 @@
         "medidas coercitivas"
       ],
       "verificationStatus": "pendiente",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "text": "Prisión preventiva: audiencia y presupuestos. Doctrina jurisprudencial sobre la audiencia de prisión preventiva: debate ordenado por cada presupuesto (fundados y graves elementos, prognosis de pena, peligro procesal), motivación reforzada y discusión expresa de la proporcionalidad y la duración de la medida. Verifique el texto completo y la vigencia del criterio en la jurisprudencia sistematizada del Poder Judicial.",
       "sources": [
         {
@@ -4085,7 +4477,7 @@
         "peligro de fuga"
       ],
       "verificationStatus": "pendiente",
-      "verifiedAt": "12/07/2026",
+      "verifiedAt": "01/09/2026",
       "text": "Prisión preventiva: presupuestos y requisitos. Actualiza y sistematiza la doctrina sobre la prisión preventiva: reafirma su carácter excepcional y subsidiario, desarrolla el peligro de fuga y de obstaculización, y exige que la duración fijada sea proporcional y esté motivada. Verifique el texto completo y la vigencia del criterio en la jurisprudencia sistematizada del Poder Judicial.",
       "sources": [
         {
@@ -4546,11 +4938,11 @@
       "name": "Diario Oficial El Peruano",
       "aliases": [
         "Diario Oficial El Peruano",
-        "Nivel 1",
+        "Publicación oficial",
         "fuente oficial"
       ],
-      "text": "Texto oficialmente publicado, fechas de publicación y vigencia, derogaciones, fe de erratas, precedentes publicados.",
-      "level": "Nivel 1",
+      "text": "Permite consultar el texto oficialmente publicado de leyes, decretos, resoluciones, fe de erratas y otras disposiciones, así como su fecha de publicación. ¿Para qué sirve? Para comprobar cómo y cuándo fue publicada oficialmente una norma.",
+      "category": "Publicación oficial",
       "sources": [
         {
           "name": "Diario Oficial El Peruano",
@@ -4564,11 +4956,11 @@
       "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
       "aliases": [
         "SPIJ — Ministerio de Justicia y Derechos Humanos",
-        "Nivel 2",
+        "Legislación sistematizada",
         "fuente oficial"
       ],
-      "text": "Textos sistematizados, concordancias, modificaciones, normas vigentes y derogadas, legislación por materia.",
-      "level": "Nivel 2",
+      "text": "Reúne textos normativos sistematizados, concordancias, modificaciones y referencias sobre vigencia o derogación. ¿Para qué sirve? Para seguir la evolución de una norma y revisar su texto sistematizado.",
+      "category": "Legislación sistematizada",
       "sources": [
         {
           "name": "SPIJ — Ministerio de Justicia y Derechos Humanos",
@@ -4582,11 +4974,11 @@
       "name": "Congreso de la República — Archivo Digital",
       "aliases": [
         "Congreso de la República — Archivo Digital",
-        "Nivel 3",
+        "Archivo legislativo",
         "fuente oficial"
       ],
-      "text": "Textos originales de leyes y decretos legislativos, fichas técnicas, antecedentes y leyes modificatorias.",
-      "level": "Nivel 3",
+      "text": "Ofrece leyes, decretos legislativos, antecedentes, fichas y documentos del procedimiento legislativo. ¿Para qué sirve? Para consultar el documento legislativo y sus antecedentes oficiales.",
+      "category": "Archivo legislativo",
       "sources": [
         {
           "name": "Congreso de la República — Archivo Digital",
@@ -4600,11 +4992,11 @@
       "name": "Ministerio Público — Fiscalía de la Nación",
       "aliases": [
         "Ministerio Público — Fiscalía de la Nación",
-        "Nivel 4",
+        "Información institucional",
         "fuente oficial"
       ],
-      "text": "Directorios por distrito fiscal, fiscalías especializadas, resoluciones de creación y reorganización, protocolos.",
-      "level": "Nivel 4",
+      "text": "Publica información sobre organización fiscal, directorios, resoluciones, protocolos y servicios institucionales. ¿Para qué sirve? Para conocer la organización y los canales públicos del Ministerio Público.",
+      "category": "Información institucional",
       "sources": [
         {
           "name": "Ministerio Público — Fiscalía de la Nación",
@@ -4618,11 +5010,11 @@
       "name": "Poder Judicial del Perú",
       "aliases": [
         "Poder Judicial del Perú",
-        "Nivel 5",
+        "Jurisprudencia judicial",
         "fuente oficial"
       ],
-      "text": "Acuerdos plenarios, casaciones, doctrina jurisprudencial, ejecutorias vinculantes y criterios de determinación de la pena.",
-      "level": "Nivel 5",
+      "text": "Permite localizar acuerdos plenarios, casaciones, doctrina jurisprudencial y otros criterios emitidos por órganos judiciales. ¿Para qué sirve? Para revisar cómo los órganos judiciales interpretan y aplican normas penales y procesales.",
+      "category": "Jurisprudencia judicial",
       "sources": [
         {
           "name": "Poder Judicial del Perú",
@@ -4636,11 +5028,11 @@
       "name": "Tribunal Constitucional",
       "aliases": [
         "Tribunal Constitucional",
-        "Nivel 6",
+        "Jurisprudencia constitucional",
         "fuente oficial"
       ],
-      "text": "Debido proceso, legalidad penal, libertad personal, plazo razonable, retroactividad favorable.",
-      "level": "Nivel 6",
+      "text": "Publica sentencias sobre derechos fundamentales, legalidad penal, debido proceso, libertad personal y control constitucional. ¿Para qué sirve? Para consultar criterios constitucionales relacionados con el sistema penal.",
+      "category": "Jurisprudencia constitucional",
       "sources": [
         {
           "name": "Tribunal Constitucional",

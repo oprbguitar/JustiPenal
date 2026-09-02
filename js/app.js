@@ -108,11 +108,11 @@ if (matchMedia("(max-width: 800px)").matches) {
 // ---------- navegación ----------
 function goPage(id, options = {}) {
   $$(".page").forEach((p) => p.classList.remove("active"));
-  $$(".nav-item").forEach((n) => n.classList.remove("active"));
+  $$(".nav-item").forEach((n) => { n.classList.remove("active"); n.removeAttribute("aria-current"); });
   const page = $("#page-" + id);
   const nav = document.querySelector(`.nav-item[data-page="${id}"]`);
   if (page) page.classList.add("active");
-  if (nav) nav.classList.add("active");
+  if (nav) { nav.classList.add("active"); nav.setAttribute("aria-current", "page"); }
   animarPagina(page, nav);
   if (id === "inicio") requestAnimationFrame(() => { animarEstadisticasUnaVez(); animarHeroUnaVez(); });
   setMenu(false);
@@ -127,6 +127,10 @@ function goPage(id, options = {}) {
   if (location.hash !== "#" + id) history.replaceState(null, "", "#" + id);
   if (window.AOS && id === "inicio") setTimeout(() => AOS.refresh(), 60);
   document.dispatchEvent(new CustomEvent("justipenal:pagechange", { detail: id }));
+  /* Estadística anónima por módulo para esta aplicación de una sola página. */
+  if (window.goatcounter && typeof window.goatcounter.count === "function") {
+    window.goatcounter.count({ path: "/" + id, title: "JustiPenal — " + id, event: false });
+  }
 }
 $$(".nav-item").forEach((btn) => btn.addEventListener("click", () => goPage(btn.dataset.page)));
 $$(".topbar-links a, .footer-links a[data-goto]").forEach((a) =>
@@ -135,12 +139,15 @@ $$(".topbar-links a, .footer-links a[data-goto]").forEach((a) =>
     if ($("#page-" + target)) { e.preventDefault(); goPage(target); }
   })
 );
-if (location.hash && $("#page-" + location.hash.slice(1))) goPage(location.hash.slice(1), { focus: false });
+if (location.hash === "#analizar") {
+  history.replaceState(null, "", "#guia");
+  goPage("guia", { focus: false });
+} else if (location.hash && $("#page-" + location.hash.slice(1))) goPage(location.hash.slice(1), { focus: false });
 
 // ---------- inicio ----------
 const STATS = [
   { icon: "⚖️", color: "#dbeafe", num: DELITOS.length + "+", label: "Delitos frecuentes catalogados", page: "delitos", aria: "Ver delitos frecuentes catalogados" },
-  { icon: "🔎", color: "#f3e8ff", num: ANALIZADOR_PATRONES.length, label: "Patrones del analizador de casos", page: "analizar", aria: "Ver patrones del analizador de casos" },
+  { icon: "🧭", color: "#f3e8ff", num: GUIA_ETAPAS.length, label: "Conceptos y rutas de consulta", page: "guia", aria: "Ver conceptos y rutas de consulta" },
   { icon: "🏛️", color: "#dcfce7", num: FISCALIAS_UI_ORDER.length, label: "Especialidades fiscales mapeadas", page: "fiscalias", aria: "Ver especialidades fiscales mapeadas" },
   { icon: "🕐", color: "#ffedd5", num: PLAZOS.length + PRISION_PREVENTIVA.length, label: "Plazos procesales de referencia", page: "plazos", aria: "Ver plazos procesales de referencia" },
   { icon: "📖", color: "#dbeafe", num: NORMAS_BASE.length + NORMAS_RECIENTES.length, label: "Normas base y recientes", page: "normativa", aria: "Ver normas base y recientes" }
@@ -149,6 +156,9 @@ $("#stats-row").innerHTML = STATS.map(
   (s) => `<button class="stat stat-link" type="button" data-page="${s.page}" aria-label="${s.aria}"><span class="bubble" style="background:${s.color}" aria-hidden="true">${s.icon}</span><span class="stat-copy"><b>${s.num}</b><span>${s.label}</span><span class="stat-action" aria-hidden="true">Ver sección →</span></span></button>`
 ).join("");
 $$("#stats-row .stat-link").forEach((button) => button.addEventListener("click", () => goPage(button.dataset.page)));
+
+$("#guide-journey").innerHTML = GUIA_ETAPAS.map((etapa, index) => `<li class="guide-stage"><span class="guide-marker" aria-hidden="true">${index + 1}</span><div><h3>${esc(etapa.titulo)}</h3><p>${esc(etapa.texto)}</p><button class="btn small secondary" type="button" data-guide-destination="${esc(etapa.destino)}">${esc(etapa.accion)}</button></div></li>`).join("");
+$("#guide-journey").addEventListener("click", (event) => { const button = event.target.closest("[data-guide-destination]"); if (button) goPage(button.dataset.guideDestination); });
 
 $("#mini-flow").innerHTML = PROCEDIMIENTO.slice(0, 4)
   .map((p) => `<div class="flow-step"><span class="ic">${p.icono}</span><b>${p.nombre}</b></div>`)
@@ -159,7 +169,7 @@ $("#mini-normas").innerHTML = NORMAS_RECIENTES.map((n) => `<li><b>${n.norma}</b>
 
 // ---------- rail de fuentes (escritorio ancho) ----------
 $("#rail-fuentes").innerHTML = FUENTES_OFICIALES.map(
-  (f) => `<div class="rail-src"><a href="${f.url}" target="_blank" rel="noopener">${f.nombre} ↗</a><p>${f.nivel} — ${f.uso.split(",")[0]}.</p></div>`
+  (f) => `<div class="rail-src"><a href="${f.url}" target="_blank" rel="noopener">${f.nombre} ↗</a><p>${f.categoria} — ${f.uso.split(",")[0]}.</p></div>`
 ).join("");
 
 // ---------- delitos: tabla con buscador ----------
@@ -192,7 +202,7 @@ function renderTablaDelitos(filtro = "") {
         <td><a href="${d.fuente.url}" target="_blank" rel="noopener" title="${esc(d.fuente.norma)}">${d.articulo} ↗</a></td>
         <td>${m.nombre}</td><td>${penaHTML(m)}</td><td>${consecuenciasHTML(m)}</td>
         <td>${selloBadge(d.sello)}<br><small style="color:var(--text-muted)">al ${VERIFICADO_AT}</small></td>
-        <td><button class="btn small secondary offense-analysis-open" type="button" data-offense="${esc(d.id)}">Ver análisis</button></td></tr>`
+        <td><button class="btn small secondary offense-analysis-open" type="button" data-offense="${esc(d.id)}">Ver ficha jurídica</button></td></tr>`
       );
     }
   }
@@ -204,7 +214,7 @@ $("#buscar-delito").addEventListener("input", (e) => renderTablaDelitos(e.target
 // ---------- perfil jurídico extendido ----------
 const offenseDialog = $("#offense-dialog");
 let offenseDialogTrigger = null;
-const officialHosts = ["spij.minjus.gob.pe", "www.gob.pe", "gob.pe", "www.pj.gob.pe", "pj.gob.pe", "www.sunat.gob.pe", "sunat.gob.pe", "www.sbs.gob.pe", "sbs.gob.pe", "www.defensoria.gob.pe", "defensoria.gob.pe"];
+const officialHosts = ["spij.minjus.gob.pe", "diariooficial.elperuano.pe", "busquedas.elperuano.pe", "leyes.congreso.gob.pe", "www2.congreso.gob.pe", "www.tc.gob.pe", "tc.gob.pe", "www.gob.pe", "gob.pe", "www.pj.gob.pe", "pj.gob.pe", "www.sunat.gob.pe", "sunat.gob.pe", "www.sbs.gob.pe", "sbs.gob.pe", "www.defensoria.gob.pe", "defensoria.gob.pe"];
 function safeOfficialUrl(value) {
   try { const url = new URL(value); return url.protocol === "https:" && officialHosts.some((host) => url.hostname === host || url.hostname.endsWith(`.${host}`)) ? url.href : ""; } catch { return ""; }
 }
@@ -212,16 +222,14 @@ const analysisList = (items) => `<ul class="analysis-list">${(items?.length ? it
 function renderOffenseAnalysis(delito) {
   const a = delito.analisis;
   const sections = [
-    ["tipo", "Tipo penal", `<div class="analysis-grid"><section><h4>Resumen</h4><p>${esc(a.resumenTipo)}</p></section><section><h4>Bien jurídico</h4><p>${esc(a.bienJuridico)}</p></section><section><h4>Sujetos</h4><p><b>Activo:</b> ${esc(a.sujetoActivo)}</p><p><b>Pasivo:</b> ${esc(a.sujetoPasivo)}</p></section><section><h4>Verbos rectores</h4>${analysisList(a.verbosRectores)}</section><section><h4>Elementos del tipo</h4>${analysisList(a.elementosObjetivos)}</section><section><h4>Elemento subjetivo</h4><p>${esc(a.elementoSubjetivo)}</p></section><section><h4>Consumación y tentativa</h4><p>${esc(a.consumacion)}</p><p>${esc(a.tentativa)}</p></section><section><h4>Agravantes específicas</h4>${analysisList(a.agravantesEspecificas)}</section></div>`],
-    ["aplica", "Por qué podría aplicar", `${analysisList(a.porQuePodriaAplicar)}<h4>Preguntas críticas</h4>${analysisList(a.preguntasCriticas)}`],
-    ["no-aplica", "Por qué podría no aplicar", `${analysisList(a.porQuePodriaNoAplicar)}<h4>Exclusión o descarte</h4>${analysisList(a.exclusionesODescarte)}<div class="analysis-distinction"><b>Diferencias esenciales:</b> la falta de encaje legal no equivale a insuficiencia de prueba; una atenuante no elimina el delito acreditado; y un beneficio procesal se aplica separadamente a la pena.</div>`],
-    ["prueba", "Prueba y peritos", `<h4>Medios probatorios</h4>${analysisList(a.mediosProbatorios)}<h4>Peritos relacionados</h4>${analysisList(a.peritosRelacionados)}<h4>Riesgos probatorios</h4>${analysisList(a.riesgosProbatorios)}<div class="tbl-wrap"><table class="tbl analysis-matrix"><thead><tr><th>Elemento jurídico</th><th>Hecho relacionado</th><th>Fuente del dato</th><th>Estado</th><th>Explicación</th><th>Qué falta verificar</th></tr></thead><tbody>${a.matriz.map((m) => `<tr><td>${esc(m.elemento)}</td><td>${esc(m.hecho)}</td><td>${esc(m.fuenteDato)}</td><td><span class="result-badge">${esc(m.estado)}</span></td><td>${esc(m.explicacion)}</td><td>${esc(m.falta)}</td></tr>`).join("")}</tbody></table></div>`],
-    ["ruta", "Ruta procesal", `${analysisList(a.rutaProcesal)}<h4>Posiciones procesales</h4><div class="procedural-positions"><details><summary>Investigación</summary><p>Solicitud de aclaración o individualización; oposición cuando proceda; control judicial de medidas restrictivas; tutela de derechos; control de plazo; cuestionamiento de legalidad o integridad de evidencia.</p></details><details><summary>Etapa intermedia</summary><p>Observación de la acusación; pedido de sobreseimiento; exclusión o disputa de admisibilidad probatoria; objeción a una atribución genérica o insuficiente.</p></details><details><summary>Juicio</summary><p>Objeciones a preguntas; contradicción de testigos; cuestionamiento pericial; autenticidad, integridad, pertinencia o cadena de custodia; alegatos finales.</p></details><details><summary>Apelación</summary><p>Error fáctico o jurídico identificado; defecto de motivación; valoración probatoria incorrecta; infracción procesal; alcance y límites del recurso.</p></details></div><p class="analysis-note">Información general: no genera escritos ni estrategia jurídica personalizada.</p>`],
-    ["interpretaciones", "Interpretaciones", analysisList(a.interpretaciones)],
-    ["fuentes", "Fuentes oficiales", a.fuentes.map((source) => { const url = safeOfficialUrl(source.url); return `<article class="analysis-source"><span class="result-badge">${esc(source.estado)}</span><h4>${esc(source.nombre)} — ${esc(source.articulo)}</h4><p>Revisión editorial: ${esc(source.ultimaVerificacion)}. ${esc(source.vigenciaTemporal)}</p><dl class="analysis-source-version"><dt>Versión legal</dt><dd>${esc(source.versionLegal)}</dd><dt>Publicación</dt><dd>${esc(source.fechaPublicacion)}</dd><dt>Vigencia</dt><dd>${esc(source.fechaVigencia)}</dd><dt>Norma modificatoria</dt><dd>${esc(source.normaModificatoria)}</dd></dl>${url ? `<a href="${url}" target="_blank" rel="noopener noreferrer">Consultar fuente oficial ↗</a>` : "<p>Pendiente de enlace oficial válido.</p>"}</article>`; }).join("")]
+    ["estructura", "Estructura del tipo", `<p>${esc(a.resumenTipo)}</p>${analysisList(a.estructura)}`],
+    ["sujetos", "Sujetos y contexto", analysisList(a.sujetosContexto)],
+    ["resultado", "Resultado y consumación", analysisList(a.resultadoConsumacion)],
+    ["pena", "Pena y agravantes", analysisList(a.penasAgravantes)],
+    ["fuentes", "Fuentes oficiales", a.fuentes.map((source) => { const url = safeOfficialUrl(source.url); return `<article class="analysis-source"><span class="result-badge">${esc(source.estado)}</span><h4>${esc(source.nombre)} — ${esc(source.articulo)}</h4><p>Revisión normativa: ${esc(source.ultimaVerificacion)}.</p>${url ? `<a href="${url}" target="_blank" rel="noopener noreferrer">Consultar fuente oficial ↗</a>` : "<p>Pendiente de enlace oficial válido.</p>"}</article>`; }).join("")]
   ];
   $("#offense-dialog-title").textContent = delito.nombre;
-  $("#offense-dialog-meta").textContent = `${delito.familia} · ${delito.articulo} · hipótesis provisional`;
+  $("#offense-dialog-meta").textContent = `${delito.familia} · ${delito.articulo} · ${a.estadoPerfil}`;
   $("#offense-tabs").innerHTML = sections.map(([id, label], index) => `<button type="button" role="tab" id="offense-tab-${id}" aria-controls="offense-panel-${id}" aria-selected="${index === 0}" tabindex="${index === 0 ? 0 : -1}">${esc(label)}</button>`).join("");
   $("#offense-tabpanels").innerHTML = sections.map(([id, , content], index) => `<section role="tabpanel" id="offense-panel-${id}" aria-labelledby="offense-tab-${id}" ${index ? "hidden" : ""}>${content}</section>`).join("");
 }
@@ -319,11 +327,10 @@ function setStep(n) { for (let i = 1; i <= 4; i++) $("#st-" + i).classList.toggl
 // ---------- caso multi-delito ----------
 let bloques = [];
 let ultimoInforme = "";
-let ultimoContextoAnalisis = null;
 let ultimoContextoCalculo = null;
 
 window.getJustiPenalPortalContext = (type) => {
-  const context = type === "analysis" ? ultimoContextoAnalisis : type === "calculation" ? ultimoContextoCalculo : null;
+  const context = type === "calculation" ? ultimoContextoCalculo : null;
   return context ? JSON.parse(JSON.stringify(context)) : null;
 };
 
@@ -618,136 +625,6 @@ $("#btn-doc").addEventListener("click", () => {
 });
 $("#btn-print").addEventListener("click", () => window.print());
 
-// ---------- analizador de casos ----------
-$("#btn-analizar").addEventListener("click", () => {
-  const texto = $("#caso-texto").value.trim();
-  if (texto.length < 20) { alert("Describa el caso con un poco más de detalle (mínimo unas dos líneas)."); return; }
-  const scanner = $(".analysis-scan");
-  if (window.anime && !REDUCE_MOTION && scanner) {
-    anime.remove(scanner);
-    anime({ targets: scanner, translateY: [0, Math.max(120, $(".analysis-input-card").offsetHeight - 2)], opacity: [0, 1, 0], duration: 500, easing: "easeInOutQuad" });
-  }
-  const tags = new Map();
-  for (const p of ANALIZADOR_PATRONES) if (!tags.has(p.tag) && p.re.test(texto)) tags.set(p.tag, p.etiqueta);
-  if (tags.has("arma-fuego") || tags.has("arma-blanca")) tags.set("arma-tipo", tags.get("arma-fuego") || tags.get("arma-blanca"));
-  const tagSet = { has: (t) => tags.has(t) || (t === "arma" && (tags.has("arma-fuego") || tags.has("arma-blanca"))) };
-
-  // extracción
-  $("#analisis-tags").innerHTML = tags.size
-    ? [...tags.values()].filter((v, i, a) => a.indexOf(v) === i).map((e) => `<span class="tag-pill">${e}</span>`).join("")
-    : '<p style="font-size:13px;color:var(--text-muted)">No se detectaron elementos típicos reconocibles. Añada más detalle sobre qué ocurrió, cómo y con qué medios.</p>';
-
-  // faltantes
-  const faltantes = [];
-  if (!$("#caso-fecha").value) faltantes.push("Fecha del hecho (necesaria para determinar la norma vigente y la favorabilidad)");
-  if (!$("#caso-lugar").value.trim()) faltantes.push("Lugar del hecho (necesario para la competencia territorial)");
-  if (tagSet.has("arma") && !tags.has("arma-tipo")) faltantes.push("Tipo de arma empleada (fuego, blanca u objeto contundente)");
-  if (tags.has("lesion")) faltantes.push("Certificado médico-legal y días de incapacidad (distingue lesiones leves, graves o falta)");
-  if (tags.has("apoderamiento") && !$("#caso-valor").value) faltantes.push("Valor y propiedad de los bienes");
-  if (tags.has("pluralidad")) faltantes.push("Participación específica de cada interviniente (autor, coautor, cómplice)");
-  if (tags.has("drogas")) faltantes.push("Tipo y cantidad de la sustancia (define el artículo aplicable: 296, 297, 298 o 299)");
-  if (tags.has("tentativa")) faltantes.push("Confirmar si el resultado llegó a producirse (consumación o tentativa)");
-  faltantes.push("Afirmaciones que requieren prueba: el análisis no convierte la sospecha en hecho probado");
-  $("#analisis-faltante").innerHTML = `<h4>Información faltante o por acreditar</h4><ul class="list-check">${faltantes.map((f) => `<li>${f}</li>`).join("")}</ul>`;
-
-  // hipótesis
-  const encontradas = [];
-  const usados = new Set();
-  for (const h of ANALIZADOR_HIPOTESIS) {
-    if (usados.has(h.delitoId)) continue;
-    if (h.soloSi && !h.soloSi(texto)) continue;
-    let ok = false;
-    try { ok = h.cuando(tagSet); } catch { ok = false; }
-    if (ok) { encontradas.push(h); usados.add(h.delitoId); }
-  }
-  let principal = encontradas.find((h) => h.tipo === "principal") || encontradas[0] || null;
-  const grupos = { principal: [], alternativa: [], conexo: [] };
-  for (const h of encontradas) {
-    if (h === principal) grupos.principal.push(h);
-    else if (h.tipo === "conexo") grupos.conexo.push(h);
-    else grupos.alternativa.push(h);
-  }
-  const hipoHTML = (h) => {
-    const d = DELITOS.find((x) => x.id === h.delitoId);
-    return `<div class="panel" style="padding:11px 13px;margin-bottom:8px"><p style="font-size:13px"><b>${d.nombre}</b> <small style="color:var(--text-muted)">(${d.articulo})</small></p><p style="font-size:12px;color:var(--text-muted)">${h.razon}</p></div>`;
-  };
-  $("#analisis-hipotesis").innerHTML = encontradas.length
-    ? `${grupos.principal.length ? `<h4 style="font-size:12px;color:var(--green-600);text-transform:uppercase;margin-bottom:6px">Hipótesis principal</h4>${grupos.principal.map(hipoHTML).join("")}` : ""}
-       ${grupos.alternativa.length ? `<h4 style="font-size:12px;color:var(--blue-600);text-transform:uppercase;margin:10px 0 6px">Hipótesis alternativas</h4>${grupos.alternativa.map(hipoHTML).join("")}` : ""}
-       ${grupos.conexo.length ? `<h4 style="font-size:12px;color:var(--amber-600);text-transform:uppercase;margin:10px 0 6px">Delitos posiblemente conexos</h4>${grupos.conexo.map(hipoHTML).join("")}
-       <p style="font-size:11.5px;color:var(--text-muted)">Un delito conexo puede quedar absorbido por el principal (concurso aparente) o concurrir con él (concurso real o ideal): requiere análisis jurídico.</p>` : ""}`
-    : '<p style="font-size:13px;color:var(--text-muted)">Sin hipótesis claras. El relato puede no describir un delito o requerir más detalle.</p>';
-
-  // matriz de tipicidad
-  const filas = [];
-  const estado = (cls, txt) => `<span class="estado ${cls}">${txt}</span>`;
-  if (principal) {
-    const d = DELITOS.find((x) => x.id === principal.delitoId);
-    $("#matriz-sub").textContent = `${d.nombre} (${d.articulo}) — el estado de cada elemento explica por qué aparece o podría descartarse la hipótesis.`;
-    if (d.familia === "Patrimonio") {
-      filas.push(["Apoderamiento de bien mueble", tags.has("apoderamiento") ? "Descrito en el relato" : "No descrito", tags.has("apoderamiento") ? estado("confirmado", "Confirmado por la descripción") : estado("nodeterminado", "No determinado")]);
-      filas.push(["Bien ajeno", "Se presume de la narración", estado("inferido", "Inferido")]);
-      filas.push(["Finalidad de aprovechamiento", "Inferida del apoderamiento", estado("inferido", "Inferido")]);
-      const va = tagSet.has("violencia") || tagSet.has("amenaza");
-      filas.push(["Violencia o amenaza contra la persona", va ? [tags.get("violencia"), tags.get("amenaza")].filter(Boolean).join(" y ") : "No descrita", va ? estado("compatible", "Compatible") : estado("ausente", "Aparentemente ausente")]);
-    }
-    if (tagSet.has("pluralidad")) filas.push(["Pluralidad de agentes", tags.get("pluralidad"), estado("compatible", "Compatible")]);
-    if (tagSet.has("arma")) filas.push(["Empleo de arma", tags.get("arma-tipo") || "Objeto no descrito con precisión", tags.has("arma-tipo") ? estado("compatible", "Compatible") : estado("nodeterminado", "Requiere precisión")]);
-    if (tags.has("lesion")) filas.push(["Lesiones (posible delito autónomo)", tags.get("lesion"), estado("nodeterminado", "Requiere certificado médico-legal")]);
-    if (tags.has("drogas")) filas.push(["Sustancia fiscalizada y cantidad", tags.get("drogas"), estado("nodeterminado", "Requiere pericia y pesaje")]);
-    if (tags.has("engano")) filas.push(["Engaño y disposición patrimonial", tags.get("engano"), estado("compatible", "Compatible")]);
-    if (tags.has("funcionario")) filas.push(["Condición de funcionario público", tags.get("funcionario"), estado("compatible", "Compatible — verificar cargo y vínculo funcional")]);
-    filas.push(["Consumación", tags.has("tentativa") ? "El relato sugiere ejecución no completada" : "El relato sugiere hecho consumado", tags.has("tentativa") ? estado("contradictorio", "Posible tentativa — confirmar") : estado("inferido", "Probable")]);
-  } else {
-    $("#matriz-sub").textContent = "No hay hipótesis principal: la matriz se construye cuando el relato permite identificar un delito candidato.";
-  }
-  $("#tabla-matriz").innerHTML = filas.length
-    ? filas.map((f) => `<tr><td><b>${f[0]}</b></td><td>${f[1]}</td><td>${f[2]}</td></tr>`).join("")
-    : '<tr><td colspan="3">Sin elementos suficientes.</td></tr>';
-
-  // cargar en calculadora
-  $("#btn-cargar-calc").style.display = principal ? "inline-flex" : "none";
-  $("#btn-preguntar-analisis").style.display = principal ? "inline-flex" : "none";
-  if (principal) {
-    const candidates = encontradas.map((hypothesis) => DELITOS.find((item) => item.id === hypothesis.delitoId)).filter(Boolean);
-    const principalOffense = DELITOS.find((item) => item.id === principal.delitoId);
-    const specialty = FISCALIAS[principalOffense.fiscalia] || FISCALIAS["penal-comun"];
-    ultimoContextoAnalisis = {
-      type: "analysis",
-      data: {
-        candidateOffenseIds: candidates.map((item) => item.id),
-        articles: candidates.map((item) => item.articulo),
-        selectedModality: principal.modalidadId,
-        applicableThird: "No calculado en el análisis local",
-        generalCircumstances: [...tags.values()].filter((value, index, values) => values.indexOf(value) === index),
-        executionStatus: tags.has("tentativa") ? "tentativa por confirmar" : "consumación probable por confirmar",
-        proceduralStage: $("#caso-etapa").value || "Sin etapa indicada",
-        preliminaryProsecutionSpecialty: specialty.nombre,
-        missingInformation: faltantes,
-        sources: candidates.map((item) => ({ name: item.fuente.norma, url: item.fuente.url }))
-      }
-    };
-  } else {
-    ultimoContextoAnalisis = null;
-  }
-  $("#btn-cargar-calc").onclick = () => {
-    if (!principal) return;
-    const d = DELITOS.find((x) => x.id === principal.delitoId);
-    $("#sel-familia").value = d.familia; fillDelitos();
-    $("#sel-delito").value = d.id; fillModalidades();
-    if (d.modalidades.some((m) => m.id === principal.modalidadId)) { $("#sel-modalidad").value = principal.modalidadId; renderAbstracta(); }
-    if (tags.has("tentativa")) $("#sel-consumacion").value = "tentativa";
-    goPage("calculo");
-  };
-
-  $("#analisis-wrap").style.display = "block";
-  $("#analisis-wrap").scrollIntoView({ behavior: "smooth" });
-  animarEntrada(".tag-pill", { stagger: 40, duration: 350 });
-  animarEntrada("#analisis-hipotesis .panel, #analisis-faltante", { stagger: 90 });
-  animarEntrada("#tabla-matriz tr", { stagger: 50, duration: 380 });
-  animarEntrada(".hypothesis-stamp", { duration: 420 });
-});
-
 // ---------- procedimiento ----------
 $("#flow-completo").innerHTML = PROCEDIMIENTO.map(
   (p) => `<div class="flow-step"><span class="ic">${p.icono}</span><b>${p.nombre}</b><span style="font-size:11.5px;color:var(--text-muted)">${p.desc}</span></div>`
@@ -817,45 +694,248 @@ $("#btn-plazo").addEventListener("click", () => {
 });
 
 // ---------- teoría del caso ----------
-$("#grid-teoria-elementos").innerHTML = TEORIA_ELEMENTOS.map(
-  (e) => `<div class="panel blue"><h4>${e.icono} ${e.nombre}</h4><p style="font-size:13px">${e.desc}</p></div>`
-).join("");
+const theoryRoot = $("#page-teoria");
 
-const familiasChecklist = Object.keys(CHECKLIST_PROBATORIO);
-$("#sel-checklist").innerHTML = familiasChecklist.map((f) => `<option value="${esc(f)}">${esc(f)}</option>`).join("");
-function renderChecklist() {
-  const items = CHECKLIST_PROBATORIO[$("#sel-checklist").value] || [];
-  $("#lista-checklist").innerHTML = items.map((i) => `<li>${esc(i)}</li>`).join("");
-  animarEntrada("#lista-checklist li", { stagger: 40 });
+function theoryIcon(id) {
+  const paths = {
+    tesis: '<circle cx="12" cy="12" r="7"></circle><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3"></path>',
+    factico: '<path d="M6 3h9l3 3v15H6z"></path><path d="M15 3v4h4M9 11h6M9 15h6"></path>',
+    juridico: '<path d="M12 3v18M5 6h14M7 6l-4 7h8L7 6zM17 6l-4 7h8l-4-7zM8 21h8"></path>',
+    probatorio: '<path d="M5 3h9l3 3v6M14 3v4h4"></path><circle cx="15.5" cy="15.5" r="4.5"></circle><path d="m19 19 3 3"></path>',
+    alternativa: '<path d="M12 21V9M12 9 7 4M12 9l5-5M7 4H3v4M17 4h4v4"></path>',
+    estandar: '<path d="M12 3 5 6v5c0 5 3 8 7 10 4-2 7-5 7-10V6l-7-3z"></path><path d="m9 12 2 2 4-5"></path>',
+    default: '<circle cx="12" cy="12" r="9"></circle><path d="M8 12h8M12 8v8"></path>'
+  };
+  return `<svg class="theory-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${paths[id] || paths.default}</svg>`;
 }
-$("#sel-checklist").addEventListener("change", renderChecklist);
-renderChecklist();
 
-$("#grid-defensas").innerHTML = DEFENSAS.map(
-  (d) => `<div class="panel"><h4 style="color:var(--navy-800)">${esc(d.nombre)}</h4><small style="color:var(--text-muted);display:block;margin-bottom:4px">${esc(d.base)}</small><p style="font-size:12.5px">${esc(d.texto)}</p></div>`
-).join("");
-
-$("#grid-instituciones").innerHTML = INSTITUCIONES.map(
-  (i) => `<div class="panel"><h4 style="color:var(--navy-800)">${esc(i.nombre)}</h4>
-    <small style="color:var(--text-muted);display:block;margin-bottom:4px">${esc(i.categoria)} · ${esc(i.base)}</small>
-    <p style="font-size:12.5px">${esc(i.texto)}</p>
-    <div style="margin-top:6px">${selloBadge(i.sello)} <small style="color:var(--text-muted)">al ${VERIFICADO_AT}</small></div></div>`
-).join("");
-
-function renderGlosario(filtro = "") {
-  const f = filtro.trim().toLowerCase();
-  const items = GLOSARIO.filter((g) => !f || g.termino.toLowerCase().includes(f) || g.def.toLowerCase().includes(f));
-  $("#grid-glosario").innerHTML = items.length
-    ? items.map((g) => `<div class="panel blue" style="padding:12px 14px"><h4 style="font-size:13.5px">${esc(g.termino)}</h4><p style="font-size:12.5px">${esc(g.def)}</p></div>`).join("")
-    : '<p style="font-size:13px;color:var(--text-muted)">Sin resultados para la búsqueda.</p>';
+function theoryMatrix(tab) {
+  return `<div class="theory-matrix-wrap"><table class="theory-matrix">
+    <thead><tr><th scope="col">Proposición fáctica</th><th scope="col">Elemento jurídico relacionado</th><th scope="col">Sustento disponible</th><th scope="col">Estado del análisis</th></tr></thead>
+    <tbody>${tab.matrix.map((row) => `<tr>${row.map((cell, index) => index === 0 ? `<th scope="row">${esc(cell)}</th>` : `<td>${esc(cell)}</td>`).join("")}</tr>`).join("")}</tbody>
+  </table></div>
+  <div class="theory-matrix-cards">${tab.matrix.map((row) => `<article>${row.map((cell, index) => `<div><strong>${["Proposición", "Elemento jurídico", "Sustento", "Estado"][index]}</strong><span>${esc(cell)}</span></div>`).join("")}</article>`).join("")}</div>`;
 }
-$("#buscar-glosario").addEventListener("input", (e) => renderGlosario(e.target.value));
-renderGlosario();
+
+function theoryTabBody(tab) {
+  let content = "";
+  if (tab.items) {
+    content = `<div class="theory-thesis-grid">${tab.items.map(([label, text], index) => `<div><span>${index + 1}</span><p><strong>${esc(label)}</strong>${esc(text)}</p></div>`).join("")}</div>
+      <aside class="theory-model"><strong>Modelo didáctico de tesis</strong><p>${esc(tab.model)}</p></aside>`;
+  } else if (tab.matrix) {
+    content = theoryMatrix(tab);
+  } else if (tab.sequence) {
+    content = `<div class="theory-proof-flow">${tab.sequence.map((step, index) => `<div><span>${index + 1}</span><strong>${esc(step)}</strong></div>`).join("")}</div>
+      <div class="theory-criteria">${tab.criteria.map(([term, text]) => `<article><h4>${esc(term)}<span class="theory-info" title="${esc(text)}" aria-label="${esc(text)}">i</span></h4><p>${esc(text)}</p></article>`).join("")}</div>`;
+  } else if (tab.comparison) {
+    content = `<div class="theory-rival-grid">${tab.comparison.map(([label, text]) => `<article><h4>${esc(label)}</h4><p>${esc(text)}</p></article>`).join("")}</div>`;
+  } else if (tab.checks) {
+    content = `<ol class="theory-legal-checks">${tab.checks.map((check) => `<li>${esc(check)}</li>`).join("")}</ol>`;
+  } else if (tab.summary) {
+    content = `<div class="theory-result-list">${tab.summary.map(([label, text]) => `<article><h4>${esc(label)}</h4><p>${esc(text)}</p></article>`).join("")}</div>`;
+  }
+  return `<div class="theory-panel-heading"><h3>${esc(tab.title)}</h3><p>${esc(tab.intro)}</p></div>${content}`;
+}
+
+function activateTheoryTab(button, moveFocus = false) {
+  const tabs = [...theoryRoot.querySelectorAll('[role="tab"]')];
+  tabs.forEach((tab) => {
+    const selected = tab === button;
+    tab.setAttribute("aria-selected", String(selected));
+    tab.tabIndex = selected ? 0 : -1;
+    const panel = document.getElementById(tab.getAttribute("aria-controls"));
+    if (panel) panel.hidden = !selected;
+  });
+  if (moveFocus) button.focus();
+}
+
+function renderTheorySection() {
+  $("#theory-pillars").innerHTML = TEORIA_PILARES.map((pillar) => `<article class="theory-pillar" tabindex="0">
+    ${theoryIcon(pillar.id)}<h3>${esc(pillar.nombre)}</h3><p>${esc(pillar.desc)}</p>
+  </article>`).join("");
+
+  $("#theory-tabs").innerHTML = TEORIA_TABS.map((tab, index) => `<button type="button" role="tab" id="theory-tab-${tab.id}" aria-selected="${index === 0}" aria-controls="theory-panel-${tab.id}" tabindex="${index === 0 ? 0 : -1}">${esc(tab.label)}</button>`).join("");
+  $("#theory-tabpanels").innerHTML = TEORIA_TABS.map((tab, index) => `<section class="theory-tabpanel" role="tabpanel" id="theory-panel-${tab.id}" aria-labelledby="theory-tab-${tab.id}" tabindex="0"${index === 0 ? "" : " hidden"}>${theoryTabBody(tab)}</section>`).join("");
+
+  $("#theory-standards-list").innerHTML = TEORIA_ESTANDARES.map((standard, index) => `<li>
+    <span class="theory-standard-index">${index + 1}</span><div><h4>${esc(standard.etapa)}</h4><strong>${esc(standard.nivel)}</strong><p>${esc(standard.desc)}</p></div>
+  </li>`).join("");
+
+  $("#theory-foundation-content").innerHTML = `<p class="theory-foundation-intro">Referencias compactas para controlar defensa, imputación, congruencia y fundamento de la acusación.</p><div class="theory-references">${TEORIA_REFERENCIAS.map((reference) => `<article><h3>${esc(reference.label)}</h3><p>${esc(reference.desc)}</p><a href="${esc(reference.url)}" target="_blank" rel="noopener noreferrer">Fuente oficial</a></article>`).join("")}</div>`;
+
+  const result = TEORIA_TABS.find((tab) => tab.id === "resultado");
+  $("#theory-output-grid").innerHTML = result.summary.map(([label, text], index) => `<article class="theory-output-item">
+    <span>${index + 1}</span><div><h4>${esc(label === "Pendientes" ? "Elementos pendientes de corroboración" : label)}</h4><p>${esc(text)}</p></div>
+  </article>`).join("");
+}
+
+renderTheorySection();
+
+$("#theory-tabs").addEventListener("click", (event) => {
+  const tab = event.target.closest('[role="tab"]');
+  if (tab) activateTheoryTab(tab);
+});
+
+$("#theory-tabs").addEventListener("keydown", (event) => {
+  const tabs = [...theoryRoot.querySelectorAll('[role="tab"]')];
+  const current = tabs.indexOf(document.activeElement);
+  if (current < 0) return;
+  let next = current;
+  if (event.key === "ArrowRight") next = (current + 1) % tabs.length;
+  else if (event.key === "ArrowLeft") next = (current - 1 + tabs.length) % tabs.length;
+  else if (event.key === "Home") next = 0;
+  else if (event.key === "End") next = tabs.length - 1;
+  else return;
+  event.preventDefault();
+  activateTheoryTab(tabs[next], true);
+});
 
 // ---------- medidas ----------
-$("#grid-medidas").innerHTML = MEDIDAS_COERCITIVAS.map(
-  (m) => `<div class="panel"><h4 style="color:var(--navy-800)">${m.nombre}</h4><p style="font-size:12.5px;color:var(--text-muted)">${m.desc}</p></div>`
-).join("");
+const coercionRoot = $("#page-medidas");
+
+function coercionList(value) {
+  if (Array.isArray(value)) return `<ul>${value.map((item) => `<li>${esc(item)}</li>`).join("")}</ul>`;
+  return `<p>${esc(value)}</p>`;
+}
+
+function coercionMeasureCard(measure) {
+  const analysisId = `coercion-analysis-${measure.id}`;
+  return `<article class="coercion-measure" data-coercion-measure="${esc(measure.id)}">
+    <div class="coercion-measure-summary">
+      <div class="coercion-measure-copy">
+        <h3>${esc(measure.nombre)}</h3>
+        <p>${esc(measure.desc)}</p>
+        <div class="coercion-meta">
+          <span><strong>Intensidad:</strong> ${esc(measure.intensidad)}</span>
+          <span><strong>Finalidad:</strong> ${esc(measure.finalidad)}</span>
+        </div>
+      </div>
+      <button class="coercion-analysis-toggle" type="button" aria-expanded="false" aria-controls="${analysisId}">
+        <span>Ver análisis</span><span class="coercion-chevron" aria-hidden="true"></span>
+      </button>
+    </div>
+    <div class="coercion-analysis" id="${analysisId}" hidden>
+      <div class="coercion-analysis-inner">
+        <section class="coercion-detail"><h4>Finalidad</h4><p>${esc(measure.finalidad)}</p></section>
+        ${measure.detalles.map(([label, content]) => `<section class="coercion-detail"><h4>${esc(label)}</h4>${coercionList(content)}</section>`).join("")}
+        ${(measure.advertencias || []).map((warning) => `<p class="coercion-warning">${esc(warning)}</p>`).join("")}
+      </div>
+    </div>
+  </article>`;
+}
+
+function renderCoercionSection() {
+  $("#coercion-principles").innerHTML = MEDIDAS_PRINCIPIOS.map((principle) => {
+    const helpId = `coercion-principle-${principle.id}`;
+    return `<div class="coercion-principle">
+      <button type="button" aria-expanded="false" aria-controls="${helpId}">${esc(principle.nombre)}<span aria-hidden="true">?</span></button>
+      <p id="${helpId}" hidden>${esc(principle.desc)}</p>
+    </div>`;
+  }).join("");
+
+  $("#coercion-panel-principios").innerHTML = `<div class="coercion-test">
+    <h3>Test de legitimidad de la medida</h3>
+    <ol>${MEDIDAS_TEST_LEGITIMIDAD.map((question) => `<li>${esc(question)}</li>`).join("")}</ol>
+    <p class="coercion-warning">La sola gravedad del delito o de la pena esperada no sustituye el análisis concreto del peligro procesal.</p>
+    <p class="coercion-note">El análisis debe realizarse sobre circunstancias verificables del caso y no mediante fórmulas genéricas.</p>
+  </div>`;
+
+  const personal = MEDIDAS_COERCITIVAS.filter((measure) => measure.categoria === "personal");
+  const patrimonial = MEDIDAS_COERCITIVAS.filter((measure) => measure.categoria === "patrimonial");
+  $("#coercion-panel-personales").innerHTML = `<div class="coercion-measures">${personal.map(coercionMeasureCard).join("")}</div>`;
+  $("#coercion-panel-patrimoniales").innerHTML = `<div class="coercion-measures">${patrimonial.map(coercionMeasureCard).join("")}</div>`;
+
+  const comparisonHeaders = ["Comparecencia simple", "Comparecencia con restricciones", "Prisión preventiva"];
+  $("#coercion-comparison").innerHTML = `<div class="coercion-table-wrap"><table class="coercion-table">
+    <thead><tr><th scope="col">Criterio</th>${comparisonHeaders.map((header) => `<th scope="col">${header}</th>`).join("")}</tr></thead>
+    <tbody>${MEDIDAS_COMPARACION.map((row) => `<tr><th scope="row">${esc(row.criterio)}</th><td>${esc(row.simple)}</td><td>${esc(row.restringida)}</td><td>${esc(row.preventiva)}</td></tr>`).join("")}</tbody>
+  </table></div>
+  <div class="coercion-compare-cards">${comparisonHeaders.map((header, index) => {
+    const key = ["simple", "restringida", "preventiva"][index];
+    return `<article><h4>${header}</h4><dl>${MEDIDAS_COMPARACION.map((row) => `<div><dt>${esc(row.criterio)}</dt><dd>${esc(row[key])}</dd></div>`).join("")}</dl></article>`;
+  }).join("")}</div>`;
+
+  $("#coercion-jurisprudence").innerHTML = MEDIDAS_JURISPRUDENCIA.map((entry) => `<article>
+    <h3>${esc(entry.nombre)}</h3>
+    <dl><div><dt>Tema</dt><dd>${esc(entry.tema)}</dd></div><div><dt>Regla resumida</dt><dd>${esc(entry.regla)}</dd></div><div><dt>Aplicación práctica</dt><dd>${esc(entry.aplicacion)}</dd></div></dl>
+    <a href="${esc(entry.url)}" target="_blank" rel="noopener noreferrer">Consultar fuente oficial</a>
+  </article>`).join("");
+
+  $("#coercion-sources-list").innerHTML = MEDIDAS_REFERENCIAS.map((reference) => `<li><a href="${esc(reference.url)}" target="_blank" rel="noopener noreferrer">${esc(reference.label)}</a></li>`).join("");
+  $("#coercion-reviewed").textContent = `Revisión normativa: ${MEDIDAS_REVISION_NORMATIVA}`;
+}
+
+function setCoercionExpanded(button, expanded) {
+  const panel = document.getElementById(button.getAttribute("aria-controls"));
+  if (!panel) return;
+  button.setAttribute("aria-expanded", String(expanded));
+  const label = button.querySelector("span:first-child");
+  if (label) label.textContent = expanded ? "Ocultar análisis" : "Ver análisis";
+  if (expanded) {
+    panel.hidden = false;
+    if (!REDUCE_MOTION) panel.animate([{ opacity: 0, transform: "translateY(-4px)" }, { opacity: 1, transform: "translateY(0)" }], { duration: 180, easing: "ease-out" });
+  } else if (REDUCE_MOTION) {
+    panel.hidden = true;
+  } else {
+    const animation = panel.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 120, easing: "ease-in" });
+    animation.addEventListener("finish", () => { panel.hidden = true; }, { once: true });
+  }
+}
+
+function activateCoercionTab(button) {
+  const tabs = [...coercionRoot.querySelectorAll('[role="tab"]')];
+  tabs.forEach((tab) => {
+    const selected = tab === button;
+    tab.setAttribute("aria-selected", String(selected));
+    tab.tabIndex = selected ? 0 : -1;
+    const panel = document.getElementById(tab.getAttribute("aria-controls"));
+    if (panel) panel.hidden = !selected;
+  });
+}
+
+renderCoercionSection();
+
+coercionRoot.addEventListener("click", (event) => {
+  const principleButton = event.target.closest(".coercion-principle button");
+  if (principleButton) {
+    const expanded = principleButton.getAttribute("aria-expanded") === "true";
+    const help = document.getElementById(principleButton.getAttribute("aria-controls"));
+    principleButton.setAttribute("aria-expanded", String(!expanded));
+    if (help) help.hidden = expanded;
+    return;
+  }
+
+  const tab = event.target.closest('[role="tab"]');
+  if (tab) {
+    activateCoercionTab(tab);
+    return;
+  }
+
+  const toggle = event.target.closest(".coercion-analysis-toggle");
+  if (toggle) {
+    const shouldOpen = toggle.getAttribute("aria-expanded") !== "true";
+    const tabPanel = toggle.closest('[role="tabpanel"]');
+    if (shouldOpen && tabPanel) {
+      tabPanel.querySelectorAll('.coercion-analysis-toggle[aria-expanded="true"]').forEach((openButton) => setCoercionExpanded(openButton, false));
+    }
+    setCoercionExpanded(toggle, shouldOpen);
+  }
+});
+
+coercionRoot.querySelector(".coercion-tabs").addEventListener("keydown", (event) => {
+  const tabs = [...coercionRoot.querySelectorAll('[role="tab"]')];
+  const current = tabs.indexOf(document.activeElement);
+  if (current < 0) return;
+  let next = current;
+  if (event.key === "ArrowRight") next = (current + 1) % tabs.length;
+  else if (event.key === "ArrowLeft") next = (current - 1 + tabs.length) % tabs.length;
+  else if (event.key === "Home") next = 0;
+  else if (event.key === "End") next = tabs.length - 1;
+  else return;
+  event.preventDefault();
+  tabs[next].focus();
+  activateCoercionTab(tabs[next]);
+});
 
 // ---------- fiscalías ----------
 const MPFN_DIRECTORY_URL = "https://www.gob.pe/institucion/mpfn/directorio-fiscalias";
@@ -1015,12 +1095,12 @@ $("#tabla-jurisprudencia").innerHTML = JURISPRUDENCIA.map(
   (j) => `<tr><td style="white-space:nowrap"><b>${esc(j.nombre)}</b><br><small style="color:var(--text-muted)">${esc(j.organo)} · ${esc(j.anio)}</small></td><td><b>${esc(j.materia)}</b></td><td style="font-size:12.5px">${esc(j.texto)}</td><td>${selloBadge(j.sello)}<br><small style="color:var(--text-muted)">al ${VERIFICADO_AT}</small></td></tr>`
 ).join("");
 $("#tabla-normas-recientes").innerHTML = NORMAS_RECIENTES.map(
-  (n) => `<tr><td style="white-space:nowrap"><span class="badge green">${n.norma}</span></td><td>${n.publicacion}</td><td>${n.materia}<br><small style="color:var(--text-muted)">Vigencia: ${n.vigencia}</small></td><td>${n.fuenteOficial}</td><td>${n.estado}</td><td>${n.verificacion}</td></tr>`
+  (n) => { const url = safeOfficialUrl(n.url); return `<tr><td style="white-space:nowrap"><span class="badge green">${esc(n.norma)}</span><br><small>${esc(n.categoria)}</small></td><td>${esc(n.publicacion)}</td><td>${esc(n.materia)}<br><small style="color:var(--text-muted)">Vigencia: ${esc(n.vigencia)}</small></td><td>${url ? `<a href="${url}" target="_blank" rel="noopener noreferrer">${esc(n.fuenteOficial)} ↗</a>` : esc(n.fuenteOficial)}</td><td>${esc(n.estado)}</td><td>${esc(n.verificacion)}</td></tr>`; }
 ).join("");
 
 // ---------- fuentes ----------
 $("#grid-fuentes").innerHTML = FUENTES_OFICIALES.map(
-  (f) => `<div class="panel src-card"><span class="lvl">${f.nivel}</span><h5>${f.nombre}</h5><p>${f.uso}</p><a href="${f.url}" target="_blank" rel="noopener">Visitar fuente oficial ↗</a></div>`
+  (f, index) => `<article class="panel src-card"><span class="lvl">${esc(f.categoria)}</span><h5>${esc(f.nombre)}</h5><p>${esc(f.uso)}</p><details class="source-help"><summary aria-label="Ayuda sobre ${esc(f.nombre)}">¿Para qué sirve?</summary><p>${esc(f.ayuda.replace(/^¿Para qué sirve\?\s*/, ""))}</p></details><a href="${safeOfficialUrl(f.url)}" target="_blank" rel="noopener noreferrer">Visitar fuente oficial ↗</a></article>`
 ).join("");
 
 // ---------- metodología ----------
@@ -1032,17 +1112,14 @@ $("#tabla-changelog").innerHTML = CHANGELOG.map(
    Ayuda contextual: botón (?) en cada sección
    ============================================================ */
 const AYUDA = [
-  ["Analizar un Caso", "Escriba lo ocurrido con sus propias palabras. El sistema detecta los elementos relevantes (armas, violencia, personas), propone hipótesis de delito y le dice qué información falta. <b>Todo se procesa en su navegador: nada se envía a internet.</b>"],
+  ["Recorrido para comprender", "Ruta educativa de seis etapas para conocer conceptos, instituciones, procedimientos, medidas y fuentes oficiales sin evaluar hechos concretos."],
   ["Cálculo de Penas", "Seleccione uno o más delitos y sus circunstancias. El portal aplica el <b>sistema de tercios</b> del Código Penal (art. 45-A) y muestra un rango referencial de pena — no una condena: esa la decide únicamente un juez."],
-  ["Extracción de Hechos", "Lista de los elementos jurídicamente relevantes que el analizador reconoció en su relato, separando lo confirmado de lo inferido y de lo que falta acreditar."],
-  ["Hipótesis Delictivas", "Delitos que <b>podrían</b> corresponder a los hechos: una hipótesis principal, alternativas si algo no se confirma, y delitos conexos que podrían sumarse o quedar absorbidos."],
-  ["Matriz de Tipicidad", "Tabla que compara cada requisito legal del delito con lo que usted relató, y explica por qué aparece esta hipótesis y qué elemento podría descartarla."],
   ["Delitos y Penas", "Catálogo referencial de los delitos más frecuentes con su artículo, rango de pena, multa e inhabilitación. Use el buscador y haga clic en el artículo para ver el texto oficial."],
   ["3. Delitos del Caso", "Los delitos que usted agregó al caso. Con dos o más, el portal evalúa las reglas de <b>concurso</b> (arts. 48-50): las penas no se suman mecánicamente."],
   ["Rango Referencial de Individualización", "Intervalo del tercio aplicable según sus circunstancias. La pena exacta dentro del tercio exige motivación judicial (gravedad, dolo, daño, condiciones personales)."],
   ["Competencia y Plazos", "Fiscalía que probablemente conocería el caso (según materia, territorio y condición del investigado), el órgano judicial de juzgamiento y los plazos de investigación aplicables."],
   ["Trazabilidad Normativa", "Repositorio o fuente oficial de consulta de cada delito usado en el cálculo, con enlace, fecha de revisión editorial y su sello correspondiente."],
-  ["Teoría del Caso", "Los tres pilares de toda posición en un proceso penal: qué pasó (fáctico), qué norma encaja (jurídico) y con qué se demuestra (probatorio). El analizador del portal cubre los dos primeros; esta sección orienta el tercero."],
+  ["Teoría del Caso", "Explica los componentes fáctico, jurídico y probatorio como contenidos académicos y profesionales. No construye una teoría para hechos ingresados por el usuario."],
   ["Checklist Probatorio", "Medios de prueba que típicamente sustentan cada familia de delito. Es orientativo: la estrategia probatoria concreta la define un abogado según el caso."],
   ["Imputación y Defensa", "Frente a cada acusación existen defensas legales: que el hecho no encaje en el delito (atipicidad), causas de justificación como la legítima defensa, errores del art. 14 o la insuficiencia de la prueba."],
   ["Instituciones del Proceso", "Figuras que pueden cambiar el rumbo de un caso: salidas alternativas al juicio, suspensión de la pena, prescripción, beneficios penitenciarios y regímenes especiales."],
